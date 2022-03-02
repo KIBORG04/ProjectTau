@@ -1,30 +1,36 @@
 package domain
 
 type Factions struct {
+	RootID       uint
+	ID           uint
 	Name         string       `json:"name"`
-	ID           string       `json:"id"`
+	FactionName  string       `json:"id"`
 	MinorVictory int          `json:"minor_victory"`
-	Objectives   []Objectives `json:"objectives"`
-	Members      []Role       `json:"members"`
+	Objectives   []Objectives `json:"objectives" gorm:"foreignKey:OwnerID"`
+	Members      []Role       `json:"members" gorm:"foreignKey:OwnerID"`
 	Type         string       `json:"type"`
 	Victory      int          `json:"victory"`
 	CultInfo     CultInfo     `json:"cult_info"`
 }
 
 type Role struct {
+	OwnerID          uint
+	ID               uint
 	Name             string       `json:"name"`
-	ID               string       `json:"id"`
+	RoleName         string       `json:"id"`
 	IsRoundstartRole int          `json:"is_roundstart_role"`
-	Objectives       []Objectives `json:"objectives"`
+	Objectives       []Objectives `json:"objectives" gorm:"foreignKey:OwnerID"`
 	Type             string       `json:"type"`
 	Victory          int          `json:"victory"`
-	FactionID        string       `json:"faction_id"`
+	FactionName      string       `json:"faction_id"`
 	MindName         string       `json:"mind_name"`
 	MindCkey         string       `json:"mind_ckey"`
 	UplinkInfo       UplinkInfo   `json:"uplink_info"`
 }
 
 type Objectives struct {
+	ID                 uint
+	OwnerID            uint
 	Owner              string `json:"owner"`
 	ExplanationText    string `json:"explanation_text"`
 	Completed          string `json:"completed"`
@@ -34,19 +40,38 @@ type Objectives struct {
 	TargetSpecialRole  string `json:"target_special_role"`
 }
 
-type UplinkPurchases struct {
-	Cost       int    `json:"cost"`
-	Bundlename string `json:"bundlename"`
-	ItemType   string `json:"item_type"`
-}
-
 type UplinkInfo struct {
+	ID              uint
+	RoleID          uint
 	TotalTC         int               `json:"total_TC"`
 	SpentTC         int               `json:"spent_TC"`
 	UplinkPurchases []UplinkPurchases `json:"uplink_purchases"`
 }
 
+type UplinkPurchases struct {
+	ID           uint
+	UplinkInfoID uint
+	Cost         int    `json:"cost"`
+	Bundlename   string `json:"bundlename"`
+	ItemType     string `json:"item_type"`
+}
+
+type CultInfo struct {
+	ID                 uint
+	FactionsID         uint
+	Aspects            Aspects         `json:"aspects"`
+	RitenameByCount    RitenameByCount `json:"ritename_by_count"`
+	RealNumberMembers  uint            `json:"real_number_members"`
+	CapturedAreas      uint            `json:"captured_areas"`
+	EndFavor           float64         `json:"end_favor"`
+	EndPiety           float64         `json:"end_piety"`
+	RunesOnStation     uint            `json:"runes_on_station"`
+	AnomaliesDestroyed uint            `json:"anomalies_destroyed"`
+}
+
 type Aspects struct {
+	ID         uint
+	CultInfoID uint
 	Mortem     int `json:"Mortem"`
 	Progressus int `json:"Progressus"`
 	Fames      int `json:"Fames"`
@@ -67,6 +92,8 @@ type Aspects struct {
 }
 
 type RitenameByCount struct {
+	ID              uint
+	CultInfoID      uint
 	Deathalarm      int `json:"Ангел-хранитель"`
 	Sacrifice       int `json:"Жертвоприношение"`
 	Convert         int `json:"Обращение"`
@@ -107,15 +134,4 @@ type RitenameByCount struct {
 	CreateTalisman  int `json:"Создание Талисмана"`
 	Devaluation     int `json:"Девальвация"`
 	Upgrade         int `json:"Улучшение"`
-}
-
-type CultInfo struct {
-	Aspects            Aspects         `json:"aspects"`
-	RitenameByCount    RitenameByCount `json:"ritename_by_count"`
-	RealNumberMembers  uint            `json:"real_number_members"`
-	CapturedAreas      uint            `json:"captured_areas"`
-	EndFavor           float64         `json:"end_favor"`
-	EndPiety           float64         `json:"end_piety"`
-	RunesOnStation     uint            `json:"runes_on_station"`
-	AnomaliesDestroyed uint            `json:"anomalies_destroyed"`
 }

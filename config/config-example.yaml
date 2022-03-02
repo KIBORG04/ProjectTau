@@ -1,0 +1,8 @@
+# remove "-example" from the file name
+
+db:
+  host: localhost
+  user: postgres
+  password: postgres
+  dbname: dbname
+  port: 5432
