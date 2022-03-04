@@ -11,6 +11,7 @@ var Models = []interface{}{
 	&LeaveStats{}, &Damage{},
 	&Objectives{}, &CultInfo{}, &UplinkInfo{},
 	&UplinkPurchases{}, &Aspects{}, &RitenameByCount{},
+	&Link{},
 }
 
 type Root struct {
