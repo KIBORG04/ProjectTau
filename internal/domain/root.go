@@ -117,6 +117,7 @@ type Deaths struct {
 	ID     int32
 	RootID int32
 	Name   string `json:"name" gorm:"size:256"`
+	// TODO: ATTENTION!!!
 	//MobType          string `json:"mob_type" gorm:"size:256"`
 	AssignedRole string `json:"assigned_role" gorm:"size:256"`
 	SpecialRole  string `json:"special_role" gorm:"size:256"`
@@ -126,6 +127,7 @@ type Deaths struct {
 	DeathX       int32  `json:"death_x"`
 	DeathY       int32  `json:"death_y"`
 	DeathZ       int32  `json:"death_z"`
+	// TODO: ATTENTION!!!
 	//TimeOfDeath      string `json:"time_of_death" gorm:"size:256"`
 	TimeOfDeath      int32  `json:"time_of_death" gorm:"size:256"`
 	FromSuicide      int32  `json:"from_suicide"`

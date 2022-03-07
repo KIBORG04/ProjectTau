@@ -24,9 +24,12 @@ func CreateConnection() {
 		postgres.Open(dsn),
 		&gorm.Config{
 			DisableForeignKeyConstraintWhenMigrating: true,
-			Logger:                                   logger.Default.LogMode(logger.Info),
+			//Logger:                                   logger.Default.LogMode(logger.Info),
+			// TODO: ATTENTION!!!
+			Logger:                                   logger.Default.LogMode(logger.Silent),
 		})
 
+	// TODO: ATTENTION!!!
 	//Database.Migrator().DropTable("links")
 	//tables, _ := Database.Migrator().GetTables()
 	//for _, table := range tables {
