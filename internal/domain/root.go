@@ -15,20 +15,20 @@ var Models = []interface{}{
 }
 
 type Root struct {
-	RoundID           uint                `json:"round_id" gorm:"primaryKey"`
-	Version           uint                `json:"version"`
-	Mode              string              `json:"mode"`
-	StartTime         string              `json:"start_time"`
-	Map               string              `json:"map"`
-	Duration          string              `json:"duration"`
-	EndTime           string              `json:"end_time"`
+	RoundID           int32               `json:"round_id" gorm:"primaryKey"`
+	Version           int32               `json:"version"`
+	Mode              string              `json:"mode" gorm:"size:128"`
+	StartTime         string              `json:"start_time" gorm:"size:16"`
+	Map               string              `json:"map" gorm:"size:128"`
+	Duration          string              `json:"duration" gorm:"size:16"`
+	EndTime           string              `json:"end_time"  gorm:"size:16"`
 	Factions          []Factions          `json:"factions"`
 	OrphanedRoles     []Role              `json:"orphaned_roles" gorm:"foreignKey:OwnerID"`
-	ModeResult        string              `json:"mode_result"`
-	MinimapImage      string              `json:"minimap_image"`
-	ServerAddress     string              `json:"server_address"`
-	BaseCommitSha     string              `json:"base_commit_sha"`
-	TestMerges        string              `json:"test_merges"`
+	ModeResult        string              `json:"mode_result" gorm:"size:128"`
+	MinimapImage      string              `json:"minimap_image" gorm:"size:256"`
+	ServerAddress     string              `json:"server_address" gorm:"size:256"`
+	BaseCommitSha     string              `json:"base_commit_sha" gorm:"size:256"`
+	TestMerges        string              `json:"test_merges" gorm:"size:256"`
 	CompletionHTML    string              `json:"completion_html"`
 	Score             Score               `json:"score"`
 	Achievements      []Achievement       `json:"achievements"`
@@ -40,71 +40,71 @@ type Root struct {
 }
 
 type Achievement struct {
-	ID     uint
-	RootID uint
-	Key    string `json:"key"`
-	Name   string `json:"name"`
-	Title  string `json:"title"`
-	Desc   string `json:"desc"`
+	ID     int32
+	RootID int32
+	Key    string `json:"key" gorm:"size:256"`
+	Name   string `json:"name" gorm:"size:256"`
+	Title  string `json:"title" gorm:"size:256"`
+	Desc   string `json:"desc" gorm:"size:256"`
 }
 
 type Score struct {
-	ID             uint
-	RootID         uint
-	Crewscore      int            `json:"crewscore"`
-	Rating         string         `json:"rating"`
-	Stuffshipped   int            `json:"stuffshipped"`
-	Stuffharvested int            `json:"stuffharvested"`
-	Oremined       int            `json:"oremined"`
-	Researchdone   int            `json:"researchdone"`
-	Eventsendured  int            `json:"eventsendured"`
-	Powerloss      int            `json:"powerloss"`
-	Mess           int            `json:"mess"`
-	Meals          int            `json:"meals"`
-	Disease        int            `json:"disease"`
-	Deadcommand    int            `json:"deadcommand"`
-	Arrested       int            `json:"arrested"`
-	Traitorswon    int            `json:"traitorswon"`
-	Roleswon       int            `json:"roleswon"`
-	Allarrested    int            `json:"allarrested"`
-	Opkilled       int            `json:"opkilled"`
-	Disc           int            `json:"disc"`
-	Nuked          int            `json:"nuked"`
-	Destranomaly   int            `json:"destranomaly"`
-	RecAntags      int            `json:"rec_antags"`
-	CrewEscaped    int            `json:"crew_escaped"`
-	CrewDead       int            `json:"crew_dead"`
-	CrewTotal      int            `json:"crew_total"`
-	CrewSurvived   int            `json:"crew_survived"`
-	Captain        pq.StringArray `json:"captain" gorm:"type:text[]"`
-	Powerbonus     int            `json:"powerbonus"`
-	Messbonus      int            `json:"messbonus"`
-	Deadaipenalty  int            `json:"deadaipenalty"`
-	Foodeaten      int            `json:"foodeaten"`
-	Clownabuse     int            `json:"clownabuse"`
-	Richestname    int            `json:"richestname"`
-	Richestjob     int            `json:"richestjob"`
-	Richestcash    int            `json:"richestcash"`
-	Richestkey     int            `json:"richestkey"`
-	Dmgestname     int            `json:"dmgestname"`
-	Dmgestjob      int            `json:"dmgestjob"`
-	Dmgestdamage   int            `json:"dmgestdamage"`
-	Dmgestkey      int            `json:"dmgestkey"`
+	ID             int32
+	RootID         int32
+	Crewscore      int32          `json:"crewscore"`
+	Rating         string         `json:"rating" gorm:"size:256"`
+	Stuffshipped   int32          `json:"stuffshipped"`
+	Stuffharvested int32          `json:"stuffharvested"`
+	Oremined       int32          `json:"oremined"`
+	Researchdone   int32          `json:"researchdone"`
+	Eventsendured  int32          `json:"eventsendured"`
+	Powerloss      int32          `json:"powerloss"`
+	Mess           int32          `json:"mess"`
+	Meals          int32          `json:"meals"`
+	Disease        int32          `json:"disease"`
+	Deadcommand    int32          `json:"deadcommand"`
+	Arrested       int32          `json:"arrested"`
+	Traitorswon    int32          `json:"traitorswon"`
+	Roleswon       int32          `json:"roleswon"`
+	Allarrested    int32          `json:"allarrested"`
+	Opkilled       int32          `json:"opkilled"`
+	Disc           int32          `json:"disc"`
+	Nuked          int32          `json:"nuked"`
+	Destranomaly   int32          `json:"destranomaly"`
+	RecAntags      int32          `json:"rec_antags"`
+	CrewEscaped    int32          `json:"crew_escaped"`
+	CrewDead       int32          `json:"crew_dead"`
+	CrewTotal      int32          `json:"crew_total"`
+	CrewSurvived   int32          `json:"crew_survived"`
+	Captain        pq.StringArray `json:"captain" gorm:"type:varchar(256)[]"`
+	Powerbonus     int32          `json:"powerbonus"`
+	Messbonus      int32          `json:"messbonus"`
+	Deadaipenalty  int32          `json:"deadaipenalty"`
+	Foodeaten      int32          `json:"foodeaten"`
+	Clownabuse     int32          `json:"clownabuse"`
+	Richestname    int32          `json:"richestname"`
+	Richestjob     int32          `json:"richestjob"`
+	Richestcash    int32          `json:"richestcash"`
+	Richestkey     int32          `json:"richestkey"`
+	Dmgestname     int32          `json:"dmgestname"`
+	Dmgestjob      int32          `json:"dmgestjob"`
+	Dmgestdamage   int32          `json:"dmgestdamage"`
+	Dmgestkey      int32          `json:"dmgestkey"`
 }
 
 type CommunicationLogs struct {
-	ID      uint
-	RootID  uint
-	Time    string `json:"time"`
-	Title   string `json:"title"`
+	ID      int32
+	RootID  int32
+	Time    string `json:"time" gorm:"size:256"`
+	Title   string `json:"title" gorm:"size:256"`
 	Content string `json:"content"`
-	Author  string `json:"author"`
-	Type    string `json:"type"`
+	Author  string `json:"author" gorm:"size:256"`
+	Type    string `json:"type" gorm:"size:256"`
 }
 
 type Damage struct {
-	ID       uint
-	DeathsID uint
+	ID       int32
+	DeathsID int32
 	Brute    float64 `json:"BRUTE"`
 	Fire     float64 `json:"FIRE"`
 	Toxin    float64 `json:"TOXIN"`
@@ -114,51 +114,53 @@ type Damage struct {
 }
 
 type Deaths struct {
-	ID               uint
-	RootID           uint
-	Name             string  `json:"name"`
-	AssignedRole     string  `json:"assigned_role"`
-	SpecialRole      string  `json:"special_role"`
-	Damage           Damage  `json:"damage"`
-	RealName         string  `json:"real_name"`
-	MindName         string  `json:"mind_name"`
-	DeathX           int     `json:"death_x"`
-	DeathY           int     `json:"death_y"`
-	DeathZ           int     `json:"death_z"`
-	TimeOfDeath      float64 `json:"time_of_death"`
-	FromSuicide      int     `json:"from_suicide"`
-	LastAttackerName string  `json:"last_attacker_name"`
+	ID     int32
+	RootID int32
+	Name   string `json:"name" gorm:"size:256"`
+	//MobType          string `json:"mob_type" gorm:"size:256"`
+	AssignedRole string `json:"assigned_role" gorm:"size:256"`
+	SpecialRole  string `json:"special_role" gorm:"size:256"`
+	Damage       Damage `json:"damage"`
+	RealName     string `json:"real_name" gorm:"size:256"`
+	MindName     string `json:"mind_name" gorm:"size:256"`
+	DeathX       int32  `json:"death_x"`
+	DeathY       int32  `json:"death_y"`
+	DeathZ       int32  `json:"death_z"`
+	//TimeOfDeath      string `json:"time_of_death" gorm:"size:256"`
+	TimeOfDeath      int32  `json:"time_of_death" gorm:"size:256"`
+	FromSuicide      int32  `json:"from_suicide"`
+	LastAttackerName string `json:"last_attacker_name" gorm:"size:256"`
 }
 
 type Explosions struct {
-	ID               uint
-	RootID           uint
-	EpicenterX       int `json:"epicenter_x"`
-	EpicenterY       int `json:"epicenter_y"`
-	EpicenterZ       int `json:"epicenter_z"`
-	DevastationRange int `json:"devastation_range"`
-	HeavyImpactRange int `json:"heavy_impact_range"`
-	LightImpactRange int `json:"light_impact_range"`
-	FlashRange       int `json:"flash_range"`
+	ID               int32
+	RootID           int32
+	EpicenterX       int32 `json:"epicenter_x"`
+	EpicenterY       int32 `json:"epicenter_y"`
+	EpicenterZ       int32 `json:"epicenter_z"`
+	DevastationRange int32 `json:"devastation_range"`
+	HeavyImpactRange int32 `json:"heavy_impact_range"`
+	LightImpactRange int32 `json:"light_impact_range"`
+	FlashRange       int32 `json:"flash_range"`
 }
 
 type ManifestEntries struct {
-	ID           uint
-	RootID       uint
-	Name         string `json:"name"`
-	AssignedRole string `json:"assigned_role"`
-	SpecialRole  string `json:"special_role"`
-	AntagRoles   string `json:"antag_roles"`
+	ID           int32
+	RootID       int32
+	Name         string         `json:"name" gorm:"size:256"`
+	AssignedRole string         `json:"assigned_role" gorm:"size:256"`
+	SpecialRole  string         `json:"special_role" gorm:"size:256"`
+	AntagRoles   pq.StringArray `json:"antag_roles" gorm:"type:varchar(256)[]"`
 }
 
 type LeaveStats struct {
-	ID           uint
-	RootID       uint
-	Name         string `json:"name"`
-	StartTime    string `json:"start_time"`
-	AssignedRole string `json:"assigned_role"`
-	SpecialRole  string `json:"special_role"`
-	AntagRoles   string `json:"antag_roles"`
-	LeaveType    string `json:"leave_type"`
-	LeaveTime    string `json:"leave_time"`
+	ID           int32
+	RootID       int32
+	Name         string         `json:"name" gorm:"size:256"`
+	StartTime    string         `json:"start_time" gorm:"size:256"`
+	AssignedRole string         `json:"assigned_role" gorm:"size:256"`
+	SpecialRole  string         `json:"special_role" gorm:"size:256"`
+	AntagRoles   pq.StringArray `json:"antag_roles" gorm:"type:varchar(256)[]"`
+	LeaveType    string         `json:"leave_type" gorm:"size:256"`
+	LeaveTime    string         `json:"leave_time" gorm:"size:256"`
 }

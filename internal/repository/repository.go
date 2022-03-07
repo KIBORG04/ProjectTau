@@ -8,6 +8,7 @@ import (
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var Database *gorm.DB
@@ -23,11 +24,14 @@ func CreateConnection() {
 		postgres.Open(dsn),
 		&gorm.Config{
 			DisableForeignKeyConstraintWhenMigrating: true,
+			Logger:                                   logger.Default.LogMode(logger.Info),
 		})
 
 	//Database.Migrator().DropTable("links")
 	//tables, _ := Database.Migrator().GetTables()
-	//Database.Migrator().DropTable(tables)
+	//for _, table := range tables {
+	//	Database.Migrator().DropTable(table)
+	//}
 	AutoMigrate()
 
 }
@@ -50,4 +54,17 @@ func FindAllByDate(date *time.Time) []string {
 
 func SaveDate(link *d.Link) {
 	Database.Save(link)
+}
+
+func Save(v interface{}) {
+	Database.Save(v)
+}
+
+func FindByRoundId(id string) (*d.Root, error) {
+	var root d.Root
+	Database.Table("roots").Where("round_id = ?", id).First(&root)
+	if root.RoundID == 0 {
+		return nil, fmt.Errorf("not found %s id", id)
+	}
+	return &root, nil
 }

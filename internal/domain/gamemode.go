@@ -1,137 +1,137 @@
 package domain
 
 type Factions struct {
-	RootID       uint
-	ID           uint
-	Name         string       `json:"name"`
-	FactionName  string       `json:"id"`
-	MinorVictory int          `json:"minor_victory"`
+	RootID       int32
+	ID           int32
+	Name         string       `json:"name" gorm:"size:256"`
+	FactionName  string       `json:"id" gorm:"size:256"`
+	MinorVictory int32        `json:"minor_victory"`
 	Objectives   []Objectives `json:"objectives" gorm:"foreignKey:OwnerID"`
 	Members      []Role       `json:"members" gorm:"foreignKey:OwnerID"`
-	Type         string       `json:"type"`
-	Victory      int          `json:"victory"`
+	Type         string       `json:"type" gorm:"size:256"`
+	Victory      int32        `json:"victory"`
 	CultInfo     CultInfo     `json:"cult_info"`
 }
 
 type Role struct {
-	OwnerID          uint
-	ID               uint
-	Name             string       `json:"name"`
-	RoleName         string       `json:"id"`
-	IsRoundstartRole int          `json:"is_roundstart_role"`
+	OwnerID          int32
+	ID               int32
+	Name             string       `json:"name" gorm:"size:256"`
+	RoleName         string       `json:"id" gorm:"size:256"`
+	IsRoundstartRole int32        `json:"is_roundstart_role"`
 	Objectives       []Objectives `json:"objectives" gorm:"foreignKey:OwnerID"`
 	Type             string       `json:"type"`
-	Victory          int          `json:"victory"`
-	FactionName      string       `json:"faction_id"`
-	MindName         string       `json:"mind_name"`
-	MindCkey         string       `json:"mind_ckey"`
+	Victory          int32        `json:"victory"`
+	FactionName      string       `json:"faction_id" gorm:"size:256"`
+	MindName         string       `json:"mind_name" gorm:"size:256"`
+	MindCkey         string       `json:"mind_ckey" gorm:"size:256"`
 	UplinkInfo       UplinkInfo   `json:"uplink_info"`
 }
 
 type Objectives struct {
-	ID                 uint
-	OwnerID            uint
-	Owner              string `json:"owner"`
+	ID                 int32
+	OwnerID            int32
+	Owner              string `json:"owner" gorm:"size:256"`
 	ExplanationText    string `json:"explanation_text"`
-	Completed          string `json:"completed"`
-	TargetName         string `json:"target_name"`
-	Type               string `json:"type"`
-	TargetAssignedRole string `json:"target_assigned_role"`
-	TargetSpecialRole  string `json:"target_special_role"`
+	Completed          string `json:"completed" gorm:"size:16"`
+	TargetName         string `json:"target_name" gorm:"size:256"`
+	Type               string `json:"type" gorm:"size:256"`
+	TargetAssignedRole string `json:"target_assigned_role" gorm:"size:256"`
+	TargetSpecialRole  string `json:"target_special_role" gorm:"size:256"`
 }
 
 type UplinkInfo struct {
-	ID              uint
-	RoleID          uint
-	TotalTC         int               `json:"total_TC"`
-	SpentTC         int               `json:"spent_TC"`
+	ID              int32
+	RoleID          int32
+	TotalTC         int32             `json:"total_TC"`
+	SpentTC         int32             `json:"spent_TC"`
 	UplinkPurchases []UplinkPurchases `json:"uplink_purchases"`
 }
 
 type UplinkPurchases struct {
-	ID           uint
-	UplinkInfoID uint
-	Cost         int    `json:"cost"`
-	Bundlename   string `json:"bundlename"`
-	ItemType     string `json:"item_type"`
+	ID           int32
+	UplinkInfoID int32
+	Cost         int32  `json:"cost"`
+	Bundlename   string `json:"bundlename" gorm:"size:256"`
+	ItemType     string `json:"item_type" gorm:"size:256"`
 }
 
 type CultInfo struct {
-	ID                 uint
-	FactionsID         uint
+	ID                 int32
+	FactionsID         int32
 	Aspects            Aspects         `json:"aspects"`
 	RitenameByCount    RitenameByCount `json:"ritename_by_count"`
-	RealNumberMembers  uint            `json:"real_number_members"`
-	CapturedAreas      uint            `json:"captured_areas"`
+	RealNumberMembers  int32           `json:"real_number_members"`
+	CapturedAreas      int32           `json:"captured_areas"`
 	EndFavor           float64         `json:"end_favor"`
 	EndPiety           float64         `json:"end_piety"`
-	RunesOnStation     uint            `json:"runes_on_station"`
-	AnomaliesDestroyed uint            `json:"anomalies_destroyed"`
+	RunesOnStation     int32           `json:"runes_on_station"`
+	AnomaliesDestroyed int32           `json:"anomalies_destroyed"`
 }
 
 type Aspects struct {
-	ID         uint
-	CultInfoID uint
-	Mortem     int `json:"Mortem"`
-	Progressus int `json:"Progressus"`
-	Fames      int `json:"Fames"`
-	Telum      int `json:"Telum"`
-	Metallum   int `json:"Metallum"`
-	Partum     int `json:"Partum"`
-	Cruciatu   int `json:"Cruciatu"`
-	Salutis    int `json:"Salutis"`
-	Spiritus   int `json:"Spiritus"`
-	Arsus      int `json:"Arsus"`
-	Chaos      int `json:"Chaos"`
-	Rabidus    int `json:"Rabidus"`
-	Absentia   int `json:"Absentia"`
-	Obscurum   int `json:"Obscurum"`
-	Lux        int `json:"Lux"`
-	Lucrum     int `json:"Lucrum"`
-	Turbam     int `json:"Turbam"`
+	ID         int32
+	CultInfoID int32
+	Mortem     int32 `json:"Mortem"`
+	Progressus int32 `json:"Progressus"`
+	Fames      int32 `json:"Fames"`
+	Telum      int32 `json:"Telum"`
+	Metallum   int32 `json:"Metallum"`
+	Partum     int32 `json:"Partum"`
+	Cruciatu   int32 `json:"Cruciatu"`
+	Salutis    int32 `json:"Salutis"`
+	Spiritus   int32 `json:"Spiritus"`
+	Arsus      int32 `json:"Arsus"`
+	Chaos      int32 `json:"Chaos"`
+	Rabidus    int32 `json:"Rabidus"`
+	Absentia   int32 `json:"Absentia"`
+	Obscurum   int32 `json:"Obscurum"`
+	Lux        int32 `json:"Lux"`
+	Lucrum     int32 `json:"Lucrum"`
+	Turbam     int32 `json:"Turbam"`
 }
 
 type RitenameByCount struct {
-	ID              uint
-	CultInfoID      uint
-	Deathalarm      int `json:"Ангел-хранитель"`
-	Sacrifice       int `json:"Жертвоприношение"`
-	Convert         int `json:"Обращение"`
-	Emp             int `json:"ЭМИ"`
-	DrainTorture    int `json:"Высасывание Жизни"`
-	RaiseTorture    int `json:"Воскрешение"`
-	CreateSlave     int `json:"Создание Гомункула"`
-	SummonAcolyt    int `json:"Призыв Аколита"`
-	Brainswap       int `json:"Обмен Разумов"`
-	GiveForcearmor  int `json:"Создание Силовой Ауры"`
-	UpgradeTome     int `json:"Улучшение Тома"`
-	ImposeBlind     int `json:"Наложить Ослепление"`
-	ImposeDeaf      int `json:"Наложить Глухоту"`
-	ImposeStun      int `json:"Наложить Оглушение"`
-	Communicate     int `json:"Общение"`
-	Talisman        int `json:"Призыв Талисмана"`
-	Soulstone       int `json:"Призыв Камня Душ"`
-	Constructshell  int `json:"Призыв Оболочки"`
-	Narsie          int `json:"Призыв Нар-Си"`
-	CultPortal      int `json:"Призыв Портала"`
-	MakeSkeleton    int `json:"Скелетофикация"`
-	Synthconversion int `json:"Синтетическое Возвышение"`
-	Freesacrifice   int `json:"Добровольное Жертвоприношение"`
-	Clownconversion int `json:"Клоунконверсия"`
-	Invite          int `json:"Божественное Приглашение"`
-	Charge          int `json:"Беспроводная Зарядка"`
-	Food            int `json:"Создание Еды"`
-	Pray            int `json:"Молитва"`
-	Honk            int `json:"Клоунский Крик"`
-	Animation       int `json:"Анимация"`
-	Spook           int `json:"Испуг"`
-	Illuminate      int `json:"Озарение"`
-	ReviveAnimal    int `json:"Возрождение Животного"`
-	Banana          int `json:"Атомная Реконструкция Молекулярной Решётки Целого Благословлённого Банана."`
-	BananaOre       int `json:"Обогащение Молекул Кислорода Атомами Банана"`
-	CallAnimal      int `json:"Призыв Животного"`
-	CreateSword     int `json:"Создание Меча"`
-	CreateTalisman  int `json:"Создание Талисмана"`
-	Devaluation     int `json:"Девальвация"`
-	Upgrade         int `json:"Улучшение"`
+	ID              int32
+	CultInfoID      int32
+	Deathalarm      int32 `json:"Ангел-хранитель"`
+	Sacrifice       int32 `json:"Жертвоприношение"`
+	Convert         int32 `json:"Обращение"`
+	Emp             int32 `json:"ЭМИ"`
+	Draint32orture  int32 `json:"Высасывание Жизни"`
+	RaiseTorture    int32 `json:"Воскрешение"`
+	CreateSlave     int32 `json:"Создание Гомункула"`
+	SummonAcolyt    int32 `json:"Призыв Аколита"`
+	Brainswap       int32 `json:"Обмен Разумов"`
+	GiveForcearmor  int32 `json:"Создание Силовой Ауры"`
+	UpgradeTome     int32 `json:"Улучшение Тома"`
+	ImposeBlind     int32 `json:"Наложить Ослепление"`
+	ImposeDeaf      int32 `json:"Наложить Глухоту"`
+	ImposeStun      int32 `json:"Наложить Оглушение"`
+	Communicate     int32 `json:"Общение"`
+	Talisman        int32 `json:"Призыв Талисмана"`
+	Soulstone       int32 `json:"Призыв Камня Душ"`
+	Constructshell  int32 `json:"Призыв Оболочки"`
+	Narsie          int32 `json:"Призыв Нар-Си"`
+	CultPortal      int32 `json:"Призыв Портала"`
+	MakeSkeleton    int32 `json:"Скелетофикация"`
+	Synthconversion int32 `json:"Синтетическое Возвышение"`
+	Freesacrifice   int32 `json:"Добровольное Жертвоприношение"`
+	Clownconversion int32 `json:"Клоунконверсия"`
+	Invite          int32 `json:"Божественное Приглашение"`
+	Charge          int32 `json:"Беспроводная Зарядка"`
+	Food            int32 `json:"Создание Еды"`
+	Pray            int32 `json:"Молитва"`
+	Honk            int32 `json:"Клоунский Крик"`
+	Animation       int32 `json:"Анимация"`
+	Spook           int32 `json:"Испуг"`
+	Illuminate      int32 `json:"Озарение"`
+	ReviveAnimal    int32 `json:"Возрождение Животного"`
+	Banana          int32 `json:"Атомная Реконструкция Молекулярной Решётки Целого Благословлённого Банана."`
+	BananaOre       int32 `json:"Обогащение Молекул Кислорода Атомами Банана"`
+	CallAnimal      int32 `json:"Призыв Животного"`
+	CreateSword     int32 `json:"Создание Меча"`
+	CreateTalisman  int32 `json:"Создание Талисмана"`
+	Devaluation     int32 `json:"Девальвация"`
+	Upgrade         int32 `json:"Улучшение"`
 }
