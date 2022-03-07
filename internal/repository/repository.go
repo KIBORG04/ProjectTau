@@ -24,13 +24,9 @@ func CreateConnection() {
 		postgres.Open(dsn),
 		&gorm.Config{
 			DisableForeignKeyConstraintWhenMigrating: true,
-			//Logger:                                   logger.Default.LogMode(logger.Info),
-			// TODO: ATTENTION!!!
 			Logger:                                   logger.Default.LogMode(logger.Silent),
 		})
 
-	// TODO: ATTENTION!!!
-	//Database.Migrator().DropTable("links")
 	//tables, _ := Database.Migrator().GetTables()
 	//for _, table := range tables {
 	//	Database.Migrator().DropTable(table)
@@ -40,7 +36,14 @@ func CreateConnection() {
 }
 
 func AutoMigrate() {
-	Database.AutoMigrate(d.Models...)
+	Database.AutoMigrate(d.Models...) // Not Fucking Auto
+	// Manual migrate
+	for _, model := range d.Models {
+		switch t := model.(type) {
+		case d.MyMigrator:
+			t.ColumnsMigration(Database)
+		}
+	}
 }
 
 func FindAllByDate(date *time.Time) []string {

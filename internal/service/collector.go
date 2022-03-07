@@ -81,11 +81,10 @@ func collectByUrl(url string) {
 		return
 	}
 
-	// TODO: ATTENTION!!!
-	//_, err := r.FindByRoundId(roundId)
-	//if err == nil {
-	//	return
-	//}
+	_, err := r.FindByRoundId(roundId)
+	if err == nil {
+		return
+	}
 
 	resp := requestGET(url)
 

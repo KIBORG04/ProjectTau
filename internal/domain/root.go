@@ -2,16 +2,11 @@ package domain
 
 import (
 	"github.com/lib/pq"
+	"gorm.io/gorm"
 )
 
-var Models = []interface{}{
-	&Root{}, &Factions{}, &Role{},
-	&Score{}, &Achievement{}, &CommunicationLogs{},
-	&Deaths{}, &Explosions{}, &ManifestEntries{},
-	&LeaveStats{}, &Damage{},
-	&Objectives{}, &CultInfo{}, &UplinkInfo{},
-	&UplinkPurchases{}, &Aspects{}, &RitenameByCount{},
-	&Link{},
+type MyMigrator interface {
+	ColumnsMigration(dx *gorm.DB)
 }
 
 type Root struct {
@@ -114,24 +109,25 @@ type Damage struct {
 }
 
 type Deaths struct {
-	ID     int32
-	RootID int32
-	Name   string `json:"name" gorm:"size:256"`
-	// TODO: ATTENTION!!!
-	//MobType          string `json:"mob_type" gorm:"size:256"`
-	AssignedRole string `json:"assigned_role" gorm:"size:256"`
-	SpecialRole  string `json:"special_role" gorm:"size:256"`
-	Damage       Damage `json:"damage"`
-	RealName     string `json:"real_name" gorm:"size:256"`
-	MindName     string `json:"mind_name" gorm:"size:256"`
-	DeathX       int32  `json:"death_x"`
-	DeathY       int32  `json:"death_y"`
-	DeathZ       int32  `json:"death_z"`
-	// TODO: ATTENTION!!!
-	//TimeOfDeath      string `json:"time_of_death" gorm:"size:256"`
-	TimeOfDeath      int32  `json:"time_of_death" gorm:"size:256"`
+	ID               int32
+	RootID           int32
+	Name             string `json:"name" gorm:"size:256"`
+	MobType          string `json:"mob_type" gorm:"size:256"`
+	AssignedRole     string `json:"assigned_role" gorm:"size:256"`
+	SpecialRole      string `json:"special_role" gorm:"size:256"`
+	Damage           Damage `json:"damage"`
+	RealName         string `json:"real_name" gorm:"size:256"`
+	MindName         string `json:"mind_name" gorm:"size:256"`
+	DeathX           int32  `json:"death_x"`
+	DeathY           int32  `json:"death_y"`
+	DeathZ           int32  `json:"death_z"`
+	TimeOfDeath      string `json:"time_of_death" gorm:"size:128"`
 	FromSuicide      int32  `json:"from_suicide"`
 	LastAttackerName string `json:"last_attacker_name" gorm:"size:256"`
+}
+
+func (d *Deaths) ColumnsMigration(dx *gorm.DB) {
+	dx.Migrator().AlterColumn(&d, "TimeOfDeath")
 }
 
 type Explosions struct {
