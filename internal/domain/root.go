@@ -5,10 +5,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type MyMigrator interface {
-	ColumnsMigration(dx *gorm.DB)
-}
-
 type Root struct {
 	RoundID           int32               `json:"round_id" gorm:"primaryKey"`
 	Version           int32               `json:"version"`

@@ -1,5 +1,7 @@
 package domain
 
+import "gorm.io/gorm"
+
 var Models = []interface{}{
 	&Root{},
 	&Factions{},
@@ -19,4 +21,8 @@ var Models = []interface{}{
 	&Aspects{},
 	&RitenameByCount{},
 	&Link{},
+}
+
+type MyMigrator interface {
+	ColumnsMigration(dx *gorm.DB)
 }
