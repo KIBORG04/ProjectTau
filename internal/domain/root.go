@@ -73,14 +73,14 @@ type Score struct {
 	Deadaipenalty  int32          `json:"deadaipenalty"`
 	Foodeaten      int32          `json:"foodeaten"`
 	Clownabuse     int32          `json:"clownabuse"`
-	Richestname    int32          `json:"richestname"`
-	Richestjob     int32          `json:"richestjob"`
+	Richestname    string         `json:"richestname"`
+	Richestjob     string         `json:"richestjob"`
 	Richestcash    int32          `json:"richestcash"`
-	Richestkey     int32          `json:"richestkey"`
-	Dmgestname     int32          `json:"dmgestname"`
-	Dmgestjob      int32          `json:"dmgestjob"`
+	Richestkey     string         `json:"richestkey"`
+	Dmgestname     string         `json:"dmgestname"`
+	Dmgestjob      string         `json:"dmgestjob"`
 	Dmgestdamage   int32          `json:"dmgestdamage"`
-	Dmgestkey      int32          `json:"dmgestkey"`
+	Dmgestkey      string         `json:"dmgestkey"`
 }
 
 type CommunicationLogs struct {

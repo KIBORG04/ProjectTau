@@ -2,6 +2,7 @@ package service
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -16,6 +17,7 @@ var loggerGet = log.New(os.Stderr, "[GET Request] ", log.Lmsgprefix|log.Ltime)
 
 type Collector struct {
 	processUrls []string
+	Logs        []string
 }
 
 func (c *Collector) CollectUrls(startDate time.Time) {
@@ -39,7 +41,7 @@ func (c *Collector) trySaveUrl(date *time.Time) {
 	}
 
 	dateUrl := dateUrl(date)
-	roundId := roundIds(dateUrl)
+	roundId := c.roundIds(dateUrl)
 	if roundId == nil {
 		return
 	}
@@ -53,31 +55,37 @@ func (c *Collector) trySaveUrl(date *time.Time) {
 
 func (c *Collector) CollectStatistics() {
 	for _, url := range c.processUrls {
-		collectByUrl(url)
+		c.collectByUrl(url)
 	}
 }
 
-func requestGET(url string) *http.Response {
+func (c *Collector) saveLogs(logger *log.Logger, text interface{}) {
+	text_str := fmt.Sprintln(text)
+	c.Logs = append(c.Logs, text_str)
+	logger.Println(text)
+}
+
+func (c *Collector) requestGET(url string) *http.Response {
 	resp, err := http.Get(url)
 
-	loggerGet.Println(url)
+	c.saveLogs(loggerGet, url)
 	if err != nil {
-		loggerGet.Println(err)
+		c.saveLogs(loggerGet, err)
 		return nil
 	}
 
 	if resp.StatusCode != http.StatusOK {
-		loggerGet.Println(resp.Status)
+		c.saveLogs(loggerGet, resp.Status)
 		return nil
 	}
 
 	return resp
 }
 
-func collectByUrl(url string) {
+func (c *Collector) collectByUrl(url string) {
 	roundId := u.RoundId.FindString(url)
 	if len(roundId) == 0 {
-		loggerStats.Printf("%s not contain digits of the round", url)
+		c.saveLogs(loggerStats, fmt.Sprintf("%s not contain digits of the round", url))
 		return
 	}
 
@@ -86,7 +94,7 @@ func collectByUrl(url string) {
 		return
 	}
 
-	resp := requestGET(url)
+	resp := c.requestGET(url)
 
 	var root d.Root
 	dec := json.NewDecoder(resp.Body)
@@ -96,8 +104,8 @@ func collectByUrl(url string) {
 	r.Save(&root)
 }
 
-func roundIds(url string) []string {
-	resp := requestGET(url)
+func (c *Collector) roundIds(url string) []string {
+	resp := c.requestGET(url)
 	if resp == nil {
 		return nil
 	}
