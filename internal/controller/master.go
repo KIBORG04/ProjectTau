@@ -24,7 +24,6 @@ func runCollector(c *gin.Context) {
 		"user": user,
 		"logs": collector.Logs,
 	})
-
 }
 
 func initializeRoutes() {

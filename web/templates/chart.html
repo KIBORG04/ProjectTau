@@ -14,7 +14,7 @@
 
 <script>
 {{ range $i, $json := .charts }}
-    const myChart = new Chart(
+    new Chart(
         document.getElementById("chart-{{ $i }}"),
         {{ $json }}
     );

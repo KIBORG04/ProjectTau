@@ -1,6 +1,7 @@
 package charts
 
 import (
+	"fmt"
 	"html/template"
 	"reflect"
 	"ssstatistics/internal/domain"
@@ -44,7 +45,7 @@ func Gamemode(c *gin.Context) {
 
 	var scores []domain.Score
 	for _, root := range roots {
-		if root.ServerAddress == "game.taucetistation.org:2508" {
+		if root.ServerAddress == "game.taucetistation.org:2506" {
 			scores = append(scores, root.Score)
 		}
 	}
@@ -59,7 +60,11 @@ func Gamemode(c *gin.Context) {
 		SetLabels(fields).
 		AddDataset(chartjs.BarDataset("Crew", coords))
 
-	c.HTML(200, "graphic.html", gin.H{
+		fmt.Println(chart)
+	fmt.Println(chart.String())
+	fmt.Println([]template.JS{chart.String()})
+
+	c.HTML(200, "chart.html", gin.H{
 		"charts": []template.JS{chart.String()},
 	})
 }

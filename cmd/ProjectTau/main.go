@@ -11,6 +11,7 @@ func main() {
 
 	r.CreateConnection()
 	controller.Run()
+
 //  NEVERMIND
 // 	var a domain.CultInfo
 // 	r.Database.Preload(clause.Associations).Find(&a)

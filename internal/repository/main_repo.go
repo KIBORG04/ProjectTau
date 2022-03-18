@@ -7,7 +7,6 @@ import (
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
 )
 
 var Database *gorm.DB
@@ -23,7 +22,7 @@ func CreateConnection() {
 		postgres.Open(dsn),
 		&gorm.Config{
 			DisableForeignKeyConstraintWhenMigrating: true,
-			Logger:                                   logger.Default.LogMode(logger.Silent),
+			//Logger:                                   logger.Default.LogMode(logger.Silent),
 		})
 
 	//tables, _ := Database.Migrator().GetTables()

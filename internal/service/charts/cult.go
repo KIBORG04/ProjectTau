@@ -16,31 +16,39 @@ func Cult(c *gin.Context) {
 	var cultInfo []domain.CultInfo
 	r.Database.Preload(clause.Associations).Find(&cultInfo)
 
-	// Initialize chart properties
-	fields := []string{"crew_escaped", "crew_dead", "crew_total", "crew_survived", "clownabuse"}
-
-	totalScore := utils.Slice2int32Map(fields)
-	for _, score := range cultInfo {
-		flatData := utils.Struct2ExpectedFieldMap(&score, fields)
-		for k, v := range flatData {
-			totalScore[k] += int32(v.(float64))
+	aspectsPool := make([]domain.Aspects, 0, len(cultInfo))
+	for _, cult := range cultInfo {
+		// skip cult from portal
+		if cult.AnomaliesDestroyed == 0 && cult.RunesOnStation == 0 && cult.EndFavor == 1000 {
+			continue
 		}
+		aspectsPool = append(aspectsPool, cult.Aspects)
+	}
+	ritesPool := make([]domain.RitenameByCount, 0, len(cultInfo))
+	for _, cult := range cultInfo {
+		// skip cult from portal
+		if cult.AnomaliesDestroyed == 0 && cult.RunesOnStation == 0 && cult.EndFavor == 1000 {
+			continue
+		}
+		ritesPool = append(ritesPool, cult.RitenameByCount)
 	}
 
-	coords := make([]chartjs.Coords, 0, len(fields))
-	for k, v := range totalScore {
-		coords = append(coords, chartjs.Coords{
-			"x": k,
-			"y": float32(v) / float32(len(cultInfo)),
-		})
-	}
+	// Initialize chart properties
+	ritesFields := utils.JsonFieldNames(&cultInfo[1].RitenameByCount, nil)
+	aspectsFields := utils.JsonFieldNames(&cultInfo[1].Aspects, nil)
+
+	ritesCoords := makeAverageCoords(ritesFields, ritesPool)
+	aspectsCoords := makeAverageCoords(aspectsFields, aspectsPool)
 
 	// Create chart
-	chart := chartjs.New("bar").
-		SetLabels([]string{"Crew Escaped", "Crew Dead", "Crew Total", "Crew Survived", "Clownabuse"}).
-		AddDataset(chartjs.BarDataset("Crew", coords))
+	ritesChart := chartjs.New("bar").
+		SetLabels(ritesFields).
+		AddDataset(chartjs.BarDataset("Rites", ritesCoords))
+	aspectChart := chartjs.New("bar").
+		SetLabels(aspectsFields).
+		AddDataset(chartjs.BarDataset("Aspects", aspectsCoords))
 
-	c.HTML(200, "graphic.html", gin.H{
-		"charts": []template.JS{chart.String()},
+	c.HTML(200, "chart.html", gin.H{
+		"charts": []template.JS{ritesChart.String(), aspectChart.String()},
 	})
 }

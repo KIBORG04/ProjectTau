@@ -83,6 +83,15 @@ type Score struct {
 	Dmgestkey      string         `json:"dmgestkey"`
 }
 
+func (d *Score) ColumnsMigration(dx *gorm.DB) {
+	dx.Migrator().AlterColumn(&d, "Richestname")
+	dx.Migrator().AlterColumn(&d, "Richestjob")
+	dx.Migrator().AlterColumn(&d, "Richestkey")
+	dx.Migrator().AlterColumn(&d, "Dmgestname")
+	dx.Migrator().AlterColumn(&d, "Dmgestjob")
+	dx.Migrator().AlterColumn(&d, "Dmgestkey")
+}
+
 type CommunicationLogs struct {
 	ID      int32
 	RootID  int32

@@ -1,5 +1,7 @@
 package domain
 
+import "gorm.io/gorm"
+
 type Factions struct {
 	RootID       int32
 	ID           int32
@@ -78,13 +80,11 @@ type Aspects struct {
 	Telum      int32 `json:"Telum"`
 	Metallum   int32 `json:"Metallum"`
 	Partum     int32 `json:"Partum"`
-	Cruciatu   int32 `json:"Cruciatu"`
 	Salutis    int32 `json:"Salutis"`
 	Spiritus   int32 `json:"Spiritus"`
 	Arsus      int32 `json:"Arsus"`
 	Chaos      int32 `json:"Chaos"`
 	Rabidus    int32 `json:"Rabidus"`
-	Absentia   int32 `json:"Absentia"`
 	Obscurum   int32 `json:"Obscurum"`
 	Lux        int32 `json:"Lux"`
 	Lucrum     int32 `json:"Lucrum"`

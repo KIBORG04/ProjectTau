@@ -2,6 +2,7 @@ package chartjs
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
 )
 
@@ -35,6 +36,9 @@ func (c *Config) AddDataset(dataset *Dataset) *Config {
 }
 
 func (c *Config) String() template.JS {
-	str, _ := json.Marshal(&c)
+	str, err := json.Marshal(&c)
+	if err != nil {
+		fmt.Println(err)
+	}
 	return template.JS(str)
 }
