@@ -9,8 +9,16 @@ func IsSlice(v interface{}) bool {
 	return reflect.TypeOf(v).Kind() == reflect.Slice
 }
 
-func Slice2Map(slice []string) map[string]float32 {
+func Slice2float32Map(slice []string) map[string]float32 {
 	elementMap := make(map[string]float32)
+	for i := 0; i < len(slice); i++ {
+		elementMap[slice[i]] = 0
+	}
+	return elementMap
+}
+
+func Slice2int32Map(slice []string) map[string]int32 {
+	elementMap := make(map[string]int32)
 	for i := 0; i < len(slice); i++ {
 		elementMap[slice[i]] = 0
 	}

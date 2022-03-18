@@ -40,3 +40,14 @@ type Dataset struct {
 	ShowLine               bool    `json:"showLine,omitempty"`
 	SpanGaps               bool    `json:"spanGaps,omitempty"`
 }
+
+func BarDataset(label string, coords []Coords) *Dataset {
+	backColors := RandomColor(len(coords))
+	return &Dataset{
+		Label: label,
+		Data: coords,
+		BackgroundColor: backColors,
+		BorderColor:     RandomBorder(backColors),
+		BorderWidth:     3,
+	}
+}
