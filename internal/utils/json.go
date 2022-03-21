@@ -3,6 +3,7 @@ package utils
 import (
 	"reflect"
 	"strings"
+	"golang.org/x/exp/slices"
 )
 
 func JsonFieldNames(v interface{}, expectedFields *[]string) []string {
@@ -11,7 +12,7 @@ func JsonFieldNames(v interface{}, expectedFields *[]string) []string {
 	for i := 0; i < typeof.NumField(); i++ {
 		field := typeof.Field(i)
 		fieldName := JsonFieldName(field)
-		if expectedFields != nil && !Contains(*expectedFields, fieldName) {
+		if expectedFields != nil && !slices.Contains(*expectedFields, fieldName) {
 			continue
 		}
 		if len(fieldName) == 0 {

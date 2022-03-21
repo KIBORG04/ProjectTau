@@ -13,15 +13,11 @@ import (
 	"gorm.io/gorm/clause"
 )
 
-func makeAverageCoords(fields []string, mainPool interface{}) []chartjs.Coords {
-	if !utils.IsSlice(mainPool) {
-		return nil
-	}
-
-	totalScore := utils.Slice2int32Map(fields)
+func makeAverageCoords[T any](fields []string, mainPool []T) []chartjs.Coords {
+	totalScore := utils.Slice2Map[int32](fields)
 	poolReflect := reflect.ValueOf(mainPool)
-	for i := 0; i < poolReflect.Len(); i++ {
-		flatData := utils.Struct2ExpectedFieldMap(poolReflect.Index(i).Interface(), fields)
+	for _, val := range mainPool {
+		flatData := utils.Struct2ExpectedFieldMap(val, fields)
 		for k, v := range flatData {
 			totalScore[k] += int32(v.(float64))
 		}
@@ -60,7 +56,7 @@ func Gamemode(c *gin.Context) {
 		SetLabels(fields).
 		AddDataset(chartjs.BarDataset("Crew", coords))
 
-		fmt.Println(chart)
+	fmt.Println(chart)
 	fmt.Println(chart.String())
 	fmt.Println([]template.JS{chart.String()})
 

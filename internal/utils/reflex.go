@@ -3,7 +3,7 @@ package utils
 import (
 	"encoding/json"
 
-	"gorm.io/gorm/utils"
+	"golang.org/x/exp/slices"
 )
 
 func Struct2ExpectedFieldMap(myStruct interface{}, expectedFields []string) map[string]interface{} {
@@ -11,7 +11,7 @@ func Struct2ExpectedFieldMap(myStruct interface{}, expectedFields []string) map[
 
 	expectedFieldsMap := make(map[string]interface{}, len(allFields))
 	for k, v := range allFields {
-		if utils.Contains(expectedFields, k) {
+		if slices.Contains(expectedFields, k) {
 			expectedFieldsMap[k] = v
 		}
 	}

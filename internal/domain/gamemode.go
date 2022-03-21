@@ -1,7 +1,5 @@
 package domain
 
-import "gorm.io/gorm"
-
 type Factions struct {
 	RootID       int32
 	ID           int32

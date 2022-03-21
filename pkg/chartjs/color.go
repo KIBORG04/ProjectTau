@@ -16,7 +16,7 @@ func (c *RGBA) MarshalJSON() ([]byte, error) {
 func RandomColor(count int) []*RGBA {
 	colors := make([]*RGBA, 0, count)
 	for i := 0; i < count; i++ {
-		colors = append(colors, utils.Pick(NiceColors).(*RGBA))
+		colors = append(colors, utils.Pick(NiceColors))
 	}
 	return colors
 }
