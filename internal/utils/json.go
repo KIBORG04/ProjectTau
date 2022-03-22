@@ -1,9 +1,9 @@
 package utils
 
 import (
+	"golang.org/x/exp/slices"
 	"reflect"
 	"strings"
-	"golang.org/x/exp/slices"
 )
 
 func JsonFieldNames(v interface{}, expectedFields *[]string) []string {

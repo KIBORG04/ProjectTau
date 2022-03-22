@@ -47,5 +47,3 @@ func AutoMigrate() {
 func Save(v interface{}) {
 	Database.Save(v)
 }
-
-

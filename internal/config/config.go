@@ -10,11 +10,11 @@ var Config GlobalConfig
 
 type GlobalConfig struct {
 	DatabaseConfig struct {
-		User     string  `yaml:"user"`
+		User     string `yaml:"user"`
 		Password string `yaml:"password"`
-		Host     string  `yaml:"host"`
-		Port     string  `yaml:"port"`
-		Dbname   string  `yaml:"dbname"`
+		Host     string `yaml:"host"`
+		Port     string `yaml:"port"`
+		Dbname   string `yaml:"dbname"`
 	} `yaml:"db"`
 }
 

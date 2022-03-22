@@ -8,7 +8,7 @@ import (
 
 type RGBA color.RGBA
 
-// MarshalJSON satisfies the json.Marshaler interface.
+// MarshalJSON satisfies the json.Marshaller interface.
 func (c *RGBA) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf("\"rgba(%d, %d, %d, %.3f)\"", c.R, c.G, c.B, float64(c.A)/255)), nil
 }

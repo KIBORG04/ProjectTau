@@ -21,8 +21,8 @@ type Dataset struct {
 	Label string   `json:"label,omitempty"`
 	Data  []Coords `json:"data"`
 
-	BackgroundColor        []*RGBA  `json:"backgroundColor,omitempty"`
-	BorderColor            []*RGBA  `json:"borderColor,omitempty"`
+	BackgroundColor        []*RGBA `json:"backgroundColor,omitempty"`
+	BorderColor            []*RGBA `json:"borderColor,omitempty"`
 	BorderWidth            float64 `json:"borderWidth,omitempty"`
 	Fill                   string  `json:"fill,omitempty"`
 	SteppedLine            string  `json:"steppedLine,omitempty"`
@@ -44,8 +44,8 @@ type Dataset struct {
 func BarDataset(label string, coords []Coords) *Dataset {
 	backColors := RandomColor(len(coords))
 	return &Dataset{
-		Label: label,
-		Data: coords,
+		Label:           label,
+		Data:            coords,
 		BackgroundColor: backColors,
 		BorderColor:     RandomBorder(backColors),
 		BorderWidth:     3,

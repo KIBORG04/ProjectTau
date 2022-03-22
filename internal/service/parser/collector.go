@@ -60,8 +60,8 @@ func (c *Collector) CollectStatistics() {
 }
 
 func (c *Collector) saveLogs(logger *log.Logger, text interface{}) {
-	text_str := fmt.Sprintln(text)
-	c.Logs = append(c.Logs, text_str)
+	textStr := fmt.Sprintln(text)
+	c.Logs = append(c.Logs, textStr)
 	logger.Println(text)
 }
 
@@ -99,7 +99,10 @@ func (c *Collector) collectByUrl(url string) {
 	var root d.Root
 	dec := json.NewDecoder(resp.Body)
 	dec.DisallowUnknownFields()
-	dec.Decode(&root)
+	err = dec.Decode(&root)
+	if err != nil {
+		return
+	}
 
 	r.Save(&root)
 }
@@ -111,7 +114,10 @@ func (c *Collector) roundIds(url string) []string {
 	}
 
 	var rounds []d.RoundInDate
-	json.NewDecoder(resp.Body).Decode(&rounds)
+	err := json.NewDecoder(resp.Body).Decode(&rounds)
+	if err != nil {
+		return nil
+	}
 
 	roundsIds := make([]string, 0, cap(rounds))
 	for _, v := range rounds {
