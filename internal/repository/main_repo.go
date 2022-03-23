@@ -44,6 +44,6 @@ func AutoMigrate() {
 	}
 }
 
-func Save(v interface{}) {
+func Save(v any) {
 	Database.Save(v)
 }

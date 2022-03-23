@@ -6,10 +6,10 @@ import (
 	"golang.org/x/exp/slices"
 )
 
-func Struct2ExpectedFieldMap(myStruct interface{}, expectedFields []string) map[string]interface{} {
+func Struct2ExpectedFieldMap(myStruct any, expectedFields []string) map[string]any {
 	allFields := Struct2FieldMap(myStruct)
 
-	expectedFieldsMap := make(map[string]interface{}, len(allFields))
+	expectedFieldsMap := make(map[string]any, len(allFields))
 	for k, v := range allFields {
 		if slices.Contains(expectedFields, k) {
 			expectedFieldsMap[k] = v
@@ -18,8 +18,8 @@ func Struct2ExpectedFieldMap(myStruct interface{}, expectedFields []string) map[
 	return expectedFieldsMap
 }
 
-func Struct2FieldMap(myStruct interface{}) map[string]interface{} {
-	var inInterface map[string]interface{}
+func Struct2FieldMap(myStruct any) map[string]any {
+	var inInterface map[string]any
 	inrec, _ := json.Marshal(myStruct)
 	json.Unmarshal(inrec, &inInterface)
 

@@ -15,7 +15,7 @@ const (
 	Triangle    shape = "triangle"
 )
 
-type Coords map[string]interface{}
+type Coords map[string]any
 
 type Dataset struct {
 	Label string   `json:"label,omitempty"`

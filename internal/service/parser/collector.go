@@ -59,7 +59,7 @@ func (c *Collector) CollectStatistics() {
 	}
 }
 
-func (c *Collector) saveLogs(logger *log.Logger, text interface{}) {
+func (c *Collector) saveLogs(logger *log.Logger, text any) {
 	textStr := fmt.Sprintln(text)
 	c.Logs = append(c.Logs, textStr)
 	logger.Println(text)

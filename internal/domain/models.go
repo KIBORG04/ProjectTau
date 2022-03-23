@@ -2,7 +2,7 @@ package domain
 
 import "gorm.io/gorm"
 
-var Models = []interface{}{
+var Models = []any{
 	&Root{},
 	&Factions{},
 	&Role{},

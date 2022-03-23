@@ -1,12 +1,13 @@
 package utils
 
 import (
-	"golang.org/x/exp/slices"
 	"reflect"
 	"strings"
+
+	"golang.org/x/exp/slices"
 )
 
-func JsonFieldNames(v interface{}, expectedFields *[]string) []string {
+func JsonFieldNames(v any, expectedFields *[]string) []string {
 	names := make([]string, 0)
 	typeof := reflect.TypeOf(v).Elem()
 	for i := 0; i < typeof.NumField(); i++ {
