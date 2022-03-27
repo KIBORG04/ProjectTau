@@ -42,3 +42,11 @@ func (c *Config) String() template.JS {
 	}
 	return template.JS(str)
 }
+
+func RenderCharts(charts ...*Config) (templates []template.JS) {
+	templates = make([]template.JS, 0, len(charts))
+	for _, chart := range charts {
+		templates = append(templates, chart.String())
+	}
+	return
+}

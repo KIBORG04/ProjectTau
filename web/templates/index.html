@@ -4,12 +4,47 @@
 {{ template "header.html" .}}
 
 
-<div class="position-static">
-    <div class="position-absolute top-50 start-50 translate-middle">
+<div class="container mt-1">
+    <div style="text-align: center;">
         <h1 class="display-1">SS13 Statistics</h1>
     </div>
 </div>
 
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Версия статистики: {{ .version }}</li>
+                <li class="list-group-item">Последнее обновление БД: {{ .lastDate }}</li>
+            </ul>
+        </div>
+        <div class="col">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Раундов в статистике: {{ .totalRounds }}</li>
+                <li class="list-group-item">Раундов на первом: {{ .alphaRounds }}</li>
+                <li class="list-group-item">Раундов на втором: {{ .betaRounds }}</li>
+                <li class="list-group-item">Раундов на третьем: {{ .gammaRounds }}</li>
+                <li class="list-group-item">ᅠ</li>
+                <li class="list-group-item">Смертей экипажа: {{ .crewDeathsSum }}</li>
+                {{ range $k, $v := .crewDeathsCount }}
+                    <li class="list-group-item" style="padding: 0;">{{ $k }}: {{ $v }}</li>
+                {{ end }}
+                <li class="list-group-item">Смертей ролей: {{ .roleDeathsSum }}</li>
+                {{ range $k, $v := .roleDeathsCount }}
+                    <li class="list-group-item" style="padding: 0;">{{ $k }}: {{ $v }}</li>
+                {{ end }}
+            </ul>
+        </div>
+        <div class="col">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Количество режимов: {{ .modesSum }}</li>
+                {{ range $k, $v := .modesCount }}
+                    <li class="list-group-item">{{ $k }}: {{ $v }}</li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+</div>
 
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}

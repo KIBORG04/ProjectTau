@@ -17,3 +17,13 @@ func Slice2Map[T constraints.Integer](slice []string) map[string]T {
 func Pick[T any](from []T) T {
 	return from[rand.Intn(len(from))]
 }
+
+func GetKeyByValue[T, R comparable](myMap map[R]T, el T) R {
+	var genericError R
+	for k, v := range myMap {
+		if el == v {
+			return k
+		}
+	}
+	return genericError
+}

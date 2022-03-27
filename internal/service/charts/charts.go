@@ -9,7 +9,6 @@ import (
 	"ssstatistics/internal/utils"
 	"ssstatistics/pkg/chartjs"
 
-	"github.com/gin-gonic/gin"
 	"gorm.io/gorm/clause"
 )
 
@@ -34,7 +33,7 @@ func makeAverageCoords[T any](fields []string, mainPool []T) []chartjs.Coords {
 	return coords
 }
 
-func Gamemode(c *gin.Context) {
+func Gamemode() []template.JS {
 	// Load data
 	var roots []domain.Root
 	r.Database.Preload(clause.Associations).Find(&roots)
@@ -60,7 +59,5 @@ func Gamemode(c *gin.Context) {
 	fmt.Println(chart.String())
 	fmt.Println([]template.JS{chart.String()})
 
-	c.HTML(200, "chart.html", gin.H{
-		"charts": []template.JS{chart.String()},
-	})
+	return chartjs.RenderCharts(chart)
 }

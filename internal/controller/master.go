@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"ssstatistics/internal/service/charts"
 	"ssstatistics/internal/service/parser"
+	"ssstatistics/internal/service/stats"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -27,12 +27,9 @@ func runCollector(c *gin.Context) {
 }
 
 func initializeRoutes() {
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index.html", gin.H{})
-	})
-
-	router.GET("/gamemodes", charts.Gamemode)
-	router.GET("/cult", charts.Cult)
+	router.GET("/", stats.Root)
+	router.GET("/gamemodes", stats.Gamemode)
+	router.GET("/cult", stats.Cult)
 
 	// Group using gin.BasicAuth() middleware
 	// gin.Accounts is a shortcut for map[string]string
@@ -53,7 +50,7 @@ func initializeRoutes() {
 
 func Run() {
 	router = gin.Default()
-	router.LoadHTMLGlob("../../web/templates/*")
+	router.LoadHTMLGlob("web/templates/*")
 
 	initializeRoutes()
 

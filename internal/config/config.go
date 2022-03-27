@@ -19,7 +19,7 @@ type GlobalConfig struct {
 }
 
 func LoadConfigurations() {
-	file, err := os.ReadFile("../../config/config.yaml")
+	file, err := os.ReadFile("config/config.yaml")
 	if err != nil {
 		panic(err)
 	}

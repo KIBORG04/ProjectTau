@@ -7,11 +7,10 @@ import (
 	"ssstatistics/internal/utils"
 	"ssstatistics/pkg/chartjs"
 
-	"github.com/gin-gonic/gin"
 	"gorm.io/gorm/clause"
 )
 
-func Cult(c *gin.Context) {
+func Cult() []template.JS {
 	// Load data
 	var cultInfo []domain.CultInfo
 	r.Database.Preload(clause.Associations).Find(&cultInfo)
@@ -48,7 +47,5 @@ func Cult(c *gin.Context) {
 		SetLabels(aspectsFields).
 		AddDataset(chartjs.BarDataset("Aspects", aspectsCoords))
 
-	c.HTML(200, "chart.html", gin.H{
-		"charts": []template.JS{ritesChart.String(), aspectChart.String()},
-	})
+	return chartjs.RenderCharts(ritesChart, aspectChart)
 }
