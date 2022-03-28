@@ -3,13 +3,6 @@
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
-
-<div class="container mt-1">
-    <div style="text-align: center;">
-        <h1 class="display-1">SS13 Statistics</h1>
-    </div>
-</div>
-
 <div class="container mt-4">
     <div class="row">
         <div class="col">
@@ -25,22 +18,38 @@
                 <li class="list-group-item">Раундов на втором: {{ .betaRounds }}</li>
                 <li class="list-group-item">Раундов на третьем: {{ .gammaRounds }}</li>
                 <li class="list-group-item">ᅠ</li>
-                <li class="list-group-item">Смертей экипажа: {{ .crewDeathsSum }}</li>
-                {{ range $k, $v := .crewDeathsCount }}
-                    <li class="list-group-item" style="padding: 0;">{{ $k }}: {{ $v }}</li>
-                {{ end }}
-                <li class="list-group-item">Смертей ролей: {{ .roleDeathsSum }}</li>
-                {{ range $k, $v := .roleDeathsCount }}
-                    <li class="list-group-item" style="padding: 0;">{{ $k }}: {{ $v }}</li>
-                {{ end }}
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#crewDeathsSum"
+                        aria-expanded="false" aria-controls="collapseExample">
+                    Смертей экипажа: {{ .crewDeathsSum }}
+                </button>
+                <div class="collapse" id="crewDeathsSum">
+                    {{ range $k, $v := .crewDeathsCount }}
+                        <li class="list-group-item ps-3 pt-0 pb-0">{{ $k }}: {{ $v }}</li>
+                    {{ end }}
+                </div>
+                <li class="list-group-item">ᅠ</li>
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#roleDeathsSum"
+                        aria-expanded="false" aria-controls="collapseExample">
+                    Смертей ролей: {{ .roleDeathsSum }}
+                </button>
+                <div class="collapse" id="roleDeathsSum">
+                    {{ range $k, $v := .roleDeathsCount }}
+                        <li class="list-group-item ps-3 pt-0 pb-0">{{ $k }}: {{ $v }}</li>
+                    {{ end }}
+                </div>
             </ul>
         </div>
         <div class="col">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Количество режимов: {{ .modesSum }}</li>
-                {{ range $k, $v := .modesCount }}
-                    <li class="list-group-item">{{ $k }}: {{ $v }}</li>
-                {{ end }}
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#modesSum"
+                        aria-expanded="false" aria-controls="collapseExample">
+                    Количество режимов: {{ .modesSum }}
+                </button>
+                <div class="collapse" id="modesSum">
+                    {{ range $k, $v := .modesCount }}
+                        <li class="list-group-item ps-3 pt-0 pb-0">{{ $k }}: {{ $v }}</li>
+                    {{ end }}
+                </div>
             </ul>
         </div>
     </div>
