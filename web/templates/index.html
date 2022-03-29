@@ -23,8 +23,8 @@
                     Смертей экипажа: {{ .crewDeathsSum }}
                 </button>
                 <div class="collapse" id="crewDeathsSum">
-                    {{ range $k, $v := .crewDeathsCount }}
-                        <li class="list-group-item ps-3 pt-0 pb-0">{{ $k }}: {{ $v }}</li>
+                    {{ range .crewDeathsCount }}
+                        <li class="list-group-item ps-3 pt-0 pb-0">{{ .Key }}: {{ .Value }}</li>
                     {{ end }}
                 </div>
                 <li class="list-group-item">ᅠ</li>
@@ -33,8 +33,8 @@
                     Смертей ролей: {{ .roleDeathsSum }}
                 </button>
                 <div class="collapse" id="roleDeathsSum">
-                    {{ range $k, $v := .roleDeathsCount }}
-                        <li class="list-group-item ps-3 pt-0 pb-0">{{ $k }}: {{ $v }}</li>
+                    {{ range .roleDeathsCount }}
+                        <li class="list-group-item ps-3 pt-0 pb-0">{{ .Key }}: {{ .Value }}</li>
                     {{ end }}
                 </div>
             </ul>
@@ -46,8 +46,8 @@
                     Количество режимов: {{ .modesSum }}
                 </button>
                 <div class="collapse" id="modesSum">
-                    {{ range $k, $v := .modesCount }}
-                        <li class="list-group-item ps-3 pt-0 pb-0">{{ $k }}: {{ $v }}</li>
+                    {{ range .modesCount }}
+                        <li class="list-group-item ps-3 pt-0 pb-0">{{ .Key }}: {{ .Value }}</li>
                     {{ end }}
                 </div>
             </ul>
