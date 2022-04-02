@@ -1,0 +1,1064 @@
+root_id,id,name,faction_name,minor_victory,type,victory
+49269,1,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49269,2,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49270,3,Traitors,Traitor,0,/datum/faction/traitor,0
+49270,4,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49275,5,Traitors,Traitor,0,/datum/faction/traitor,1
+49275,6,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49281,7,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49281,8,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49282,9,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49283,10,Traitors,Traitor,0,/datum/faction/traitor,0
+49283,11,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49284,12,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49284,13,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49285,14,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+49285,15,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49286,16,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49286,17,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49287,18,Traitors,Traitor,0,/datum/faction/traitor,0
+49287,19,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49288,20,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49288,21,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49289,22,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49289,23,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49290,24,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49292,25,Shadowlings,Shadowlings,0,/datum/faction/shadowlings,0
+49292,26,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49292,27,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49292,28,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49293,29,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49293,30,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49294,31,Mothership Rho,Abductor Team,0,/datum/faction/abductors,0
+49294,32,Mothership Xi,Abductor Team,0,/datum/faction/abductors,0
+49294,33,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49294,34,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49295,35,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49295,36,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49296,37,Traitors,Traitor,0,/datum/faction/traitor,0
+49296,38,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49297,39,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49297,40,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49298,41,Traitors,Traitor,0,/datum/faction/traitor,0
+49298,42,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49299,43,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49299,44,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49301,45,Traitors,Traitor,0,/datum/faction/traitor,0
+49301,46,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49301,47,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49304,48,Traitors,Traitor,0,/datum/faction/traitor,0
+49304,49,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49305,50,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49305,51,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49307,52,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49307,53,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49309,54,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49309,55,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49310,56,Mothership Omicron,Abductor Team,0,/datum/faction/abductors,0
+49310,57,Mothership Tau,Abductor Team,0,/datum/faction/abductors,0
+49310,58,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49312,59,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49312,60,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49313,61,Traitors,Traitor,0,/datum/faction/traitor,1
+49313,62,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49314,63,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49315,64,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49315,65,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49316,66,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49316,67,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49317,68,Revolutionaries,Revolution,0,/datum/faction/revolution,1
+49317,69,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49319,70,Traitors,Traitor,0,/datum/faction/traitor,0
+49319,71,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49322,72,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49322,73,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49324,74,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49324,75,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49324,76,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49331,77,Traitors,Traitor,0,/datum/faction/traitor,0
+49331,78,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49339,79,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49339,80,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49342,81,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49342,82,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49344,83,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49344,84,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49345,85,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49345,86,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49345,87,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,1
+49345,88,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49347,89,Traitors,Traitor,0,/datum/faction/traitor,0
+49347,90,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49347,91,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49348,92,Пираты,Custom,0,/datum/faction/custom,0
+49349,93,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49349,94,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49353,95,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49353,96,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49353,97,Revolutionaries,Revolution,0,/datum/faction/revolution,1
+49354,98,Traitors,Traitor,0,/datum/faction/traitor,0
+49354,99,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49355,100,Traitors,Traitor,0,/datum/faction/traitor,0
+49355,101,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49356,102,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49356,103,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49357,104,Traitors,Traitor,0,/datum/faction/traitor,0
+49357,105,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49360,106,Traitors,Traitor,0,/datum/faction/traitor,0
+49360,107,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49362,108,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49362,109,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49364,110,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49364,111,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49365,112,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49365,113,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49368,114,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49368,115,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49368,116,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49368,117,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49369,118,Traitors,Traitor,0,/datum/faction/traitor,0
+49369,119,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49371,120,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49371,121,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49372,122,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49372,123,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49373,124,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49373,125,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49374,126,Shadowlings,Shadowlings,0,/datum/faction/shadowlings,0
+49374,127,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49375,128,Traitors,Traitor,0,/datum/faction/traitor,0
+49375,129,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49378,130,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49378,131,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49379,132,Traitors,Traitor,0,/datum/faction/traitor,0
+49379,133,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49383,134,Traitors,Traitor,0,/datum/faction/traitor,0
+49383,135,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49384,136,Traitors,Traitor,0,/datum/faction/traitor,0
+49384,137,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49385,138,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49385,139,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49386,140,Traitors,Traitor,0,/datum/faction/traitor,0
+49386,141,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49387,142,Traitors,Traitor,0,/datum/faction/traitor,0
+49387,143,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49388,144,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49388,145,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49390,146,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,1
+49390,147,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49392,148,Traitors,Traitor,0,/datum/faction/traitor,0
+49392,149,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49393,150,Zobmies,Zobmies,0,/datum/faction/zombie,0
+49443,226,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49393,151,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49393,152,Nanotrasen Deathsquad,Nanotrasen Deathsquad,0,/datum/faction/strike_team/deathsquad,1
+49394,153,Traitors,Traitor,0,/datum/faction/traitor,0
+49394,154,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49395,155,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,1
+49395,156,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49395,157,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49397,158,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49397,159,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49398,160,Mothership Phi,Abductor Team,0,/datum/faction/abductors,1
+49398,161,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49399,162,Traitors,Traitor,0,/datum/faction/traitor,0
+49399,163,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49400,164,Revolutionaries,Revolution,0,/datum/faction/revolution,1
+49400,165,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49402,166,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49402,167,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49402,168,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49404,169,Traitors,Traitor,0,/datum/faction/traitor,0
+49404,170,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49406,171,Traitors,Traitor,0,/datum/faction/traitor,0
+49406,172,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49407,173,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49407,174,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49408,175,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49408,176,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49408,177,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49412,178,Revolutionaries,Revolution,0,/datum/faction/revolution,0
+49412,179,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49412,180,Spider Clan,Spider Clan,0,/datum/faction/ninja,0
+49413,181,Mothership Upsilon,Abductor Team,0,/datum/faction/abductors,1
+49413,182,Mothership Delta,Abductor Team,0,/datum/faction/abductors,0
+49413,183,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49415,184,Traitors,Traitor,0,/datum/faction/traitor,0
+49415,185,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49416,186,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49416,187,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49416,188,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49419,189,Traitors,Traitor,0,/datum/faction/traitor,0
+49419,190,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49420,191,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,1
+49420,192,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49421,193,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49421,194,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49424,195,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49424,196,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49426,197,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49426,198,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49426,199,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49428,200,Traitors,Traitor,0,/datum/faction/traitor,1
+49428,201,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49430,202,Traitors,Traitor,0,/datum/faction/traitor,0
+49430,203,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49431,204,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49431,205,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49434,206,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49434,207,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49436,208,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49436,209,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49437,210,Revolutionaries,Revolution,0,/datum/faction/revolution,0
+49437,211,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49438,212,Traitors,Traitor,0,/datum/faction/traitor,0
+49438,213,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49439,214,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49439,215,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49440,216,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49440,217,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49441,218,Shadowlings,Shadowlings,0,/datum/faction/shadowlings,0
+49441,219,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49441,220,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49442,221,Traitors,Traitor,0,/datum/faction/traitor,0
+49442,222,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49443,223,TraitorChan,TraitorChan,0,/datum/faction/changeling/traitorchan,0
+49443,224,Traitors,Traitor,0,/datum/faction/traitor,0
+49443,225,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49444,227,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49444,228,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49445,229,Traitors,Traitor,0,/datum/faction/traitor,0
+49445,230,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49445,231,Zobmies,Zobmies,0,/datum/faction/zombie,0
+49446,232,Traitors,Traitor,0,/datum/faction/traitor,0
+49446,233,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49448,234,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49448,235,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49453,236,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49453,237,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49454,238,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49454,239,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49455,240,Traitors,Traitor,0,/datum/faction/traitor,1
+49455,241,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49456,242,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49456,243,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49456,244,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49458,245,Traitors,Traitor,0,/datum/faction/traitor,0
+49458,246,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49460,247,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,1
+49460,248,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49460,249,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49461,250,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49461,251,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49462,252,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49462,253,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49463,254,Traitors,Traitor,0,/datum/faction/traitor,0
+49463,255,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49464,256,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49464,257,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49465,258,Mothership Mu,Abductor Team,0,/datum/faction/abductors,0
+49465,259,Mothership Chi,Abductor Team,0,/datum/faction/abductors,0
+49465,260,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49466,261,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49466,262,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49468,263,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49468,264,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49469,265,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49469,266,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49470,267,Traitors,Traitor,0,/datum/faction/traitor,0
+49470,268,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49471,269,Shadowlings,Shadowlings,0,/datum/faction/shadowlings,0
+49471,270,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49472,271,Traitors,Traitor,0,/datum/faction/traitor,0
+49472,272,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49473,273,Traitors,Traitor,0,/datum/faction/traitor,0
+49473,274,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49473,275,Zobmies,Zobmies,0,/datum/faction/zombie,0
+49476,276,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49476,277,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49476,278,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49479,279,Traitors,Traitor,0,/datum/faction/traitor,0
+49479,280,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49482,281,Traitors,Traitor,0,/datum/faction/traitor,0
+49482,282,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49483,283,Traitors,Traitor,0,/datum/faction/traitor,0
+49483,284,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49484,285,Revolutionaries,Revolution,0,/datum/faction/revolution,1
+49484,286,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49484,287,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49486,288,Organized Crimes Department,Organized Crimes Department,0,/datum/faction/cops,0
+49486,289,Tunnel Snakes,Families,0,/datum/faction/gang/tunnel_snakes,0
+49486,290,Jack Bros,Families,0,/datum/faction/gang/jackbros,0
+49486,291,Russian Mafia,Families,0,/datum/faction/gang/russian_mafia,0
+49486,292,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49503,293,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49503,294,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49503,295,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49506,296,Traitors,Traitor,0,/datum/faction/traitor,1
+49506,297,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49511,298,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49511,299,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49512,300,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49512,301,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49513,302,Traitors,Traitor,0,/datum/faction/traitor,1
+49513,303,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49514,304,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+49515,305,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49515,306,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49516,307,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49516,308,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49518,309,TraitorChan,TraitorChan,0,/datum/faction/changeling/traitorchan,0
+49518,310,Traitors,Traitor,0,/datum/faction/traitor,0
+49518,311,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49518,312,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49519,313,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49519,314,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49520,315,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49520,316,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49520,317,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49523,318,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49523,319,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49524,320,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49524,321,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49526,322,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49526,323,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49527,324,Traitors,Traitor,0,/datum/faction/traitor,0
+49527,325,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49528,326,Organized Crimes Department,Organized Crimes Department,0,/datum/faction/cops,0
+49528,327,Russian Mafia,Families,0,/datum/faction/gang/russian_mafia,0
+49528,328,Los Santos Vagos,Families,0,/datum/faction/gang/vagos,1
+49528,329,San Fierro Triad,Families,0,/datum/faction/gang/red,0
+49528,330,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49529,331,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49529,332,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49530,333,Shadowlings,Shadowlings,0,/datum/faction/shadowlings,0
+49530,334,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49530,335,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49531,336,Traitors,Traitor,0,/datum/faction/traitor,1
+49531,337,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49532,338,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49532,339,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49533,340,Zobmies,Zobmies,0,/datum/faction/zombie,0
+49533,341,Nanotrasen Deathsquad,Nanotrasen Deathsquad,0,/datum/faction/strike_team/deathsquad,0
+49534,342,Traitors,Traitor,0,/datum/faction/traitor,0
+49534,343,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49535,344,Traitors,Traitor,0,/datum/faction/traitor,0
+49535,345,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49536,346,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49538,347,Traitors,Traitor,0,/datum/faction/traitor,0
+49538,348,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49539,349,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49539,350,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49539,351,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49541,352,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49541,353,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49541,354,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49545,355,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49545,356,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49545,357,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49545,358,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49546,359,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49548,360,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49548,361,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49549,362,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49549,363,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49550,364,Traitors,Traitor,0,/datum/faction/traitor,0
+49550,365,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49551,366,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49551,367,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49553,368,Traitors,Traitor,0,/datum/faction/traitor,0
+49553,369,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49553,370,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49554,371,Traitors,Traitor,0,/datum/faction/traitor,0
+49554,372,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49554,373,Spider Clan,Spider Clan,0,/datum/faction/ninja,0
+49554,374,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49555,375,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49555,376,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49556,377,Traitors,Traitor,0,/datum/faction/traitor,0
+49556,378,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49557,379,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49558,380,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49558,381,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49559,382,Traitors,Traitor,0,/datum/faction/traitor,1
+49559,383,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49564,384,Traitors,Traitor,0,/datum/faction/traitor,1
+49564,385,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49565,386,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49565,387,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49566,388,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49566,389,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49568,390,Traitors,Traitor,0,/datum/faction/traitor,0
+49568,391,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49569,392,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,1
+49569,393,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49571,394,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49571,395,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49571,396,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49571,397,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49572,398,Traitors,Traitor,0,/datum/faction/traitor,0
+49572,399,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49579,400,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49579,401,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49581,402,Traitors,Traitor,0,/datum/faction/traitor,1
+49581,403,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49583,404,Traitors,Traitor,0,/datum/faction/traitor,0
+49583,405,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49584,406,Traitors,Traitor,0,/datum/faction/traitor,0
+49584,407,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49585,408,Traitors,Traitor,0,/datum/faction/traitor,0
+49588,409,Revolutionaries,Revolution,0,/datum/faction/revolution,1
+49588,410,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49591,411,Organized Crimes Department,Organized Crimes Department,0,/datum/faction/cops,1
+49591,412,Monarch Crew,Families,0,/datum/faction/gang/henchmen,0
+49591,413,Ballas,Families,0,/datum/faction/gang/purple,1
+49591,414,Jack Bros,Families,0,/datum/faction/gang/jackbros,0
+49591,415,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49591,416,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49593,417,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49593,418,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49594,419,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49594,420,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49595,421,Traitors,Traitor,0,/datum/faction/traitor,0
+49595,422,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49596,423,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49596,424,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49596,425,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49597,426,Revolutionaries,Revolution,0,/datum/faction/revolution,1
+49597,427,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49597,428,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49598,429,Traitors,Traitor,0,/datum/faction/traitor,0
+49598,430,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49599,431,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49599,432,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49602,433,Traitors,Traitor,0,/datum/faction/traitor,0
+49602,434,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49606,435,Traitors,Traitor,0,/datum/faction/traitor,1
+49606,436,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49608,437,Revolutionaries,Revolution,0,/datum/faction/revolution,0
+49608,438,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49609,439,Traitors,Traitor,0,/datum/faction/traitor,0
+49609,440,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49610,441,Traitors,Traitor,0,/datum/faction/traitor,0
+49610,442,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49611,443,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,1
+49611,444,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49611,445,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49613,446,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49613,447,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49614,448,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49614,449,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49615,450,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49615,451,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49615,452,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49615,453,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+49616,454,Traitors,Traitor,0,/datum/faction/traitor,0
+49616,455,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49617,456,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49617,457,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49618,458,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49618,459,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49620,460,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49620,461,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49620,462,Zobmies,Zobmies,0,/datum/faction/zombie,0
+49621,463,Traitors,Traitor,0,/datum/faction/traitor,0
+49621,464,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49622,465,Shadowlings,Shadowlings,0,/datum/faction/shadowlings,0
+49622,466,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49625,467,Traitors,Traitor,0,/datum/faction/traitor,0
+49625,468,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49627,469,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49627,470,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49628,471,Traitors,Traitor,0,/datum/faction/traitor,1
+49628,472,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49630,473,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49630,474,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49631,475,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,1
+49631,476,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49631,477,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49631,478,Spider Clan,Spider Clan,0,/datum/faction/ninja,0
+49632,479,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49632,480,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49633,481,Traitors,Traitor,0,/datum/faction/traitor,0
+49633,482,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49636,483,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49636,484,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49638,485,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,1
+49638,486,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49638,487,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49640,488,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49640,489,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49640,490,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49642,491,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+49642,492,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49644,493,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49644,494,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49646,495,Traitors,Traitor,0,/datum/faction/traitor,1
+49646,496,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49648,497,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49648,498,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49635,499,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49635,500,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49635,501,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49637,502,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49637,503,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49639,504,Traitors,Traitor,0,/datum/faction/traitor,0
+49639,505,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49641,506,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49641,507,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49643,508,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49643,509,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49643,510,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49645,511,Traitors,Traitor,0,/datum/faction/traitor,0
+49645,512,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49647,513,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49649,514,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49649,515,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49652,516,Traitors,Traitor,0,/datum/faction/traitor,0
+49652,517,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49654,518,Traitors,Traitor,0,/datum/faction/traitor,0
+49654,519,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49656,520,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49656,521,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49658,522,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49658,523,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49662,524,Traitors,Traitor,0,/datum/faction/traitor,0
+49662,525,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49651,526,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49651,527,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49657,528,Traitors,Traitor,0,/datum/faction/traitor,0
+49657,529,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49659,530,Shadowlings,Shadowlings,0,/datum/faction/shadowlings,0
+49659,531,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49661,532,Traitors,Traitor,0,/datum/faction/traitor,0
+49661,533,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49663,534,Revolutionaries,Revolution,0,/datum/faction/revolution,1
+49663,535,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49663,536,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49671,537,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49671,538,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49672,539,Traitors,Traitor,0,/datum/faction/traitor,1
+49672,540,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49672,541,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49675,542,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49675,543,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49676,544,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49676,545,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49677,546,Traitors,Traitor,0,/datum/faction/traitor,1
+49677,547,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49678,548,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49678,549,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49678,550,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49679,551,Traitors,Traitor,0,/datum/faction/traitor,1
+49679,552,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49680,553,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49680,554,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49682,555,Revolutionaries,Revolution,0,/datum/faction/revolution,1
+49682,556,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49683,557,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49683,558,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49685,559,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49685,560,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49686,561,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,1
+49686,562,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49687,563,Traitors,Traitor,0,/datum/faction/traitor,0
+49687,564,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49688,565,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49688,566,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49688,567,Spider Clan,Spider Clan,0,/datum/faction/ninja,0
+49688,568,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49689,569,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49689,570,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49691,571,Revolutionaries,Revolution,0,/datum/faction/revolution,0
+49691,572,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49691,573,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+49692,574,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49692,575,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49692,576,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49694,577,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49694,578,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49694,579,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49696,580,Traitors,Traitor,0,/datum/faction/traitor,1
+49696,581,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49699,582,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49699,583,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49699,584,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49700,585,Traitors,Traitor,0,/datum/faction/traitor,0
+49700,586,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49701,587,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49701,588,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49701,589,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49701,590,Spider Clan,Spider Clan,0,/datum/faction/ninja,0
+49704,591,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49704,592,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49705,593,Revolutionaries,Revolution,0,/datum/faction/revolution,1
+49705,594,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49705,595,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49705,596,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49706,597,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49706,598,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49707,599,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49707,600,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49708,601,Traitors,Traitor,0,/datum/faction/traitor,0
+49708,602,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49708,603,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49709,604,Mothership Mu,Abductor Team,0,/datum/faction/abductors,0
+49709,605,Mothership Lambda,Abductor Team,0,/datum/faction/abductors,0
+49709,606,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49713,607,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49713,608,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49714,609,Revolutionaries,Revolution,0,/datum/faction/revolution,1
+49714,610,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49714,611,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49729,612,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49731,613,Traitors,Traitor,0,/datum/faction/traitor,0
+49731,614,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49733,615,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49733,616,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49734,617,Shadowlings,Shadowlings,0,/datum/faction/shadowlings,0
+49734,618,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49736,619,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49736,620,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49737,621,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49737,622,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49738,623,Traitors,Traitor,0,/datum/faction/traitor,0
+49738,624,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49739,625,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49739,626,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49741,627,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49741,628,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49741,629,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49743,630,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49743,631,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49746,632,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49746,633,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49742,634,Traitors,Traitor,0,/datum/faction/traitor,0
+49742,635,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49744,636,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49744,637,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49747,638,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49747,639,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49751,640,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49751,641,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49755,642,Revolutionaries,Revolution,0,/datum/faction/revolution,0
+49755,643,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49757,644,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49757,645,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49748,646,Traitors,Traitor,0,/datum/faction/traitor,0
+49748,647,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49750,648,Traitors,Traitor,0,/datum/faction/traitor,1
+49750,649,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49752,650,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49752,651,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49756,652,Traitors,Traitor,0,/datum/faction/traitor,0
+49756,653,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49771,654,Traitors,Traitor,0,/datum/faction/traitor,0
+49771,655,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49773,656,Traitors,Traitor,0,/datum/faction/traitor,0
+49773,657,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49774,658,Traitors,Traitor,0,/datum/faction/traitor,0
+49774,659,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49776,660,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49776,661,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49778,662,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49778,663,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49779,664,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49779,665,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49780,666,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49780,667,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49781,668,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49781,669,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49781,670,Zobmies,Zobmies,0,/datum/faction/zombie,0
+49782,671,Traitors,Traitor,0,/datum/faction/traitor,0
+49782,672,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49784,673,Mothership Xi,Abductor Team,0,/datum/faction/abductors,0
+49784,674,Mothership Chi,Abductor Team,0,/datum/faction/abductors,1
+49784,675,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49785,676,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49785,677,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49786,678,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49786,679,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49786,680,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49786,681,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49786,682,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49787,683,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49787,684,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49788,685,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49788,686,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49789,687,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49789,688,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49790,689,Traitors,Traitor,0,/datum/faction/traitor,0
+49790,690,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49791,691,Mothership Nu,Abductor Team,0,/datum/faction/abductors,0
+49791,692,Mothership Lambda,Abductor Team,0,/datum/faction/abductors,0
+49791,693,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49791,694,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+49792,695,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49792,696,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49793,697,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49793,698,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49794,699,Traitors,Traitor,0,/datum/faction/traitor,1
+49794,700,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49795,701,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49795,702,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49796,703,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49798,704,Traitors,Traitor,0,/datum/faction/traitor,0
+49798,705,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49799,706,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49800,707,Traitors,Traitor,0,/datum/faction/traitor,0
+49800,708,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49802,709,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49802,710,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49802,711,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49803,712,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49803,713,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49804,714,Traitors,Traitor,0,/datum/faction/traitor,0
+49804,715,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49805,716,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49805,717,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49805,718,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49806,719,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49806,720,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49807,721,Traitors,Traitor,0,/datum/faction/traitor,0
+49807,722,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49808,723,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49808,724,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49810,725,Traitors,Traitor,0,/datum/faction/traitor,0
+49810,726,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49811,727,Traitors,Traitor,0,/datum/faction/traitor,1
+49811,728,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49812,729,Mothership Iota,Abductor Team,0,/datum/faction/abductors,0
+49812,730,Mothership Kappa,Abductor Team,0,/datum/faction/abductors,1
+49812,731,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49812,732,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49813,733,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49813,734,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49814,735,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49814,736,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49814,737,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49816,738,Traitors,Traitor,0,/datum/faction/traitor,0
+49816,739,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49817,740,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49817,741,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49818,742,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+49818,743,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49819,744,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49819,745,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49820,746,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49820,747,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49821,748,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49821,749,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49821,750,Zobmies,Zobmies,0,/datum/faction/zombie,0
+49822,751,Traitors,Traitor,0,/datum/faction/traitor,0
+49822,752,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49824,753,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49824,754,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49828,755,Traitors,Traitor,0,/datum/faction/traitor,1
+49828,756,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49832,757,Traitors,Traitor,0,/datum/faction/traitor,0
+49832,758,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49834,759,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49834,760,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49835,761,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49835,762,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49836,763,Traitors,Traitor,0,/datum/faction/traitor,0
+49836,764,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49837,765,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49837,766,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49837,767,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49838,768,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+49838,769,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49838,770,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+49840,771,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49840,772,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49841,773,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49841,774,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49843,775,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49843,776,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49843,777,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+49844,778,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49844,779,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49844,780,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49851,781,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49851,782,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49857,783,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49857,784,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49857,785,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49858,786,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49858,787,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49860,788,Traitors,Traitor,0,/datum/faction/traitor,0
+49860,789,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49861,790,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49861,791,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49863,792,Traitors,Traitor,0,/datum/faction/traitor,0
+49863,793,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49863,794,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49869,795,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49869,796,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49870,797,Traitors,Traitor,0,/datum/faction/traitor,1
+49870,798,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49871,799,Zobmies,Zobmies,0,/datum/faction/zombie,0
+49874,800,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49874,801,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49878,802,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49878,803,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49882,804,Traitors,Traitor,0,/datum/faction/traitor,1
+49882,805,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49883,806,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49883,807,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49883,808,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49884,809,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49884,810,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49885,811,Traitors,Traitor,0,/datum/faction/traitor,0
+49885,812,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49889,813,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49889,814,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49890,815,Revolutionaries,Revolution,0,/datum/faction/revolution,0
+49890,816,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49890,817,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49891,818,Traitors,Traitor,0,/datum/faction/traitor,0
+49891,819,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49892,820,Mothership Lambda,Abductor Team,0,/datum/faction/abductors,0
+49892,821,Mothership Pi,Abductor Team,0,/datum/faction/abductors,0
+49892,822,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49892,823,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49893,824,Traitors,Traitor,0,/datum/faction/traitor,0
+49893,825,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49894,826,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49894,827,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49895,828,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+49895,829,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49896,830,Traitors,Traitor,0,/datum/faction/traitor,0
+49896,831,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49898,832,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49898,833,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49899,834,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49899,835,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49901,836,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49901,837,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49902,838,Traitors,Traitor,0,/datum/faction/traitor,0
+49902,839,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49903,840,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+49903,841,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49906,842,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49906,843,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49908,844,Traitors,Traitor,0,/datum/faction/traitor,1
+49908,845,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49911,846,Traitors,Traitor,0,/datum/faction/traitor,1
+49911,847,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49915,848,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,1
+49915,849,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49916,850,Traitors,Traitor,0,/datum/faction/traitor,1
+49916,851,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49917,852,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49917,853,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49918,854,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+49918,855,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49918,856,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49920,857,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49920,858,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49920,859,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49920,860,Spider Clan,Spider Clan,0,/datum/faction/ninja,0
+49922,861,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49922,862,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49922,863,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+49925,864,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49925,865,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49926,866,Traitors,Traitor,0,/datum/faction/traitor,0
+49926,867,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49927,868,Mothership Nu,Abductor Team,0,/datum/faction/abductors,0
+49927,869,Mothership Alpha,Abductor Team,0,/datum/faction/abductors,1
+49927,870,Mothership Mu,Abductor Team,0,/datum/faction/abductors,0
+49927,871,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49929,872,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49929,873,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49930,874,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49930,875,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49931,876,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,1
+49931,877,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49935,878,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49935,879,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49936,880,Traitors,Traitor,0,/datum/faction/traitor,0
+49936,881,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49937,882,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49937,883,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49945,884,Traitors,Traitor,0,/datum/faction/traitor,1
+49945,885,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49947,886,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49947,887,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49948,888,Traitors,Traitor,0,/datum/faction/traitor,1
+49948,889,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49950,890,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49950,891,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49954,892,Traitors,Traitor,0,/datum/faction/traitor,0
+49954,893,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49956,894,Traitors,Traitor,0,/datum/faction/traitor,0
+49956,895,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49957,896,Traitors,Traitor,0,/datum/faction/traitor,0
+49957,897,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49959,898,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49959,899,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49961,900,Revolutionaries,Revolution,0,/datum/faction/revolution,0
+49961,901,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49962,902,Traitors,Traitor,0,/datum/faction/traitor,1
+49962,903,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49965,904,Traitors,Traitor,0,/datum/faction/traitor,1
+49965,905,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49965,906,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49968,907,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49968,908,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49970,909,Traitors,Traitor,0,/datum/faction/traitor,0
+49970,910,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49971,911,Zobmies,Zobmies,0,/datum/faction/zombie,0
+49971,912,Props,Props,0,/datum/faction/props,0
+49972,913,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+49972,914,Props,Props,0,/datum/faction/props,1
+49976,915,Traitors,Traitor,0,/datum/faction/traitor,0
+49976,916,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49976,917,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49983,918,Traitors,Traitor,0,/datum/faction/traitor,0
+49983,919,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49984,920,Traitors,Traitor,0,/datum/faction/traitor,0
+49984,921,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49986,922,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+49986,923,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49988,924,Traitors,Traitor,0,/datum/faction/traitor,0
+49988,925,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49988,926,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+49989,927,Traitors,Traitor,0,/datum/faction/traitor,0
+49989,928,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49991,929,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+49991,930,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49993,931,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49993,932,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49994,933,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+49994,934,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49995,935,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+49995,936,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+49995,937,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+49995,938,Spider Clan,Spider Clan,0,/datum/faction/ninja,0
+49997,939,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+49997,940,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+49997,941,Props,Props,0,/datum/faction/props,0
+49997,942,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+49998,943,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+49998,944,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50001,945,Traitors,Traitor,0,/datum/faction/traitor,0
+50001,946,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50002,947,Traitors,Traitor,0,/datum/faction/traitor,0
+50002,948,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50003,949,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+50003,950,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50007,951,Traitors,Traitor,0,/datum/faction/traitor,0
+50007,952,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50009,953,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+50010,954,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+50010,955,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50010,956,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+50011,957,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+50011,958,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50011,959,Props,Props,0,/datum/faction/props,0
+50014,960,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+50016,961,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+50016,962,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50034,963,Traitors,Traitor,0,/datum/faction/traitor,0
+50034,964,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50036,965,Traitors,Traitor,0,/datum/faction/traitor,0
+50036,966,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50038,967,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+50038,968,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50039,969,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+50039,970,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50040,971,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+50040,972,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50040,973,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+50042,974,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+50042,975,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50042,976,Spider Clan,Spider Clan,0,/datum/faction/ninja,0
+50042,977,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+50044,978,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+50044,979,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50044,980,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+50044,981,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+50046,982,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+50046,983,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50047,984,Traitors,Traitor,0,/datum/faction/traitor,0
+50047,985,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50053,986,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,1
+50053,987,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50053,988,Spider Clan,Spider Clan,0,/datum/faction/ninja,0
+50053,989,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+50054,990,Поганые Капиталисты,Custom,0,/datum/faction/custom,1
+50054,991,Russian Mafia,Families,0,/datum/faction/gang/russian_mafia,1
+50054,992,Italian Mob,Families,0,/datum/faction/gang/italian_mob,1
+50054,993,Tunnel Snakes,Families,0,/datum/faction/gang/tunnel_snakes,1
+50054,994,Dutch van der Linde's Gang,Families,0,/datum/faction/gang/dutch,1
+50054,995,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,0
+50054,996,Syndicate Deep-Strike squad,Syndicate Elite Strike Team,0,/datum/faction/strike_team/syndiesquad,1
+50057,997,Revolutionaries,Revolution,0,/datum/faction/revolution,0
+50057,998,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50062,999,Traitors,Traitor,0,/datum/faction/traitor,1
+50062,1000,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50064,1001,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,1
+50064,1002,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50065,1003,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+50065,1004,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50068,1005,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+50068,1006,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50068,1007,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+50083,1008,Wizard Federation,Wizard Federation,0,/datum/faction/wizards,0
+50083,1009,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50085,1010,Traitors,Traitor,0,/datum/faction/traitor,0
+50085,1011,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50088,1012,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+50088,1013,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50096,1014,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,1
+50096,1015,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50098,1016,Mothership Alpha,Abductor Team,0,/datum/faction/abductors,1
+50098,1017,Mothership Upsilon,Abductor Team,0,/datum/faction/abductors,0
+50098,1018,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50105,1019,Shadowlings,Shadowlings,0,/datum/faction/shadowlings,1
+50105,1020,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50105,1021,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+50109,1022,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+50109,1023,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50110,1024,Traitors,Traitor,0,/datum/faction/traitor,0
+50110,1025,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50113,1026,Traitors,Traitor,0,/datum/faction/traitor,1
+50113,1027,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50117,1028,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+50117,1029,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50120,1030,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+50120,1031,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50123,1032,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,1
+50123,1033,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50125,1034,Traitors,Traitor,0,/datum/faction/traitor,0
+50125,1035,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50129,1036,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+50129,1037,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50130,1038,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,0
+50130,1039,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50130,1040,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+50130,1041,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+50133,1042,Vox Shoal,Vox Shoal,0,/datum/faction/heist,1
+50133,1043,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50141,1044,Traitors,Traitor,0,/datum/faction/traitor,0
+50141,1045,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50145,1046,Traitors,Traitor,0,/datum/faction/traitor,0
+50145,1047,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50147,1048,Traitors,Traitor,0,/datum/faction/traitor,0
+50147,1049,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50147,1050,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+50153,1051,Traitors,Traitor,0,/datum/faction/traitor,0
+50153,1052,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50154,1053,Traitors,Traitor,0,/datum/faction/traitor,0
+50154,1054,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50159,1055,Shadowlings,Shadowlings,0,/datum/faction/shadowlings,0
+50159,1056,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50161,1057,Traitors,Traitor,0,/datum/faction/traitor,0
+50161,1058,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50162,1059,Changeling Hivemind,Changeling Hivemind,0,/datum/faction/changeling,0
+50162,1060,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50162,1061,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+50165,1062,Traitors,Traitor,0,/datum/faction/traitor,1
+50165,1063,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
