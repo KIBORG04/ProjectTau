@@ -30,18 +30,12 @@
             </ul>
             <form class="d-flex" method="post">
                 <div class="mt-2">
-                  <span class="form-check-inline">
-                          <input type="checkbox" class="form-check-input" id="alpha">
-                          <label class="form-check-label" for="exampleCheck1">Alpha</label>
-                  </span>
+                    {{ range $k, $checkboxState := .serverCheckboxes }}
                     <span class="form-check-inline">
-                      <input type="checkbox" class="form-check-input" id="beta">
-                      <label class="form-check-label" for="exampleCheck1">Beta</label>
+                      <input type="checkbox" class="form-check-input" id="{{ $k }}" value="{{ $k }}" name="server[]" {{ $checkboxState }}>
+                      <label class="form-check-label" for="{{ $k }}">{{ $k }}</label>
                     </span>
-                    <span class="form-check-inline">
-                      <input type="checkbox" class="form-check-input" id="gamma">
-                      <label class="form-check-label" for="exampleCheck1">Gamma</label>
-                    </span>
+                    {{ end }}
                 </div>
                 <button type="submit" class="btn btn-outline-secondary">Update</button>
             </form>

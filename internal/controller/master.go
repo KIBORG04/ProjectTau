@@ -27,7 +27,9 @@ func runCollector(c *gin.Context) {
 }
 
 func initializeRoutes() {
-	router.GET("/", stats.Root)
+	router.GET("/", stats.RootGET)
+	router.POST("/", stats.RootPOST)
+
 	router.GET("/gamemodes", stats.Gamemode)
 	router.GET("/cult", stats.Cult)
 

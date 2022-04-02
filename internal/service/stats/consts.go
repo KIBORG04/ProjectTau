@@ -1,9 +1,15 @@
 package stats
 
 const (
-	ServerAlpha = "game.taucetistation.org:2506"
-	ServerBeta  = "game.taucetistation.org:2507"
-	ServerGamma = "game.taucetistation.org:2508"
+	ServerAlphaAddress = "game.taucetistation.org:2506"
+	ServerBetaAddress  = "game.taucetistation.org:2507"
+	ServerGammaAddress = "game.taucetistation.org:2508"
+)
+
+const (
+	Alpha = "Alpha"
+	Beta  = "Beta"
+	Gamma = "Gamma"
 )
 
 var (
