@@ -166,7 +166,12 @@ func completedObjectives[T any](objectives []T) uint {
 	return completed
 }
 
-func Gamemodes(c *gin.Context) {
+func GamemodesPOST(c *gin.Context) {
+	setCheckboxStates(c)
+	GamemodesGET(c)
+}
+
+func GamemodesGET(c *gin.Context) {
 	checkboxStates := getCheckboxStates(c)
 	_, processRoots, _, _, _ := getRootsByCheckboxes([]string{"Factions.FactionObjectives", "Factions.Members.RoleObjectives"}, checkboxStates)
 

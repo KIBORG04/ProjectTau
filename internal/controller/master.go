@@ -31,7 +31,9 @@ func initializeRoutes() {
 	router.GET("/", stats.RootGET)
 	router.POST("/", stats.RootPOST)
 
-	router.GET("/gamemodes", stats.Gamemodes)
+	router.GET("/gamemodes", stats.GamemodesGET)
+	router.POST("/gamemodes", stats.GamemodesPOST)
+
 	router.GET("/cult", stats.Cult)
 
 	// Group using gin.BasicAuth() middleware
