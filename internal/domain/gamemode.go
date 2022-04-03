@@ -1,31 +1,33 @@
 package domain
 
+type FactionObjectives Objectives
 type Factions struct {
-	RootID       int32
-	ID           int32
-	Name         string       `json:"name" gorm:"size:256"`
-	FactionName  string       `json:"id" gorm:"size:256"`
-	MinorVictory int32        `json:"minor_victory"`
-	Objectives   []Objectives `json:"objectives" gorm:"foreignKey:OwnerID"`
-	Members      []Role       `json:"members" gorm:"foreignKey:OwnerID"`
-	Type         string       `json:"type" gorm:"size:256"`
-	Victory      int32        `json:"victory"`
-	CultInfo     CultInfo     `json:"cult_info"`
+	RootID            int32
+	ID                int32
+	Name              string              `json:"name" gorm:"size:256"`
+	FactionName       string              `json:"id" gorm:"size:256"`
+	MinorVictory      int32               `json:"minor_victory"`
+	FactionObjectives []FactionObjectives `json:"objectives" gorm:"foreignKey:OwnerID"`
+	Members           []Role              `json:"members" gorm:"foreignKey:OwnerID"`
+	Type              string              `json:"type" gorm:"size:256"`
+	Victory           int32               `json:"victory"`
+	CultInfo          CultInfo            `json:"cult_info"`
 }
 
+type RoleObjectives Objectives
 type Role struct {
 	OwnerID          int32
 	ID               int32
-	Name             string       `json:"name" gorm:"size:256"`
-	RoleName         string       `json:"id" gorm:"size:256"`
-	IsRoundstartRole int32        `json:"is_roundstart_role"`
-	Objectives       []Objectives `json:"objectives" gorm:"foreignKey:OwnerID"`
-	Type             string       `json:"type"`
-	Victory          int32        `json:"victory"`
-	FactionName      string       `json:"faction_id" gorm:"size:256"`
-	MindName         string       `json:"mind_name" gorm:"size:256"`
-	MindCkey         string       `json:"mind_ckey" gorm:"size:256"`
-	UplinkInfo       UplinkInfo   `json:"uplink_info"`
+	Name             string           `json:"name" gorm:"size:256"`
+	RoleName         string           `json:"id" gorm:"size:256"`
+	IsRoundstartRole int32            `json:"is_roundstart_role"`
+	RoleObjectives   []RoleObjectives `json:"objectives" gorm:"foreignKey:OwnerID"`
+	Type             string           `json:"type"`
+	Victory          int32            `json:"victory"`
+	FactionName      string           `json:"faction_id" gorm:"size:256"`
+	MindName         string           `json:"mind_name" gorm:"size:256"`
+	MindCkey         string           `json:"mind_ckey" gorm:"size:256"`
+	UplinkInfo       UplinkInfo       `json:"uplink_info"`
 }
 
 type Objectives struct {
@@ -73,6 +75,7 @@ type Aspects struct {
 	ID         int32
 	CultInfoID int32
 	Mortem     int32 `json:"Mortem"`
+	Cruciatu   int32 `json:"cruciatu"`
 	Progressus int32 `json:"Progressus"`
 	Fames      int32 `json:"Fames"`
 	Telum      int32 `json:"Telum"`

@@ -10,60 +10,10 @@ import (
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/charts"
 	"ssstatistics/internal/utils"
-	"strings"
 )
 
 type ServerCheckbox struct {
 	Checkboxes []string `form:"server[]"`
-}
-
-func setCheckboxStates(c *gin.Context) {
-	var serversForm ServerCheckbox
-	err := c.ShouldBind(&serversForm)
-	if err != nil {
-		println(err)
-		return
-	}
-	c.SetCookie("serverCheckboxes", strings.Join(serversForm.Checkboxes, "|"), 10000, "", "", true, true)
-	c.Set("serverCheckboxes", serversForm)
-}
-
-func getCheckboxStates(c *gin.Context) map[string]string {
-	bool2Checked := func(b bool) string {
-		if b {
-			return "checked"
-		}
-		return ""
-	}
-
-	// If POST request
-	formInterface, exist := c.Get("serverCheckboxes")
-	if exist {
-		serversForm := formInterface.(ServerCheckbox)
-		return map[string]string{
-			Alpha: bool2Checked(slices.Contains(serversForm.Checkboxes, Alpha)),
-			Beta:  bool2Checked(slices.Contains(serversForm.Checkboxes, Beta)),
-			Gamma: bool2Checked(slices.Contains(serversForm.Checkboxes, Gamma)),
-		}
-	}
-
-	// If GET request
-	cookie, err := c.Cookie("serverCheckboxes")
-	if err != nil {
-		return map[string]string{
-			Alpha: "",
-			Beta:  "",
-			Gamma: "",
-		}
-	}
-
-	checkboxes := strings.Split(cookie, "|")
-	checkboxesStates := map[string]string{
-		Alpha: bool2Checked(slices.Contains(checkboxes, Alpha)),
-		Beta:  bool2Checked(slices.Contains(checkboxes, Beta)),
-		Gamma: bool2Checked(slices.Contains(checkboxes, Gamma)),
-	}
-	return checkboxesStates
 }
 
 func RootPOST(c *gin.Context) {
@@ -72,12 +22,8 @@ func RootPOST(c *gin.Context) {
 }
 
 func RootGET(c *gin.Context) {
-	var roots []domain.Root
-	r.Database.Preload("Deaths").Find(&roots)
-
-	var links domain.Link
-	str := fmt.Sprintf("%%%d%%", roots[len(roots)-1].RoundID)
-	r.Database.Where("link LIKE ?", str).First(&links)
+	checkboxStates := getCheckboxStates(c)
+	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRootsByCheckboxes([]string{"Deaths"}, checkboxStates)
 
 	crewDeathsCount := make(keymap.MyMap[string, uint], 0)
 	crewDeathsSum := 0
@@ -88,34 +34,7 @@ func RootGET(c *gin.Context) {
 	modesCount := make(keymap.MyMap[string, uint], 0)
 	modesSum := 0
 
-	checkboxStates := getCheckboxStates(c)
-
-	var processRoots []*domain.Root
-
-	var alphaRoots []*domain.Root
-	var betaRoots []*domain.Root
-	var gammaRoots []*domain.Root
-	for _, rr := range roots {
-		root := rr
-		switch root.ServerAddress {
-		case ServerAlphaAddress:
-			alphaRoots = append(alphaRoots, &root)
-			if checkboxStates[Alpha] != "" {
-				processRoots = append(processRoots, &root)
-			}
-		case ServerBetaAddress:
-			betaRoots = append(betaRoots, &root)
-			if checkboxStates[Beta] != "" {
-				processRoots = append(processRoots, &root)
-			}
-		case ServerGammaAddress:
-			gammaRoots = append(gammaRoots, &root)
-			if checkboxStates[Gamma] != "" {
-				processRoots = append(processRoots, &root)
-			}
-		}
-	}
-
+	var lastRoot *domain.Root
 	for _, root := range processRoots {
 		modesCount = keymap.AddElem(modesCount, root.Mode, 1)
 		modesSum++
@@ -129,34 +48,194 @@ func RootGET(c *gin.Context) {
 				roleDeathsSum++
 			}
 		}
+		if lastRoot == nil || root.RoundID > lastRoot.RoundID {
+			lastRoot = root
+		}
 	}
 
 	sort.Stable(sort.Reverse(modesCount))
 	sort.Stable(sort.Reverse(crewDeathsCount))
 	sort.Stable(sort.Reverse(roleDeathsCount))
 
+	var links domain.Link
+	str := fmt.Sprintf("%%%d%%", lastRoot.RoundID)
+	r.Database.Where("link LIKE ?", str).First(&links)
+
 	c.HTML(200, "index.html", gin.H{
-		"totalRounds":      len(roots),
-		"version":          roots[len(roots)-1].Version,
-		"lastDate":         links.Date,
-		"alphaRounds":      len(alphaRoots),
-		"betaRounds":       len(betaRoots),
-		"gammaRounds":      len(gammaRoots),
-		"modesCount":       modesCount,
-		"modesSum":         modesSum,
-		"crewDeathsCount":  crewDeathsCount,
-		"crewDeathsSum":    crewDeathsSum,
-		"roleDeathsCount":  roleDeathsCount,
-		"roleDeathsSum":    roleDeathsSum,
+		"totalRounds": len(roots),
+		"version":     lastRoot.Version,
+		"lastRound":   lastRoot.RoundID,
+		"lastDate":    links.Date,
+
+		"alphaRounds": len(alphaRoots),
+		"betaRounds":  len(betaRoots),
+		"gammaRounds": len(gammaRoots),
+
+		"modesCount":      modesCount,
+		"modesSum":        modesSum,
+		"crewDeathsCount": crewDeathsCount,
+		"crewDeathsSum":   crewDeathsSum,
+		"roleDeathsCount": roleDeathsCount,
+		"roleDeathsSum":   roleDeathsSum,
+
 		"serverCheckboxes": checkboxStates,
 	})
 }
 
-func Gamemode(c *gin.Context) {
-	render := charts.Gamemode()
+type FactionsInfos []*FactionsInfo
 
-	c.HTML(200, "chart.html", gin.H{
-		"charts": render,
+func (info FactionsInfos) Len() int {
+	return len(info)
+}
+
+func (info FactionsInfos) Less(i, j int) bool {
+	return info[i].Winrate < info[j].Winrate
+}
+
+func (info FactionsInfos) Swap(i, j int) {
+	info[i], info[j] = info[j], info[i]
+}
+
+func (info FactionsInfos) hasName(name string) (*FactionsInfo, bool) {
+	for i := 0; i < len(info); i++ {
+		if info[i].Name == name {
+			return info[i], true
+		}
+	}
+	return nil, false
+}
+
+type FactionsInfo struct {
+	Name                string
+	Count               uint
+	Wins                uint
+	Members             uint
+	Winrate             uint
+	TotalObjectives     uint
+	CompletedObjectives uint
+	PercentObjectives   uint
+}
+
+type RolesInfos []*RolesInfo
+
+func (info RolesInfos) Len() int {
+	return len(info)
+}
+
+func (info RolesInfos) Less(i, j int) bool {
+	return info[i].Winrate < info[j].Winrate
+}
+
+func (info RolesInfos) Swap(i, j int) {
+	info[i], info[j] = info[j], info[i]
+}
+
+func (info RolesInfos) hasName(name string) (*RolesInfo, bool) {
+	for i := 0; i < len(info); i++ {
+		if info[i].Name == name {
+			return info[i], true
+		}
+	}
+	return nil, false
+}
+
+type RolesInfo struct {
+	Name                string
+	Count               uint
+	Wins                uint
+	Winrate             uint
+	TotalObjectives     uint
+	CompletedObjectives uint
+	PercentObjectives   uint
+}
+
+func completedObjectives[T any](objectives []T) uint {
+	var completed uint
+	for _, objective := range objectives {
+		switch t := any(objective).(type) {
+		case domain.RoleObjectives:
+			if t.Completed == ObjectiveWIN {
+				completed++
+			}
+		case domain.FactionObjectives:
+			if t.Completed == ObjectiveWIN {
+				completed++
+			}
+		}
+	}
+	return completed
+}
+
+func Gamemodes(c *gin.Context) {
+	checkboxStates := getCheckboxStates(c)
+	_, processRoots, _, _, _ := getRootsByCheckboxes([]string{"Factions.FactionObjectives", "Factions.Members.RoleObjectives"}, checkboxStates)
+
+	factionsSum := 0
+	factionsCount := make(FactionsInfos, 0)
+
+	rolesSum := 0
+	rolesCount := make(RolesInfos, 0)
+
+	for _, root := range processRoots {
+		for _, faction := range root.Factions {
+			foundInfo, ok := factionsCount.hasName(faction.FactionName)
+			if !ok {
+				factionsCount = append(factionsCount, &FactionsInfo{
+					Name:                faction.FactionName,
+					Count:               1,
+					Wins:                uint(faction.Victory),
+					Members:             uint(len(faction.Members)),
+					Winrate:             uint(faction.Victory * 100),
+					TotalObjectives:     uint(len(faction.FactionObjectives)),
+					CompletedObjectives: completedObjectives(faction.FactionObjectives),
+					PercentObjectives:   completedObjectives(faction.FactionObjectives) * 100 / utils.Max(uint(len(faction.FactionObjectives)), 1),
+				})
+			} else {
+				foundInfo.Count++
+				foundInfo.Members += uint(len(faction.Members))
+				foundInfo.Wins += uint(faction.Victory)
+				foundInfo.Winrate = foundInfo.Wins * 100 / foundInfo.Count
+				foundInfo.TotalObjectives += uint(len(faction.FactionObjectives))
+				foundInfo.CompletedObjectives += completedObjectives(faction.FactionObjectives)
+				foundInfo.PercentObjectives = foundInfo.CompletedObjectives * 100 / utils.Max(foundInfo.TotalObjectives, 1)
+			}
+			factionsSum++
+
+			for _, role := range faction.Members {
+				foundInfo, ok := rolesCount.hasName(role.RoleName)
+				if !ok {
+					rolesCount = append(rolesCount, &RolesInfo{
+						Name:                role.RoleName,
+						Count:               1,
+						Wins:                uint(role.Victory),
+						Winrate:             uint(role.Victory) * 100,
+						TotalObjectives:     uint(len(role.RoleObjectives)),
+						CompletedObjectives: completedObjectives(role.RoleObjectives),
+						PercentObjectives:   completedObjectives(role.RoleObjectives) * 100 / utils.Max(uint(len(role.RoleObjectives)), 1),
+					})
+				} else {
+					foundInfo.Count++
+					foundInfo.Wins += uint(role.Victory)
+					foundInfo.Winrate = foundInfo.Wins * 100 / foundInfo.Count
+					foundInfo.TotalObjectives += uint(len(role.RoleObjectives))
+					foundInfo.CompletedObjectives += completedObjectives(role.RoleObjectives)
+					foundInfo.PercentObjectives = foundInfo.CompletedObjectives * 100 / utils.Max(foundInfo.TotalObjectives, 1)
+				}
+				rolesSum++
+			}
+
+		}
+	}
+
+	sort.Sort(sort.Reverse(factionsCount))
+	sort.Sort(sort.Reverse(rolesCount))
+
+	c.HTML(200, "gamemodes.html", gin.H{
+		"factionsSum":      factionsSum,
+		"factionsCount":    factionsCount,
+		"rolesSum":         rolesSum,
+		"rolesCount":       rolesCount,
+		"serverCheckboxes": checkboxStates,
 	})
 }
 

@@ -12,6 +12,12 @@ const (
 	Gamma = "Gamma"
 )
 
+const (
+	ObjectiveWIN   = "SUCCESS"
+	ObjectiveHALF  = "HALF"
+	ObjectiveLFAIL = "FAIL"
+)
+
 var (
 	commandPositions = []string{
 		"Captain",

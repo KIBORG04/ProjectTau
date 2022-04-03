@@ -4,20 +4,20 @@
 {{ template "header.html" .}}
 
 {{ range $i, $json := .charts }}
-<div>
+  <div>
     <canvas id="chart-{{ $i }}"></canvas>
-</div>
+  </div>
 {{ end }}
 
 
 
 <script>
-{{ range $i, $json := .charts }}
-    new Chart(
-        document.getElementById("chart-{{ $i }}"),
-        {{ $json }}
-    );
-{{ end }}
+  {{ range $i, $json := .charts }}
+  new Chart(
+          document.getElementById("chart-{{ $i }}"),
+          {{ $json }}
+  );
+  {{ end }}
 
 </script>
 

@@ -17,14 +17,6 @@ func NewKeyMap[K comparable, V constraints.Ordered](key K, value V) *KeyMap[K, V
 }
 
 func hasKey[K comparable, V constraints.Ordered](keyMap []*KeyMap[K, V], key K) (*KeyMap[K, V], bool) {
-	/*
-		for _, myMap := range keyMap {
-			if myMap.Key == key {
-				return &myMap, true
-			}
-		}
-		return nil, false
-	*/
 	for i := 0; i < len(keyMap); i++ {
 		if keyMap[i].Key == key {
 			return keyMap[i], true

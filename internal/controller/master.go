@@ -17,6 +17,7 @@ func runCollector(c *gin.Context) {
 
 	collector := parser.Collector{}
 	collector.CollectUrls(startDate)
+
 	collector.CollectStatistics()
 
 	user := c.MustGet(gin.AuthUserKey).(string)
@@ -30,7 +31,7 @@ func initializeRoutes() {
 	router.GET("/", stats.RootGET)
 	router.POST("/", stats.RootPOST)
 
-	router.GET("/gamemodes", stats.Gamemode)
+	router.GET("/gamemodes", stats.Gamemodes)
 	router.GET("/cult", stats.Cult)
 
 	// Group using gin.BasicAuth() middleware

@@ -1,0 +1,88 @@
+<!--chart.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <ul class="list-group list-group-flush">
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#factionsSum"
+                        aria-expanded="false" aria-controls="collapseExample">
+                    Фракции: {{ .factionsSum }}
+                </button>
+            </ul>
+            <div class="collapse" id="factionsSum">
+                <table class="table table-sm table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Режим</th>
+                        <th scope="col">Количество</th>
+                        <th scope="col">Побед</th>
+                        <th scope="col">Винрейт</th>
+                        <th scope="col">Членов</th>
+                        <th scope="col">Всего задач</th>
+                        <th scope="col">Выполнено задач</th>
+                        <th scope="col">Винрейт задач</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{ range .factionsCount }}
+                    <tr>
+                        <th scope="row">{{ .Name }}</th>
+                        <td>{{ .Count }}</td>
+                        <td>{{ .Wins }}</td>
+                        <td>{{ .Winrate }}%</td>
+                        <td>{{ .Members }}</td>
+                        <td>{{ .TotalObjectives }}</td>
+                        <td>{{ .CompletedObjectives }}</td>
+                        <td>{{ .PercentObjectives }}%</td>
+                    </tr>
+                    {{ end }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <ul class="list-group list-group-flush">
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#rolessSum"
+                        aria-expanded="false" aria-controls="collapseExample">
+                    Роли: {{ .rolesSum }}
+                </button>
+            </ul>
+            <div class="collapse" id="rolessSum">
+                <table class="table table-sm table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Роль</th>
+                        <th scope="col">Количество</th>
+                        <th scope="col">Побед</th>
+                        <th scope="col">Винрейт</th>
+                        <th scope="col">Всего задач</th>
+                        <th scope="col">Выполнено задач</th>
+                        <th scope="col">Винрейт задач</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{ range .rolesCount}}
+                    <tr>
+                        <th scope="row">{{ .Name }}</th>
+                        <td>{{ .Count }}</td>
+                        <td>{{ .Wins }}</td>
+                        <td>{{ .Winrate }}%</td>
+                        <td>{{ .TotalObjectives }}</td>
+                        <td>{{ .CompletedObjectives }}</td>
+                        <td>{{ .PercentObjectives }}%</td>
+                    </tr>
+                    {{ end }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}
