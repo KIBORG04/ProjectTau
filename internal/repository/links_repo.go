@@ -16,7 +16,3 @@ func FindAllByDate(date *time.Time) []string {
 
 	return strings
 }
-
-func SaveDate(link *d.Link) {
-	Database.Save(link)
-}
