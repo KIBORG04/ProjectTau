@@ -796,3 +796,41 @@ id,root_id,crewscore,rating,stuffshipped,stuffharvested,oremined,researchdone,ev
 795,50018,7730,Ambassadors of Discovery,1,273,5953,68,0,17,316,28,0,0,0,0,0,0,0,0,0,422,0,13,1,44,23,{Tinara Nero},0,0,0,172,22,Danny Mortland,Chief Medical Officer,2250,Stepansamp228pos,Danny Roby,Shaft Miner,9,23as23as
 796,49591,7368,Ambassadors of Discovery,4,19,2226,65,0,0,567,28,0,0,0,0,0,0,0,0,0,0,0,32,0,76,55,{Kevin Stinger},1,0,0,194,70,Kevin Stinger,Captain,1725,Glen_Zodia,Petr Metelsky,Test Subject,21,Javeliin
 797,50019,-3680,You're All Fired,0,101,1690,57,0,13,2431,43,0,0,0,0,1,0,11,0,0,0,0,7,29,66,27,"",0,0,0,134,31,John Don,Paramedic,464,HeXo4yXa,Petr Metelsky,Recycler,0,Javeliin
+798,50196,2335,Promotions for Everyone,0,0,0,7,0,0,175,0,0,0,0,0,0,0,0,0,0,0,0,2,1,9,5,{Ivan Rogalov},1,0,0,1,0,Ivan Rogalov,Captain,600,Ivan_Rogalov,"","",0,""
+799,50234,-5257,Singularity Fodder,12,56,2156,7,0,17,1694,25,0,0,0,0,1,0,0,0,0,0,0,0,25,67,42,{Tate Benford},0,0,0,92,5,"","",0,"","","",0,""
+800,50199,4551,Promotions for Everyone,2,32,3353,16,0,0,2379,43,0,0,0,0,0,0,0,0,0,0,0,8,0,16,10,{Cash Murphy},1,0,0,51,0,Cash Murphy,Captain,2323,FaH3uJIb,Issar Hess,Scientist,20,DarkFurrSss
+801,50198,-1886,You're All Fired,0,0,55,7,0,57,466,0,0,0,0,0,0,0,0,0,0,0,0,11,1,18,11,{Cash Murphy},0,0,0,30,0,Cassian Winton,Chief Medical Officer,1500,Kandrey,Roman Elinov,Security Officer,1,Misterionno
+802,50201,2977,Promotions for Everyone,0,28,117,7,0,0,83,26,0,0,0,0,0,0,0,0,0,0,0,3,0,8,3,"",1,0,0,17,0,Tamsin Winton,Medical Doctor,7520,Shahmatist,"","",0,""
+803,50197,7977,Ambassadors of Discovery,1,267,4637,52,0,0,1307,14,0,0,0,0,0,0,0,0,0,0,0,7,0,32,19,"",1,0,0,96,2,Horatio Highjack,Head of Personnel,1380,SergalCute,Horatio Highjack,Head of Personnel,17,SergalCute
+804,50195,2214,Promotions for Everyone,2,54,0,7,0,0,295,14,0,0,0,0,0,0,0,0,0,0,0,1,2,16,1,"",1,0,0,60,0,Jose Butterfill,Security Officer,380,Peperspray,"","",0,""
+805,50213,3941,Promotions for Everyone,5,14,0,27,0,0,128,39,0,0,0,0,0,0,0,0,0,0,0,7,0,12,10,"",1,0,0,55,37,Alan Ward,Research Director,1000,NikMaestro,"","",0,""
+806,50215,172,Skillful Servants of Science,0,0,265,7,0,1,148,0,0,0,0,0,0,0,0,0,0,0,0,5,1,14,10,"",0,0,0,3,0,Tahikakiyata,Scientist,180,Lazarev Vladimir,Elizabeth Rubram,Forensic Technician,22,DeadFan
+807,50203,-191,Outclassed by Lab Monkeys,0,7,0,7,0,3,138,4,0,0,0,0,0,0,0,0,0,0,0,2,1,10,7,"",0,0,0,8,0,Jose Butterfill,Warden,1255,Peperspray,"","",0,""
+808,50216,2592,Promotions for Everyone,3,10,1077,60,0,2,405,4,0,0,0,0,0,0,0,0,0,0,0,7,1,26,10,"",0,0,0,52,0,Kellen Peters,Station Engineer,1830,AirBlack,Kellen Peters,Station Engineer,0,AirBlack
+809,50227,-1067,You're All Fired,0,51,249,12,0,45,392,3,0,0,0,0,0,0,0,0,0,0,0,0,0,21,18,"",0,0,0,21,0,"","",0,"","","",0,""
+810,50222,132,Skillful Servants of Science,0,0,45,7,0,2,138,0,0,0,0,0,0,0,0,0,0,0,0,3,0,6,3,"",0,0,0,12,0,Steven Anderson,Chief Engineer,4808,Azzy.Dreemurr,"","",0,""
+811,50212,-1088,You're All Fired,0,0,287,7,0,32,375,0,0,0,0,0,0,0,0,0,0,0,0,0,1,19,18,"",0,0,0,14,1,"","",0,"","","",0,""
+812,50219,-2648,You're All Fired,2,18,242,7,0,93,238,2,0,0,0,0,0,0,0,0,0,0,0,0,1,10,3,"",0,0,0,9,40,"","",0,"","","",0,""
+813,50226,6015,Ambassadors of Discovery,2,33,1714,51,0,0,222,22,0,0,0,0,0,0,0,0,0,0,0,8,0,22,17,"",1,0,0,63,0,Ivan Huga,Quartermaster,1120,Marlestr,Lucas Gibson,Mime,0,Dashatar
+814,50200,3611,Promotions for Everyone,3,0,2357,63,0,1,196,3,0,0,0,0,0,0,0,0,0,0,0,14,4,26,20,"",0,0,0,44,0,Friedrich Von Brandenburg,Research Director,1735,L4rever,Luke Roadman,Xenobiologist,0,Gaming Dog
+815,50224,3766,Promotions for Everyone,3,17,2478,53,0,1,1034,14,0,0,0,0,0,0,0,0,0,0,0,18,0,21,18,"",0,0,0,47,0,Horatio Highjack,Head of Personnel,1750,SergalCute,Jad Shock,Mime,51,Artur1601
+816,50231,3811,Promotions for Everyone,4,110,620,7,0,0,129,0,0,0,0,0,0,0,0,0,0,0,0,8,0,20,15,"",1,0,0,81,0,Liam O'Shea,Chief Engineer,1191,Onikuru,Alex Bennett,Cargo Technician,0,Edward459
+817,50206,7228,Ambassadors of Discovery,12,60,2399,50,0,0,106,35,0,0,0,0,0,0,0,0,0,0,0,12,2,25,16,"",1,0,0,47,0,Viktor Valentine,Shaft Miner,1140,Aktano,Viktor Valentine,Shaft Miner,0,Aktano
+818,50204,-13676,Singularity Fodder,2,210,1789,7,0,42,1090,13,0,0,0,0,2,0,0,0,0,0,0,0,53,59,23,"",0,0,0,33,14,"","",0,"","","",0,""
+819,50223,8080,Ambassadors of Discovery,1,41,3907,72,0,0,478,55,0,0,0,0,1,0,0,0,0,0,1,14,2,33,25,"",1,0,0,160,26,Aramsha Jarmack,Station Engineer,2130,Chikart,Roman Elinov,"",55,Misterionno
+820,50225,-442,A Wretched Heap of Scum and Incompetence,0,0,0,7,0,13,312,0,0,0,0,0,0,0,0,0,0,0,0,2,0,12,6,"",0,0,0,24,31,Slen Franko,Internal Affairs Agent,800,FlyTheDemon,"","",0,""
+821,50220,-3929,You're All Fired,6,32,983,0,0,7,565,27,0,0,0,0,1,0,0,0,0,0,0,0,18,49,28,{Maya Foxova},0,0,0,4,9,"","",0,"","","",0,""
+822,50208,10343,The Pride of Science Itself,3,26,5264,74,0,0,247,1,0,0,0,0,0,0,0,0,0,0,0,14,0,33,21,"",1,0,0,56,85,Genadiy Tesla,Barber,8380,Tankistkiller,Juan Williis,Shaft Miner,41,Moonlight7
+823,50210,4536,Promotions for Everyone,1,125,2501,52,0,1,340,39,0,0,0,0,0,0,0,0,0,0,0,18,0,45,25,{Gennady Whiteman},0,0,0,146,8,Loreto Bunten,"",1001330,"",Loreto Bunten,"",0,""
+824,50209,6956,Ambassadors of Discovery,2,333,1867,69,0,0,659,115,0,0,0,0,0,0,0,0,0,0,0,35,3,73,50,{Maya Foxova},1,0,0,222,0,Quiwz'xu Qox,Shaft Miner,6907,GrozaAndGrom,Noel Whirlow,Security Cadet,98,Sevrus356
+825,50229,8787,Ambassadors of Discovery,3,3,6937,70,0,3,733,24,0,0,0,0,0,0,0,0,0,0,0,19,1,50,27,"",0,0,0,147,3,Frugen Wufflecam,Quartermaster,12800,Passional,Alex Ermakov,Recycler,0,AlexSHIKHOV
+826,50218,-12904,Singularity Fodder,1,160,483,7,0,0,727,29,0,0,0,0,0,0,7,0,1,0,0,0,30,40,0,{Maya Foxova},1,0,0,22,2,"","",0,"","","",0,""
+827,50230,-1849,You're All Fired,0,43,2372,15,0,9,929,27,0,0,0,0,0,0,3,0,0,0,0,14,19,47,36,"",0,0,0,30,6,Aramsha Jarmack,Station Engineer,640,Chikart,Angela Barens,Botanist,0,Angela Barens
+828,50214,12160,The Pride of Science Itself,18,785,6401,60,0,0,611,77,0,0,0,0,0,0,0,0,0,0,0,32,5,77,51,{Maya Foxova},1,0,0,297,0,M'ark M'rshan,Roboticist,7490,Morkleb,Semyon Hatsunov,Test Subject,0,Pioneer1024
+829,50205,-1218,You're All Fired,13,36,2294,45,0,1,5523,51,0,0,0,0,0,0,0,0,0,0,0,27,5,71,49,{Maya Foxova},0,0,0,169,0,Richard Reed,Head of Personnel,1295,MrYAROSLAV,John Mackenzie,Chemist,87,Pigla
+830,50228,-3501,You're All Fired,4,114,1902,61,0,66,1262,34,0,0,0,0,0,0,0,0,0,0,0,7,19,38,14,{Cash Murphy},0,0,0,70,0,Curly Mens,Scientist,1305,Arygal,Isaiah Seidner,Virologist,26,NoNaMe212
+831,50211,5266,Ambassadors of Discovery,8,1,3958,57,0,1,653,36,0,0,0,0,1,0,0,0,0,0,0,0,1,62,57,{May Svitovich},0,0,0,157,9,"","",0,"","","",0,""
+832,50232,2837,Promotions for Everyone,7,209,1941,69,0,2,963,53,0,0,0,0,0,0,0,0,0,0,0,24,6,69,34,{Rylan Wardle},0,0,1,144,0,Chip Elderson,"",1530,AlexNomo,Patton Werry,Technical Assistant,168,KittyCat91
+833,50207,4504,Promotions for Everyone,8,106,4966,64,0,7,1258,66,0,0,0,0,0,0,0,0,0,0,0,22,9,73,42,{Sebastian Pivovarov},0,0,1,263,133,Seamon Light,Virologist,6050,T1meToCaRRy,Artemida Byblikova,Xenobiologist,0,HE_APTEM
+834,50221,2321,Promotions for Everyone,5,71,3589,58,0,1,2149,10,0,0,0,0,1,0,0,0,0,228,0,7,5,56,30,{Maya Foxova},0,0,0,105,18,Arleen Morris,Head of Personnel,1250,StepanZZZ,Mark McCarthy,Research Director,3,Vysserath
+835,50202,6326,Ambassadors of Discovery,5,1,16840,7,0,18,4810,0,0,0,0,0,1,0,0,0,0,980,0,0,21,47,23,"",0,0,1,129,1,"","",0,"","","",0,""

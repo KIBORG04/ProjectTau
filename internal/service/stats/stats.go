@@ -82,61 +82,22 @@ func RootGET(c *gin.Context) {
 	})
 }
 
-type FactionsInfos []*FactionsInfo
-
-func (info FactionsInfos) Len() int {
-	return len(info)
-}
-
-func (info FactionsInfos) Less(i, j int) bool {
-	return info[i].Winrate < info[j].Winrate
-}
-
-func (info FactionsInfos) Swap(i, j int) {
-	info[i], info[j] = info[j], info[i]
-}
-
-func (info FactionsInfos) hasName(name string) (*FactionsInfo, bool) {
-	for i := 0; i < len(info); i++ {
-		if info[i].Name == name {
-			return info[i], true
-		}
-	}
-	return nil, false
-}
-
-type FactionsInfo struct {
+type FactionInfo struct {
 	Name                string
 	Count               uint
 	Wins                uint
-	Members             uint
 	Winrate             uint
+	Members             uint
 	TotalObjectives     uint
 	CompletedObjectives uint
 	PercentObjectives   uint
 }
 
-type RolesInfos []*RolesInfo
-
-func (info RolesInfos) Len() int {
-	return len(info)
+func (b FactionInfo) GetName() string {
+	return b.Name
 }
-
-func (info RolesInfos) Less(i, j int) bool {
-	return info[i].Winrate < info[j].Winrate
-}
-
-func (info RolesInfos) Swap(i, j int) {
-	info[i], info[j] = info[j], info[i]
-}
-
-func (info RolesInfos) hasName(name string) (*RolesInfo, bool) {
-	for i := 0; i < len(info); i++ {
-		if info[i].Name == name {
-			return info[i], true
-		}
-	}
-	return nil, false
+func (b FactionInfo) GetCount() uint {
+	return b.Count
 }
 
 type RolesInfo struct {
@@ -149,6 +110,14 @@ type RolesInfo struct {
 	PercentObjectives   uint
 }
 
+func (b RolesInfo) GetName() string {
+	return b.Name
+}
+func (b RolesInfo) GetCount() uint {
+	return b.Count
+}
+
+// functions declaration in another function doesn't support generics
 func completedObjectives[T any](objectives []T) uint {
 	var completed uint
 	for _, objective := range objectives {
@@ -176,16 +145,16 @@ func GamemodesGET(c *gin.Context) {
 	_, processRoots, _, _, _ := getRootsByCheckboxes([]string{"Factions.FactionObjectives", "Factions.Members.RoleObjectives"}, checkboxStates)
 
 	factionsSum := 0
-	factionsCount := make(FactionsInfos, 0)
+	factionsCount := make(InfoSlice, 0)
 
 	rolesSum := 0
-	rolesCount := make(RolesInfos, 0)
+	rolesCount := make(InfoSlice, 0)
 
 	for _, root := range processRoots {
 		for _, faction := range root.Factions {
 			foundInfo, ok := factionsCount.hasName(faction.FactionName)
 			if !ok {
-				factionsCount = append(factionsCount, &FactionsInfo{
+				factionsCount = append(factionsCount, &FactionInfo{
 					Name:                faction.FactionName,
 					Count:               1,
 					Wins:                uint(faction.Victory),
@@ -196,13 +165,14 @@ func GamemodesGET(c *gin.Context) {
 					PercentObjectives:   completedObjectives(faction.FactionObjectives) * 100 / utils.Max(uint(len(faction.FactionObjectives)), 1),
 				})
 			} else {
-				foundInfo.Count++
-				foundInfo.Members += uint(len(faction.Members))
-				foundInfo.Wins += uint(faction.Victory)
-				foundInfo.Winrate = foundInfo.Wins * 100 / foundInfo.Count
-				foundInfo.TotalObjectives += uint(len(faction.FactionObjectives))
-				foundInfo.CompletedObjectives += completedObjectives(faction.FactionObjectives)
-				foundInfo.PercentObjectives = foundInfo.CompletedObjectives * 100 / utils.Max(foundInfo.TotalObjectives, 1)
+				factionInfo := (*foundInfo).(*FactionInfo)
+				factionInfo.Count++
+				factionInfo.Members += uint(len(faction.Members))
+				factionInfo.Wins += uint(faction.Victory)
+				factionInfo.Winrate = factionInfo.Wins * 100 / factionInfo.Count
+				factionInfo.TotalObjectives += uint(len(faction.FactionObjectives))
+				factionInfo.CompletedObjectives += completedObjectives(faction.FactionObjectives)
+				factionInfo.PercentObjectives = factionInfo.CompletedObjectives * 100 / utils.Max(factionInfo.TotalObjectives, 1)
 			}
 			factionsSum++
 
@@ -219,12 +189,13 @@ func GamemodesGET(c *gin.Context) {
 						PercentObjectives:   completedObjectives(role.RoleObjectives) * 100 / utils.Max(uint(len(role.RoleObjectives)), 1),
 					})
 				} else {
-					foundInfo.Count++
-					foundInfo.Wins += uint(role.Victory)
-					foundInfo.Winrate = foundInfo.Wins * 100 / foundInfo.Count
-					foundInfo.TotalObjectives += uint(len(role.RoleObjectives))
-					foundInfo.CompletedObjectives += completedObjectives(role.RoleObjectives)
-					foundInfo.PercentObjectives = foundInfo.CompletedObjectives * 100 / utils.Max(foundInfo.TotalObjectives, 1)
+					roleInfo := (*foundInfo).(*RolesInfo)
+					roleInfo.Count++
+					roleInfo.Wins += uint(role.Victory)
+					roleInfo.Winrate = roleInfo.Wins * 100 / roleInfo.Count
+					roleInfo.TotalObjectives += uint(len(role.RoleObjectives))
+					roleInfo.CompletedObjectives += completedObjectives(role.RoleObjectives)
+					roleInfo.PercentObjectives = roleInfo.CompletedObjectives * 100 / utils.Max(roleInfo.TotalObjectives, 1)
 				}
 				rolesSum++
 			}
@@ -249,5 +220,114 @@ func Cult(c *gin.Context) {
 
 	c.HTML(200, "chart.html", gin.H{
 		"charts": render,
+	})
+}
+
+func UplinkPOST(c *gin.Context) {
+	setCheckboxStates(c)
+	UplinkGET(c)
+}
+
+type UplinkInfo struct {
+	Name      string
+	Count     uint
+	Type      string
+	Wins      uint
+	Winrate   uint
+	TotalCost uint
+}
+
+func (b UplinkInfo) GetName() string {
+	return b.Type
+}
+func (b UplinkInfo) GetCount() uint {
+	return b.Count
+}
+
+type UplinkRoleInfo struct {
+	Name        string
+	Count       uint
+	UplinkInfos InfoSlice
+}
+
+func (b UplinkRoleInfo) GetName() string {
+	return b.Name
+}
+func (b UplinkRoleInfo) GetCount() uint {
+	return b.Count
+}
+
+func UplinkGET(c *gin.Context) {
+	checkboxStates := getCheckboxStates(c)
+	_, processRoots, _, _, _ := getRootsByCheckboxes([]string{"Factions.Members.UplinkInfo.UplinkPurchases"}, checkboxStates)
+
+	uplinkRoles := make(InfoSlice, 0)
+
+	addUplinkInfo := func(infos InfoSlice, counter *uint, purchase *domain.UplinkPurchases, faction *domain.Factions, role *domain.Role) InfoSlice {
+		foundInfo, ok := infos.hasName(purchase.ItemType)
+		var isWin uint
+		if faction != nil {
+			isWin = uint(faction.Victory)
+		} else {
+			isWin = uint(role.Victory)
+		}
+		if !ok {
+			infos = append(infos, &UplinkInfo{
+				Name:      purchase.Bundlename,
+				Count:     1,
+				Type:      purchase.ItemType,
+				Wins:      isWin,
+				Winrate:   isWin * 100,
+				TotalCost: uint(purchase.Cost),
+			})
+		} else {
+			uplinkInfo := (*foundInfo).(*UplinkInfo)
+			uplinkInfo.Count++
+			uplinkInfo.Wins += isWin
+			uplinkInfo.Winrate = uplinkInfo.Wins * 100 / uplinkInfo.Count
+			uplinkInfo.TotalCost += uint(purchase.Cost)
+
+		}
+		*counter++
+		return infos
+	}
+
+	for _, root := range processRoots {
+		for _, faction := range root.Factions {
+			for _, role := range faction.Members {
+				for _, purchase := range role.UplinkInfo.UplinkPurchases {
+					roleName := role.RoleName
+					var useFaction *domain.Factions
+					if faction.FactionName == "Syndicate Operatives" || faction.FactionName == "Revolution" {
+						roleName = faction.FactionName
+						useFaction = &faction
+					}
+					foundInfo, ok := uplinkRoles.hasName(roleName)
+					if !ok {
+						newUplinkInfo := &UplinkRoleInfo{
+							Name:  roleName,
+							Count: 1,
+						}
+						s := StatInfo(newUplinkInfo)
+						foundInfo = &s
+						uplinkRoles = append(uplinkRoles, newUplinkInfo)
+					} else {
+						(*foundInfo).(*UplinkRoleInfo).Count++
+					}
+					newUplinkInfo := (*foundInfo).(*UplinkRoleInfo)
+					newUplinkInfo.UplinkInfos = addUplinkInfo(newUplinkInfo.UplinkInfos, &newUplinkInfo.Count, &purchase, useFaction, &role)
+				}
+			}
+		}
+	}
+
+	for _, role := range uplinkRoles {
+		uplinkRoleInfo := role.(*UplinkRoleInfo)
+		sort.Sort(sort.Reverse(uplinkRoleInfo.UplinkInfos))
+	}
+
+	c.HTML(200, "uplink.html", gin.H{
+		"uplinkPurchases":  uplinkRoles,
+		"serverCheckboxes": checkboxStates,
 	})
 }

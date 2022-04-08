@@ -1,6 +1,5 @@
 package domain
 
-type FactionObjectives Objectives
 type Factions struct {
 	RootID            int32
 	ID                int32
@@ -14,7 +13,6 @@ type Factions struct {
 	CultInfo          CultInfo            `json:"cult_info"`
 }
 
-type RoleObjectives Objectives
 type Role struct {
 	OwnerID          int32
 	ID               int32
@@ -27,9 +25,11 @@ type Role struct {
 	FactionName      string           `json:"faction_id" gorm:"size:256"`
 	MindName         string           `json:"mind_name" gorm:"size:256"`
 	MindCkey         string           `json:"mind_ckey" gorm:"size:256"`
-	UplinkInfo       UplinkInfo       `json:"uplink_info"`
+	UplinkInfo       UplinkInfo       `json:"uplink_info" gorm:"foreignKey:RoleID"`
 }
 
+type FactionObjectives Objectives
+type RoleObjectives Objectives
 type Objectives struct {
 	ID                 int32
 	OwnerID            int32

@@ -36816,6 +36816,7 @@ id,root_id,name,assigned_role,special_role,antag_roles
 36815,49490,Fanzilia Clark,Medical Doctor,"",
 36816,49490,Jackson Taggart,Janitor,"",
 36817,49490,Liam O'Shea,Chief Medical Officer,"",
+37218,50196,Ruben Foster,Security Officer,"",
 36818,49490,Kaylie Pennington,Chaplain,Traitor,{Traitor}
 36819,49490,Owen Bickerson,Librarian,"",
 36820,49490,Noorr Orrvashi,Shaft Miner,"",
@@ -37216,3 +37217,2079 @@ id,root_id,name,assigned_role,special_role,antag_roles
 37215,50019,mouse (405),Animal,"",
 37216,50019,mouse (94),Animal,"",
 37217,50019,maintenance drone (878),Cyborg,"",
+37219,50196,Patrick Rowley,Chief Engineer,"",
+37220,50196,Roy Surgovich,Test Subject,"",
+37221,50196,Charlton Nicholas,Test Subject,"",
+37222,50196,Seymour Raub,Station Engineer,"",
+37223,50196,Juan Williis,Recycler,"",
+37224,50196,Igor Collins,Security Cadet,"",
+37225,50196,Ivan Rogalov,Captain,"",
+37226,50196,Honk Next Doors,Clown,"",
+37227,50196,maintenance drone (514),Cyborg,"",
+37228,50196,mouse (83),Animal,"",
+37229,50196,Primary 2440,MODE,Cortical Borer,{Cortical Borer}
+37230,50234,Paral Dune,Test Subject,"",
+37231,50234,Quiwz'xu Qox,Botanist,"",
+37232,50234,Sigma O'Neill,Medical Doctor,"",
+37233,50234,Danko Cesarre,Cyborg,"",
+37234,50234,Seamon Light,Virologist,"",
+37235,50234,Issar Hess,Cyborg,"",
+37236,50234,Zikkykikati,Station Engineer,"",
+37237,50234,Jeremy Lloyd,Janitor,"",
+37238,50234,Charlie Greene,Chief Engineer,"",
+37239,50234,Artem Sentemon,Test Subject,"",
+37240,50234,Gwenevere Coldsmith,Atmospheric Technician,"",
+37241,50234,Sam Bravo,Detective,"",
+37242,50234,Hatika,Scientist,"",
+37243,50234,Horatio Highjack,Bartender,"",
+37244,50234,Slen Franko,Cargo Technician,"",
+37245,50234,Karen,Chemist,"",
+37246,50234,M'ark M'rshan,Roboticist,"",
+37247,50234,Lim Al-Kuds,Scientist,"",
+37248,50234,Ezekiel Woodward,Librarian,"",
+37249,50234,RDMNS,AI,"",
+37250,50234,alien hunter (520),Alien,Hunter,{Xenomorph}
+37251,50234,alien hunter (556),Alien,Hunter,{Xenomorph}
+37252,50234,Shisshve Ashita,Security Officer,"",
+37253,50234,Gary Greenwood,Barber,"",
+37254,50234,Randy Best,Forensic Technician,"",
+37255,50234,Kronos Fanth,Shaft Miner,"",
+37256,50234,Patton Werry,Atmospheric Technician,"",
+37257,50234,Aurelius Aquilimus,Security Officer,"",
+37258,50234,Sal Lord,Scientist,"",
+37259,50234,alien sentinel (192),Alien,Sentinel,{Xenomorph}
+37260,50234,Ivan Huga,Quartermaster,"",
+37261,50234,Alroy Podkins,Medical Intern,"",
+37262,50234,Jin Relo,Security Cadet,"",
+37263,50234,alien queen (74),Alien,Queen,{Xenomorph}
+37264,50234,John Don,Paramedic,"",
+37265,50234,Kameron Dean,Station Engineer,"",
+37266,50234,Vlad Omar,Xenobiologist,"",
+37267,50234,Ali Azar,Chaplain,"",
+37268,50234,Silly Willy,Clown,"",
+37269,50234,Harvey Schaeffer,Station Engineer,"",
+37270,50234,Sam Samich,Roboticist,"",
+37271,50234,Shi'shi De She,Security Officer,"",
+37272,50234,Patrick Cherry,Test Subject,"",
+37273,50234,Dar'zahr,Medical Doctor,"",
+37274,50234,Lion Remark,Geneticist,"",
+37275,50234,Irvine White,Station Engineer,"",
+37276,50234,Mikalojus Tumss,Head of Personnel,"",
+37277,50234,Jayson Lewis,Technical Assistant,"",
+37278,50234,Roy Surgovich,Technical Assistant,"",
+37279,50234,Artemida Byblikova,Paramedic,"",
+37280,50234,Silas Green,Medical Intern,"",
+37281,50234,NYX,pAI,"",
+37282,50234,Sebastian Pivovarov,Test Subject,"",
+37283,50234,JRD-419,Cyborg,"",
+37284,50234,John Mackenzie,Test Subject,"",
+37285,50234,Alexander Petrovich,Chief Medical Officer,"",
+37286,50234,Cristopher Phillips,Chef,"",
+37287,50234,alien facehugger (386),MODE,Xenomorph,{Xenomorph}
+37288,50234,alien facehugger (768),MODE,Xenomorph,{Xenomorph}
+37289,50234,alien facehugger (50),MODE,Xenomorph,{Xenomorph}
+37290,50234,alien facehugger (47),MODE,Xenomorph,{Xenomorph}
+37291,50234,alien facehugger (381),MODE,Xenomorph,{Xenomorph}
+37292,50234,Oldman Kirsan,Mime,"",
+37293,50234,alien facehugger (963),MODE,Xenomorph,{Xenomorph}
+37294,50234,alien facehugger (831),MODE,Xenomorph,{Xenomorph}
+37295,50234,Sharon Nash,Security Officer,"",
+37296,50234,Brodie McDonald,Chef,"",
+37297,50234,alien larva (409),MODE,Larva,{Xenomorph}
+37298,50234,alien larva (414),MODE,Larva,{Xenomorph}
+37299,50234,alien hunter (322),Alien,Hunter,{Xenomorph}
+37300,50234,alien larva (49),MODE,Larva,{Xenomorph}
+37301,50234,alien facehugger (841),MODE,Xenomorph,{Xenomorph}
+37302,50234,alien facehugger (827),MODE,Xenomorph,{Xenomorph}
+37303,50234,alien facehugger (582),MODE,Xenomorph,{Xenomorph}
+37304,50234,alien drone (262),Alien,Drone,{Xenomorph}
+37305,50234,alien hunter (622),Alien,Hunter,{Xenomorph}
+37306,50234,alien facehugger (502),MODE,Xenomorph,{Xenomorph}
+37307,50234,alien sentinel (254),Alien,Sentinel,{Xenomorph}
+37308,50234,alien facehugger (325),MODE,Xenomorph,{Xenomorph}
+37309,50234,alien facehugger (814),MODE,Xenomorph,{Xenomorph}
+37310,50234,alien sentinel (150),Alien,Sentinel,{Xenomorph}
+37311,50234,Andy Miller,Internal Affairs Agent,"",
+37312,50234,alien facehugger (474),MODE,Xenomorph,{Xenomorph}
+37313,50234,alien facehugger (535),Alien,Xenomorph,{Xenomorph}
+37314,50234,alien facehugger (823),MODE,Xenomorph,{Xenomorph}
+37315,50234,alien facehugger (819),MODE,Xenomorph,{Xenomorph}
+37316,50234,alien facehugger (197),MODE,Xenomorph,{Xenomorph}
+37317,50234,Johnny,default,"",
+37318,50234,alien facehugger (227),MODE,Xenomorph,{Xenomorph}
+37319,50234,alien facehugger (129),MODE,Xenomorph,{Xenomorph}
+37320,50234,alien facehugger (363),MODE,Xenomorph,{Xenomorph}
+37321,50234,Larry Barret,Medical Intern,"",
+37322,50234,alien facehugger (232),MODE,Xenomorph,{Xenomorph}
+37323,50234,alien facehugger (945),MODE,Xenomorph,{Xenomorph}
+37324,50234,alien facehugger (415),MODE,Xenomorph,{Xenomorph}
+37325,50234,alien larva (161),MODE,Larva,{Xenomorph}
+37326,50234,Hans Uberman,Xenobiologist,"",
+37327,50234,Tyler Jones,Security Officer,"",
+37328,50234,alien facehugger (960),MODE,Xenomorph,{Xenomorph}
+37329,50234,alien facehugger (179),MODE,Xenomorph,{Xenomorph}
+37330,50234,alien larva (577),MODE,Larva,{Xenomorph}
+37331,50234,Valeriy Zimov,Shaft Miner,"",
+37332,50234,alien facehugger (191),MODE,Xenomorph,{Xenomorph}
+37333,50234,alien facehugger (761),MODE,Xenomorph,{Xenomorph}
+37334,50234,alien facehugger (293),MODE,Xenomorph,{Xenomorph}
+37335,50234,alien facehugger (235),MODE,Xenomorph,{Xenomorph}
+37336,50234,alien facehugger (521),MODE,Xenomorph,{Xenomorph}
+37487,50199,Liam O'Shea,Quartermaster,"",
+37337,50234,alien facehugger (187),MODE,Xenomorph,{Xenomorph}
+37338,50234,alien facehugger (1000),MODE,Xenomorph,{Xenomorph}
+37339,50234,alien facehugger (772),MODE,Xenomorph,{Xenomorph}
+37340,50234,alien facehugger (943),MODE,Xenomorph,{Xenomorph}
+37341,50234,alien facehugger (567),MODE,Xenomorph,{Xenomorph}
+37342,50234,alien facehugger (803),MODE,Xenomorph,{Xenomorph}
+37343,50234,alien facehugger (78),MODE,Xenomorph,{Xenomorph}
+37344,50234,alien facehugger (385),MODE,Xenomorph,{Xenomorph}
+37345,50234,alien facehugger (279),MODE,Xenomorph,{Xenomorph}
+37346,50234,Alex Bennett,Cargo Technician,"",
+37347,50234,alien facehugger (249),MODE,Xenomorph,{Xenomorph}
+37348,50234,alien facehugger (263),MODE,Xenomorph,{Xenomorph}
+37349,50234,Ink Void,Shaft Miner,"",
+37350,50234,Brock Ellis,Botanist,"",
+37351,50234,Jason Powell,Head of Security,"",
+37352,50234,alien facehugger (239),MODE,Xenomorph,{Xenomorph}
+37353,50234,alien sentinel (789),Alien,Sentinel,{Xenomorph}
+37354,50234,Tate Benford,Captain,"",
+37355,50234,alien facehugger (916),MODE,Xenomorph,{Xenomorph}
+37356,50234,alien facehugger (705),MODE,Xenomorph,{Xenomorph}
+37357,50234,alien facehugger (815),MODE,Xenomorph,{Xenomorph}
+37358,50234,alien facehugger (887),MODE,Xenomorph,{Xenomorph}
+37359,50234,alien facehugger (48),MODE,Xenomorph,{Xenomorph}
+37360,50234,alien queen (371),Alien,Queen,{Xenomorph}
+37361,50234,alien facehugger (511),MODE,Xenomorph,{Xenomorph}
+37362,50234,alien facehugger (942),MODE,Xenomorph,{Xenomorph}
+37363,50234,alien facehugger (831),MODE,Xenomorph,{Xenomorph}
+37364,50234,mouse (937),Animal,"",
+37365,50234,alien facehugger (336),MODE,Xenomorph,{Xenomorph}
+37366,50234,Joon Deleon,Medical Doctor,"",
+37367,50234,Johnathan Armstrong,Medical Doctor,"",
+37368,50234,alien facehugger (503),MODE,Xenomorph,{Xenomorph}
+37369,50234,alien facehugger (517),MODE,Xenomorph,{Xenomorph}
+37370,50234,alien facehugger (977),MODE,Xenomorph,{Xenomorph}
+37371,50234,alien facehugger (752),MODE,Xenomorph,{Xenomorph}
+37372,50234,alien facehugger (89),MODE,Xenomorph,{Xenomorph}
+37373,50234,alien facehugger (467),MODE,Xenomorph,{Xenomorph}
+37374,50234,alien facehugger (57),MODE,Xenomorph,{Xenomorph}
+37375,50234,alien facehugger (416),MODE,Xenomorph,{Xenomorph}
+37376,50234,alien sentinel (641),Alien,Sentinel,{Xenomorph}
+37377,50234,alien facehugger (217),MODE,Xenomorph,{Xenomorph}
+37378,50234,alien facehugger (457),MODE,Xenomorph,{Xenomorph}
+37379,50234,alien facehugger (52),MODE,Xenomorph,{Xenomorph}
+37380,50234,alien facehugger (811),MODE,Xenomorph,{Xenomorph}
+37381,50234,alien facehugger (130),MODE,Xenomorph,{Xenomorph}
+37382,50234,alien facehugger (703),MODE,Xenomorph,{Xenomorph}
+37383,50234,alien facehugger (339),MODE,Xenomorph,{Xenomorph}
+37384,50234,alien facehugger (662),MODE,Xenomorph,{Xenomorph}
+37385,50234,alien facehugger (127),MODE,Xenomorph,{Xenomorph}
+37386,50234,alien facehugger (72),MODE,Xenomorph,{Xenomorph}
+37387,50234,alien facehugger (847),MODE,Xenomorph,{Xenomorph}
+37388,50234,alien facehugger (108),MODE,Xenomorph,{Xenomorph}
+37389,50234,alien facehugger (36),MODE,Xenomorph,{Xenomorph}
+37390,50234,alien facehugger (557),MODE,Xenomorph,{Xenomorph}
+37391,50234,alien facehugger (111),MODE,Xenomorph,{Xenomorph}
+37392,50234,alien facehugger (364),MODE,Xenomorph,{Xenomorph}
+37393,50234,alien facehugger (726),MODE,Xenomorph,{Xenomorph}
+37394,50234,alien facehugger (602),MODE,Xenomorph,{Xenomorph}
+37395,50234,alien facehugger (66),MODE,Xenomorph,{Xenomorph}
+37396,50234,alien larva (402),MODE,Larva,{Xenomorph}
+37397,50234,alien larva (656),MODE,Larva,{Xenomorph}
+37398,50234,alien larva (176),MODE,Larva,{Xenomorph}
+37399,50234,mouse (268),Animal,"",
+37400,50234,alien facehugger (969),MODE,Xenomorph,{Xenomorph}
+37401,50234,alien facehugger (629),MODE,Xenomorph,{Xenomorph}
+37402,50234,alien sentinel (550),Alien,Sentinel,{Xenomorph}
+37403,50234,alien facehugger (664),MODE,Xenomorph,{Xenomorph}
+37404,50234,alien hunter (267),Alien,Hunter,{Xenomorph}
+37405,50234,alien sentinel (543),Alien,Sentinel,{Xenomorph}
+37406,50234,alien facehugger (957),MODE,Xenomorph,{Xenomorph}
+37407,50234,alien facehugger (207),MODE,Xenomorph,{Xenomorph}
+37408,50234,alien facehugger (223),MODE,Xenomorph,{Xenomorph}
+37409,50234,alien facehugger (637),MODE,Xenomorph,{Xenomorph}
+37410,50234,alien hunter (688),Alien,Hunter,{Xenomorph}
+37488,50199,Cash Murphy,Captain,"",
+37411,50234,alien facehugger (971),MODE,Xenomorph,{Xenomorph}
+37412,50234,alien facehugger (575),MODE,Xenomorph,{Xenomorph}
+37413,50234,alien sentinel (533),Alien,Sentinel,{Xenomorph}
+37414,50234,Warner Shaffer,Barber,"",
+37415,50234,Isall Niver,Test Subject,"",
+37416,50234,Alex Mochacha,Xenoarchaeologist,"",
+37417,50234,alien facehugger (428),MODE,Xenomorph,{Xenomorph}
+37418,50234,alien facehugger (522),MODE,Xenomorph,{Xenomorph}
+37419,50234,alien larva (356),MODE,Larva,{Xenomorph}
+37420,50234,alien facehugger (754),MODE,Xenomorph,{Xenomorph}
+37421,50234,alien facehugger (97),MODE,Xenomorph,{Xenomorph}
+37422,50234,alien facehugger (153),MODE,Xenomorph,{Xenomorph}
+37423,50234,alien facehugger (414),MODE,Xenomorph,{Xenomorph}
+37424,50234,alien facehugger (295),MODE,Xenomorph,{Xenomorph}
+37425,50234,alien facehugger (318),MODE,Xenomorph,{Xenomorph}
+37426,50234,alien facehugger (576),MODE,Xenomorph,{Xenomorph}
+37427,50234,alien facehugger (43),MODE,Xenomorph,{Xenomorph}
+37428,50234,alien facehugger (790),MODE,Xenomorph,{Xenomorph}
+37429,50234,alien facehugger (162),MODE,Xenomorph,{Xenomorph}
+37430,50234,alien sentinel (277),Alien,Sentinel,{Xenomorph}
+37431,50234,alien facehugger (733),MODE,Xenomorph,{Xenomorph}
+37432,50234,alien facehugger (497),MODE,Xenomorph,{Xenomorph}
+37433,50234,mouse (519),Animal,"",
+37434,50234,alien facehugger (44),MODE,Xenomorph,{Xenomorph}
+37435,50234,Artem Kotov,Chemist,"",
+37436,50234,alien facehugger (359),MODE,Xenomorph,{Xenomorph}
+37437,50234,Blob Overmind (913),MODE,Blob Overmind,{Blob Overmind}
+37438,50234,alien facehugger (264),MODE,Xenomorph,{Xenomorph}
+37439,50234,alien facehugger (247),MODE,Xenomorph,{Xenomorph}
+37440,50234,alien facehugger (412),MODE,Xenomorph,{Xenomorph}
+37441,50234,alien sentinel (253),Alien,Sentinel,{Xenomorph}
+37442,50234,alien facehugger (848),MODE,Xenomorph,{Xenomorph}
+37443,50234,alien facehugger (597),MODE,Xenomorph,{Xenomorph}
+37444,50234,alien facehugger (579),MODE,Xenomorph,{Xenomorph}
+37445,50234,alien facehugger (593),MODE,Xenomorph,{Xenomorph}
+37446,50234,alien facehugger (999),MODE,Xenomorph,{Xenomorph}
+37447,50234,alien facehugger (234),MODE,Xenomorph,{Xenomorph}
+37448,50234,alien facehugger (144),MODE,Xenomorph,{Xenomorph}
+37449,50234,alien facehugger (248),MODE,Xenomorph,{Xenomorph}
+37450,50234,alien facehugger (859),MODE,Xenomorph,{Xenomorph}
+37451,50234,alien facehugger (779),MODE,Xenomorph,{Xenomorph}
+37452,50234,alien facehugger (344),MODE,Xenomorph,{Xenomorph}
+37453,50234,alien facehugger (716),MODE,Xenomorph,{Xenomorph}
+37454,50234,alien facehugger (155),MODE,Xenomorph,{Xenomorph}
+37455,50234,alien facehugger (112),MODE,Xenomorph,{Xenomorph}
+37456,50234,alien facehugger (317),MODE,Xenomorph,{Xenomorph}
+37457,50234,alien facehugger (129),MODE,Xenomorph,{Xenomorph}
+37458,50234,alien facehugger (211),MODE,Xenomorph,{Xenomorph}
+37459,50234,alien facehugger (902),MODE,Xenomorph,{Xenomorph}
+37460,50234,alien facehugger (667),MODE,Xenomorph,{Xenomorph}
+37461,50234,alien facehugger (918),MODE,Xenomorph,{Xenomorph}
+37462,50234,alien facehugger (275),MODE,Xenomorph,{Xenomorph}
+37463,50234,alien facehugger (182),MODE,Xenomorph,{Xenomorph}
+37464,50234,alien facehugger (46),MODE,Xenomorph,{Xenomorph}
+37465,50234,alien facehugger (957),MODE,Xenomorph,{Xenomorph}
+37466,50234,alien facehugger (509),MODE,Xenomorph,{Xenomorph}
+37467,50234,mouse (573),Animal,"",
+37468,50234,alien facehugger (971),MODE,Xenomorph,{Xenomorph}
+37469,50234,alien facehugger (177),MODE,Xenomorph,{Xenomorph}
+37470,50234,alien facehugger (721),MODE,Xenomorph,{Xenomorph}
+37471,50234,A.S.T.R.O. mini,pAI,"",
+37472,50234,alien larva (891),MODE,Larva,{Xenomorph}
+37473,50234,alien facehugger (742),MODE,Xenomorph,{Xenomorph}
+37474,50234,alien facehugger (308),MODE,Xenomorph,{Xenomorph}
+37475,50234,alien facehugger (994),MODE,Xenomorph,{Xenomorph}
+37476,50234,alien facehugger (724),MODE,Xenomorph,{Xenomorph}
+37477,50234,alien facehugger (804),MODE,Xenomorph,{Xenomorph}
+37478,50234,alien facehugger (107),MODE,Xenomorph,{Xenomorph}
+37479,50199,Issar Hess,Scientist,Traitor,{Traitor}
+37480,50199,Horatio Highjack,Head of Personnel,"",
+37481,50199,Luke Roadman,Xenobiologist,"",
+37482,50199,Roman Elinov,Test Subject,"",
+37483,50199,Max Russell,Station Engineer,"",
+37484,50199,Kane Ayron,Chef,Traitor,{Traitor}
+37485,50199,Allen Gray,Research Director,"",
+37486,50199,Kshiya Less,Scientist,"",
+37489,50199,Oleg Osetrov,Station Engineer,Traitor,{Traitor}
+37490,50199,Koil Welher,Station Engineer,"",
+37491,50199,Adam Sommer,Test Subject,"",
+37492,50199,Gelon Torn,Medical Doctor,"",
+37493,50199,Vincent Rahl,Test Subject,"",
+37494,50199,Friedrich Von Brandenburg,Security Officer,"",
+37495,50198,Kane Ayron,Test Subject,"",
+37496,50198,Issar Hess,Scientist,"",
+37497,50198,Roman Elinov,Security Officer,"",
+37498,50198,Kshiya Less,Scientist,"",
+37499,50198,Fillipe Duconte,Chaplain,"",
+37500,50198,Horatio Highjack,Head of Personnel,"",
+37501,50198,Jad Shock,Mime,"",
+37502,50198,Luke Roadman,Xenobiologist,"",
+37503,50198,Emilia Wong,Detective,"",
+37504,50198,Rastus Sealis,Security Cadet,"",
+37505,50198,Vlad Omar,Security Cadet,"",
+37506,50198,Spike Schmidt,Chemist,"",
+37507,50198,Seok Drummond,Security Officer,"",
+37508,50198,Cassian Winton,Chief Medical Officer,"",
+37509,50198,Sath Morris,Station Engineer,"",
+37510,50198,Harvey Evans,Test Subject,"",
+37511,50198,Allen Gray,Research Director,"",
+37512,50198,Cash Murphy,Captain,"",
+37513,50201,Jose Butterfill,Security Officer,"",
+37514,50201,Zander Smirnov,Station Engineer,"",
+37515,50201,Colton Moore,Xenoarchaeologist,"",
+37516,50201,Pedro Wolfe,Medical Doctor,"",
+37517,50201,Marat Werner,Chef,"",
+37518,50201,Raymond Mingle,Paramedic,"",
+37519,50201,Ruben Foster,Security Officer,"",
+37520,50201,Tamsin Winton,Medical Doctor,"",
+37521,50197,Fading Light,Station Engineer,"",
+37522,50197,Rafael Sunders,Station Engineer,Traitor,{Traitor}
+37523,50197,Kane Ayron,Test Subject,"",
+37524,50197,Denis Denisenko,Medical Doctor,"",
+37525,50197,Jamal Freeman,Shaft Miner,Traitor,{Traitor}
+37526,50197,Aramsha Jarmack,Station Engineer,Traitor,{Traitor}
+37527,50197,Jad Shock,Mime,"",
+37528,50197,Karen,Chemist,"",
+37529,50197,Mr.Honky,Clown,"",
+37530,50197,Roman Elinov,Test Subject,"",
+37531,50197,Nikita Bubencov,Station Engineer,"",
+37532,50197,Frank Lloyd,Chaplain,Traitor,{Traitor}
+37533,50197,Sath Morris,Station Engineer,"",
+37534,50197,Otto Schulz,Cyborg,"",
+37535,50197,Rastus Sealis,Security Officer,"",
+37536,50197,Emilia Wong,Detective,"",
+37537,50197,Max Russell,Cyborg,"",
+37538,50197,Roy Walker,Test Subject,"",
+37539,50197,Vlad Omar,Security Cadet,"",
+37540,50197,Avalanche,AI,"",
+37541,50197,Tyler Jones,Research Director,"",
+37542,50197,Cristopher Phillips,Atmospheric Technician,"",
+37543,50197,Dorian,Botanist,"",
+37544,50197,Issar Hess,Scientist,"",
+37545,50197,Kshiya Less,Scientist,"",
+37546,50197,Seok Drummond,Security Officer,"",
+37547,50197,Igor Moon,Shaft Miner,"",
+37548,50197,Bomber,Clown,"",
+37549,50197,Horatio Highjack,Head of Personnel,"",
+37550,50197,Martin Vanleer,Roboticist,"",
+37551,50197,Cassian Winton,Chief Medical Officer,"",
+37552,50197,Rashidi Adelakun,Test Subject,"",
+37553,50197,"","","",
+37554,50197,Luke Roadman,Xenobiologist,"",
+37555,50197,Alan Smail,Forensic Technician,"",
+37556,50197,CHOC-491,Positronic Brain,"",
+37557,50197,maintenance drone (842),Cyborg,"",
+37558,50195,Harvey Evans,Detective,"",
+37559,50195,Weston Bell,Station Engineer,"",
+37560,50195,Mike Ward,Quartermaster,"",
+37561,50195,Mr.Honky,Clown,"",
+37562,50195,Elizabeth Rubram,Forensic Technician,Traitor,{Traitor}
+37563,50195,Jad Shock,Mime,"",
+37564,50195,Rastus Sealis,Head of Security,"",
+37565,50195,Werner Von Schmidt,Head of Personnel,"",
+37566,50195,Adrian Gordon,Technical Assistant,"",
+37567,50195,Shala'Raigar Nar Raina,Security Officer,"",
+37568,50195,Joseph Dreyfus,Chief Medical Officer,"",
+37569,50195,Horatio Highjack,Bartender,"",
+37570,50195,Westerose Krieg,Atmospheric Technician,"",
+37571,50195,Alexander Sokolov,Test Subject,"",
+37572,50195,Rose Willow,Security Officer,"",
+37573,50195,Jose Butterfill,Security Officer,"",
+37574,50213,Gachi Clown,Clown,"",
+37575,50213,Juan Williis,Quartermaster,Traitor,{Traitor}
+37576,50213,Joseph Dreyfus,Detective,"",
+37577,50213,Gleb Sobachkin,Bartender,"",
+37578,50213,Ivan Rogalov,Chef,"",
+37579,50213,Igor Collins,Security Officer,"",
+37580,50213,Vitia Kosoi,Medical Doctor,"",
+37581,50213,Makskim Shomski,Recycler,"",
+37582,50213,Chris Snyder,Shaft Miner,"",
+37583,50213,Ascent Of The Lord Of Dawn,Technical Assistant,"",
+37584,50213,Alan Ward,Research Director,"",
+37585,50213,Eddie Ali,Security Cadet,"",
+37586,50215,Jad Shock,Mime,"",
+37587,50215,Elizabeth Rubram,Forensic Technician,"",
+37588,50215,Westerose Krieg,Atmospheric Technician,"",
+37589,50215,Isaiah Vader,Chef,Traitor,{Traitor}
+37590,50215,Sherwin Fly,Cyborg,"",
+37591,50215,Jackson Kelly,Security Cadet,"",
+37592,50215,Gennady Whiteman,Security Officer,"",
+37593,50215,Ulric Parker,Detective,"",
+37594,50215,Amos Ma'jorshi,Paramedic,"",
+37595,50215,Seassant-An Nueve,Station Engineer,Traitor,{Traitor}
+37596,50215,Viktor Valentine,Shaft Miner,"",
+37597,50215,Ali Azar,Chaplain,"",
+37598,50215,Tahikakiyata,Scientist,"",
+37599,50215,Zeke Wheeler,Test Subject,"",
+37600,50215,Parker Williams,Test Subject,"",
+37601,50203,Jose Butterfill,Warden,"",
+37602,50203,Ruben Foster,Security Officer,"",
+37603,50203,Renato Sardini,Test Subject,"",
+37604,50203,Beta,default,"",
+37605,50203,Makskim Shomski,Geneticist,"",
+37606,50203,Quinn Glover,Medical Doctor,"",
+37607,50203,Hugo Pritchard,Janitor,"",
+37608,50203,Hayden Pearsall,Chief Engineer,"",
+37609,50203,Lion Remark,Virologist,"",
+37610,50203,Korvo Forpean,Station Engineer,"",
+37611,50203,Chloe Price,Librarian,"",
+37612,50203,maintenance drone (540),Cyborg,"",
+37613,50216,Elizabeth Rubram,Forensic Technician,"",
+37614,50216,Ulric Parker,Medical Doctor,"",
+37615,50216,Chloe Price,Head of Personnel,"",
+37616,50216,Isaiah Vader,Roboticist,"",
+37617,50216,Jeremy Schofield,Xenoarchaeologist,"",
+37618,50216,Zeke Wheeler,Test Subject,"",
+37619,50216,Ali Azar,Chaplain,"",
+37620,50216,Gennady Whiteman,Security Officer,"",
+37621,50216,Jose Butterfill,Security Officer,"",
+37622,50216,Kellen Peters,Station Engineer,"",
+37623,50216,Amos Ma'jorshi,Paramedic,"",
+37624,50216,Marat Werner,Recycler,"",
+37625,50216,Alfred Kiefer,Shaft Miner,"",
+37626,50216,Thomas Sagan,Shaft Miner,"",
+37627,50216,Seok Drummond,Research Director,"",
+37628,50216,Alexander Sokolov,Botanist,"",
+37629,50216,Robert Blake,Cargo Technician,"",
+37630,50216,Martin Vanleer,Detective,"",
+37631,50216,Evangelina Shaffer,Shaft Miner,"",
+37632,50216,Timothy Bowchiew,Technical Assistant,"",
+37633,50216,Roy Surgovich,Technical Assistant,"",
+37634,50216,Mike Ward,Quartermaster,"",
+37635,50216,Karlos Lopes,Test Subject,"",
+37636,50216,Marcos Donkin,Test Subject,"",
+37637,50216,Harvester (157),Animal,Cultist,{Cultist}
+37638,50216,Juggernaut (775),Juggernaut,Cultist,{Cultist}
+37639,50216,Harvester (901),Animal,Cultist,{Cultist}
+37640,50216,Ascent Of The Lord Of Dawn,Botanist,"",
+37641,50216,podkid (883),"","",
+37642,50216,Makskim Shomski,Barber,"",
+37643,50227,M'ark M'rshan,Roboticist,"",
+37644,50227,Curly Mens,Security Officer,"",
+37645,50227,Artemida Byblikova,Paramedic,"",
+37646,50227,Yayatiyatichi,MODE,Vox Raider,{Vox Raider}
+37647,50227,Natalia Koneva,Chief Medical Officer,"",
+37648,50227,Joseph Hope,Janitor,"",
+37649,50227,Yachitayahi,MODE,Vox Raider,{Vox Raider}
+37650,50227,Yayahakah,MODE,Vox Raider,{Vox Raider}
+37651,50227,Max Russell,Scientist,"",
+37652,50227,Alroy Podkins,Forensic Technician,"",
+37653,50227,John Mackenzie,Bartender,"",
+37654,50227,Kakakahti,MODE,Vox Raider,{Vox Raider}
+37655,50227,Zarella Frei,Cargo Technician,"",
+37656,50227,Yachakahtakahki,MODE,Vox Raider,{Vox Raider}
+37657,50227,Najah Mujib,Paramedic,"",
+37658,50227,Dragan Sheshel,Test Subject,"",
+37659,50227,Lim Al-Kuds,Chaplain,"",
+37660,50227,Jimena Reade,Technical Assistant,"",
+37661,50227,Bill Black,Technical Assistant,"",
+37662,50227,Vitia Kosoi,Medical Doctor,"",
+37663,50227,Persh Levett,Recycler,"",
+37664,50227,Shade of Kakakahti,Shade,"",
+37665,50227,Semyon Hatsunov,Test Subject,"",
+37666,50227,Silver Eyes,Station Engineer,"",
+37667,50227,Adolph Keppel,Technical Assistant,"",
+37668,50227,Czarseniy Ozor,Librarian,"",
+37669,50227,Dmitriy Ulyanov,Detective,"",
+37670,50222,Mike Ward,Quartermaster,"",
+37671,50222,B.Cast,Research Director,"",
+37672,50222,Zordium,default,"",
+37673,50222,Steven Anderson,Chief Engineer,"",
+37674,50222,Ruben Foster,Test Subject,"",
+37675,50222,Dante Virt,Chief Medical Officer,"",
+37676,50222,John Anderson,Head of Personnel,"",
+37677,50212,Tahikakiyata,Scientist,"",
+37678,50212,Danny Roby,Shaft Miner,"",
+37679,50212,Gennady Whiteman,Security Officer,"",
+37680,50212,Westerose Krieg,Atmospheric Technician,"",
+37681,50212,Cybill,AI,"",
+37682,50212,Seok Drummond,Security Officer,"",
+37683,50212,Cold Winds Of Winter,Geneticist,"",
+37684,50212,Amos Ma'jorshi,Paramedic,"",
+37685,50212,Kikikahikaha,MODE,Vox Raider,{Vox Raider}
+37686,50212,Adolph Nastain,Medical Doctor,"",
+37687,50212,Elizabeth Rubram,Forensic Technician,"",
+37688,50212,Kahiyayatachikikah,MODE,Vox Raider,{Vox Raider}
+37689,50212,Hakitahita,MODE,Vox Raider,{Vox Raider}
+37690,50212,Chihayahikiya,MODE,Vox Raider,{Vox Raider}
+37691,50212,Tayakachiyakaki,MODE,Vox Raider,{Vox Raider}
+37692,50212,Ryder Moore,Technical Assistant,"",
+37693,50212,Tikahtichachika,MODE,Vox Raider,{Vox Raider}
+37694,50212,Jake Pliskin,Internal Affairs Agent,"",
+37695,50212,Georgene Riker,Test Subject,"",
+37696,50212,Max Wells,Medical Intern,"",
+37697,50212,Seymour Briggs,Roboticist,"",
+37698,50212,Andres Losey,Janitor,"",
+37699,50212,SLI-726,Cyborg,"",
+37700,50212,Sherwin Fly,Cyborg,"",
+37701,50212,Balbesus,Clown,"",
+37702,50212,Jose Butterfill,Detective,"",
+37703,50212,Seassant-An Nueve,Station Engineer,"",
+37704,50219,Harvey Evans,Test Subject,"",
+37705,50219,Vitia Kosoi,Virologist,"",
+37706,50219,Marcos Donkin,Test Subject,"",
+37707,50219,Ascent Of The Lord Of Dawn,Botanist,"",
+37708,50219,Viktor Valentine,Shaft Miner,Traitor,{Traitor}
+37709,50219,Makskim Shomski,Barber,"",
+37710,50219,Mike Ward,Quartermaster,"",
+37711,50219,Francisco Gonzales,Technical Assistant,"",
+37712,50219,Dick Cockenson,Clown,"",
+37713,50219,Omega,default,"",
+37714,50219,Sezaro Plamondo,Mime,"",
+37715,50226,Issar Hess,Station Engineer,"",
+37716,50226,M'ark M'rshan,Cyborg,"",
+37717,50226,Natalia Koneva,Chief Medical Officer,Traitor,{Traitor}
+37718,50226,Skyler Cook,Head of Personnel,"",
+37719,50226,Joseph Hope,Bartender,"",
+37720,50226,Slen Franko,Shaft Miner,"",
+37721,50226,Edward Brown,Cargo Technician,"",
+37722,50226,Alroy Podkins,Recycler,"",
+37723,50226,Kshiya Less,Atmospheric Technician,"",
+37724,50226,Cassian Winton,Medical Doctor,"",
+37725,50226,Oleg Osetrov,Paramedic,"",
+37726,50226,Ivan Huga,Quartermaster,"",
+37727,50226,Semyon Hatsunov,Test Subject,"",
+37728,50226,Klein Maccubus,Chemist,"",
+37729,50226,Adolph Nastain,Medical Doctor,"",
+37730,50226,Curly Mens,Head of Security,"",
+37731,50226,Lucas Gibson,Mime,"",
+37732,50226,Chip Elderson,Scientist,"",
+37733,50226,Reuben Hunt,Warden,"",
+37734,50226,Artemida Byblikova,Paramedic,"",
+37735,50226,Roman Elinov,Security Officer,"",
+37736,50226,Cletus Coldsmith,Geneticist,"",
+37737,50226,Zarella Frei,Cargo Technician,"",
+37738,50200,Zayden Fiddler,Head of Security,"",
+37739,50200,Koil Welher,Technical Assistant,"",
+37740,50200,Friedrich Von Brandenburg,Research Director,Traitor,{Traitor}
+37741,50200,Oleg Osetrov,Station Engineer,"",
+37742,50200,Issar Hess,Scientist,"",
+37743,50200,Maya Foxova,Chaplain,"",
+37744,50200,Marcus Arrow,Paramedic,Traitor,{Traitor}
+37745,50200,Merk Asacris,Cyborg,"",
+37746,50200,Gatatikikichakiya,Test Subject,"",
+37747,50200,Kshiya Less,Scientist,"",
+37748,50200,Seymour Briggs,Geneticist,"",
+37749,50200,Liam O'Shea,Chief Medical Officer,"",
+37750,50200,Nendo Galaxy,Recycler,"",
+37751,50200,Adam Sommer,Security Officer,"",
+37752,50200,Riley James,Mime,"",
+37753,50200,Luke Roadman,Xenobiologist,"",
+37754,50200,friend,Animal,"",
+37755,50200,Slip Pogba,Security Officer,"",
+37756,50200,Nikolay Gorgulov,Medical Doctor,"",
+37757,50200,unknown,default,"",
+37758,50200,CHOC-587,Cyborg,"",
+37759,50200,Adolf Firefield,Roboticist,"",
+37760,50200,Vincent Rahl,Xenoarchaeologist,"",
+37761,50200,Nikita Bubencov,Quartermaster,"",
+37762,50200,mouse (477),Animal,"",
+37763,50200,Kate Shmidt,Bartender,"",
+37764,50200,Aurelius Aquilimus,Cargo Technician,"",
+37765,50200,Slip Pogba,Test Subject,"",
+37766,50200,Nikolai Vakhmistrov,Recycler,"",
+37767,50200,Ivan Huga,Security Cadet,"",
+37768,50200,Adolph Nastain,Medical Doctor,"",
+37769,50200,maintenance drone (812),Cyborg,"",
+37770,50224,Tom,Scientist,"",
+37771,50224,Flick Welty,Quartermaster,Traitor,{Traitor}
+37772,50224,Roman Elinov,Warden,"",
+37773,50224,Jad Shock,Mime,"",
+37774,50224,Karen,Roboticist,"",
+37775,50224,Volqrmixqu Lirqrrxium,Roboticist,"",
+37776,50224,Horatio Highjack,Head of Personnel,"",
+37777,50224,Zikkykikati,Scientist,Traitor,{Traitor}
+37778,50224,Hans Uberman,Security Officer,"",
+37779,50224,Vlad Omar,Geneticist,"",
+37780,50224,Alex Bennett,Chef,"",
+37781,50224,Kakotika,Shaft Miner,"",
+37782,50224,Spike Schmidt,Security Officer,"",
+37783,50224,Korvo Forpean,Internal Affairs Agent,"",
+37784,50224,Cassian Winton,Chief Medical Officer,"",
+37785,50224,Kshiya Less,Station Engineer,"",
+37786,50224,Ulishahs Oshus,Atmospheric Technician,"",
+37787,50224,Issar Hess,Station Engineer,"",
+37788,50224,Tyler Jones,Research Director,"",
+37789,50224,Theory Of Sunrise,Xenoarchaeologist,"",
+37790,50224,Arkadiy Paradigmovich,Technical Assistant,"",
+37791,50231,Dante Virt,Chief Medical Officer,"",
+37792,50231,Teddy,Roboticist,Traitor,{Traitor}
+37793,50231,A.S.M.A.S,AI,"",
+37794,50231,Chloe Price,Head of Personnel,"",
+37795,50231,Weston Bell,Detective,"",
+37796,50231,Vinny Mckendrick,Station Engineer,"",
+37797,50231,Anna Belko,Chemist,"",
+37798,50231,Renato Sardini,Technical Assistant,"",
+37799,50231,Alex Bennett,Cargo Technician,"",
+37800,50231,Everard Heidrich,Internal Affairs Agent,"",
+37801,50231,Xander Morris,Security Officer,"",
+37802,50231,DUNC-910,Cyborg,"",
+37803,50231,Jason Powell,Head of Security,"",
+37804,50231,Adolph Nastain,Botanist,"",
+37805,50231,Ascent Of The Lord Of Dawn,Botanist,"",
+37806,50231,Martin Vanleer,Security Officer,"",
+37807,50231,Liam O'Shea,Chief Engineer,"",
+37808,50231,Vitia Kosoi,Medical Doctor,"",
+37809,50231,Anna Flugel,Chief Medical Officer,Traitor,{Traitor}
+37810,50231,Jayce Snyder,Detective,"",
+37811,50231,Mike Ward,Quartermaster,"",
+37812,50231,Aurelius Aquilimus,Security Officer,"",
+37813,50231,podkid (889),default,"",
+37814,50206,Ulric Parker,Quartermaster,"",
+37815,50206,Vitia Kosoi,Paramedic,Traitor,{Traitor}
+37816,50206,Lion Remark,Virologist,Traitor,{Traitor}
+37817,50206,Tyler Rathen,Paramedic,"",
+37818,50206,Chloe Price,Head of Personnel,"",
+37819,50206,Tristan Garratt,Station Engineer,"",
+37820,50206,Jose Butterfill,Security Officer,"",
+37821,50206,Adam Baklazhanov,Botanist,"",
+37822,50206,Alan Ward,Xenoarchaeologist,"",
+37823,50206,Marat Werner,Recycler,"",
+37824,50206,Dante Virt,Station Engineer,"",
+37825,50206,Charles Wood,Xenobiologist,"",
+37826,50206,maintenance drone (726),Cyborg,"",
+37827,50206,Viktor Valentine,Shaft Miner,"",
+37828,50206,Colvar Abram,Shaft Miner,"",
+37829,50206,Adrian Gordon,Technical Assistant,"",
+37830,50206,Shi'shi De She,Security Officer,"",
+37831,50206,Patrick Rowley,Shaft Miner,"",
+37832,50206,Tahikakiyata,Scientist,"",
+37833,50206,Andy Rotberg,Internal Affairs Agent,"",
+37834,50206,Joseph Dreyfus,Detective,"",
+37835,50206,Martin Vanleer,Station Engineer,"",
+37836,50206,Loreto Bunten,Xenoarchaeologist,"",
+37837,50206,mouse (62),Animal,"",
+37838,50206,mouse (632),Animal,"",
+37839,50206,Werner Von Schmidt,Head of Personnel,"",
+37840,50206,Kuriu Qlio'kaf,Janitor,"",
+37841,50206,mouse (202),Animal,"",
+37842,50206,Alfred Donkin,Psychiatrist,"",
+37843,50204,Lion Remark,Virologist,"",
+37844,50204,Alroy Podkins,Test Subject,"",
+37845,50204,Jin Relo,Security Cadet,"",
+37846,50204,Maya Foxova,Warden,"",
+37847,50204,Quiwz'xu Qox,Shaft Miner,"",
+37848,50204,Leeland Rahl,Head of Security,"",
+37849,50204,Joseph Hope,Scientist,"",
+37850,50204,Kefal.Archigos.Filos,Station Engineer,"",
+37851,50204,Lucas Gibson,Head of Personnel,Traitor,{Traitor}
+37852,50204,Reuben Hunt,Security Officer,"",
+37853,50204,Nikita Bubencov,Cyborg,"",
+37854,50204,Bailey Patel,Station Engineer,"",
+37855,50204,Koudi Cooper,Roboticist,"",
+37856,50204,Illia Bronson,Botanist,"",
+37857,50204,Reva Marks,Geneticist,"",
+37858,50204,Max Black,Janitor,"",
+37859,50204,Adam Sommer,Security Officer,"",
+37860,50204,John Mackenzie,Chemist,"",
+37861,50204,Aurelius Aquilimus,Geneticist,"",
+37862,50204,Luke Roadman,Xenobiologist,"",
+37863,50204,Mayron Demetrios,Technical Assistant,Traitor,{Traitor}
+37864,50204,Merk Asacris,Cyborg,"",
+37865,50204,Jason Snyder,Medical Intern,"",
+37866,50204,M'ark M'rshan,Cyborg,"",
+37867,50204,Elliot Temere,Test Subject,"",
+37868,50204,Gatatikikichakiya,Atmospheric Technician,"",
+37869,50204,Ivan Huga,Chaplain,"",
+37870,50204,O-5,AI,Malf AI,{Malf AI}
+37871,50204,Sasha Clark,Medical Doctor,"",
+37872,50204,Isaiah Vader,Security Officer,"",
+37873,50204,Puzobor Slavov,Mime,"",
+37874,50204,Tamsin Winton,Security Officer,"",
+37875,50204,Keegan Hunt,Research Director,"",
+37876,50204,Nikolai Vakhmistrov,Chef,"",
+37877,50204,Johnathan Armstrong,Recycler,"",
+37878,50204,Michael Langston,Medical Intern,"",
+37879,50204,Oldman Kirsan,Detective,"",
+37880,50204,Cassian Winton,Chief Medical Officer,"",
+37881,50204,CDB-346,Cyborg,"",
+37882,50204,Isaac Fletcher,Internal Affairs Agent,"",
+37883,50204,Dar'zahr,Medical Doctor,"",
+37884,50204,Ikdrasil,Cargo Technician,"",
+37885,50204,Adolph Nastain,Security Cadet,"",
+37886,50204,Andre Bailey,Shaft Miner,"",
+37887,50204,Chip Elderson,Scientist,"",
+37888,50204,Richard Reed,Station Engineer,"",
+37889,50204,Aramsha Jarmack,Station Engineer,"",
+37890,50204,SyndiClown,Clown,"",
+37891,50204,Shi'shi De She,Security Officer,"",
+37892,50204,Kuriu Qlio'kaf,Station Engineer,"",
+37893,50204,Andrey Palkow,Bartender,"",
+37894,50204,Unbelievable God,Chaplain`s staff,"",
+37895,50204,Maxoun Gymovic,Chef,"",
+37896,50204,Jesus Garneys,Psychiatrist,"",
+37897,50204,mouse (109),Animal,"",
+37898,50204,Philipp Smith,Shaft Miner,"",
+37899,50204,Klein Maccubus,Medical Intern,"",
+37900,50204,Dominick Addison,Chief Engineer,"",
+37901,50204,Alex Ermakov,Recycler,"",
+37902,50204,Volqrmixqu Lirqrrxuim,Xenoarchaeologist,"",
+37903,50204,Allen Richardson,Test Subject,"",
+37904,50204,Danny Roby,Xenobiologist,"",
+37905,50204,mouse (137),Animal,"",
+37906,50204,maintenance drone (994),Cyborg,"",
+37907,50204,Ivan Huga,default,"",
+37908,50204,Милая согханочка из борде,default,"",
+37909,50204,SEX BEAR,default,"",
+37910,50204,Ken,default,"",
+37911,50204,Lucas Gibson,default,"",
+37912,50204,Michael Langston,default,"",
+37913,50204,Christopher Jean,default,"",
+37914,50204,Allen Richardson,default,"",
+37915,50204,Alroy Podkins,default,"",
+37916,50204,Volqrmixqu Lirqrrxuim,default,"",
+37917,50204,Rick Shorts,default,"",
+37918,50204,Danny Roby,default,"",
+37919,50204,Jason Snyder,default,"",
+37920,50204,Koudi Cooper,default,"",
+37921,50204,Tamsin Winton,default,"",
+37922,50204,Joseph Hope,default,"",
+37923,50204,Najah Mujib,Paramedic,"",
+37924,50204,mouse (804),Animal,"",
+37925,50204,Rafael Pfeifer,default,"",
+37926,50204,maintenance drone (874),Cyborg,"",
+37927,50204,Jean-Poul Marat,Botanist,"",
+37928,50204,Rosemary Demuth,Technical Assistant,"",
+37929,50204,Rosemary Demuth,default,"",
+37930,50204,Jean-Poul Marat,default,"",
+37931,50204,Ikdrasil,default,"",
+37932,50204,Alroy Podkins,default,"",
+37933,50204,Isaac Fletcher,default,"",
+37934,50204,Gwenevere Coldsmith,default,"",
+37935,50204,Rick Shorts,default,"",
+37936,50204,Luke Roadman,default,"",
+37937,50204,Chip Elderson,default,"",
+37938,50204,Elliot Temere,default,"",
+37939,50204,Andrey Palkow,default,"",
+37940,50204,Christopher Jean,default,"",
+37941,50204,Ken,MODE,Emergency Responder,{Emergency Responder}
+37942,50204,Sig,MODE,Emergency Responder,{Emergency Responder}
+37943,50204,mouse (529),Animal,"",
+37944,50204,AURELIUS,MODE,Emergency Responder,{Emergency Responder}
+37945,50204,Rosa,MODE,Emergency Responder,{Emergency Responder}
+37946,50204,Allan,MODE,Emergency Responder,{Emergency Responder}
+37947,50204,maintenance drone (679),Cyborg,"",
+37948,50223,Kakotika,Xenoarchaeologist,Revolutionary,{Revolutionary}
+37949,50223,Roman Elinov,Security Officer,"",
+37950,50223,Norbert Kodik,Scientist,"",
+37951,50223,Flick Welty,Recycler,"",
+37952,50223,Tucha Master,Clown,Revolutionary,{Revolutionary}
+37953,50223,Zikkykikati,Scientist,"",
+37954,50223,Seamon Light,Shaft Miner,"",
+37955,50223,Volqrmixqu Lirqrrxuim,Roboticist,"",
+37956,50223,Arthur Garland,Bartender,"",
+37957,50223,Rick Justice,Medical Doctor,"",
+37958,50223,Liam O'Shea,Chief Medical Officer,"",
+37959,50223,Aramsha Jarmack,Station Engineer,"",
+37960,50223,Korvo Forpean,Station Engineer,Head Revolutionary,{Head Revolutionary}
+37961,50223,Max Russell,Scientist,"",
+37962,50223,Horatio Highjack,Head of Personnel,"",
+37963,50223,Randy Best,Xenobiologist,Revolutionary,{Revolutionary}
+37964,50223,Jad Shock,Mime,Head Revolutionary,{Head Revolutionary}
+37965,50223,Vlad Omar,Geneticist,"",
+37966,50223,Adam Browning Jr,Chemist,"",
+37967,50223,Karen,Chemist,"",
+37968,50223,Drew Collins,Botanist,"",
+37969,50223,Kshiya Less,Atmospheric Technician,"",
+37970,50223,Issar Hess,Atmospheric Technician,"",
+37971,50223,Tyler Jones,Research Director,Revolutionary,{Revolutionary}
+37972,50223,Lenny Echard,Test Subject,"",
+37973,50223,Chip Elderson,Shaft Miner,"",
+37974,50223,Arleen Morris,Station Engineer,"",
+37975,50223,Alexander Newbern,Quartermaster,Revolutionary,{Revolutionary}
+37976,50223,Hans Uberman,Xenobiologist,Revolutionary,{Revolutionary}
+37977,50223,Alex Bennett,Chef,"",
+37978,50223,Patrick Sealis,Detective,"",
+37979,50223,Union,default,"",
+37980,50223,Oleg Osetrov,Warden,"",
+37981,50223,mouse (771),Animal,"",
+37982,50223,Spike Schmidt,Security Officer,"",
+37983,50225,Sparkle,Clown,"",
+37984,50225,Jad Shock,Mime,"",
+37985,50225,Joon Deleon,Medical Doctor,"",
+37986,50225,Vlad Omar,Security Cadet,"",
+37987,50225,Flick Welty,Quartermaster,"",
+37988,50225,Kshiya Less,Station Engineer,"",
+37989,50225,maintenance drone (840),Cyborg,"",
+37990,50225,maintenance drone (391),Cyborg,"",
+37991,50225,maintenance drone (614),Cyborg,"",
+37992,50225,Dawson Dryfus,Head of Security,"",
+37993,50225,Timothy David,Test Subject,"",
+37994,50225,Ivan Huga,Security Cadet,"",
+37995,50225,Slen Franko,Internal Affairs Agent,"",
+37996,50225,Joseph Hope,Security Cadet,"",
+37997,50225,Natalia Koneva,Chief Medical Officer,"",
+37998,50220,Sergey Labuda,Station Engineer,"",
+37999,50220,Kakotika,Detective,"",
+38000,50220,Danko Cesarre,Cyborg,"",
+38001,50220,Jin Relo,Security Cadet,"",
+38002,50220,Anna Smith,Scientist,"",
+38003,50220,Issar Hess,Scientist,"",
+38004,50220,Seamon Light,Shaft Miner,"",
+38005,50220,Mr. Walker,AI,"",
+38006,50220,Alroy Podkins,Medical Intern,"",
+38007,50220,Richard Reed,Station Engineer,"",
+38008,50220,Shagan Rock'Shur,Test Subject,"",
+38009,50220,Sivean Doulson,Roboticist,"",
+38010,50220,Tate Benford,Animal,"",
+38011,50220,Troy Orgail,Animal,"",
+38012,50220,Artemida Byblikova,Chef,"",
+38013,50220,Vadim Wood,Test Subject,"",
+38014,50220,Mike Spenser,Cargo Technician,"",
+38015,50220,Vladislav Sokolov,Chemist,"",
+38016,50220,Maxoun Gymovic,Chef,"",
+38017,50220,Franklin Davis,Test Subject,"",
+38018,50220,Maya Foxova,Captain,"",
+38019,50220,Roman Elinov,Test Subject,"",
+38020,50220,Kshiya Less,Scientist,"",
+38021,50220,Alisa Don,Botanist,"",
+38022,50220,Denis Brodskiy,Medical Doctor,"",
+38023,50220,Semyon Hatsunov,Test Subject,"",
+38024,50220,Keegan Hunt,Head of Security,"",
+38025,50220,Vlad Omar,Geneticist,"",
+38026,50220,Tucha Master,Clown,"",
+38027,50220,Arleen Morris,Station Engineer,"",
+38028,50220,Kane Sanders,Recycler,"",
+38029,50220,Lary Doger,Medical Doctor,"",
+38030,50220,Jad Shock,Mime,"",
+38031,50220,Norman Don,Botanist,"",
+38032,50220,Ray Wardle,Chief Engineer,"",
+38033,50220,Adam Browning Jr,Chemist,"",
+38034,50220,Andre Isaakov,Quartermaster,"",
+38035,50220,Horatio Highjack,Head of Personnel,"",
+38036,50220,Stefan Ray,Bartender,"",
+38037,50220,Linton Mitchell,Chaplain,"",
+38038,50220,Johnathan Armstrong,Test Subject,"",
+38039,50220,Alex Ermakov,Recycler,"",
+38040,50220,Hatika,Paramedic,"",
+38041,50220,Bryan James,Internal Affairs Agent,"",
+38042,50220,Andrey Palkow,Security Officer,"",
+38043,50220,Yrtem Kingdarli,Forensic Technician,"",
+38044,50220,mouse (779),Animal,"",
+38045,50220,Natalia Koneva,Warden,"",
+38046,50220,Jim Morris,Security Officer,"",
+38047,50220,mouse (971),Animal,"",
+38048,50220,Blob Overmind (75),MODE,Blob Cerebrate,{Blob Cerebrate}
+38049,50220,Zarella Frei,Cargo Technician,"",
+38050,50220,Blob Overmind (770),MODE,Blob Cerebrate,{Blob Cerebrate}
+38051,50220,Randy Best,Xenoarchaeologist,"",
+38052,50220,MSO-635,Cyborg,"",
+38053,50220,Arthur Garland,Security Cadet,"",
+38054,50220,Byrne Buttersworth,Test Subject,"",
+38055,50220,maintenance drone (246),Cyborg,"",
+38056,50220,maintenance drone (243),Cyborg,"",
+38057,50220,Zeke Brooks,Atmospheric Technician,"",
+38058,50208,Weston Bell,Detective,"",
+38059,50208,Vitia Kosoi,Paramedic,"",
+38060,50208,Rose Willow,Station Engineer,"",
+38061,50208,Otto Schulz,Cyborg,"",
+38062,50208,Werner Von Schmidt,Head of Personnel,"",
+38063,50208,Jill Stingray,Bartender,"",
+38064,50208,Alfred Donkin,Virologist,"",
+38065,50208,Sal Lord,Station Engineer,"",
+38066,50208,Mr.Honky,Clown,"",
+38067,50208,Marcus Peters,Station Engineer,"",
+38068,50208,Kuriu Qlio'kaf,Janitor,"",
+38069,50208,Maham'ru Jar'Mahar,Mime,"",
+38070,50208,Ulric Parker,Research Director,"",
+38071,50208,Patrick Rowley,Shaft Miner,"",
+38072,50208,Colton Moore,Xenoarchaeologist,"",
+38073,50208,Marat Werner,Recycler,"",
+38074,50208,Gleb Sobachkin,Medical Intern,"",
+38075,50208,Makskim Shomski,Medical Intern,"",
+38076,50208,Robert Exeter,Security Officer,"",
+38077,50208,Gray,Quartermaster,"",
+38078,50208,Chloe Price,Librarian,"",
+38079,50208,Brodie Glover,Internal Affairs Agent,"",
+38080,50208,Juan Williis,Shaft Miner,"",
+38081,50208,Ali Azar,Test Subject,"",
+38082,50208,Mihail,default,"",
+38083,50208,Nikolay Oleinikov,Warden,"",
+38084,50208,Shi'shi De She,Security Officer,"",
+38085,50208,Seymour Briggs,Geneticist,"",
+38086,50208,Tom (173),Animal,"",
+38087,50208,Konstantin Morozov,Medical Doctor,"",
+38088,50208,Genrry Kamilov,Botanist,"",
+38089,50208,Valeriy Zimov,Security Officer,"",
+38090,50208,Chris Snyder,Shaft Miner,"",
+38091,50208,Jad Shock,Detective,"",
+38092,50208,Genadiy Tesla,Barber,"",
+38093,50208,Adam Grace,Bartender,"",
+38094,50210,Genadiy Tesla,Station Engineer,Traitor,{Traitor}
+38095,50210,Adam Baklazhanov,Chef,"",
+38096,50210,Ulric Parker,Station Engineer,"",
+38097,50210,Juan Williis,Shaft Miner,"",
+38098,50210,Vitia Kosoi,Medical Doctor,"",
+38099,50210,Chloe Price,Psychiatrist,"",
+38100,50210,Ali Azar,Chaplain,"",
+38101,50210,Marcus Arrow,Cyborg,"",
+38102,50210,Adam Grace,Barber,Traitor,{Traitor}
+38103,50210,Loreto Bunten,Xenoarchaeologist,Traitor,{Traitor}
+38104,50210,Shi'shi De She,Security Officer,"",
+38105,50210,Gra'Marra Li'irrka,Paramedic,"",
+38106,50210,Gleb Sobachkin,Shaft Miner,"",
+38107,50210,Alfred Donkin,Station Engineer,"",
+38108,50210,Jad Shock,Mime,"",
+38109,50210,NT Enjoyer,Clown,"",
+38110,50210,Werner Von Schmidt,Head of Personnel,"",
+38111,50210,Artemida Byblikova,Chef,Traitor,{Traitor}
+38112,50210,Konstantin Morozov,Cyborg,"",
+38113,50210,Colton Moore,Xenoarchaeologist,"",
+38114,50210,John Pavlov,Medical Doctor,Traitor,{Traitor}
+38115,50210,Bishop,AI,"",
+38116,50210,Makskim Shomski,Quartermaster,"",
+38117,50210,Rose Willow,Security Officer,"",
+38118,50210,Valeriy Zimov,Chief Medical Officer,"",
+38119,50210,Sherwin Fly,Roboticist,"",
+38120,50210,Jameson Jenner,Test Subject,"",
+38121,50210,Dawson Dryfus,Detective,"",
+38122,50210,Liam O'Shea,Research Director,"",
+38123,50210,Adolph Nastain,Security Cadet,"",
+38124,50210,Tahikakiyata,Scientist,"",
+38125,50210,Rick Shorts,Roboticist,"",
+38126,50210,Ruben Foster,Bartender,"",
+38127,50210,Amos Ma'jorshi,Paramedic,"",
+38128,50210,Persh Levett,Recycler,"",
+38129,50210,Igor Collins,Recycler,"",
+38130,50210,Gray,Janitor,"",
+38131,50210,Robert Exeter,Security Officer,"",
+38132,50210,Westerose Krieg,Atmospheric Technician,"",
+38133,50210,Gennady Whiteman,Captain,"",
+38134,50210,XAL-113,Cyborg,"",
+38135,50210,Jared Smith,Technical Assistant,"",
+38136,50210,Agent Addison,default,"",
+38137,50210,Ivan Rogalov,Test Subject,"",
+38138,50210,Marat Werner,Botanist,"",
+38139,50210,Ilnar Galimzyanov,Forensic Technician,"",
+38140,50210,Max Wells,Medical Intern,"",
+38141,50210,Isaiah Vader,Medical Doctor,"",
+38142,50210,Danny Roby,Shaft Miner,"",
+38143,50209,Zikkykikati,Medical Doctor,"",
+38144,50209,M'ark M'rshan,Roboticist,"",
+38145,50209,Paral Dune,Atmospheric Technician,"",
+38146,50209,Quiwz'xu Qox,Shaft Miner,Traitor,{Traitor}
+38147,50209,Sergey Labuda,Station Engineer,"",
+38148,50209,Vadim Wood,Test Subject,"",
+38149,50209,Aramsha Jarmack,Station Engineer,Traitor,{Traitor}
+38150,50209,James Carter,Janitor,"",
+38151,50209,Noel Whirlow,Security Cadet,"",
+38152,50209,Ezra Woodward,Cyborg,"",
+38153,50209,Daniel Mildred,Head of Personnel,Traitor,{Traitor}
+38154,50209,Shisshve Ashita,Detective,"",
+38155,50209,Aurelius Aquilimus,Mime,"",
+38156,50209,Artem Kotov,Test Subject,"",
+38157,50209,Vlad Omar,Animal,"",
+38158,50209,Isaiah Vader,Security Officer,"",
+38159,50209,Randy Best,Forensic Technician,"",
+38160,50209,Andre Isaakov,Chief Medical Officer,"",
+38161,50209,Danny Roby,Security Cadet,"",
+38162,50209,Artemida Byblikova,Scientist,"",
+38163,50209,Seamon Light,Shaft Miner,Shadowling,{Shadowling}
+38164,50209,Gikakhayikati,Geneticist,"",
+38165,50209,Johnathan Armstrong,Quartermaster,"",
+38166,50209,Michael Goliafof,Shaft Miner,Thrall,{Thrall}
+38167,50209,Shagan Rock'Shur,Test Subject,Traitor,{Traitor}
+38168,50209,Leroy White,Security Officer,"",
+38169,50209,Allen Richardson,Test Subject,Thrall,{Thrall}
+38170,50209,Issar Hess,Cyborg,"",
+38171,50209,Jeremy Lloyd,Librarian,"",
+38172,50209,Aphelios Tildor,Medical Doctor,"",
+38173,50209,Sivean Doulson,Scientist,"",
+38174,50209,Richard Reed,Medical Doctor,"",
+38175,50209,Alfreda Byers,Paramedic,"",
+38176,50209,Pogla,Clown,"",
+38177,50209,Reva Marks,Chemist,"",
+38178,50209,Li'quxpixli Lenienq'wik,Chemist,"",
+38179,50209,Max Russell,Scientist,"",
+38180,50209,Tyler Jones,Research Director,"",
+38181,50209,Sam Samich,Roboticist,"",
+38408,50230,Chip Elderson,Geneticist,"",
+38182,50209,Konstantin Morozov,Geneticist,Shadowling,{Shadowling}
+38183,50209,S.A.M.,AI,"",
+38184,50209,Lucas Aberg,Xenoarchaeologist,"",
+38185,50209,Kefal.Archigos.Filos,Xenobiologist,"",
+38186,50209,Gwenevere Coldsmith,Atmospheric Technician,"",
+38187,50209,Ray Wardle,Chief Engineer,"",
+38188,50209,Dar'zahr,Virologist,"",
+38189,50209,Roy Walker,Warden,"",
+38190,50209,Nikita Bubencov,Cyborg,"",
+38191,50209,Chris Snyder,Cargo Technician,"",
+38192,50209,Alroy Podkins,Recycler,"",
+38193,50209,Morgan Prevatt,Bartender,"",
+38194,50209,Max Black,Test Subject,"",
+38195,50209,Maya Foxova,Captain,"",
+38196,50209,XHS-540,Cyborg,"",
+38197,50209,Hatika,Paramedic,"",
+38198,50209,Cristopher Phillips,Botanist,"",
+38199,50209,Lia Paterson,Security Officer,"",
+38200,50209,Dawson Dryfus,Security Officer,"",
+38201,50209,Dominick Thompson,Chef,"",
+38202,50209,Bruce Fitgerald,Test Subject,Traitor,{Traitor}
+38203,50209,Sherlock Worst,Security Officer,"",
+38204,50209,Terry Hints,Station Engineer,"",
+38205,50209,Thomas Leech,Security Cadet,"",
+38206,50209,Dorian,Medical Intern,"",
+38207,50209,Ivan Huga,Geneticist,"",
+38208,50209,syndicate drone (382),Cyborg,"",
+38209,50209,Кира,default,"",
+38210,50209,Nendo Galaxy,Recycler,"",
+38211,50209,Charlie Greene,Atmospheric Technician,"",
+38212,50209,maintenance drone (615),Cyborg,"",
+38213,50209,maintenance drone (791),Cyborg,"",
+38214,50209,Rosemary Demuth,Chef,"",
+38215,50209,podkid (69),default,"",
+38216,50209,Lion Remark,Test Subject,"",
+38217,50209,Daniel Parker,Station Engineer,"",
+38218,50209,Violet Velorum,Test Subject,"",
+38219,50209,mouse (213),Animal,"",
+38220,50209,Zayden Fiddler,Head of Security,"",
+38221,50209,Tinara Nero,Test Subject,Thrall,{Thrall}
+38222,50209,Adam Grace,Barber,"",
+38223,50209,Dawson Dryfus,Security Officer,"",
+38224,50209,podkid (315),"","",
+38225,50209,podkid (868),default,"",
+38226,50209,Rashidi Adelakun,Security Officer,"",
+38227,50209,mouse (220),Animal,"",
+38228,50209,mouse (930),Animal,"",
+38229,50209,Adamantine Golem (484),default,"",
+38230,50209,mouse (204),Animal,"",
+38231,50209,mouse (873),Animal,"",
+38232,50209,Seth Valentine,Roboticist,"",
+38233,50209,maintenance drone (209),Cyborg,"",
+38234,50209,mouse (27),Animal,"",
+38235,50209,mouse (351),Animal,"",
+38236,50229,Noelle Goodman,Technical Assistant,"",
+38237,50229,Dmitriy Ulyanov,Detective,"",
+38238,50229,Zero,AI,"",
+38239,50229,Drill Gnoos,Medical Doctor,"",
+38240,50229,Frugen Wufflecam,Quartermaster,"",
+38241,50229,Alroy Podkins,Forensic Technician,"",
+38242,50229,M'ark M'rshan,Roboticist,Traitor,{Traitor}
+38243,50229,John Mackenzie,Bartender,"",
+38244,50229,Lucas Gibson,Station Engineer,Traitor,{Traitor}
+38245,50229,Danko Cesarre,Cyborg,"",
+38246,50229,Richard Reed,Head of Personnel,Traitor,{Traitor}
+38247,50229,Gennady Whiteman,Security Officer,"",
+38248,50229,Otto Schulz,Cyborg,"",
+38249,50229,Jesus Exery,Station Engineer,"",
+38250,50229,Reuben Hunt,Technical Assistant,"",
+38251,50229,Lucas Aberg,Xenoarchaeologist,"",
+38252,50229,Lim Al-Kuds,Test Subject,"",
+38253,50229,Sergey Labuda,Station Engineer,Traitor,{Traitor}
+38254,50229,Koudi Cooper,Roboticist,"",
+38255,50229,Jin Relo,Security Cadet,"",
+38256,50229,Bryan James,Mime,Traitor,{Traitor}
+38257,50229,Luke Roadman,Test Subject,"",
+38258,50229,Dragan Sheshel,Security Cadet,"",
+38259,50229,Evgeniy Barabulka,Security Officer,"",
+38260,50229,Artemida Byblikova,Paramedic,"",
+38261,50229,Gatatikikichakiya,Shaft Miner,"",
+38262,50229,Adolph Nastain,Chemist,"",
+38263,50229,Semyon Hatsunov,Station Engineer,"",
+38264,50229,Zarella Frei,Cargo Technician,"",
+38265,50229,Allen Richardson,Security Officer,"",
+38266,50229,Alex Ermakov,Recycler,"",
+38267,50229,Isaiah Seidner,Virologist,"",
+38268,50229,Ezra Woodward,Chief Engineer,"",
+38269,50229,Leeland Rahl,Warden,"",
+38270,50229,Aramsha Jarmack,Station Engineer,"",
+38271,50229,Jason Snyder,Chaplain,"",
+38272,50229,Dawson Dryfus,Head of Security,"",
+38273,50229,maintenance drone (233),Cyborg,"",
+38274,50229,Bibka,Clown,"",
+38275,50229,Bruce Fitgerald,Recycler,"",
+38276,50229,Cassian Winton,Chief Medical Officer,"",
+38277,50229,Huey Long,Cargo Technician,"",
+38278,50229,Hugo Richter,Cyborg,"",
+38279,50229,Adam Sommer,Janitor,"",
+38280,50229,mouse (680),Animal,"",
+38281,50229,Vitia Kosoi,Medical Doctor,"",
+38282,50229,mouse (864),Animal,"",
+38283,50229,Curly Mens,Research Director,"",
+38284,50229,Vlad Omar,Geneticist,"",
+38285,50229,Harvester (964),Animal,Cultist,{Cultist}
+38286,50229,Harvester (501),Animal,Cultist,{Cultist}
+38287,50229,Harvester (628),Animal,Cultist,{Cultist}
+38288,50229,Angela Barens,Test Subject,"",
+38289,50229,Overseer,default,"",
+38290,50229,mouse (235),Animal,"",
+38291,50229,Juan Williis,Shaft Miner,"",
+38292,50229,mouse (249),Animal,"",
+38293,50229,Blob Overmind (41),MODE,Blob Overmind,{Blob Overmind}
+38294,50229,Slen Franko,Test Subject,"",
+38295,50229,Esteban Berkheimer,Shaft Miner,"",
+38296,50229,mouse (4),Animal,"",
+38297,50229,X'qarra X'gurilin,Scientist,"",
+38298,50229,maintenance drone (253),Cyborg,"",
+38299,50229,Quri Oliqoomarra,Medical Doctor,"",
+38300,50229,Alen Daylore,Chef,"",
+38301,50218,Seamon Light,MODE,Nuclear Operative,{Nuclear Operative}
+38302,50218,Arleen Morris,Station Engineer,"",
+38303,50218,Artemida Byblikova,MODE,Nuclear Operative Leader,{Nuclear Operative Leader}
+38304,50218,Zarella Frei,Cargo Technician,"",
+38305,50218,Kshiya Less,Scientist,"",
+38306,50218,Maxoun Gymovic,Chef,"",
+38307,50218,Viktor Valentine,MODE,Nuclear Operative,{Nuclear Operative}
+38308,50218,Sergey Labuda,MODE,Nuclear Operative,{Nuclear Operative}
+38309,50218,Skiddle,Clown,"",
+38310,50218,Gwenevere Coldsmith,Atmospheric Technician,"",
+38311,50218,Yrtem Kingdarli,Quartermaster,"",
+38312,50218,Zikkykikati,Medical Doctor,"",
+38313,50218,Danko Cesarre,Cyborg,"",
+38314,50218,Lary Doger,Medical Doctor,"",
+38315,50218,Tate Benford,Chief Medical Officer,"",
+38316,50218,Jad Shock,Mime,"",
+38317,50218,Issar Hess,Scientist,"",
+38318,50218,Claude Morgan,Head of Personnel,"",
+38319,50218,Alisa Don,Botanist,"",
+38320,50218,Mike Spenser,MODE,Nuclear Operative,{Nuclear Operative}
+38321,50218,Roy Walker,Station Engineer,"",
+38322,50218,Norman Don,Bartender,"",
+38323,50218,Kane Sanders,Botanist,"",
+38324,50218,Sivean Doulson,MODE,Nuclear Operative,{Nuclear Operative}
+38325,50218,Zeke Wheeler,Test Subject,"",
+38326,50218,Ray Wardle,Chief Engineer,"",
+38327,50218,Maya Foxova,Captain,"",
+38328,50218,Jin Relo,Cyborg,"",
+38329,50218,Andre Isaakov,Xenobiologist,"",
+38330,50218,Bryan James,Chef,"",
+38331,50218,Kakotika,Test Subject,"",
+38332,50218,Troy Orgail,Test Subject,"",
+38333,50218,Andrey Palkow,Security Officer,"",
+38334,50218,Franklin Davis,Janitor,"",
+38335,50218,Richard Reed,Station Engineer,"",
+38336,50218,Johnathan Armstrong,Test Subject,"",
+38337,50218,Zayden Fiddler,Head of Security,"",
+38338,50218,Natalia Koneva,Security Officer,"",
+38339,50218,Semyon Hatsunov,Test Subject,"",
+38340,50218,Tahikakiyata,Scientist,"",
+38341,50218,Violet Velorum,Chemist,"",
+38342,50218,Syndicate Robot-717,Cyborg,Nuclear Operative,{Nuclear Operative}
+38343,50218,Alroy Podkins,Medical Intern,"",
+38344,50218,Adam Browning Jr,Chemist,"",
+38345,50218,Andy Rotberg,Internal Affairs Agent,"",
+38346,50218,Isall Niver,Test Subject,"",
+38347,50218,mouse (542),Animal,"",
+38348,50218,Owen Tireman,Chaplain,"",
+38349,50218,Vlad Omar,Geneticist,"",
+38350,50218,Hatika,Paramedic,"",
+38351,50230,Frugen Wufflecam,MODE,Nuclear Operative,{Nuclear Operative}
+38352,50230,Mei Kiryuin,Head of Personnel,"",
+38353,50230,Vitia Kosoi,Medical Doctor,"",
+38354,50230,Seamon Light,Shaft Miner,"",
+38355,50230,M'ark M'rshan,MODE,Nuclear Operative,{Nuclear Operative}
+38356,50230,Curly Mens,Chief Medical Officer,"",
+38357,50230,BIBA,Clown,"",
+38358,50230,Bryan James,Chef,"",
+38359,50230,Kronos Fanth,Xenobiologist,"",
+38360,50230,Evgeniy Barabulka,Station Engineer,"",
+38361,50230,Silver Eyes,Chemist,Traitor,{Traitor}
+38362,50230,Quri Oliqoomarra,Medical Doctor,"",
+38363,50230,Koudi Cooper,Roboticist,"",
+38364,50230,Esteban Berkheimer,Security Officer,"",
+38365,50230,Huey Long,Chef,"",
+38366,50230,Adolph Nastain,Janitor,"",
+38367,50230,Nikita Bubencov,Cyborg,"",
+38368,50230,Gatatikikichakiya,Atmospheric Technician,"",
+38369,50230,Dragan Sheshel,Chaplain,"",
+38370,50230,Luke Roadman,MODE,Nuclear Operative,{Nuclear Operative}
+38371,50230,Hugo Richter,MODE,Nuclear Operative,{Nuclear Operative}
+38372,50230,Richard Reed,MODE,Nuclear Operative,{Nuclear Operative}
+38373,50230,Aramsha Jarmack,Station Engineer,"",
+38374,50230,Dmitriy Ulyanov,Chemist,"",
+38375,50230,Vlad Omar,Virologist,"",
+38376,50230,Lucas Gibson,MODE,Nuclear Operative Leader,{Nuclear Operative Leader}
+38377,50230,John Mackenzie,Bartender,"",
+38378,50230,Jason Powell,Detective,"",
+38379,50230,maintenance drone (453),Cyborg,"",
+38380,50230,Evangelina Shaffer,Recycler,"",
+38381,50230,Irvine White,Station Engineer,"",
+38382,50230,Noelle Goodman,Technical Assistant,"",
+38383,50230,Angela Barens,Botanist,"",
+38384,50230,Klein Maccubus,Medical Intern,"",
+38385,50230,Alen Daylore,Security Officer,"",
+38386,50230,mouse (278),Animal,"",
+38387,50230,Drill Gnoos,Test Subject,"",
+38388,50230,Gary Greenwood,Test Subject,"",
+38389,50230,STLP-768,Cyborg,"",
+38390,50230,mouse (455),Animal,"",
+38391,50230,John Anderson,Paramedic,"",
+38392,50230,Otto Schulz,Security Officer,"",
+38393,50230,Aphelios Tildor,Station Engineer,"",
+38394,50230,Slen Franko,Station Engineer,"",
+38395,50230,Alex Ermakov,Recycler,"",
+38396,50230,Mark McCarthy,Chief Engineer,"",
+38397,50230,Andrey Palkow,Quartermaster,"",
+38398,50230,Koil Welher,Technical Assistant,"",
+38399,50230,Randy Best,Mime,"",
+38400,50230,Ianko Lavr,Scientist,"",
+38401,50230,Daniel Mildred,Head of Security,"",
+38402,50230,Syndicate Robot-247,MODE,Nuclear Operative,{Nuclear Operative}
+38403,50230,maintenance drone (212),Cyborg,"",
+38404,50230,Gwenevere Coldsmith,Atmospheric Technician,"",
+38405,50230,Alroy Podkins,Forensic Technician,"",
+38406,50230,Hatika,Paramedic,"",
+38407,50230,mouse (456),Animal,"",
+38409,50230,maintenance drone (549),Cyborg,"",
+38410,50230,Lucas Gibson,default,"",
+38411,50230,John Don,default,"",
+38412,50230,Tony Xegarty,default,"",
+38413,50230,Frugen Wufflecam,default,"",
+38414,50230,Lim Al-Kuds,default,"",
+38415,50230,Jason Snyder,default,"",
+38416,50230,Gary Greenwood,default,"",
+38417,50230,Aphelios Tildor,default,"",
+38418,50230,Slen Franko,default,"",
+38419,50230,John Anderson,default,"",
+38420,50230,Drill Gnoos,default,"",
+38421,50230,Randy Best,default,"",
+38422,50230,Tamsin Winton,Medical Doctor,"",
+38423,50230,maintenance drone (879),Cyborg,"",
+38424,50230,Brock Ellis,Botanist,"",
+38425,50230,unknown,default,"",
+38426,50230,mouse (196),Animal,"",
+38427,50230,Drill Gnoos,default,"",
+38428,50230,Frugen Wufflecam,default,"",
+38429,50230,Patton Werry,default,"",
+38430,50230,Gwenevere Coldsmith,default,"",
+38431,50230,John Don,default,"",
+38432,50230,Patrick Cherry,default,"",
+38433,50230,Aphelios Tildor,default,"",
+38434,50230,Lucas Gibson,default,"",
+38435,50230,Tony Xegarty,default,"",
+38436,50230,John Anderson,default,"",
+38437,50230,Gary Greenwood,default,"",
+38438,50230,Lim Al-Kuds,default,"",
+38439,50230,Devon Black,Scientist,"",
+38440,50230,maintenance drone (800),Cyborg,"",
+38441,50230,mouse (791),Animal,"",
+38442,50214,Mohamed McDonald,Chef,TraitorChan,{TraitorChan}
+38443,50214,Zed Murray,Medical Doctor,"",
+38444,50214,Aisha Al-Zahrami,Paramedic,"",
+38445,50214,Noel Whirlow,Security Cadet,"",
+38446,50214,John Don,Paramedic,"",
+38447,50214,Kshiya Less,Scientist,"",
+38448,50214,Zikkykikati,Detective,"",
+38449,50214,Woclaw Przjemyslawitch,Bartender,"",
+38450,50214,Lim Al-Kuds,Geneticist,"",
+38451,50214,Quiwz'xu Qox,Shaft Miner,Traitor,{Traitor}
+38452,50214,Seamon Light,Shaft Miner,"",
+38453,50214,Tyler Jones,Research Director,"",
+38454,50214,Artemida Byblikova,Virologist,"",
+38455,50214,Shagan Rock'Shur,Test Subject,Traitor,{Traitor}
+38456,50214,Lion Remark,Medical Doctor,"",
+38457,50214,M'ark M'rshan,Roboticist,"",
+38458,50214,Violet Velorum,Security Officer,"",
+38459,50214,Aramsha Jarmack,Station Engineer,"",
+38460,50214,Maya Foxova,Captain,"",
+38461,50214,Merk Asacris,Cyborg,"",
+38462,50214,Kaela Pratt,Geneticist,"",
+38463,50214,Ezekiel Woodward,Cyborg,"",
+38464,50214,Issar Hess,Scientist,"",
+38465,50214,Illia Bronson,Botanist,Traitor,{Traitor}
+38466,50214,Bailey Patel,Station Engineer,"",
+38467,50214,Karen,Atmospheric Technician,"",
+38468,50214,Randy Best,Forensic Technician,Traitor,{Traitor}
+38469,50214,Tate Benford,Chief Medical Officer,Traitor,{Traitor}
+38470,50214,Lucas Aberg,Xenoarchaeologist,"",
+38471,50214,Troy Orgail,Medical Intern,"",
+38472,50214,Silver Eyes,Station Engineer,Traitor,{Traitor}
+38473,50214,Daniel Mildred,Security Officer,"",
+38474,50214,John Mackenzie,Chemist,Traitor,{Traitor}
+38475,50214,Sivean Doulson,Scientist,"",
+38476,50214,Ivan Huga,Chaplain,"",
+38477,50214,Ladybug Honks,Clown,"",
+38478,50214,Rick Shorts,Xenoarchaeologist,"",
+38479,50214,Brody Atweeke,Botanist,"",
+38480,50214,Melhior,AI,"",
+38481,50214,Alexander Voronov,Head of Personnel,TraitorChan,{TraitorChan}
+38482,50214,Sergey Labuda,Station Engineer,Traitor,{Traitor}
+38483,50214,Dominick Addison,Chief Engineer,"",
+38484,50214,Horatio Highjack,Librarian,"",
+38485,50214,Harvey Schaeffer,Station Engineer,"",
+38486,50214,Richard Reed,Security Officer,"",
+38487,50214,Tuco Calimantan,Security Cadet,"",
+38488,50214,Alvin Collins,Botanist,"",
+38489,50214,Charlie Greene,Xenobiologist,"",
+38490,50214,Morgan Prevatt,Technical Assistant,"",
+38491,50214,Unbelievable God,Chaplain`s staff,"",
+38492,50214,Vlad Omar,Shaft Miner,"",
+38493,50214,syndicate drone (793),Cyborg,"",
+38494,50214,Yrtem Kingdarli,Quartermaster,"",
+38495,50214,DUNC-472,Cyborg,"",
+38496,50214,Alisa Don,Psychiatrist,"",
+38497,50214,Rosemary Demuth,Security Cadet,"",
+38498,50214,Unbelievable God,Chaplain`s staff,"",
+38499,50214,Dawson Dryfus,Warden,"",
+38500,50214,maintenance drone (607),Cyborg,"",
+38501,50214,Norman Don,Chef,"",
+38502,50214,Minerva Everett,Medical Doctor,"",
+38503,50214,Test Dummy,default,"",
+38504,50214,Jad Shock,Mime,"",
+38505,50214,Kameron Hastings,default,"",
+38506,50214,Trent Teagarden,default,"",
+38507,50214,Dalton Anderson,Janitor,"",
+38508,50214,Dar'zahr,Recycler,"",
+38509,50214,Butch Adler,Cargo Technician,"",
+38510,50214,maintenance drone (833),Cyborg,"",
+38511,50214,Alroy Podkins,Xenobiologist,"",
+38512,50214,Maxoun Gymovic,Recycler,"",
+38513,50214,Leeland Rahl,Head of Security,"",
+38514,50214,Ian,default,"",
+38515,50214,Andrey Palkow,Security Officer,"",
+38516,50214,Shi'shi De She,Security Officer,"",
+38517,50214,Spike Schmidt,Paramedic,"",
+38518,50214,Satmuel Johav,default,"",
+38519,50214,maintenance drone (491),Cyborg,"",
+38520,50214,Mark Demanoly,default,"",
+38521,50214,Jordan Wolff,Atmospheric Technician,"",
+38522,50214,Semyon Hatsunov,Test Subject,"",
+38523,50214,Seassant-An Nueve,Paramedic,"",
+38524,50214,diona nymph (780),"","",
+38525,50214,Zarella Frei,Test Subject,"",
+38526,50214,Benjamin Johnson,Bartender,"",
+38527,50214,Sigma O'Neill,Medical Doctor,"",
+38528,50214,Mike Becker,Test Subject,"",
+38529,50214,Gaspard De Chevalier,Test Subject,"",
+38530,50214,diona nymph (903),default,"",
+38531,50214,mouse (964),Animal,"",
+38532,50214,Flop O'Honker,Clown,"",
+38533,50214,mouse (79),Animal,"",
+38534,50214,Silas Holmes,Chief Engineer,"",
+38535,50214,Zeke Wheeler,Test Subject,"",
+38536,50214,maintenance drone (413),Cyborg,"",
+38537,50214,Maya Foxova,Cargo Technician,"",
+38538,50214,Natalia Koneva,Internal Affairs Agent,"",
+38539,50214,maintenance drone (271),Cyborg,"",
+38540,50214,maintenance drone (454),Cyborg,"",
+38541,50214,maintenance drone (373),Cyborg,"",
+38542,50214,Bryan James,Test Subject,"",
+38543,50214,Adamantine Golem (248),default,"",
+38544,50205,Richard Reed,Head of Personnel,"",
+38545,50205,Mothership Theta Scientist,MODE,Abductor Scientist,{Abductor Scientist}
+38546,50205,Tyler Jones,Research Director,"",
+38547,50205,Danny Roby,Shaft Miner,"",
+38548,50205,M'ark M'rshan,Roboticist,"",
+38549,50205,Andre Bailey,Recycler,"",
+38550,50205,Maxoun Gymovic,Chef,"",
+38551,50205,Andrey Palkow,Bartender,"",
+38552,50205,Paral Dune,Atmospheric Technician,"",
+38553,50205,Quiwz'xu Qox,Medical Doctor,Traitor,{Traitor}
+38554,50205,Elliot Temere,Test Subject,"",
+38555,50205,Illia Bronson,Medical Doctor,"",
+38556,50205,Lucas Gibson,Mime,"",
+38557,50205,Hugo Richter,Virologist,"",
+38558,50205,Vadim Wood,Test Subject,"",
+38559,50205,Najah Mujib,Station Engineer,"",
+38560,50205,Gwenevere Coldsmith,Atmospheric Technician,"",
+38561,50205,Vincent Rahl,Cyborg,"",
+38562,50205,Mothership Delta Agent,MODE,Abductor Agent,{Abductor Agent}
+38563,50205,Kefal.Archigos.Filos,Station Engineer,"",
+38564,50205,Reva Marks,Geneticist,"",
+38565,50205,Mothership Theta Agent,MODE,Abductor Agent,{Abductor Agent}
+38566,50205,Shi'shi De She,Security Officer,"",
+38567,50205,Keegan Hunt,Head of Security,"",
+38568,50205,Jean-Poul Marat,Test Subject,"",
+38569,50205,Aurelius Aquilimus,Chef,"",
+38570,50205,N-V-G,AI,"",
+38571,50205,Jason Snyder,Test Subject,Abducted,{Abducted}
+38572,50205,John Mackenzie,Chemist,Abducted,{Abducted}
+38573,50205,Max Black,Janitor,Abducted,{Abducted}
+38574,50205,Rick Shorts,Shaft Miner,"",
+38575,50205,Aramsha Jarmack,Station Engineer,"",
+38576,50205,Li'quxpixli Lenienq'wik,Shaft Miner,Traitor,{Traitor}
+38577,50205,Rosemary Demuth,Medical Intern,"",
+38578,50205,Mothership Delta Scientist,MODE,Abductor Scientist,{Abductor Scientist}
+38579,50205,Maya Foxova,Internal Affairs Agent,Abducted,{Abducted}
+38580,50205,Luke Roadman,Test Subject,"",
+38581,50205,Tamsin Winton,Security Officer,"",
+38582,50205,Balbesus,Clown,Abducted,{Abducted}
+38583,50205,Patrick Rowley,Station Engineer,"",
+38584,50205,Nikolai Vakhmistrov,Test Subject,"",
+38585,50205,Harvey O'Neill,Quartermaster,Abducted,{Abducted}
+38586,50205,Nikolay Gorgulov,Chief Medical Officer,"",
+38587,50205,Colten Baum,Paramedic,"",
+38588,50205,Cain Swing,Security Officer,"",
+38589,50205,Michael Langston,Geneticist,"",
+38590,50205,Gikakhayikati,Cargo Technician,"",
+38591,50205,Isaac Fletcher,Test Subject,Traitor,{Traitor}
+38592,50205,Leroy White,Medical Doctor,"",
+38593,50205,Alroy Podkins,Test Subject,"",
+38594,50205,Jim Morris,Station Engineer,"",
+38595,50205,Fading Light,Test Subject,"",
+38596,50205,Shisshve Ashita,Detective,"",
+38597,50205,Artemida Byblikova,Recycler,"",
+38598,50205,KOR-791,Cyborg,"",
+38599,50205,Sharon Nash,Security Officer,"",
+38600,50205,Isaiah Vader,Security Officer,"",
+38601,50205,Roy Walker,Warden,"",
+38602,50205,Makskim Shomski,Chaplain,"",
+38603,50205,Sam Samich,Roboticist,"",
+38604,50205,Alexander Petrovich,Medical Doctor,"",
+38605,50205,Windows Braun,Barber,"",
+38606,50205,Colvar Abram,Cargo Technician,"",
+38607,50205,Maya Foxova,Captain,Abducted,{Abducted}
+38608,50205,Kale Keppel,Botanist,"",
+38609,50205,Randy Best,Forensic Technician,"",
+38610,50205,Terry Hints,Scientist,"",
+38611,50205,Lucas Aberg,Xenoarchaeologist,"",
+38612,50205,friend,Animal,"",
+38613,50205,mouse (913),Animal,"",
+38614,50205,Henderson Eliza,default,"",
+38615,50205,Chris Snyder,Test Subject,"",
+38616,50205,Adrian Gordon,Technical Assistant,"",
+38617,50205,friend,Animal,"",
+38618,50205,Daniel Mildred,Scientist,"",
+38619,50205,mouse (837),Animal,"",
+38620,50205,Marcus Frei,Test Subject,"",
+38621,50205,Alexei Zhukov,Botanist,Abducted,{Abducted}
+38622,50205,Sasha Clark,Paramedic,"",
+38623,50205,Graeme Ulery,Test Subject,"",
+38624,50205,unknown,default,"",
+38625,50205,maintenance drone (797),Cyborg,"",
+38626,50205,Ivory Howard,Security Officer,"",
+38627,50205,maintenance drone (799),Cyborg,"",
+38628,50205,Vincent Cooper,Librarian,"",
+38629,50205,Spike Schmidt,Chemist,"",
+38630,50205,maintenance drone (526),Cyborg,"",
+38631,50205,mouse (137),Animal,"",
+38632,50228,Frugen Wufflecam,Mime,"",
+38633,50228,Vitia Kosoi,Medical Doctor,"",
+38634,50228,Adolph Keppel,Technical Assistant,"",
+38635,50228,Max Russell,Shaft Miner,"",
+38636,50228,Curly Mens,Scientist,"",
+38637,50228,M'ark M'rshan,Cyborg,"",
+38638,50228,Lim Al-Kuds,Head of Personnel,"",
+38639,50228,Natalia Koneva,Head of Security,"",
+38640,50228,Silver Eyes,Chef,"",
+38641,50228,Semyon Hatsunov,Security Cadet,"",
+38642,50228,Zarella Frei,Cargo Technician,"",
+38643,50228,Reuben Hunt,Warden,"",
+38644,50228,Patton Werry,Atmospheric Technician,"",
+38645,50228,Dragan Sheshel,Technical Assistant,Traitor,{Traitor}
+38646,50228,GLaDos,AI,Malf AI,{Malf AI}
+38647,50228,Dmitriy Ulyanov,Detective,"",
+38648,50228,Tyler Jones,Research Director,"",
+38649,50228,Lucas Gibson,Xenoarchaeologist,Traitor,{Traitor}
+38650,50228,Issar Hess,Cyborg,"",
+38651,50228,John Mackenzie,Bartender,"",
+38652,50228,Slen Franko,Internal Affairs Agent,"",
+38653,50228,Danko Cesarre,Janitor,"",
+38654,50228,Gennady Whiteman,Security Officer,"",
+38655,50228,Alroy Podkins,Forensic Technician,"",
+38656,50228,Lorin Ackerley,Security Officer,"",
+38657,50228,Klein Maccubus,Chemist,"",
+38658,50228,Koudi Cooper,Roboticist,"",
+38659,50228,Lucas Aberg,Xenoarchaeologist,"",
+38660,50228,mouse (849),Animal,"",
+38661,50228,Diego Merryman,Recycler,"",
+38662,50228,Dawson Dryfus,Security Officer,"",
+38663,50228,Richard Reed,Station Engineer,"",
+38664,50228,Adolph Nastain,Chemist,"",
+38665,50228,maintenance drone (175),Cyborg,"",
+38666,50228,maintenance drone (463),Cyborg,"",
+38667,50228,Luke Roadman,Test Subject,"",
+38668,50228,Liam O'Shea,Chief Medical Officer,"",
+38669,50228,maintenance drone (827),Cyborg,"",
+38670,50228,maintenance drone (700),Cyborg,"",
+38671,50228,Jesus Exery,Security Officer,"",
+38672,50228,Alex Ermakov,Recycler,"",
+38673,50228,maintenance drone (798),Cyborg,"",
+38674,50228,maintenance drone (301),Cyborg,"",
+38675,50228,Cash Murphy,Captain,"",
+38676,50228,Noelle Goodman,Technical Assistant,"",
+38677,50228,maintenance drone (145),Cyborg,"",
+38678,50228,maintenance drone (781),Cyborg,"",
+38679,50228,maintenance drone (893),Cyborg,"",
+38680,50228,mouse (592),Animal,"",
+38681,50228,maintenance drone (505),Cyborg,"",
+38682,50228,maintenance drone (917),Cyborg,"",
+38683,50228,mouse (597),Animal,"",
+38684,50228,Isaiah Seidner,Virologist,"",
+38685,50228,Hayden Pearsall,Chief Engineer,Traitor,{Traitor}
+38686,50228,mouse (358),Animal,"",
+38687,50228,Adolph Nastain,default,"",
+38688,50228,Frugen Wufflecam,default,"",
+38689,50228,Leeland Rahl,default,"",
+38690,50228,Lucas Gibson,default,"",
+38691,50228,Evgeniy Barabulka,default,"",
+38692,50228,Cash Murphy,default,"",
+38693,50228,Tyler Jones,default,"",
+38694,50228,Slen Franko,default,"",
+38695,50228,Ezekiel Woodward,default,"",
+38696,50228,Koudi Cooper,default,"",
+38697,50228,Jason Snyder,default,"",
+38698,50228,Tony Xegarty,default,"",
+38699,50228,mouse (556),Animal,"",
+38700,50228,mouse (181),Animal,"",
+38701,50228,podkid (362),default,"",
+38702,50228,Elizabeth Rubram,Paramedic,"",
+38703,50211,Richard Reed,Station Engineer,"",
+38704,50211,Albina Djamaeva,Technical Assistant,"",
+38705,50211,Seamon Light,Shaft Miner,"",
+38706,50211,Sergey Labuda,Station Engineer,"",
+38707,50211,Danko Cesarre,Cyborg,"",
+38708,50211,Kahkikahikahkayahi,MODE,Vox Raider,{Vox Raider}
+38709,50211,Artemida Byblikova,Scientist,"",
+38710,50211,Zikkykikati,Medical Doctor,"",
+38711,50211,Chatikihiyaki,MODE,Vox Raider,{Vox Raider}
+38712,50211,M'ark M'rshan,Roboticist,"",
+38713,50211,Issar Hess,Scientist,"",
+38714,50211,Aramsha Jarmack,Station Engineer,"",
+38715,50211,Cole Ward,Research Director,Traitor,{Traitor}
+38716,50211,Cristopher Phillips,Atmospheric Technician,"",
+38717,50211,Shagan Rock'Shur,Test Subject,"",
+38718,50211,Vadim Wood,Test Subject,"",
+38719,50211,Sivean Doulson,Scientist,"",
+38720,50211,May Svitovich,Captain,"",
+38721,50211,Nikita Bubencov,Shaft Miner,"",
+38722,50211,Hatika,Shaft Miner,"",
+38723,50211,Horatio Highjack,Head of Personnel,"",
+38724,50211,Tuco Calimantan,Detective,"",
+38725,50211,Keegan Hunt,Head of Security,"",
+38726,50211,Karen,Chemist,"",
+38727,50211,Thomas Leech,Mime,"",
+38728,50211,Randy Best,Xenoarchaeologist,"",
+38729,50211,Yakikachikaha,MODE,Vox Raider,{Vox Raider}
+38730,50211,Vlad Omar,Cyborg,"",
+38731,50211,Tihachatahakahchayata,MODE,Vox Raider,{Vox Raider}
+38732,50211,Daniel Mildred,Security Officer,"",
+38733,50211,Li'quxpixli Lenienq'wik,Recycler,"",
+38734,50211,Yahihichikaka,MODE,Vox Raider,{Vox Raider}
+38735,50211,Troy Orgail,Medical Intern,"",
+38736,50211,Kaela Pratt,Station Engineer,"",
+38737,50211,Isaac Fletcher,Medical Doctor,"",
+38738,50211,Illia Bronson,Quartermaster,"",
+38739,50211,Lucas Aberg,Xenoarchaeologist,"",
+38740,50211,Tyler Jones,Security Officer,"",
+38741,50211,John Mackenzie,Bartender,"",
+38742,50211,Yahatihihi,MODE,Vox Raider,{Vox Raider}
+38743,50211,John Don,Paramedic,"",
+38744,50211,Gwenevere Coldsmith,Test Subject,"",
+38745,50211,Melhior,AI,"",
+38746,50211,Ray Wardle,Chief Engineer,"",
+38747,50211,Rosemary Demuth,Chef,"",
+38748,50211,Nendo Galaxy,Recycler,"",
+38749,50211,Charlie Greene,Security Officer,"",
+38750,50211,Kane Ayron,Test Subject,"",
+38751,50211,Sam Samich,Roboticist,"",
+38752,50211,Jake Pliskin,Test Subject,"",
+38753,50211,Meow Meow,Clown,"",
+38754,50211,Dorian,Station Engineer,"",
+38755,50211,Woclaw Przjemyslawitch,Security Cadet,"",
+38756,50211,Kshiya Less,Paramedic,"",
+38757,50211,Zed Murray,Security Officer,"",
+38758,50211,Dawson Dryfus,Warden,"",
+38759,50211,Ezekiel Woodward,Virologist,"",
+38760,50211,"","","",
+38761,50211,Tate Benford,Chief Medical Officer,"",
+38762,50211,Jameson Jenner,Test Subject,"",
+38763,50211,Alroy Podkins,Security Cadet,"",
+38764,50211,Lim Al-Kuds,Test Subject,"",
+38765,50211,Francisco Kelly,Test Subject,"",
+38766,50211,Morgan Prevatt,Technical Assistant,"",
+38767,50211,"",Animal,"",
+38768,50211,friend,Animal,"",
+38769,50211,Devon Miller,Janitor,"",
+38770,50211,"",Animal,"",
+38771,50211,mouse (864),Animal,"",
+38772,50211,Aurelius Aquilimus,Chef,"",
+38773,50211,Remy Ratatouille,Chef,Custom,{Custom}
+38774,50211,Ivan Huga,Botanist,"",
+38775,50211,KOR-901,Cyborg,"",
+38776,50211,Noel Whirlow,Security Cadet,"",
+38777,50211,Unbelievable God,Chaplain`s staff,"",
+38778,50211,maintenance drone (173),Cyborg,"",
+38779,50211,Mohamed McDonald,Test Subject,"",
+38780,50211,Lim Al-Kuds,"","",
+38781,50211,Quiwz'xu Qox,Cargo Technician,"",
+38782,50211,maintenance drone (810),Cyborg,"",
+38783,50211,Bailey Patel,Test Subject,"",
+38784,50232,Randy Best,Forensic Technician,"",
+38785,50232,Paravoz,Clown,"",
+38786,50232,John Anderson,Xenobiologist,"",
+38787,50232,Esteban Berkheimer,Security Officer,"",
+38788,50232,Cyanide,AI,Malf AI,{Malf AI}
+38789,50232,Karen,Scientist,"",
+38790,50232,Hugo Richter,Cyborg,"",
+38791,50232,Seamon Light,Shaft Miner,"",
+38792,50232,Kane Ayron,Test Subject,"",
+38793,50232,Issar Hess,Cyborg,"",
+38794,50232,Hatika,Paramedic,"",
+38795,50232,Sergey Labuda,Station Engineer,"",
+38796,50232,Troy Orgail,Chemist,"",
+38797,50232,Chip Elderson,Scientist,"",
+38798,50232,Richard Reed,Security Officer,"",
+38799,50232,Sam Bravo,Security Officer,"",
+38800,50232,Daniel Mildred,Head of Personnel,"",
+38801,50232,Lucas Gibson,Internal Affairs Agent,"",
+38802,50232,Slen Franko,Security Cadet,"",
+38803,50232,Lim Al-Kuds,Geneticist,"",
+38804,50232,Dmitriy Ulyanov,Detective,"",
+38805,50232,Andrey Palkow,Quartermaster,"",
+38806,50232,John Mackenzie,Bartender,"",
+38807,50232,Davy Butchers,Chaplain,"",
+38808,50232,Aphelios Tildor,Station Engineer,"",
+38809,50232,Mark McCarthy,Research Director,"",
+38810,50232,Koil Welher,Station Engineer,"",
+38811,50232,Dragan Sheshel,Botanist,"",
+38812,50232,Paral Dune,Atmospheric Technician,"",
+38813,50232,Kate Shmidt,Paramedic,"",
+38814,50232,Kronos Fanth,Scientist,"",
+38815,50232,Gwenevere Coldsmith,Atmospheric Technician,"",
+38816,50232,John Anderson,Chef,"",
+38817,50232,Curly Mens,Shaft Miner,"",
+38818,50232,Ii'rranmra Kratul,Station Engineer,"",
+38819,50232,Kaela Pratt,Station Engineer,"",
+38820,50232,Luke Roadman,Botanist,"",
+38821,50232,Alex Ermakov,Recycler,"",
+38822,50232,Tamsin Winton,Medical Doctor,"",
+38823,50232,Nikita Bubencov,Virologist,"",
+38824,50232,Brock Ellis,Xenoarchaeologist,"",
+38825,50232,Gary Greenwood,Librarian,"",
+38826,50232,Evangelina Shaffer,Cargo Technician,"",
+38827,50232,Patrick Cherry,Test Subject,"",
+38828,50232,Noelle Goodman,Technical Assistant,"",
+38829,50232,Mayron Demetrios,Janitor,"",
+38830,50232,Patton Werry,Technical Assistant,"",
+38831,50232,Sigma O'Neill,Medical Doctor,"",
+38832,50232,Shi'shi De She,Security Officer,"",
+38833,50232,Gatatikikichakiya,Roboticist,"",
+38834,50232,Angela Barens,Botanist,"",
+38835,50232,maintenance drone (936),Cyborg,"",
+38836,50232,ARMA-367,Cyborg,"",
+38837,50232,Vlad Omar,Security Officer,"",
+38838,50232,Gladwyn Marriman,Test Subject,"",
+38839,50232,Aurelius Aquilimus,Mime,"",
+38840,50232,Lion Remark,Recycler,"",
+38841,50232,maintenance drone (676),Cyborg,"",
+38842,50232,mouse (258),Animal,"",
+38843,50232,Alroy Podkins,Medical Intern,"",
+38844,50232,Isall Niver,Medical Intern,"",
+38845,50232,mouse (237),Animal,"",
+38846,50232,Zayden Fiddler,Head of Security,"",
+38847,50232,Sam Samich,Roboticist,"",
+38848,50232,mouse (309),Animal,"",
+38849,50232,maintenance drone (100),Cyborg,"",
+38850,50232,Bruce Fitgerald,Test Subject,"",
+38851,50232,mouse (529),Animal,"",
+38852,50232,Shade of Mayron Demetrios,Shade,"",
+38853,50232,Shisshve Ashita,Warden,"",
+38854,50232,mouse (112),Animal,"",
+38855,50232,maintenance drone (834),Cyborg,"",
+38856,50232,Wraith (641),Wraith,Cultist,{Cultist}
+38857,50232,Proteon (250),Proteon,Cultist,{Cultist}
+38858,50232,maintenance drone (707),Cyborg,"",
+38859,50232,Bo Bo Sassy,Clown,"",
+38860,50232,Jim Morris,Medical Doctor,"",
+38861,50232,Zikkykikati,Station Engineer,"",
+38862,50232,Ivan Huga,Medical Doctor,"",
+38863,50232,maintenance drone (936),Cyborg,"",
+38864,50232,maintenance drone (635),Cyborg,"",
+38865,50232,Quiwz'xu Qox,default,"",
+38866,50232,Sigma O'Neill,default,"",
+38867,50232,Slen Franko,default,"",
+38868,50232,Nikita Bubencov,default,"",
+38869,50232,John Don,default,"",
+38870,50232,Lucas Gibson,default,"",
+38871,50232,Klein Maccubus,default,"",
+38872,50232,Isaac Fletcher,default,"",
+38873,50232,Lion Remark,default,"",
+38874,50232,Tony Xegarty,default,"",
+38875,50232,Zikkykikati,default,"",
+38876,50232,Kronos Fanth,default,"",
+38877,50232,Jason Powell,Internal Affairs Agent,"",
+38878,50232,maintenance drone (557),Cyborg,"",
+38879,50232,Alex Bennett,Cargo Technician,"",
+38880,50232,mouse (49),Animal,"",
+38881,50232,maintenance drone (929),Cyborg,"",
+38882,50232,Rylan Wardle,Captain,"",
+38883,50232,mouse (736),Animal,"",
+38884,50232,Artem Sentemon,Test Subject,"",
+38885,50232,maintenance drone (509),Cyborg,"",
+38886,50232,maintenance drone (822),Cyborg,"",
+38887,50232,Nikita Bubencov,default,"",
+38888,50232,Klein Maccubus,default,"",
+38889,50232,Kris Merdrod,default,"",
+38890,50232,John Don,default,"",
+38891,50232,Kronos Fanth,default,"",
+38892,50232,Tony Xegarty,default,"",
+38893,50232,Zikkykikati,default,"",
+38894,50232,Lion Remark,default,"",
+38895,50232,Isaac Fletcher,default,"",
+38896,50232,Quiwz'xu Qox,default,"",
+38897,50232,Sigma O'Neill,default,"",
+38898,50232,Lucas Gibson,default,"",
+38899,50232,maintenance drone (107),Cyborg,"",
+38900,50232,Noelle Goodman,Medical Intern,"",
+38901,50232,Clara Paradise,Barber,"",
+38902,50232,Charlie Greene,Chief Engineer,"",
+38903,50232,mouse (60),Animal,"",
+38904,50232,maintenance drone (911),Cyborg,"",
+38905,50232,maintenance drone (781),Cyborg,"",
+38906,50232,mouse (451),Animal,"",
+38907,50232,mouse (245),Animal,"",
+38908,50207,Ray Wardle,Chief Engineer,"",
+38909,50207,Artemida Byblikova,Xenobiologist,"",
+38910,50207,Zikkykikati,Medical Doctor,Gangster,{Gangster}
+38911,50207,Mr. Walker,AI,"",
+38912,50207,Paral Dune,Atmospheric Technician,"",
+38913,50207,Quiwz'xu Qox,Shaft Miner,"",
+38914,50207,Max Russell,Station Engineer,"",
+38915,50207,Ivory Howard,Security Officer,"",
+38916,50207,Tyler Jones,Station Engineer,"",
+38917,50207,Seamon Light,Virologist,Gangster Leader,{Gangster Leader}
+38918,50207,Weston Bell,Station Engineer,Gangster Leader,{Gangster Leader}
+38919,50207,Aurili Septemus,Security Officer,"",
+38920,50207,Sigma O'Neill,Medical Doctor,Gangster,{Gangster}
+38921,50207,Aramsha Jarmack,Station Engineer,"",
+38922,50207,Sharon Nash,Medical Doctor,"",
+38923,50207,Spike Schmidt,Paramedic,Gangster,{Gangster}
+38924,50207,Morgan Prevatt,Quartermaster,"",
+38925,50207,Gwenevere Coldsmith,Atmospheric Technician,Gangster,{Gangster}
+38926,50207,Maxoun Gymovic,Recycler,"",
+38927,50207,Keegan Hunt,Head of Security,"",
+38928,50207,Gikakhayikati,Chef,Gangster Leader,{Gangster Leader}
+38929,50207,Koudi Cooper,Security Cadet,"",
+38930,50207,Isaiah Vader,Geneticist,Gangster Leader,{Gangster Leader}
+38931,50207,Aphelios Tildor,Station Engineer,Undercover Officer,{Undercover Officer}
+38932,50207,Karen,Shaft Miner,"",
+38933,50207,Marcus Frei,Test Subject,"",
+38934,50207,John Mackenzie,Chemist,Gangster Leader,{Gangster Leader}
+38935,50207,Jean-Poul Marat,Medical Intern,Gangster,{Gangster}
+38936,50207,Mr.OldHonkus,Clown,Gangster,{Gangster}
+38937,50207,Rick Shorts,Roboticist,"",
+38938,50207,Sal Lord,Geneticist,"",
+38939,50207,Rosemary Demuth,Bartender,Gangster,{Gangster}
+38940,50207,Slen Franko,Security Cadet,"",
+38941,50207,Sam Samich,Roboticist,"",
+38942,50207,Shisshve Ashita,Security Officer,"",
+38943,50207,Alexei Zhukov,Chef,"",
+38944,50207,Lucas Aberg,Xenoarchaeologist,Undercover Officer,{Undercover Officer}
+38945,50207,Daniel Mildred,Research Director,Undercover Officer,{Undercover Officer}
+38946,50207,Vadim Wood,Mime,Gangster,{Gangster}
+38947,50207,Colvar Abram,Shaft Miner,"",
+38948,50207,Lia Paterson,Security Officer,"",
+38949,50207,Gatatikikichakiya,Detective,"",
+38950,50207,Makskim Shomski,Chaplain,Gangster Leader,{Gangster Leader}
+38951,50207,Richard Reed,Head of Personnel,"",
+38952,50207,Jake Summy,Warden,"",
+38953,50207,Randy Best,Forensic Technician,"",
+38954,50207,Artem Kotov,Test Subject,Gangster,{Gangster}
+38955,50207,M'ark M'rshan,Scientist,"",
+38956,50207,Li'quxpixli Lenienq'wik,Scientist,"",
+38957,50207,Adrian Gordon,Technical Assistant,Gangster,{Gangster}
+38958,50207,Sebastian Pivovarov,Captain,"",
+38959,50207,Adolph Nastain,Security Officer,"",
+38960,50207,maintenance drone (350),Cyborg,"",
+38961,50207,Kuriu Qlio'kaf,Janitor,"",
+38962,50207,Reese Taggart,Paramedic,"",
+38963,50207,Alroy Podkins,Test Subject,Gangster,{Gangster}
+38964,50207,mouse (18),Animal,"",
+38965,50207,Default Robot-645,Cyborg,"",
+38966,50207,Andy Willey,Test Subject,Gangster,{Gangster}
+38967,50207,DUNC-432,Cyborg,"",
+38968,50207,Diego Gonzalez,Recycler,"",
+38969,50207,Ivan Huga,Test Subject,Gangster,{Gangster}
+38970,50207,Andre Bailey,Botanist,"",
+38971,50207,Lucas Gibson,Botanist,"",
+38972,50207,Lexia Mccune,Test Subject,"",
+38973,50207,Vlad Omar,Security Cadet,"",
+38974,50207,Chris Snyder,Cargo Technician,"",
+38975,50207,Lion Remark,Test Subject,"",
+38976,50207,Jaid,default,Gangster Dealer,{Gangster Dealer}
+38977,50207,Deadman,default,Gangster Dealer,{Gangster Dealer}
+38978,50207,Gabriel Roberts,Cargo Technician,"",
+38979,50207,Nikita Bubencov,slime,"",
+38980,50207,mouse (298),Animal,"",
+38981,50207,grey adult slime (128),slime,"",
+38982,50207,Silencing Null,MODE,Space Ninja,{Space Ninja}
+38983,50207,Stella Jyllian,Test Subject,"",
+38984,50207,Alexander Kuznetsov,Janitor,Gangster,{Gangster}
+38985,50207,grey baby slime (960),slime,"",
+38986,50207,Alfreda Byers,Test Subject,"",
+38987,50207,grey adult slime (217),slime,"",
+38988,50207,Danny Roby,Barber,Gangster,{Gangster}
+38989,50207,grey baby slime (735),slime,"",
+38990,50207,Nitrogen,pAI,"",
+38991,50207,Maya Foxova,Chaplain,"",
+38992,50207,fox,default,OCD Officer,{OCD Officer}
+38993,50207,Volga,default,OCD Officer,{OCD Officer}
+38994,50207,Payton,default,OCD Officer,{OCD Officer}
+38995,50207,Alpha,default,OCD Officer,{OCD Officer}
+38996,50207,SSGT. Frost,default,OCD Officer,{OCD Officer}
+38997,50207,German Fisher,default,OCD Officer,{OCD Officer}
+38998,50207,Kris Filby,default,OCD Officer,{OCD Officer}
+38999,50207,Mama,default,OCD Officer,{OCD Officer}
+39000,50207,Reva Marks,Geneticist,"",
+39001,50207,Ian,default,"",
+39002,50207,podkid (300),default,"",
+39003,50207,Sivean Doulson,Botanist,"",
+39004,50207,podkid (774),"","",
+39005,50207,Johnathan Armstrong,Security Officer,"",
+39006,50221,Issar Hess,Scientist,"",
+39007,50221,Takirichi,Station Engineer,Cultist,{Cultist}
+39008,50221,Kshiya Less,Scientist,"",
+39009,50221,Danko Cesarre,Cyborg,"",
+39010,50221,Jad Shock,Mime,"",
+39011,50221,Tate Benford,Chief Medical Officer,"",
+39012,50221,Troy Orgail,Test Subject,Cultist,{Cultist}
+39013,50221,Bryan James,Paramedic,"",
+39014,50221,M.A.L.F.,AI,"",
+39015,50221,Artemida Byblikova,Xenobiologist,Cultist,{Cultist}
+39016,50221,Korvo Forpean,Station Engineer,"",
+39017,50221,Seamon Light,Shaft Miner,"",
+39018,50221,BIBA,Clown,"",
+39019,50221,Lary Doger,Medical Doctor,"",
+39020,50221,Maya Foxova,Captain,"",
+39021,50221,Vladislav Sokolov,Chemist,"",
+39022,50221,Vlad Omar,Geneticist,"",
+39023,50221,Karen,Chemist,"",
+39024,50221,Denis Brodskiy,Medical Doctor,"",
+39025,50221,Jim Morris,Bartender,"",
+39026,50221,Roman Elinov,Test Subject,"",
+39027,50221,Kane Sanders,Recycler,"",
+39028,50221,Arleen Morris,Head of Personnel,Cultist,{Cultist}
+39029,50221,Randy Best,Xenoarchaeologist,Cultist,"{Traitor,Cultist}"
+39030,50221,Mark McCarthy,Research Director,Cultist,{Cultist}
+39031,50221,Adam Browning Jr,Cargo Technician,"",
+39032,50221,Sivean Doulson,Scientist,"",
+39033,50221,Mike Spenser,Cargo Technician,"",
+39034,50221,Norman Don,Botanist,"",
+39035,50221,Alisa Don,Botanist,"",
+39036,50221,Zed Murray,Security Officer,"",
+39037,50221,Vadim Wood,Test Subject,"",
+39038,50221,Roy Walker,Test Subject,"",
+39039,50221,Shagan Rock'Shur,Roboticist,Cultist,{Cultist}
+39040,50221,Ray Wardle,Chief Engineer,"",
+39041,50221,Baldric Saylor,Cyborg,"",
+39042,50221,Semyon Hatsunov,Security Officer,"",
+39043,50221,Garrett Mills,Chaplain,"",
+39044,50221,Alex Ermakov,Recycler,"",
+39045,50221,Aidan Jackson,Security Officer,"",
+39046,50221,Spike Schmidt,Paramedic,"",
+39047,50221,Arthur Garland,Security Cadet,"",
+39048,50221,Ian,"","",
+39049,50221,Timothy Bicknell,Chef,"",
+39050,50221,Zikkykikati,Station Engineer,Cultist,{Cultist}
+39051,50221,Seok Drummond,Security Officer,"",
+39052,50221,Slava Petrov,Test Subject,"",
+39053,50221,Flick Welty,Quartermaster,"",
+39054,50221,Volqrmixqu Lirqrrxuim,Roboticist,Cultist,{Cultist}
+39055,50221,Aramsha Jarmack,Janitor,"",
+39056,50221,Marcos Donkin,Test Subject,"",
+39057,50221,Oleg Osetrov,Detective,"",
+39058,50221,Alexander Sokolov,Librarian,"",
+39059,50221,Carlos Alfonco Lopes,Geneticist,"",
+39060,50221,Garry Flint,Xenoarchaeologist,"",
+39061,50221,Unbelievable God,Chaplain`s staff,"",
+39062,50221,Horatio Highjack,Test Subject,"",
+39063,50221,Thomas Remongton,Botanist,"",
+39064,50221,Tyler Jones,Security Officer,"",
+39065,50221,Ryker Wolfe,Test Subject,"",
+39066,50221,Artificer (316),Artificer,Cultist,{Cultist}
+39067,50221,Sprinkledinkle,Clown,"",
+39068,50221,Proteon (246),Proteon,Cultist,{Cultist}
+39069,50221,Harvester (59),Animal,Cultist,{Cultist}
+39070,50221,Juggernaut (86),Juggernaut,Cultist,{Cultist}
+39071,50221,Juggernaut (12),Juggernaut,Cultist,{Cultist}
+39072,50221,Harvester (75),Animal,Cultist,{Cultist}
+39073,50221,Harvester (606),Animal,Cultist,{Cultist}
+39074,50221,Artificer (960),Artificer,Cultist,{Cultist}
+39075,50221,Artificer (182),Artificer,Cultist,{Cultist}
+39076,50221,Harvester (882),Animal,Cultist,{Cultist}
+39077,50221,Proteon (366),Proteon,Cultist,{Cultist}
+39078,50221,Harvester (25),Animal,Cultist,{Cultist}
+39079,50221,Harvester (200),Animal,Cultist,{Cultist}
+39080,50221,Juggernaut (127),Juggernaut,Cultist,{Cultist}
+39081,50221,Artificer (937),Artificer,Cultist,{Cultist}
+39082,50221,Harvester (864),Animal,Cultist,{Cultist}
+39083,50221,podkid (837),default,"",
+39084,50221,Proteon (934),Proteon,Cultist,{Cultist}
+39085,50221,Harvester (839),Animal,Cultist,{Cultist}
+39086,50221,Shade of Seamon Light,Shade,"",
+39087,50202,Nikolai Vakhmistrov,Recycler,"",
+39088,50202,Oleg Osetrov,Xenoarchaeologist,Cultist,{Cultist}
+39089,50202,Aurelius Aquilimus,Quartermaster,"",
+39090,50202,Issar Hess,Cyborg,"",
+39091,50202,Maya Foxova,Roboticist,Cultist,{Cultist}
+39092,50202,Bailey Patel,Station Engineer,"",
+39093,50202,Lion Remark,Virologist,"",
+39094,50202,Nendo Galaxy,Recycler,"",
+39095,50202,Zayden Fiddler,Warden,"",
+39096,50202,Adam Sommer,Security Officer,"",
+39097,50202,Ulric Parker,Station Engineer,"",
+39098,50202,A.S.T.R.O.,AI,"",
+39099,50202,Lucifer Desketi,Head of Personnel,"",
+39100,50202,Weston Bell,Detective,"",
+39101,50202,Evangelina Shaffer,Cyborg,"",
+39102,50202,Adolph Nastain,Medical Doctor,"",
+39103,50202,Cold Winds Of Winter,Chemist,"",
+39104,50202,Luke Roadman,Xenobiologist,Cultist,{Cultist}
+39105,50202,Vincent Rahl,Security Cadet,"",
+39106,50202,Ivan Huga,Chaplain,"",
+39107,50202,Kefal.Archigos.Filos,Xenobiologist,"",
+39108,50202,M'ark M'rshan,Roboticist,Cultist,{Cultist}
+39109,50202,Nikita Bubencov,Chemist,"",
+39110,50202,Johnathan Mosser,Head of Security,"",
+39111,50202,Adolf Firefield,Medical Doctor,"",
+39112,50202,Dar'zahr,Shaft Miner,"",
+39113,50202,Unbelievable God,Shade,"",
+39114,50202,Cassian Winton,Chief Medical Officer,"",
+39115,50202,Jordan Kelley,Security Cadet,"",
+39116,50202,Randy Newdome,Technical Assistant,"",
+39117,50202,Joseph Hope,Janitor,"",
+39118,50202,John Mackenzie,Bartender,"",
+39119,50202,Romeo Roberts,Librarian,"",
+39120,50202,Maham'ru Jar'Mahar,Mime,"",
+39121,50202,Curly Mens,Medical Doctor,"",
+39122,50202,Johnathan Armstrong,Scientist,Cultist,{Cultist}
+39123,50202,Natalia Koneva,Security Officer,"",
+39124,50202,Reva Marks,Geneticist,"",
+39125,50202,Adamantine Golem (905),default,"",
+39126,50202,Adamantine Golem (360),default,"",
+39127,50202,Adamantine Golem (166),default,"",
+39128,50202,Macey Hunter,default,"",
+39129,50202,maintenance drone (421),Cyborg,"",
+39130,50202,homunculus of The One Who Sees XX,default,Cultist,{Cultist}
+39131,50202,Gatatikikichakiya,Atmospheric Technician,"",
+39132,50202,homunculus of The One Who Sees I,default,Cultist,{Cultist}
+39133,50202,homunculus of The Geometer of Blood II,default,Cultist,{Cultist}
+39134,50202,Shade of homunculus of The Geometer of Blood II,Shade,"",
+39135,50202,Wraith (651),Wraith,Slave,{Slave}
+39136,50202,homunculus of Dark One XVIII,default,Cultist,{Cultist}
+39137,50202,Shade of homunculus of Dark One XVIII,Shade,"",
+39138,50202,Wraith (783),Wraith,Slave,{Slave}
+39139,50202,Shade of homunculus of The One Who Sees XX,Shade,"",
+39140,50202,Artificer (400),Artificer,Slave,{Slave}
+39141,50202,Puzobor Slavov,Test Subject,"",
+39142,50202,Michael Langston,Geneticist,"",
+39143,50202,homunculus of Nar-Sie VI,default,Cultist,{Cultist}
+39144,50202,homunculus of Dark One XIX,default,Cultist,{Cultist}
+39145,50202,Shade of homunculus of Nar-Sie VI,Shade,"",
+39146,50202,Shade of homunculus of Dark One XIX,Shade,"",
+39147,50202,Wraith (969),Wraith,Slave,{Slave}
+39148,50202,Wraith (333),Wraith,Slave,{Slave}
+39149,50202,Minerva Everett,Medical Doctor,"",
+39150,50202,homunculus of The One Who Sees XX,default,Cultist,{Cultist}
+39151,50202,homunculus of The Geometer of Blood IV,default,Cultist,{Cultist}
+39152,50202,Shade of homunculus of The One Who Sees XX,Shade,"",
+39153,50202,Shade of homunculus of The Geometer of Blood IV,Shade,"",
+39154,50202,Wraith (501),Wraith,Slave,{Slave}
+39155,50202,Wraith (66),Wraith,Slave,{Slave}
+39156,50202,Tahikaeeti,Cargo Technician,"",
+39157,50202,homunculus of Dark One VIII,default,Cultist,{Cultist}
+39158,50202,Shade of homunculus of Dark One VIII,Shade,"",
+39159,50202,Wraith (784),Wraith,Slave,{Slave}
+39160,50202,homunculus of Nar-Sie XI,default,Cultist,{Cultist}
+39161,50202,Shade of homunculus of Nar-Sie XI,Shade,"",
+39162,50202,Wraith (827),Wraith,Slave,{Slave}
+39163,50202,homunculus of Dark One IX,default,Cultist,{Cultist}
+39164,50202,Shade of homunculus of Dark One IX,Shade,"",
+39165,50202,Wraith (770),Wraith,Slave,{Slave}
+39166,50202,homunculus of Nar-Sie III,default,Cultist,{Cultist}
+39167,50202,Shade of homunculus of Nar-Sie III,Shade,"",
+39168,50202,homunculus of The Geometer of Blood XIX,default,Cultist,{Cultist}
+39169,50202,Shade of homunculus of The Geometer of Blood XIX,Shade,"",
+39170,50202,Wraith (665),Wraith,Slave,{Slave}
+39171,50202,Proteon (500),Proteon,Slave,{Slave}
+39172,50202,Tamsin Winton,Security Officer,"",
+39173,50202,homunculus of The Geometer of Blood XX,default,Cultist,{Cultist}
+39174,50202,Shade of homunculus of The Geometer of Blood XX,Shade,"",
+39175,50202,Wraith (680),Wraith,Slave,{Slave}
+39176,50202,homunculus of Nar-Sie II,default,Cultist,{Cultist}
+39177,50202,Shade of homunculus of Nar-Sie II,Shade,"",
+39178,50202,Juggernaut (698),Juggernaut,Slave,{Slave}
+39179,50202,homunculus of The One Who Sees XII,default,Cultist,{Cultist}
+39180,50202,Shade of homunculus of The One Who Sees XII,Shade,"",
+39181,50202,Wraith (860),Wraith,Slave,{Slave}
+39182,50202,Lee Chautsan,Paramedic,"",
+39183,50202,homunculus of The One Who Sees X,default,Cultist,{Cultist}
+39184,50202,Shade of homunculus of The One Who Sees X,Shade,"",
+39185,50202,Wraith (818),Wraith,Slave,{Slave}
+39186,50202,homunculus of The Geometer of Blood XIX,default,Cultist,{Cultist}
+39187,50202,Shade of homunculus of The Geometer of Blood XIX,Shade,"",
+39188,50202,Artificer (560),Artificer,Slave,{Slave}
+39189,50202,homunculus of Dark One XII,default,Cultist,{Cultist}
+39190,50202,Shade of homunculus of Dark One XII,Shade,"",
+39191,50202,Juggernaut (72),Juggernaut,Slave,{Slave}
+39192,50202,homunculus of The Geometer of Blood XV,default,Cultist,{Cultist}
+39193,50202,Shade of homunculus of The Geometer of Blood XV,Shade,"",
+39194,50202,Wraith (204),Wraith,Slave,{Slave}
+39195,50202,homunculus of Nar-Sie XVII,default,Cultist,{Cultist}
+39196,50202,Lucas Gibson,Cargo Technician,"",
+39197,50202,Shade of homunculus of Nar-Sie XVII,Shade,"",
+39198,50202,Wraith (158),Wraith,Slave,{Slave}
+39199,50202,homunculus of The One Who Sees VII,default,Cultist,{Cultist}
+39200,50202,Shade of homunculus of The One Who Sees VII,Shade,"",
+39201,50202,Silly Willy,Clown,"",
+39202,50202,Wraith (386),Wraith,Slave,{Slave}
+39203,50202,homunculus of Dark One XII,default,Cultist,{Cultist}
+39204,50202,Shade of homunculus of Dark One XII,Shade,"",
+39205,50202,Wraith (161),Wraith,Slave,{Slave}
+39206,50202,homunculus of The Geometer of Blood V,default,Cultist,{Cultist}
+39207,50202,Shade of homunculus of The Geometer of Blood V,Shade,"",
+39208,50202,Wraith (294),Wraith,Slave,{Slave}
+39209,50202,homunculus of The Geometer of Blood XIII,default,Cultist,{Cultist}
+39210,50202,Shade of homunculus of The Geometer of Blood XIII,Shade,"",
+39211,50202,Wraith (652),Wraith,Slave,{Slave}
+39212,50202,homunculus of The Geometer of Blood IV,default,Cultist,{Cultist}
+39213,50202,Shade of homunculus of The Geometer of Blood IV,Shade,"",
+39214,50202,Wraith (400),Wraith,Slave,{Slave}
+39215,50202,homunculus of Dark One VIII,default,Cultist,{Cultist}
+39216,50202,Shade of homunculus of Dark One VIII,Shade,"",
+39217,50202,Wraith (407),Wraith,Slave,{Slave}
+39218,50202,homunculus of Nar-Sie III,default,Cultist,{Cultist}
+39219,50202,Shade of homunculus of Nar-Sie III,Shade,"",
+39220,50202,Wraith (247),Wraith,Slave,{Slave}
+39221,50202,homunculus of Nar-Sie XI,default,Cultist,{Cultist}
+39222,50202,Shade of homunculus of Nar-Sie XI,Shade,"",
+39223,50202,Wraith (182),Wraith,Slave,{Slave}
+39224,50202,Bailey Patel,Head of Security,"",
+39225,50202,homunculus of The One Who Sees XI,default,Cultist,{Cultist}
+39226,50202,Shade of homunculus of The One Who Sees XI,Shade,"",
+39227,50202,Wraith (428),Wraith,Slave,{Slave}
+39228,50202,homunculus of Dark One XIII,default,Cultist,{Cultist}
+39229,50202,Shade of homunculus of Dark One XIII,Shade,"",
+39230,50202,Juggernaut (865),Juggernaut,Slave,{Slave}
+39231,50202,homunculus of Nar-Sie VII,default,Cultist,{Cultist}
+39232,50202,Shade of homunculus of Nar-Sie VII,Shade,"",
+39233,50202,Wraith (678),Wraith,Slave,{Slave}
+39234,50202,homunculus of The One Who Sees XIII,default,Cultist,{Cultist}
+39235,50202,Shade of homunculus of The One Who Sees XIII,Shade,"",
+39236,50202,Wraith (41),Wraith,Slave,{Slave}
+39237,50202,Alroy Podkins,Test Subject,"",
+39238,50202,homunculus of The One Who Sees IX,default,Cultist,{Cultist}
+39239,50202,Shade of homunculus of The One Who Sees IX,Shade,"",
+39240,50202,Wraith (963),Wraith,Slave,{Slave}
+39241,50202,homunculus of Dark One XVII,default,Cultist,{Cultist}
+39242,50202,Shade of homunculus of Dark One XVII,Shade,"",
+39243,50202,Wraith (688),Wraith,Slave,{Slave}
+39244,50202,maintenance drone (488),Cyborg,"",
+39245,50202,homunculus of The One Who Sees XX,default,Cultist,{Cultist}
+39246,50202,homunculus of The One Who Sees XI,default,Cultist,{Cultist}
+39247,50202,Elliot Temere,Test Subject,"",
+39248,50202,homunculus of Nar-Sie XV,default,Cultist,{Cultist}
+39249,50202,mouse (842),Animal,"",
+39250,50202,Proteon (469),Proteon,Cultist,{Cultist}
+39251,50202,Wraith (327),Wraith,Cultist,{Cultist}
+39252,50202,Harvester (864),Animal,Cultist,{Cultist}
+39253,50202,Harvester (374),Animal,Cultist,{Cultist}
+39254,50202,Juggernaut (400),Juggernaut,Cultist,{Cultist}
+39255,50202,Wraith (923),Wraith,Cultist,{Cultist}
+39256,50202,Harvester (150),Animal,Cultist,{Cultist}
+39257,50202,Proteon (838),Proteon,Cultist,{Cultist}
+39258,50202,Artificer (346),Artificer,Cultist,{Cultist}
+39259,50202,Harvester (967),Animal,Cultist,{Cultist}
+39260,50202,Proteon (581),Proteon,Cultist,{Cultist}
+39261,50202,Juggernaut (663),Juggernaut,Cultist,{Cultist}
+39262,50202,Harvester (859),Animal,Cultist,{Cultist}
+39263,50202,Artificer (905),Artificer,Cultist,{Cultist}
+39264,50202,Artificer (618),Artificer,Cultist,{Cultist}
+39265,50202,Harvester (875),Animal,Cultist,{Cultist}
+39266,50202,Harvester (33),Animal,Cultist,{Cultist}
+39267,50202,Harvester (897),Animal,Cultist,{Cultist}
+39268,50202,Harvester (329),Animal,Cultist,{Cultist}
+39269,50202,Harvester (44),Animal,Cultist,{Cultist}
+39270,50202,Harvester (773),Animal,Cultist,{Cultist}
+39271,50202,Artificer (574),Artificer,Cultist,{Cultist}
+39272,50202,Harvester (781),Animal,Cultist,{Cultist}
+39273,50202,Proteon (734),Proteon,Cultist,{Cultist}
+39274,50202,Harvester (310),Animal,Cultist,{Cultist}
+39275,50202,Harvester (215),Animal,Cultist,{Cultist}
+39276,50202,Juggernaut (666),Juggernaut,Cultist,{Cultist}
+39277,50202,Harvester (403),Animal,Cultist,{Cultist}
+39278,50202,Harvester (783),Animal,Cultist,{Cultist}
+39279,50202,Harvester (396),Animal,Cultist,{Cultist}
+39280,50202,Illia Bronson,Botanist,"",
+39281,50202,Wraith (686),Wraith,Cultist,{Cultist}
+39282,50202,Juggernaut (849),Juggernaut,Cultist,{Cultist}
+39283,50202,Harvester (192),Animal,Cultist,{Cultist}
+39284,50202,Wraith (456),Wraith,Cultist,{Cultist}
+39285,50202,Juggernaut (382),Juggernaut,Cultist,{Cultist}
+39286,50202,mouse (674),Animal,"",
+39287,50202,Harvester (746),Animal,Cultist,{Cultist}
+39288,50202,Harvester (536),Animal,Cultist,{Cultist}
+39289,50202,maintenance drone (670),Cyborg,"",
+39290,50202,Proteon (173),Proteon,Cultist,{Cultist}
+39291,50202,Harvester (84),Animal,Cultist,{Cultist}
+39292,50202,maintenance drone (999),Cyborg,"",
+39293,50202,Harvester (898),Animal,Cultist,{Cultist}
+39294,50202,Harvester (133),Animal,Cultist,{Cultist}

@@ -1416,3 +1416,77 @@ root_id,id,name,faction_name,minor_victory,type,victory
 50019,1415,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
 50019,1416,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
 50019,1417,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+50196,1418,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,0
+50234,1419,Alien Hivemind,Alien Hivemind,0,/datum/faction/infestation,0
+50234,1420,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50234,1421,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+50199,1422,Traitors,Traitor,0,/datum/faction/traitor,0
+50199,1423,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50197,1424,Traitors,Traitor,0,/datum/faction/traitor,0
+50197,1425,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50195,1426,Traitors,Traitor,0,/datum/faction/traitor,0
+50195,1427,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50195,1428,Borer Hivemind,Borer Hivemind,0,/datum/faction/borers,1
+50213,1429,Traitors,Traitor,0,/datum/faction/traitor,0
+50213,1430,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50215,1431,Traitors,Traitor,0,/datum/faction/traitor,0
+50215,1432,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50216,1433,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+50227,1434,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+50227,1435,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50212,1436,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+50212,1437,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50219,1438,Traitors,Traitor,0,/datum/faction/traitor,1
+50219,1439,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50226,1440,Traitors,Traitor,0,/datum/faction/traitor,1
+50226,1441,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50200,1442,Traitors,Traitor,0,/datum/faction/traitor,1
+50200,1443,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50224,1444,Traitors,Traitor,0,/datum/faction/traitor,1
+50224,1445,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50231,1446,Traitors,Traitor,0,/datum/faction/traitor,0
+50231,1447,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50206,1448,Traitors,Traitor,0,/datum/faction/traitor,0
+50206,1449,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50204,1450,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+50204,1451,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50204,1452,Emergency Response Team,Emergency Response Team,0,/datum/faction/strike_team/ert,1
+50223,1453,Revolutionaries,Revolution,0,/datum/faction/revolution,1
+50223,1454,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50220,1455,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,1
+50220,1456,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50210,1457,Traitors,Traitor,0,/datum/faction/traitor,0
+50210,1458,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50209,1459,Shadowlings,Shadowlings,0,/datum/faction/shadowlings,0
+50209,1460,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50229,1461,Traitors,Traitor,0,/datum/faction/traitor,0
+50229,1462,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50229,1463,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+50229,1464,Blob Conglomerate,Blob Conglomerate,0,/datum/faction/blob_conglomerate,0
+50218,1465,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,1
+50218,1466,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50230,1467,Syndicate Operatives,Syndicate Operatives,0,/datum/faction/nuclear,0
+50230,1468,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50214,1469,TraitorChan,TraitorChan,0,/datum/faction/changeling/traitorchan,1
+50214,1470,Traitors,Traitor,0,/datum/faction/traitor,0
+50214,1471,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50205,1472,Mothership Delta,Abductor Team,0,/datum/faction/abductors,0
+50205,1473,Mothership Theta,Abductor Team,0,/datum/faction/abductors,0
+50205,1474,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50228,1475,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+50228,1476,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50211,1477,Vox Shoal,Vox Shoal,0,/datum/faction/heist,0
+50211,1478,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50232,1479,Malf AI,Malf AI,0,/datum/faction/malf_silicons,1
+50232,1480,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50232,1481,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+50207,1482,Organized Crimes Department,Organized Crimes Department,0,/datum/faction/cops,1
+50207,1483,Monarch Crew,Families,0,/datum/faction/gang/henchmen,0
+50207,1484,Dutch van der Linde's Gang,Families,0,/datum/faction/gang/dutch,0
+50207,1485,Los Santos Vagos,Families,0,/datum/faction/gang/vagos,1
+50207,1486,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1
+50207,1487,Spider Clan,Spider Clan,0,/datum/faction/ninja,0
+50221,1488,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+50221,1489,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,0
+50202,1490,Cult Of Blood,Cult Of Blood,0,/datum/faction/cult,1
+50202,1491,AutoTraitors,Traitor,0,/datum/faction/traitor/auto,1

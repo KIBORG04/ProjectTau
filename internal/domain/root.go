@@ -6,15 +6,16 @@ import (
 )
 
 type Root struct {
-	RoundID           int32               `json:"round_id" gorm:"primaryKey"`
-	Version           int32               `json:"version"`
-	Mode              string              `json:"mode" gorm:"size:128"`
-	StartTime         string              `json:"start_time" gorm:"size:16"`
-	Map               string              `json:"map" gorm:"size:128"`
-	Duration          string              `json:"duration" gorm:"size:16"`
-	EndTime           string              `json:"end_time"  gorm:"size:16"`
-	Factions          []Factions          `json:"factions"`
-	OrphanedRoles     []Role              `json:"orphaned_roles" gorm:"foreignKey:OwnerID"`
+	RoundID   int32      `json:"round_id" gorm:"primaryKey"`
+	Version   int32      `json:"version"`
+	Mode      string     `json:"mode" gorm:"size:128"`
+	StartTime string     `json:"start_time" gorm:"size:16"`
+	Map       string     `json:"map" gorm:"size:128"`
+	Duration  string     `json:"duration" gorm:"size:16"`
+	EndTime   string     `json:"end_time"  gorm:"size:16"`
+	Factions  []Factions `json:"factions"`
+	// Totally broken, and I'm too lazy to fix it
+	//OrphanedRoles     []Role              `json:"orphaned_roles" gorm:"foreignKey:OwnerID"`
 	ModeResult        string              `json:"mode_result" gorm:"size:128"`
 	MinimapImage      string              `json:"minimap_image" gorm:"size:256"`
 	ServerAddress     string              `json:"server_address" gorm:"size:256"`

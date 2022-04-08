@@ -11749,3 +11749,524 @@ id,root_id,name,start_time,assigned_role,special_role,antag_roles,leave_type,lea
 11748,50019,Keni Spots,00:00,Medical Doctor,"",,Disconnected,01:02
 11749,50019,mouse (786),01:18,Animal,"",,Disconnected,01:18
 11750,50019,Tshepilov Sergei,01:05,Librarian,"",,Disconnected,01:19
+11751,50196,Ruben Foster,00:02,Security Officer,"",,Ghosted,02:08
+11752,50196,Seymour Raub,02:38,Station Engineer,"",,Ghosted,02:59
+11753,50196,Patrick Rowley,00:04,Chief Engineer,"",,Disconnected,01:07
+11754,50196,Roy Surgovich,02:14,Test Subject,"",,Disconnected,02:39
+11755,50196,Charlton Nicholas,02:20,Test Subject,"",,Disconnected,02:39
+11756,50234,Paral Dune,00:00,Test Subject,"",,Ghosted in Cryopod,00:00
+11757,50234,Slen Franko,00:00,Cargo Technician,"",,Ghosted in Cryopod,00:02
+11758,50234,Kameron Dean,00:00,Station Engineer,"",,Ghosted in Cryopod,00:03
+11759,50234,Lim Al-Kuds,00:00,Scientist,"",,Ghosted,00:05
+11760,50234,Gary Greenwood,00:00,Barber,"",,Ghosted in Cryopod,00:07
+11761,50234,JRD-419,00:09,Positronic Brain,"",,Ghosted,00:09
+11762,50234,JRD-419,00:09,Positronic Brain,"",,Ghosted,00:12
+11763,50234,Artem Sentemon,00:00,Test Subject,"",,Cryopod,00:17
+11764,50234,Ali Azar,00:00,Chaplain,"",,Ghosted,00:19
+11765,50234,Jeremy Lloyd,00:00,Janitor,"",,Ghosted,00:20
+11766,50234,Sebastian Pivovarov,00:08,Test Subject,"",,Cryopod,00:24
+11767,50234,Tyler Jones,00:26,Security Officer,"",,Ghosted in Cryopod,00:28
+11768,50234,Sharon Nash,00:15,Security Officer,"",,Ghosted,00:31
+11769,50234,Silly Willy,00:00,Clown,"",,Ghosted,00:32
+11770,50234,Jin Relo,00:00,Security Cadet,"",,Ghosted in Cryopod,00:36
+11771,50234,Dar'zahr,00:00,Medical Doctor,"",,Cryopod,00:37
+11772,50234,Jayson Lewis,00:03,Technical Assistant,"",,Cryopod,00:42
+11773,50234,Sam Samich,00:00,Roboticist,"",,Ghosted,00:44
+11774,50234,Joon Deleon,00:40,Medical Doctor,"",,Ghosted in Cryopod,00:47
+11775,50234,Brodie McDonald,00:15,Chef,"",,Cryopod,00:49
+11776,50234,Karen,00:00,Chemist,"",,Ghosted in Cryopod,00:53
+11777,50234,mouse (519),01:05,Animal,"",,Ghosted,01:06
+11778,50234,Tate Benford,00:38,Captain,"",,Ghosted,01:06
+11779,50234,mouse (519),01:05,Animal,"",,Ghosted,01:06
+11780,50234,mouse (573),01:16,Animal,"",,Ghosted,01:18
+11781,50234,JRD-419,00:09,Cyborg,"",,Ghosted,01:20
+11782,50234,Artemida Byblikova,00:03,Paramedic,"",,Disconnected,00:20
+11783,50234,Roy Surgovich,00:00,Technical Assistant,"",,Disconnected,00:24
+11784,50234,Jayson Lewis,00:03,Technical Assistant,"",,Disconnected,00:26
+11785,50234,NYX,00:06,pAI,"",,Disconnected,00:34
+11786,50234,Johnathan Armstrong,00:40,Medical Doctor,"",,Disconnected,00:50
+11787,50234,alien facehugger (428),00:56,MODE,Xenomorph,{Xenomorph},Disconnected,00:58
+11788,50234,Harvey Schaeffer,00:00,Station Engineer,"",,Disconnected,01:12
+11789,50234,Jason Powell,00:34,Head of Security,"",,Disconnected,01:14
+11790,50234,A.S.T.R.O. mini,01:17,pAI,"",,Disconnected,01:18
+11791,50234,Warner Shaffer,00:52,Barber,"",,Disconnected,01:19
+11792,50199,Luke Roadman,00:00,Xenobiologist,"",,Ghosted in Cryopod,01:21
+11793,50199,Adam Sommer,01:05,Test Subject,"",,Cryopod,01:25
+11794,50199,Gelon Torn,01:23,Medical Doctor,"",,Cryopod,01:43
+11795,50199,Allen Gray,00:00,Research Director,"",,Cryopod,01:50
+11796,50199,Roman Elinov,00:00,Test Subject,"",,Disconnected,00:24
+11797,50198,Jad Shock,00:00,Mime,"",,Cryopod,00:22
+11798,50198,Kane Ayron,00:00,Test Subject,"",,Cryopod,00:42
+11799,50198,Rastus Sealis,00:00,Security Cadet,"",,Cryopod,00:56
+11800,50198,Harvey Evans,00:36,Test Subject,"",,Cryopod,01:16
+11801,50198,Spike Schmidt,00:00,Chemist,"",,Cryopod,01:27
+11802,50198,Allen Gray,01:07,Research Director,"",,Ghosted,01:36
+11803,50198,Fillipe Duconte,00:00,Chaplain,"",,Disconnected,00:00
+11804,50198,Jad Shock,00:00,Mime,"",,Disconnected,00:02
+11805,50198,Rastus Sealis,00:00,Security Cadet,"",,Disconnected,00:35
+11806,50201,Jose Butterfill,00:00,Security Officer,"",,Cryopod,01:13
+11807,50201,Marat Werner,00:47,Chef,"",,Cryopod,01:55
+11808,50201,Raymond Mingle,01:38,Paramedic,"",,Cryopod,02:12
+11809,50201,Colton Moore,00:00,Xenoarchaeologist,"",,Disconnected,01:54
+11810,50201,Pedro Wolfe,00:46,Medical Doctor,"",,Disconnected,02:13
+11811,50197,Mr.Honky,00:00,Clown,"",,Ghosted in Cryopod,00:01
+11812,50197,Roy Walker,00:00,Test Subject,"",,Cryopod,00:15
+11813,50197,Karen,00:00,Chemist,"",,Cryopod,01:12
+11814,50197,Rashidi Adelakun,00:54,Test Subject,"",,Ghosted,01:26
+11815,50197,Nikita Bubencov,00:00,Station Engineer,"",,Cryopod,01:27
+11816,50197,Tyler Jones,00:00,Research Director,"",,Cryopod,01:28
+11817,50197,CHOC-491,01:28,Positronic Brain,"",,Ghosted,01:30
+11818,50197,Alan Smail,00:59,Forensic Technician,"",,Cryopod,01:39
+11819,50197,Frank Lloyd,00:00,Chaplain,Traitor,{Traitor},Ghosted,01:39
+11820,50197,Rafael Sunders,00:00,Station Engineer,Traitor,{Traitor},Ghosted,01:40
+11821,50197,Nikita Bubencov,00:00,Station Engineer,"",,Disconnected,00:54
+11822,50197,Sath Morris,00:00,Station Engineer,"",,Disconnected,01:18
+11823,50197,Seok Drummond,00:00,Security Officer,"",,Disconnected,01:42
+11824,50195,Mr.Honky,00:00,Clown,"",,Ghosted in Cryopod,00:01
+11825,50195,Jad Shock,00:00,Mime,"",,Cryopod,00:21
+11826,50195,Weston Bell,00:00,Station Engineer,"",,Cryopod,01:34
+11827,50195,Westerose Krieg,00:43,Atmospheric Technician,"",,Cryopod,01:34
+11828,50195,Shala'Raigar Nar Raina,00:00,Security Officer,"",,Cryopod,01:44
+11829,50195,Horatio Highjack,00:09,Bartender,"",,Cryopod,02:04
+11830,50195,Adrian Gordon,00:00,Technical Assistant,"",,Cryopod,02:12
+11831,50195,Elizabeth Rubram,00:00,Forensic Technician,Traitor,{Traitor},Ghosted,03:02
+11832,50195,Rose Willow,01:33,Security Officer,"",,Ghosted in Cryopod,04:06
+11833,50195,Werner Von Schmidt,00:00,Head of Personnel,"",,Ghosted in Cryopod,04:06
+11834,50195,Rastus Sealis,00:00,Head of Security,"",,Disconnected,00:00
+11835,50195,Jad Shock,00:00,Mime,"",,Disconnected,00:02
+11836,50195,Shala'Raigar Nar Raina,00:00,Security Officer,"",,Disconnected,01:11
+11837,50195,Alexander Sokolov,00:44,Test Subject,"",,Disconnected,01:36
+11838,50195,Joseph Dreyfus,00:00,Chief Medical Officer,"",,Disconnected,02:43
+11839,50195,Harvey Evans,00:00,Detective,"",,Disconnected,04:10
+11840,50213,Joseph Dreyfus,00:00,Detective,"",,Cryopod,01:24
+11841,50213,Ivan Rogalov,00:00,Chef,"",,Cryopod,01:56
+11842,50213,Ivan Rogalov,00:00,Chef,"",,Disconnected,01:39
+11843,50215,Westerose Krieg,00:00,Atmospheric Technician,"",,Cryopod,00:19
+11844,50215,Jad Shock,00:00,Mime,"",,Disconnected,00:00
+11845,50215,Viktor Valentine,00:00,Shaft Miner,"",,Disconnected,00:13
+11846,50215,Parker Williams,00:00,Test Subject,"",,Disconnected,00:18
+11847,50203,Ruben Foster,00:00,Security Officer,"",,Cryopod,00:37
+11848,50203,Hugo Pritchard,00:36,Janitor,"",,Cryopod,00:54
+11849,50203,Renato Sardini,00:00,Test Subject,"",,Disconnected,00:49
+11850,50203,Beta,00:21,default,"",,Disconnected,01:33
+11851,50203,Hayden Pearsall,00:42,Chief Engineer,"",,Disconnected,01:34
+11852,50216,Isaiah Vader,00:00,Roboticist,"",,Cryopod,00:30
+11853,50216,Zeke Wheeler,00:00,Test Subject,"",,Ghosted in Cryopod,00:30
+11854,50216,Martin Vanleer,00:22,Detective,"",,Cryopod,00:54
+11855,50216,Elizabeth Rubram,00:00,Forensic Technician,"",,Ghosted in Cryopod,01:14
+11856,50216,Thomas Sagan,00:00,Shaft Miner,"",,Ghosted,01:21
+11857,50216,Alfred Kiefer,00:02,Shaft Miner,"",,Ghosted,01:21
+11858,50216,Harvester (157),01:18,Animal,Cultist,{Cultist},Ghosted,01:22
+11859,50216,Gennady Whiteman,00:00,Security Officer,"",,Cryopod,01:30
+11860,50216,podkid (883),01:40,"","",,Ghosted,01:40
+11861,50216,Ulric Parker,00:00,Medical Doctor,"",,Ghosted,01:43
+11862,50216,Isaiah Vader,00:00,Roboticist,"",,Disconnected,00:02
+11863,50216,Jeremy Schofield,00:00,Xenoarchaeologist,"",,Disconnected,00:22
+11864,50216,Alexander Sokolov,00:12,Botanist,"",,Disconnected,00:27
+11865,50216,Robert Blake,00:14,Cargo Technician,"",,Disconnected,00:29
+11866,50216,Ali Azar,00:00,Chaplain,"",,Disconnected,00:35
+11867,50216,Timothy Bowchiew,00:53,Technical Assistant,"",,Disconnected,01:24
+11868,50216,Roy Surgovich,00:51,Technical Assistant,"",,Disconnected,01:25
+11869,50227,Shade of Kakakahti,00:17,Shade,"",,Ghosted,00:17
+11870,50227,Bill Black,00:00,Technical Assistant,"",,Cryopod,00:46
+11871,50227,Jimena Reade,00:00,Technical Assistant,"",,Cryopod,00:46
+11872,50227,Najah Mujib,00:00,Paramedic,"",,Disconnected,00:18
+11873,50227,Yachakahtakahki,00:00,MODE,Vox Raider,{Vox Raider},Disconnected,00:19
+11874,50227,Persh Levett,00:06,Recycler,"",,Disconnected,00:30
+11875,50222,B.Cast,00:56,Research Director,"",,Ghosted in Cryopod,00:57
+11876,50222,Zordium,00:59,default,"",,Ghosted,01:03
+11877,50222,Mike Ward,00:00,Quartermaster,"",,Cryopod,04:55
+11878,50222,Mike Ward,00:00,Quartermaster,"",,Disconnected,00:02
+11879,50222,Steven Anderson,01:13,Chief Engineer,"",,Disconnected,05:44
+11880,50212,Ryder Moore,00:00,Technical Assistant,"",,Ghosted in Cryopod,00:00
+11881,50212,Adolph Nastain,00:00,Medical Doctor,"",,Cryopod,00:30
+11882,50212,Chihayahikiya,00:00,MODE,Vox Raider,{Vox Raider},Disconnected,00:00
+11883,50212,Adolph Nastain,00:00,Medical Doctor,"",,Disconnected,00:02
+11884,50212,Seymour Briggs,00:07,Roboticist,"",,Disconnected,00:28
+11885,50212,Balbesus,00:12,Clown,"",,Disconnected,00:40
+11886,50219,Makskim Shomski,00:00,Barber,"",,Ghosted,00:16
+11887,50219,Francisco Gonzales,00:00,Technical Assistant,"",,Cryopod,00:33
+11888,50219,Ascent Of The Lord Of Dawn,00:00,Botanist,"",,Cryopod,00:47
+11889,50219,Marcos Donkin,00:00,Test Subject,"",,Cryopod,01:15
+11890,50219,Vitia Kosoi,00:00,Virologist,"",,Cryopod,01:17
+11891,50219,Marcos Donkin,00:00,Test Subject,"",,Disconnected,00:23
+11892,50219,Omega,00:17,default,"",,Disconnected,00:29
+11893,50226,Cassian Winton,00:02,Medical Doctor,"",,Ghosted in Cryopod,00:04
+11894,50226,Roman Elinov,01:19,Security Officer,"",,Disconnected,01:46
+11895,50226,Ivan Huga,00:02,Quartermaster,"",,Disconnected,01:46
+11896,50200,Gatatikikichakiya,00:00,Test Subject,"",,Cryopod,00:25
+11897,50200,Slip Pogba,00:25,Security Officer,"",,Cryopod,00:57
+11898,50200,Slip Pogba,01:38,Test Subject,"",,Ghosted in Cryopod,01:39
+11899,50200,Riley James,00:11,Mime,"",,Disconnected,00:23
+11900,50200,Seymour Briggs,00:00,Geneticist,"",,Disconnected,00:51
+11901,50200,mouse (477),01:06,Animal,"",,Disconnected,01:09
+11902,50200,Kate Shmidt,01:12,Bartender,"",,Disconnected,01:35
+11903,50200,Wikipedia,01:07,AI,"",,Disconnected,01:45
+11904,50224,Kakotika,00:00,Shaft Miner,"",,Disconnected,00:08
+11905,50224,Arkadiy Paradigmovich,01:23,Technical Assistant,"",,Disconnected,01:29
+11906,50224,Spike Schmidt,00:00,Security Officer,"",,Disconnected,01:44
+11907,50231,Weston Bell,00:00,Detective,"",,Ghosted in Cryopod,00:36
+11908,50231,Dante Virt,00:00,Chief Medical Officer,"",,Cryopod,00:52
+11909,50231,Chloe Price,00:00,Head of Personnel,"",,Cryopod,00:53
+11910,50231,Renato Sardini,00:00,Technical Assistant,"",,Ghosted in Cryopod,01:11
+11911,50231,DUNC-910,00:24,Cyborg,"",,Ghosted,01:38
+11912,50231,Teddy,00:00,Roboticist,Traitor,{Traitor},Disconnected,01:41
+11913,50206,maintenance drone (726),00:16,Cyborg,"",,Ghosted,00:31
+11914,50206,Jose Butterfill,00:00,Security Officer,"",,Cryopod,00:57
+11915,50206,Andy Rotberg,00:49,Internal Affairs Agent,"",,Cryopod,01:06
+11916,50206,Chloe Price,00:00,Head of Personnel,"",,Cryopod,01:14
+11917,50206,Shi'shi De She,00:29,Security Officer,"",,Cryopod,01:29
+11918,50206,Tristan Garratt,00:00,Station Engineer,"",,Disconnected,00:39
+11919,50206,Charles Wood,00:06,Xenobiologist,"",,Disconnected,00:40
+11920,50206,Colvar Abram,00:26,Shaft Miner,"",,Disconnected,00:52
+11921,50206,Tyler Rathen,00:00,Paramedic,"",,Disconnected,00:56
+11922,50206,Shi'shi De She,00:29,Security Officer,"",,Disconnected,01:06
+11923,50206,Patrick Rowley,00:39,Shaft Miner,"",,Disconnected,01:36
+11924,50204,Adam Sommer,00:00,Security Officer,"",,Cryopod,00:18
+11925,50204,Isaiah Vader,00:00,Security Officer,"",,Cryopod,00:21
+11926,50204,Leeland Rahl,00:00,Head of Security,"",,Ghosted,00:24
+11927,50204,Joseph Hope,00:00,Scientist,"",,Ghosted,00:29
+11928,50204,Sasha Clark,00:00,Medical Doctor,"",,Cryopod,00:37
+11929,50204,Richard Reed,00:21,Station Engineer,"",,Ghosted,00:38
+11930,50204,Allen Richardson,00:39,Test Subject,"",,Ghosted,00:42
+11931,50204,Andrey Palkow,00:25,Bartender,"",,Ghosted,00:42
+11932,50204,Ken,00:49,default,"",,Ghosted,00:53
+11933,50204,Милая согханочка из борде,00:49,default,"",,Ghosted,00:54
+11934,50204,Rafael Pfeifer,00:53,default,"",,Ghosted,00:54
+11935,50204,Dar'zahr,00:14,Medical Doctor,"",,Ghosted,01:02
+11936,50204,Gwenevere Coldsmith,01:05,default,"",,Ghosted,01:06
+11937,50204,Unbelievable God,00:28,Chaplain`s staff,"",,Ghosted,01:06
+11938,50204,mouse (529),01:06,Animal,"",,Ghosted,01:07
+11939,50204,Adam Sommer,00:00,Security Officer,"",,Disconnected,00:00
+11940,50204,Bailey Patel,00:00,Station Engineer,"",,Disconnected,00:02
+11941,50204,Adolph Nastain,00:14,Security Cadet,"",,Disconnected,00:25
+11942,50204,Johnathan Armstrong,00:00,Recycler,"",,Disconnected,00:34
+11943,50204,mouse (137),00:43,Animal,"",,Disconnected,00:43
+11944,50204,Lion Remark,00:00,Virologist,"",,Disconnected,00:47
+11945,50204,maintenance drone (874),00:55,Cyborg,"",,Disconnected,00:59
+11946,50223,Lenny Echard,00:09,Test Subject,"",,Ghosted in Cryopod,00:19
+11947,50223,Union,00:49,default,"",,Ghosted,00:52
+11948,50223,Karen,00:00,Chemist,"",,Ghosted in Cryopod,01:03
+11949,50223,Seamon Light,00:00,Shaft Miner,"",,Disconnected,00:03
+11950,50223,Arleen Morris,00:08,Station Engineer,"",,Disconnected,00:36
+11951,50223,Drew Collins,00:00,Botanist,"",,Disconnected,00:54
+11952,50223,Oleg Osetrov,01:08,Warden,"",,Disconnected,01:15
+11953,50223,Marvin,00:00,AI,"",,Disconnected,01:17
+11954,50223,Rick Justice,00:00,Medical Doctor,"",,Disconnected,01:29
+11955,50225,Joon Deleon,00:00,Medical Doctor,"",,Ghosted in Cryopod,00:05
+11956,50225,Timothy David,00:56,Test Subject,"",,Cryopod,01:55
+11957,50225,Flick Welty,00:00,Quartermaster,"",,Disconnected,00:41
+11958,50225,Dawson Dryfus,00:52,Head of Security,"",,Disconnected,01:05
+11959,50225,Vlad Omar,00:00,Security Cadet,"",,Disconnected,01:44
+11960,50220,Sergey Labuda,00:00,Station Engineer,"",,Ghosted in Cryopod,00:04
+11961,50220,Mike Spenser,00:00,Cargo Technician,"",,Ghosted in Cryopod,00:04
+11962,50220,mouse (971),00:01,Animal,"",,Ghosted,00:08
+11963,50220,mouse (779),00:01,Animal,"",,Disconnected,00:02
+11964,50220,Stefan Ray,00:00,Bartender,"",,Disconnected,00:09
+11965,50220,Andrey Palkow,00:00,Security Officer,"",,Disconnected,00:10
+11966,50220,Byrne Buttersworth,00:06,Test Subject,"",,Disconnected,00:11
+11967,50220,Franklin Davis,00:00,Test Subject,"",,Disconnected,00:11
+11968,50220,Semyon Hatsunov,00:00,Test Subject,"",,Disconnected,00:14
+11969,50208,Jill Stingray,00:00,Bartender,"",,Ghosted in Cryopod,00:10
+11970,50208,Brodie Glover,00:26,Internal Affairs Agent,"",,Ghosted,00:39
+11971,50208,Marcus Peters,00:00,Station Engineer,"",,Cryopod,01:00
+11972,50208,Makskim Shomski,00:02,Medical Intern,"",,Ghosted in Cryopod,01:07
+11973,50208,Kuriu Qlio'kaf,00:00,Janitor,"",,Cryopod,01:23
+11974,50208,Mr.Honky,00:00,Clown,"",,Ghosted,01:50
+11975,50208,Sal Lord,00:00,Station Engineer,"",,Disconnected,00:29
+11976,50208,Kuriu Qlio'kaf,00:00,Janitor,"",,Disconnected,00:57
+11977,50208,Nikolay Oleinikov,00:58,Warden,"",,Disconnected,01:08
+11978,50208,Chris Snyder,01:29,Shaft Miner,"",,Disconnected,01:36
+11979,50208,Seymour Briggs,01:04,Geneticist,"",,Disconnected,01:36
+11980,50208,Otto Schulz,00:00,Cyborg,"",,Disconnected,01:40
+11981,50208,Patrick Rowley,00:00,Shaft Miner,"",,Disconnected,01:50
+11982,50208,Mihail,01:02,default,"",,Disconnected,01:51
+11983,50210,Dawson Dryfus,00:07,Detective,"",,Cryopod,01:04
+11984,50210,Loreto Bunten,00:00,Xenoarchaeologist,Traitor,{Traitor},Ghosted in Cryopod,01:18
+11985,50210,Colton Moore,00:00,Xenoarchaeologist,"",,Ghosted,01:29
+11986,50210,Robert Exeter,00:59,Security Officer,"",,Ghosted in Cryopod,01:30
+11987,50210,Vitia Kosoi,00:00,Medical Doctor,"",,Cryopod,01:31
+11988,50210,Konstantin Morozov,00:00,Cyborg,"",,Ghosted,01:34
+11989,50210,Jameson Jenner,00:04,Test Subject,"",,Cryopod,01:41
+11990,50210,Alfred Donkin,00:00,Station Engineer,"",,Cryopod,01:50
+11991,50210,Rick Shorts,00:42,Roboticist,"",,Cryopod,01:50
+11992,50210,Ali Azar,00:00,Chaplain,"",,Disconnected,00:22
+11993,50210,Dawson Dryfus,00:07,Detective,"",,Disconnected,00:28
+11994,50210,Ulric Parker,00:00,Station Engineer,"",,Disconnected,00:59
+11995,50210,Chloe Price,00:00,Psychiatrist,"",,Disconnected,01:22
+11996,50210,Artemida Byblikova,00:00,Chef,Traitor,{Traitor},Disconnected,01:09
+11997,50210,Makskim Shomski,00:00,Quartermaster,"",,Disconnected,01:18
+11998,50210,Jameson Jenner,00:04,Test Subject,"",,Disconnected,01:19
+11999,50210,Rick Shorts,00:42,Roboticist,"",,Disconnected,01:24
+12000,50210,Jared Smith,01:26,Technical Assistant,"",,Disconnected,01:26
+12001,50210,Bishop,00:00,AI,"",,Disconnected,01:32
+12002,50210,Ruben Foster,00:52,Bartender,"",,Disconnected,01:41
+12003,50210,Adam Baklazhanov,00:00,Chef,"",,Disconnected,01:51
+12004,50209,Paral Dune,00:00,Atmospheric Technician,"",,Ghosted in Cryopod,00:02
+12005,50209,Jeremy Lloyd,00:00,Librarian,"",,Ghosted,00:12
+12006,50209,Konstantin Morozov,00:00,Geneticist,Shadowling,{Shadowling},Cryopod,00:15
+12007,50209,Nikita Bubencov,00:00,Cyborg,"",,Ghosted,00:27
+12008,50209,XHS-540,00:04,Cyborg,"",,Ghosted,00:33
+12009,50209,Chris Snyder,00:00,Cargo Technician,"",,Cryopod,00:36
+12010,50209,Max Black,00:00,Test Subject,"",,Ghosted in Cryopod,00:41
+12011,50209,maintenance drone (791),00:40,Cyborg,"",,Ghosted,00:41
+12012,50209,Isaiah Vader,00:00,Security Officer,"",,Ghosted,00:52
+12013,50209,Dar'zahr,00:00,Virologist,"",,Cryopod,00:52
+12014,50209,Dawson Dryfus,00:06,Security Officer,"",,Cryopod,01:02
+12015,50209,M'ark M'rshan,00:00,Roboticist,"",,Ghosted in Cryopod,01:07
+12016,50209,XHS-540,00:04,Cyborg,"",,Ghosted,01:14
+12017,50209,Gwenevere Coldsmith,00:00,Atmospheric Technician,"",,Ghosted in Cryopod,01:16
+12018,50209,Rosemary Demuth,00:40,Chef,"",,Cryopod,01:17
+12019,50209,Ivan Huga,00:00,Geneticist,"",,Ghosted,01:29
+12020,50209,Aurelius Aquilimus,00:00,Mime,"",,Cryopod,01:29
+12021,50209,Aphelios Tildor,00:00,Medical Doctor,"",,Disconnected,00:39
+12022,50209,Johnathan Armstrong,00:00,Quartermaster,"",,Disconnected,00:54
+12023,50209,Allen Richardson,00:00,Test Subject,Thrall,{Thrall},Disconnected,00:57
+12024,50209,Danny Roby,00:00,Security Cadet,"",,Disconnected,01:01
+12025,50209,Roy Walker,00:00,Warden,"",,Disconnected,01:07
+12026,50209,mouse (930),01:14,Animal,"",,Disconnected,01:14
+12027,50209,Daniel Parker,00:55,Station Engineer,"",,Disconnected,01:21
+12028,50209,Bruce Fitgerald,00:07,Test Subject,Traitor,{Traitor},Disconnected,01:23
+12029,50229,Allen Richardson,00:00,Security Officer,"",,Ghosted in Cryopod,00:01
+12030,50229,Reuben Hunt,00:00,Technical Assistant,"",,Ghosted in Cryopod,00:01
+12031,50229,maintenance drone (233),00:07,Cyborg,"",,Ghosted,00:29
+12032,50229,Evgeniy Barabulka,00:00,Security Officer,"",,Ghosted in Cryopod,00:52
+12033,50229,Drill Gnoos,00:00,Medical Doctor,"",,Ghosted in Cryopod,00:56
+12034,50229,mouse (249),00:57,Animal,"",,Ghosted,00:58
+12035,50229,Gennady Whiteman,00:00,Security Officer,"",,Cryopod,01:01
+12036,50229,Slen Franko,00:53,Test Subject,"",,Ghosted,01:08
+12037,50229,Overseer,00:46,default,"",,Ghosted,01:20
+12038,50229,Bibka,00:08,Clown,"",,Ghosted,01:22
+12039,50229,Adolph Nastain,00:00,Chemist,"",,Ghosted,01:23
+12040,50229,Lim Al-Kuds,00:00,Test Subject,"",,Disconnected,00:37
+12041,50229,Bruce Fitgerald,00:06,Recycler,"",,Disconnected,01:18
+12042,50218,Viktor Valentine,00:00,MODE,Nuclear Operative,{Nuclear Operative},Ghosted,00:22
+12043,50218,Jad Shock,00:00,Mime,"",,Ghosted,00:25
+12044,50218,Skiddle,00:00,Clown,"",,Ghosted,00:26
+12045,50218,Violet Velorum,00:00,Chemist,"",,Disconnected,00:03
+12046,50218,mouse (542),00:16,Animal,"",,Disconnected,00:16
+12047,50218,Isall Niver,00:13,Test Subject,"",,Disconnected,00:22
+12048,50230,Evgeniy Barabulka,00:00,Station Engineer,"",,Ghosted in Cryopod,00:01
+12049,50230,Klein Maccubus,00:01,Medical Intern,"",,Ghosted in Cryopod,00:02
+12050,50230,Luke Roadman,00:00,MODE,Nuclear Operative,{Nuclear Operative},Ghosted,00:10
+12051,50230,Gatatikikichakiya,00:00,Atmospheric Technician,"",,Cryopod,00:28
+12052,50230,Quri Oliqoomarra,00:00,Medical Doctor,"",,Ghosted in Cryopod,00:30
+12053,50230,maintenance drone (453),00:00,Cyborg,"",,Ghosted,00:36
+12054,50230,Daniel Mildred,00:13,Head of Security,"",,Ghosted in Cryopod,00:39
+12055,50230,Slen Franko,00:22,Station Engineer,"",,Ghosted,00:54
+12056,50230,mouse (455),00:14,Animal,"",,Ghosted,00:59
+12057,50230,maintenance drone (879),00:59,Cyborg,"",,Ghosted,01:04
+12058,50230,maintenance drone (549),00:51,Cyborg,"",,Ghosted,01:08
+12059,50230,Adolph Nastain,00:00,Janitor,"",,Disconnected,00:36
+12060,50230,Alen Daylore,00:00,Security Officer,"",,Disconnected,00:38
+12061,50230,Mei Kiryuin,00:00,Head of Personnel,"",,Disconnected,00:39
+12062,50230,Huey Long,00:00,Chef,"",,Disconnected,00:52
+12063,50230,Jason Snyder,00:55,default,"",,Disconnected,00:56
+12064,50230,Jason Powell,00:00,Detective,"",,Disconnected,01:07
+12065,50214,DUNC-472,00:02,Positronic Brain,"",,Ghosted,00:03
+12066,50214,Aisha Al-Zahrami,00:00,Paramedic,"",,Ghosted in Cryopod,00:10
+12067,50214,Shagan Rock'Shur,00:00,Test Subject,Traitor,{Traitor},Ghosted,00:11
+12068,50214,Richard Reed,00:00,Security Officer,"",,Cryopod,00:14
+12069,50214,John Mackenzie,00:00,Chemist,Traitor,{Traitor},Cryopod,00:20
+12070,50214,Unbelievable God,00:05,Chaplain`s staff,"",,Ghosted,00:27
+12071,50214,Karen,00:00,Atmospheric Technician,"",,Ghosted in Cryopod,00:35
+12072,50214,Woclaw Przjemyslawitch,00:00,Bartender,"",,Cryopod,00:43
+12073,50214,Ivan Huga,00:00,Chaplain,"",,Ghosted,00:45
+12074,50214,John Don,00:00,Paramedic,"",,Ghosted in Cryopod,00:48
+12075,50214,Bailey Patel,00:00,Station Engineer,"",,Ghosted,00:48
+12076,50214,Troy Orgail,00:00,Medical Intern,"",,Ghosted in Cryopod,00:54
+12077,50214,Ladybug Honks,00:00,Clown,"",,Ghosted in Cryopod,01:04
+12078,50214,Dominick Addison,00:00,Chief Engineer,"",,Cryopod,01:06
+12079,50214,Zed Murray,00:00,Medical Doctor,"",,Cryopod,01:14
+12080,50214,mouse (964),01:18,Animal,"",,Ghosted,01:18
+12081,50214,Harvey Schaeffer,00:00,Station Engineer,"",,Cryopod,01:18
+12082,50214,Minerva Everett,00:07,Medical Doctor,"",,Cryopod,01:23
+12083,50214,Gaspard De Chevalier,01:13,Test Subject,"",,Cryopod,01:30
+12084,50214,Spike Schmidt,00:50,Paramedic,"",,Cryopod,01:33
+12085,50214,maintenance drone (271),01:34,Cyborg,"",,Ghosted,01:44
+12086,50214,Charlie Greene,00:00,Xenobiologist,"",,Disconnected,00:13
+12087,50214,Woclaw Przjemyslawitch,00:00,Bartender,"",,Disconnected,00:18
+12088,50214,Butch Adler,00:27,Cargo Technician,"",,Disconnected,00:36
+12089,50214,Rick Shorts,00:00,Xenoarchaeologist,"",,Disconnected,00:38
+12090,50214,Minerva Everett,00:07,Medical Doctor,"",,Disconnected,00:41
+12091,50214,Lim Al-Kuds,00:00,Geneticist,"",,Disconnected,01:34
+12092,50205,Gwenevere Coldsmith,00:00,Atmospheric Technician,"",,Ghosted in Cryopod,00:16
+12093,50205,Maya Foxova,00:00,Internal Affairs Agent,Abducted,{Abducted},Ghosted,00:19
+12094,50205,Tyler Jones,00:00,Research Director,"",,Ghosted,00:26
+12095,50205,Makskim Shomski,00:33,Chaplain,"",,Ghosted,00:41
+12096,50205,Paral Dune,00:00,Atmospheric Technician,"",,Ghosted in Cryopod,00:56
+12097,50205,Patrick Rowley,00:03,Station Engineer,"",,Cryopod,00:57
+12098,50205,mouse (913),00:58,Animal,"",,Ghosted,01:04
+12099,50205,Jim Morris,00:22,Station Engineer,"",,Cryopod,01:07
+12100,50205,Najah Mujib,00:00,Station Engineer,"",,Cryopod,01:11
+12101,50205,Kefal.Archigos.Filos,00:00,Station Engineer,"",,Ghosted in Cryopod,01:12
+12102,50205,Colvar Abram,00:48,Cargo Technician,"",,Cryopod,01:13
+12103,50205,mouse (837),01:10,Animal,"",,Ghosted,01:14
+12104,50205,Shi'shi De She,00:00,Security Officer,"",,Cryopod,01:16
+12105,50205,Max Black,00:00,Janitor,Abducted,{Abducted},Ghosted,01:17
+12106,50205,Chris Snyder,01:01,Test Subject,"",,Ghosted in Cryopod,01:18
+12107,50205,Fading Light,00:23,Test Subject,"",,Ghosted in Cryopod,01:18
+12108,50205,Tamsin Winton,00:00,Security Officer,"",,Cryopod,01:21
+12109,50205,Elliot Temere,00:00,Test Subject,"",,Cryopod,01:22
+12110,50205,KOR-791,00:31,Cyborg,"",,Ghosted,01:22
+12111,50205,Kale Keppel,00:51,Botanist,"",,Cryopod,01:26
+12112,50205,Lucas Gibson,00:00,Mime,"",,Ghosted,01:27
+12113,50205,Sharon Nash,00:31,Security Officer,"",,Ghosted,01:29
+12114,50205,Patrick Rowley,00:03,Station Engineer,"",,Disconnected,00:26
+12115,50205,Illia Bronson,00:00,Medical Doctor,"",,Disconnected,00:42
+12116,50205,Michael Langston,00:00,Geneticist,"",,Disconnected,00:58
+12117,50205,Hugo Richter,00:00,Virologist,"",,Disconnected,00:59
+12118,50205,Alroy Podkins,00:21,Test Subject,"",,Disconnected,01:00
+12119,50205,Danny Roby,00:00,Shaft Miner,"",,Disconnected,01:01
+12120,50205,Alexander Petrovich,00:41,Medical Doctor,"",,Disconnected,01:02
+12121,50205,Windows Braun,00:45,Barber,"",,Disconnected,01:12
+12122,50205,Andrey Palkow,00:00,Bartender,"",,Disconnected,01:28
+12123,50228,mouse (849),00:26,Animal,"",,Ghosted,00:32
+12124,50228,Zarella Frei,00:00,Cargo Technician,"",,Ghosted,00:40
+12125,50228,M'ark M'rshan,00:00,Cyborg,"",,Ghosted,00:40
+12126,50228,Richard Reed,00:41,Station Engineer,"",,Ghosted,00:42
+12127,50228,Jesus Exery,00:47,Security Officer,"",,Ghosted,01:02
+12128,50228,Issar Hess,00:00,Cyborg,"",,Ghosted,01:05
+12129,50228,maintenance drone (505),01:06,Cyborg,"",,Ghosted,01:12
+12130,50228,mouse (556),01:16,Animal,"",,Ghosted,01:17
+12131,50228,maintenance drone (145),01:00,Cyborg,"",,Ghosted,01:17
+12132,50228,Diego Merryman,00:28,Recycler,"",,Disconnected,00:38
+12133,50228,Adolph Keppel,00:00,Technical Assistant,"",,Disconnected,00:43
+12134,50228,Vitia Kosoi,00:00,Medical Doctor,"",,Disconnected,00:56
+12135,50228,Dawson Dryfus,00:37,Security Officer,"",,Disconnected,01:05
+12136,50211,Ivan Huga,00:00,Botanist,"",,Ghosted,00:21
+12137,50211,KOR-901,00:22,Cyborg,"",,Ghosted,00:25
+12138,50211,Rosemary Demuth,00:00,Chef,"",,Cryopod,00:35
+12139,50211,Sergey Labuda,00:00,Station Engineer,"",,Ghosted in Cryopod,00:37
+12140,50211,Francisco Kelly,00:05,Test Subject,"",,Cryopod,00:39
+12141,50211,KOR-901,00:22,Cyborg,"",,Ghosted,00:41
+12142,50211,Nikita Bubencov,00:00,Shaft Miner,"",,Ghosted,00:44
+12143,50211,Vadim Wood,00:00,Test Subject,"",,Ghosted in Cryopod,00:44
+12144,50211,KOR-901,00:22,Cyborg,"",,Ghosted,00:52
+12145,50211,Gwenevere Coldsmith,00:00,Test Subject,"",,Ghosted in Cryopod,00:53
+12146,50211,Li'quxpixli Lenienq'wik,00:00,Recycler,"",,Ghosted in Cryopod,01:02
+12147,50211,Thomas Leech,00:00,Mime,"",,Disconnected,00:02
+12148,50211,Aurelius Aquilimus,00:00,Chef,"",,Disconnected,00:36
+12149,50211,Dawson Dryfus,00:00,Warden,"",,Disconnected,01:04
+12150,50232,Slen Franko,00:00,Security Cadet,"",,Ghosted in Cryopod,00:04
+12151,50232,Ii'rranmra Kratul,00:00,Station Engineer,"",,Ghosted in Cryopod,00:07
+12152,50232,Kronos Fanth,00:00,Scientist,"",,Ghosted in Cryopod,00:10
+12153,50232,Kronos Fanth,00:00,Scientist,"",,Ghosted in Cryopod,00:10
+12154,50232,maintenance drone (936),00:09,Cyborg,"",,Ghosted,00:11
+12155,50232,mouse (237),00:31,Animal,"",,Ghosted,00:35
+12156,50232,Richard Reed,00:00,Security Officer,"",,Ghosted,00:40
+12157,50232,Paravoz,00:00,Clown,"",,Cryopod,00:44
+12158,50232,mouse (309),00:44,Animal,"",,Ghosted,00:45
+12159,50232,Patrick Cherry,00:00,Test Subject,"",,Ghosted,00:48
+12160,50232,Sigma O'Neill,00:02,Medical Doctor,"",,Ghosted,00:49
+12161,50232,Gatatikikichakiya,00:04,Roboticist,"",,Cryopod,00:53
+12162,50232,Aphelios Tildor,00:00,Station Engineer,"",,Ghosted,00:56
+12163,50232,Luke Roadman,00:00,Botanist,"",,Ghosted,00:57
+12164,50232,Isall Niver,00:25,Medical Intern,"",,Cryopod,01:03
+12165,50232,maintenance drone (557),01:06,Cyborg,"",,Ghosted,01:10
+12166,50232,mouse (49),01:10,Animal,"",,Ghosted,01:11
+12167,50232,maintenance drone (929),01:11,Cyborg,"",,Ghosted,01:14
+12168,50232,mouse (529),00:48,Animal,"",,Ghosted,01:17
+12169,50232,mouse (60),01:32,Animal,"",,Ghosted,01:32
+12170,50232,maintenance drone (509),01:18,Cyborg,"",,Ghosted,01:33
+12171,50232,Gladwyn Marriman,00:15,Test Subject,"",,Disconnected,00:23
+12172,50232,Sergey Labuda,00:00,Station Engineer,"",,Disconnected,00:36
+12173,50232,Troy Orgail,00:00,Chemist,"",,Disconnected,01:00
+12174,50232,Bo Bo Sassy,00:54,Clown,"",,Disconnected,01:09
+12175,50232,Davy Butchers,00:00,Chaplain,"",,Disconnected,01:09
+12176,50232,maintenance drone (635),01:01,Cyborg,"",,Disconnected,01:12
+12177,50232,maintenance drone (936),01:00,Cyborg,"",,Disconnected,01:19
+12178,50232,Jason Powell,01:04,Internal Affairs Agent,"",,Disconnected,01:20
+12179,50232,maintenance drone (834),00:54,Cyborg,"",,Disconnected,01:21
+12180,50232,Jim Morris,00:51,Medical Doctor,"",,Disconnected,01:34
+12181,50232,Chip Elderson,00:00,Scientist,"",,Disconnected,01:35
+12182,50232,Andrey Palkow,00:00,Quartermaster,"",,Disconnected,01:37
+12183,50232,Angela Barens,00:08,Botanist,"",,Disconnected,01:37
+12184,50207,M'ark M'rshan,00:00,Scientist,"",,Ghosted in Cryopod,00:05
+12185,50207,Ivory Howard,00:00,Security Officer,"",,Ghosted in Cryopod,00:18
+12186,50207,Makskim Shomski,00:00,Chaplain,Gangster Leader,{Gangster Leader},Ghosted in Cryopod,00:23
+12187,50207,Ivan Huga,00:00,Test Subject,"",,Ghosted,00:23
+12188,50207,Paral Dune,00:00,Atmospheric Technician,"",,Ghosted in Cryopod,00:29
+12189,50207,Slen Franko,00:00,Security Cadet,"",,Ghosted in Cryopod,00:34
+12190,50207,maintenance drone (350),00:06,Cyborg,"",,Ghosted,00:34
+12191,50207,Kuriu Qlio'kaf,00:11,Janitor,"",,Cryopod,00:34
+12192,50207,Gatatikikichakiya,00:00,Detective,"",,Cryopod,00:44
+12193,50207,Tyler Jones,00:00,Station Engineer,"",,Cryopod,00:47
+12194,50207,Isaiah Vader,00:00,Geneticist,Gangster Leader,{Gangster Leader},Cryopod,00:48
+12195,50207,Karen,00:00,Shaft Miner,"",,Ghosted,00:50
+12196,50207,Lucas Gibson,00:23,Botanist,"",,Ghosted in Cryopod,00:58
+12197,50207,Andy Willey,00:08,Test Subject,Gangster,{Gangster},Ghosted,01:05
+12198,50207,DUNC-432,00:13,Cyborg,"",,Ghosted,01:08
+12199,50207,Gikakhayikati,00:00,Chef,Gangster Leader,{Gangster Leader},Ghosted,01:15
+12200,50207,Mama,01:11,default,OCD Officer,{OCD Officer},Ghosted,01:22
+12201,50207,Sharon Nash,00:00,Medical Doctor,"",,Disconnected,00:04
+12202,50207,Colvar Abram,00:00,Shaft Miner,"",,Disconnected,00:07
+12203,50207,Kuriu Qlio'kaf,00:11,Janitor,"",,Disconnected,00:18
+12204,50207,Aurili Septemus,00:00,Security Officer,"",,Disconnected,00:23
+12205,50207,Adolph Nastain,00:03,Security Officer,"",,Disconnected,00:38
+12206,50207,Sal Lord,00:00,Geneticist,"",,Disconnected,00:56
+12207,50207,Jake Summy,00:00,Warden,"",,Disconnected,01:18
+12208,50207,SSGT. Frost,01:09,default,OCD Officer,{OCD Officer},Disconnected,01:18
+12209,50207,Gwenevere Coldsmith,00:00,Atmospheric Technician,Gangster,{Gangster},Disconnected,01:19
+12210,50207,Maya Foxova,01:01,Chaplain,"",,Disconnected,01:19
+12211,50207,Gabriel Roberts,00:31,Cargo Technician,"",,Disconnected,01:20
+12212,50207,Alpha,01:09,default,OCD Officer,{OCD Officer},Disconnected,01:22
+12213,50207,Maxoun Gymovic,00:00,Recycler,"",,Disconnected,01:25
+12214,50207,Rosemary Demuth,00:00,Bartender,Gangster,{Gangster},Disconnected,01:26
+12215,50221,Roy Walker,00:00,Test Subject,"",,Ghosted in Cryopod,00:03
+12216,50221,Aidan Jackson,00:00,Security Officer,"",,Cryopod,00:44
+12217,50221,Bryan James,00:00,Paramedic,"",,Cryopod,00:52
+12218,50221,BIBA,00:00,Clown,"",,Cryopod,00:53
+12219,50221,Slava Petrov,00:07,Test Subject,"",,Cryopod,01:10
+12220,50221,Ryker Wolfe,01:10,Test Subject,"",,Ghosted in Cryopod,01:11
+12221,50221,Unbelievable God,01:04,Chaplain`s staff,"",,Ghosted,01:12
+12222,50221,Alex Ermakov,00:00,Recycler,"",,Cryopod,01:13
+12223,50221,Juggernaut (86),01:13,Juggernaut,Cultist,{Cultist},Ghosted,01:13
+12224,50221,Juggernaut (12),01:13,Juggernaut,Cultist,{Cultist},Ghosted,01:13
+12225,50221,Harvester (75),01:13,Animal,Cultist,{Cultist},Ghosted,01:13
+12226,50221,Harvester (606),01:13,Animal,Cultist,{Cultist},Ghosted,01:13
+12227,50221,Artificer (960),01:13,Artificer,Cultist,{Cultist},Ghosted,01:14
+12228,50221,Artificer (182),01:14,Artificer,Cultist,{Cultist},Ghosted,01:14
+12229,50221,Harvester (882),01:14,Animal,Cultist,{Cultist},Ghosted,01:14
+12230,50221,Tyler Jones,01:08,Security Officer,"",,Ghosted,01:14
+12231,50221,Seok Drummond,00:06,Security Officer,"",,Ghosted,01:15
+12232,50221,Tate Benford,00:00,Chief Medical Officer,"",,Ghosted,01:17
+12233,50221,Artemida Byblikova,00:00,Xenobiologist,Cultist,{Cultist},Disconnected,00:23
+12234,50221,Baldric Saylor,00:00,Cyborg,"",,Disconnected,00:28
+12235,50221,Lary Doger,00:00,Medical Doctor,"",,Disconnected,00:31
+12236,50221,Slava Petrov,00:07,Test Subject,"",,Disconnected,00:34
+12237,50221,Timothy Bicknell,00:07,Chef,"",,Disconnected,00:34
+12238,50221,Ian,00:03,"","",,Disconnected,00:51
+12239,50221,Alisa Don,00:00,Botanist,"",,Disconnected,00:52
+12240,50221,Alexander Sokolov,00:47,Librarian,"",,Disconnected,00:58
+12241,50221,Mike Spenser,00:00,Cargo Technician,"",,Disconnected,01:01
+12242,50221,Maya Foxova,00:00,Captain,"",,Disconnected,01:06
+12243,50221,Thomas Remongton,01:08,Botanist,"",,Disconnected,01:13
+12244,50221,Oleg Osetrov,00:45,Detective,"",,Disconnected,01:16
+12245,50202,Bailey Patel,00:00,Station Engineer,"",,Cryopod,00:15
+12246,50202,Adolf Firefield,00:00,Medical Doctor,"",,Ghosted in Cryopod,00:17
+12247,50202,Unbelievable God,00:02,Shade,"",,Ghosted,00:32
+12248,50202,Curly Mens,00:19,Medical Doctor,"",,Cryopod,00:51
+12249,50202,Cold Winds Of Winter,00:00,Chemist,"",,Cryopod,01:00
+12250,50202,Johnathan Mosser,00:00,Head of Security,"",,Cryopod,01:02
+12251,50202,homunculus of The One Who Sees XI,01:36,default,Cultist,{Cultist},Ghosted,01:36
+12252,50202,Evangelina Shaffer,00:00,Cyborg,"",,Ghosted,01:36
+12253,50202,Harvester (773),01:39,Animal,Cultist,{Cultist},Ghosted,01:40
+12254,50202,mouse (842),01:37,Animal,"",,Ghosted,01:40
+12255,50202,Harvester (781),01:39,Animal,Cultist,{Cultist},Ghosted,01:40
+12256,50202,Harvester (875),01:39,Animal,Cultist,{Cultist},Ghosted,01:40
+12257,50202,Elliot Temere,01:34,Test Subject,"",,Ghosted,01:41
+12258,50202,Harvester (215),01:40,Animal,Cultist,{Cultist},Ghosted,01:42
+12259,50202,Proteon (581),01:39,Proteon,Cultist,{Cultist},Ghosted,01:42
+12260,50202,Wraith (247),01:28,Wraith,Slave,{Slave},Ghosted,01:45
+12261,50202,Dar'zahr,00:00,Shaft Miner,"",,Ghosted,01:46
+12262,50202,Curly Mens,00:19,Medical Doctor,"",,Disconnected,00:26
+12263,50202,Johnathan Mosser,00:00,Head of Security,"",,Disconnected,00:30
+12264,50202,Jordan Kelley,00:00,Security Cadet,"",,Disconnected,00:41
+12265,50202,Randy Newdome,00:00,Technical Assistant,"",,Disconnected,01:07
+12266,50202,Issar Hess,00:00,Cyborg,"",,Disconnected,01:10
+12267,50202,Minerva Everett,01:10,Medical Doctor,"",,Disconnected,01:21
+12268,50202,Tamsin Winton,01:17,Security Officer,"",,Disconnected,01:32
+12269,50202,Proteon (734),01:40,Proteon,Cultist,{Cultist},Disconnected,01:41
+12270,50202,maintenance drone (670),01:44,Cyborg,"",,Disconnected,01:45
+12271,50202,Artificer (905),01:39,Artificer,Cultist,{Cultist},Disconnected,01:45

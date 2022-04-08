@@ -4305,3 +4305,219 @@ id,uplink_info_id,cost,bundlename,item_type
 4304,1389,1,Sy-Code Book,/obj/item/weapon/syndcodebook
 4305,1390,8,Power Fist,/obj/item/weapon/melee/powerfist
 4306,1390,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4307,1391,3,EMP Implant,/obj/item/weapon/storage/box/syndie_kit/imp_emp
+4308,1391,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4309,1393,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4310,1393,2,Chameleon Kit,/obj/item/weapon/storage/box/syndie_kit/chameleon
+4311,1394,4,EMP Flashlight,/obj/item/device/flashlight/emp
+4312,1394,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4313,1395,3,High Explosive Mine,/obj/item/mine
+4314,1395,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4315,1395,1,Composition C-4,/obj/item/weapon/plastique
+4316,1395,1,Composition C-4,/obj/item/weapon/plastique
+4317,1395,3,High Explosive Mine,/obj/item/mine
+4318,1395,3,EMP Implant,/obj/item/weapon/storage/box/syndie_kit/imp_emp
+4319,1395,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4320,1395,1,No-Slip Brown Shoes,/obj/item/clothing/shoes/syndigaloshes
+4321,1396,12,Silence gloves,/obj/item/clothing/gloves/black/silence
+4322,1396,5,Chameleon-Projector,/obj/item/device/chameleon
+4323,1396,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4324,1398,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4325,1398,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4326,1398,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4327,1398,1,Syndicate Briefcase Full of Cash,/obj/item/weapon/storage/secure/briefcase/syndie
+4328,1398,5,Energy Dagger,/obj/item/weapon/pen/edagger
+4329,1399,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4330,1399,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4331,1399,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4332,1399,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4333,1400,8,TR-8-R Revolver,/obj/item/weapon/gun/projectile/revolver/traitor
+4334,1401,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4335,1401,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4336,1402,8,TR-8-R Revolver,/obj/item/weapon/gun/projectile/revolver/traitor
+4337,1402,1,No-Slip Brown Shoes,/obj/item/clothing/shoes/syndigaloshes
+4338,1402,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4339,1403,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4340,1403,4,EMP Flashlight,/obj/item/device/flashlight/emp
+4341,1403,5,Energy Dagger,/obj/item/weapon/pen/edagger
+4342,1404,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4343,1404,8,TR-8-R Revolver,/obj/item/weapon/gun/projectile/revolver/traitor
+4344,1404,1,Sy-Code Book,/obj/item/weapon/syndcodebook
+4345,1405,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4346,1406,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4347,1406,7,Compressed Implant,/obj/item/weapon/implanter/storage
+4348,1406,1,No-Slip Brown Shoes,/obj/item/clothing/shoes/syndigaloshes
+4349,1406,5,Energy Dagger,/obj/item/weapon/pen/edagger
+4350,1406,2,Chameleon Kit,/obj/item/weapon/storage/box/syndie_kit/chameleon
+4351,1407,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4352,1407,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4353,1408,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4354,1408,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4355,1410,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4356,1410,5,Chameleon-Projector,/obj/item/device/chameleon
+4357,1410,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4358,1410,4,EMP Flashlight,/obj/item/device/flashlight/emp
+4359,1411,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4360,1414,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4361,1414,7,Miniature Energy Crossbow,/obj/item/weapon/gun/energy/crossbow
+4362,1414,1,No-Slip Brown Shoes,/obj/item/clothing/shoes/syndigaloshes
+4363,1414,5,Freedom Implant,/obj/item/weapon/storage/box/syndie_kit/imp_freedom
+4364,1415,12,Hacked AI Law Upload Module,/obj/item/weapon/aiModule/freeform/syndicate
+4365,1416,5,Energy Dagger,/obj/item/weapon/pen/edagger
+4366,1418,12,Hacked AI Law Upload Module,/obj/item/weapon/aiModule/freeform/syndicate
+4367,1419,20,hacker bundle,/obj/item/weapon/storage/box/syndicate
+4368,1420,3,EMP Implant,/obj/item/weapon/storage/box/syndie_kit/imp_emp
+4369,1420,4,EMP Flashlight,/obj/item/device/flashlight/emp
+4370,1420,4,Syndicate Space Suit,/obj/item/weapon/storage/box/syndie_kit/space
+4371,1420,5,EMP Grenades,/obj/item/weapon/storage/box/emps
+4372,1420,4,Bag of C-4 explosives,/obj/item/weapon/storage/backpack/dufflebag/c4
+4373,1421,14,Syndicate drone,/obj/item/weapon/storage/box/syndie_kit/drone
+4374,1421,1,Full Syndicate Toolbox,/obj/item/weapon/storage/toolbox/syndicate
+4375,1421,4,Mulligan,/obj/item/weapon/reagent_containers/syringe/mulligan
+4376,1422,7,Compressed Implant,/obj/item/weapon/implanter/storage
+4377,1422,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4378,1424,12,Silence gloves,/obj/item/clothing/gloves/black/silence
+4379,1424,8,Power Fist,/obj/item/weapon/melee/powerfist
+4380,1425,8,TR-8-R Revolver,/obj/item/weapon/gun/projectile/revolver/traitor
+4381,1425,1,Composition C-4,/obj/item/weapon/plastique
+4382,1425,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4383,1425,5,Chameleon-Projector,/obj/item/device/chameleon
+4384,1425,1,No-Slip Brown Shoes,/obj/item/clothing/shoes/syndigaloshes
+4385,1425,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4386,1425,1,Composition C-4,/obj/item/weapon/plastique
+4387,1425,1,Composition C-4,/obj/item/weapon/plastique
+4388,1426,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4389,1426,7,Compressed Implant,/obj/item/weapon/implanter/storage
+4390,1426,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4391,1426,3,Binary Translator Key,/obj/item/device/encryptionkey/binary
+4392,1426,1,Sy-Code Book,/obj/item/weapon/syndcodebook
+4393,1426,1,No-Slip Brown Shoes,/obj/item/clothing/shoes/syndigaloshes
+4394,1428,20,implant bundle,/obj/item/weapon/storage/box/syndicate
+4395,1429,5,Energy Dagger,/obj/item/weapon/pen/edagger
+4396,1429,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4397,1429,7,Compressed Implant,/obj/item/weapon/implanter/storage
+4398,1430,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4399,1430,7,Compressed Implant,/obj/item/weapon/implanter/storage
+4400,1430,6,Stechkin Pistol,/obj/item/weapon/gun/projectile/automatic/pistol
+4401,1430,4,EMP Flashlight,/obj/item/device/flashlight/emp
+4402,1430,1,Smuggler's Satchel,/obj/item/weapon/storage/backpack/satchel/flat
+4403,1431,0,War Device,/obj/item/device/nuclear_challenge
+4404,1431,30,Shuttle Unlocker,""
+4405,1431,8,Syndi Rig,/obj/item/weapon/storage/box/syndie_kit/rig
+4406,1431,8,Syndi Rig,/obj/item/weapon/storage/box/syndie_kit/rig
+4407,1431,8,Syndi Rig,/obj/item/weapon/storage/box/syndie_kit/rig
+4408,1431,8,Syndi Rig,/obj/item/weapon/storage/box/syndie_kit/rig
+4409,1431,8,Syndi Rig,/obj/item/weapon/storage/box/syndie_kit/rig
+4410,1431,8,Syndi Rig,/obj/item/weapon/storage/box/syndie_kit/rig
+4411,1431,4,Bag of C-4 explosives,/obj/item/weapon/storage/backpack/dufflebag/c4
+4412,1431,7,Energy Sword,/obj/item/weapon/melee/energy/sword
+4413,1431,1,Full Syndicate Toolbox,/obj/item/weapon/storage/toolbox/syndicate
+4414,1431,20,Drozd OTs-114 Assault Carbine,/obj/item/weapon/gun/projectile/automatic/drozd
+4415,1431,4,Ammo-12.7mm,/obj/item/ammo_box/magazine/drozd127
+4416,1431,12,C-20r Submachine Gun,/obj/item/weapon/gun/projectile/automatic/c20r
+4417,1431,3,Ammo-.45 ACP,/obj/item/ammo_box/magazine/m12mm
+4418,1431,3,EMP Implant,/obj/item/weapon/storage/box/syndie_kit/imp_emp
+4419,1431,3,EMP Implant,/obj/item/weapon/storage/box/syndie_kit/imp_emp
+4420,1431,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4421,1431,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4422,1431,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4423,1431,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4424,1431,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4425,1431,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4426,1431,6,Box of Throwing Weapons,/obj/item/weapon/storage/box/syndie_kit/throwing_weapon
+4427,1431,7,Energy Sword,/obj/item/weapon/melee/energy/sword
+4428,1431,7,Energy Sword,/obj/item/weapon/melee/energy/sword
+4429,1431,7,Energy Sword,/obj/item/weapon/melee/energy/sword
+4430,1431,7,Energy Sword,/obj/item/weapon/melee/energy/sword
+4431,1431,12,C-20r Submachine Gun,/obj/item/weapon/gun/projectile/automatic/c20r
+4432,1431,1,Composition C-4,/obj/item/weapon/plastique
+4433,1432,2,Ammo-40x46mm (explosive),/obj/item/ammo_casing/r4046/explosive
+4434,1432,4,Ammo-12.7mm,/obj/item/ammo_box/magazine/drozd127
+4435,1432,6,Box of Throwing Weapons,/obj/item/weapon/storage/box/syndie_kit/throwing_weapon
+4436,1432,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4437,1432,2,Ammo-40x46mm (explosive),/obj/item/ammo_casing/r4046/explosive
+4438,1433,20,20 Telecrystals,/obj/item/stack/telecrystal/twenty
+4439,1434,20,20 Telecrystals,/obj/item/stack/telecrystal/twenty
+4440,1436,12,C-20r Submachine Gun,/obj/item/weapon/gun/projectile/automatic/c20r
+4441,1436,3,Ammo-.45 ACP,/obj/item/ammo_box/magazine/m12mm
+4442,1438,15,Gateway Locker,/obj/item/device/gateway_locker
+4443,1439,0,War Device,/obj/item/device/nuclear_challenge
+4444,1439,2,Chameleon Kit,/obj/item/weapon/storage/box/syndie_kit/chameleon
+4445,1442,8,Syndi Rig,/obj/item/weapon/storage/box/syndie_kit/rig
+4446,1442,12,Heavy Syndi Rig,/obj/item/weapon/storage/box/syndie_kit/heavy_rig
+4447,1442,12,Heavy Syndi Rig,/obj/item/weapon/storage/box/syndie_kit/heavy_rig
+4448,1442,2,Chameleon Kit,/obj/item/weapon/storage/box/syndie_kit/chameleon
+4449,1442,2,Chameleon Kit,/obj/item/weapon/storage/box/syndie_kit/chameleon
+4450,1442,3,EMP Implant,/obj/item/weapon/storage/box/syndie_kit/imp_emp
+4451,1442,20,A74 Assault Rifle,/obj/item/weapon/gun/projectile/automatic/a74
+4452,1442,7,Ammo-7.74mm,/obj/item/ammo_box/magazine/a74mm
+4453,1442,7,Ammo-7.74mm,/obj/item/ammo_box/magazine/a74mm
+4454,1442,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4455,1442,3,EMP Implant,/obj/item/weapon/storage/box/syndie_kit/imp_emp
+4456,1442,16,V15 Bulldog shotgun,/obj/item/weapon/gun/projectile/automatic/bulldog
+4457,1442,7,Energy Sword,/obj/item/weapon/melee/energy/sword
+4458,1442,3,EMP Implant,/obj/item/weapon/storage/box/syndie_kit/imp_emp
+4459,1442,4,Ammo-12g Buckshot,/obj/item/ammo_box/magazine/m12g
+4460,1442,4,Ammo-12g Buckshot,/obj/item/ammo_box/magazine/m12g
+4461,1442,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4462,1442,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4463,1442,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4464,1442,4,Bag of C-4 explosives,/obj/item/weapon/storage/backpack/dufflebag/c4
+4465,1442,6,Syndicate Minibomb,/obj/item/weapon/grenade/syndieminibomb
+4466,1442,7,Energy Sword,/obj/item/weapon/melee/energy/sword
+4467,1442,7,Energy Sword,/obj/item/weapon/melee/energy/sword
+4468,1442,8,Syndi Rig,/obj/item/weapon/storage/box/syndie_kit/rig
+4469,1442,7,Energy Sword,/obj/item/weapon/melee/energy/sword
+4470,1442,7,Energy Sword,/obj/item/weapon/melee/energy/sword
+4471,1442,1,Full Syndicate Toolbox,/obj/item/weapon/storage/toolbox/syndicate
+4472,1445,4,Armor Set,/obj/item/weapon/storage/box/syndie_kit/light_armor
+4473,1445,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4474,1445,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4475,1445,3,Voice Changer,/obj/item/clothing/mask/gas/voice
+4476,1445,2,Dart Pistol,/obj/item/weapon/gun/syringe/syndicate
+4477,1445,1,Poster kit,/obj/item/weapon/storage/box/syndie_kit/posters
+4478,1450,14,Syndicate drone,/obj/item/weapon/storage/box/syndie_kit/drone
+4479,1451,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4480,1451,3,Explosive Implant,/obj/item/weapon/implanter/explosive
+4481,1451,2,Artificial Intelligence Detector,/obj/item/device/multitool/ai_detect
+4482,1451,7,Radioactive Microlaser,/obj/item/device/healthanalyzer/rad_laser
+4483,1451,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4484,1451,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4485,1452,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4486,1452,8,TR-8-R Revolver,/obj/item/weapon/gun/projectile/revolver/traitor
+4487,1452,4,Bag of C-4 explosives,/obj/item/weapon/storage/backpack/dufflebag/c4
+4488,1452,3,EMP Implant,/obj/item/weapon/storage/box/syndie_kit/imp_emp
+4489,1452,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4490,1452,1,Syndicate Soap,/obj/item/weapon/reagent_containers/food/snacks/soap/syndie
+4491,1452,1,Sy-Code Book,/obj/item/weapon/syndcodebook
+4492,1453,4,Fake Bureucracy Set,/obj/item/weapon/storage/box/syndie_kit/fake
+4493,1453,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4494,1453,7,Compressed Implant,/obj/item/weapon/implanter/storage
+4495,1454,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4496,1454,5,Chameleon-Projector,/obj/item/device/chameleon
+4497,1454,1,Syndicate Briefcase Full of Cash,/obj/item/weapon/storage/secure/briefcase/syndie
+4498,1455,2,Detomatix PDA Cartridge,/obj/item/weapon/cartridge/syndicate
+4499,1456,8,TR-8-R Revolver,/obj/item/weapon/gun/projectile/revolver/traitor
+4500,1456,1,No-Slip Brown Shoes,/obj/item/clothing/shoes/syndigaloshes
+4501,1456,6,Adrenaline Implant,/obj/item/weapon/storage/box/syndie_kit/imp_adrenaline
+4502,1456,5,Chameleon-Projector,/obj/item/device/chameleon
+4503,1456,4,Bag of C-4 explosives,/obj/item/weapon/storage/backpack/dufflebag/c4
+4504,1456,1,Syndicate Soap,/obj/item/weapon/reagent_containers/food/snacks/soap/syndie
+4505,1457,12,Silence gloves,/obj/item/clothing/gloves/black/silence
+4506,1457,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4507,1457,1,No-Slip Brown Shoes,/obj/item/clothing/shoes/syndigaloshes
+4508,1457,1,Sy-Code Book,/obj/item/weapon/syndcodebook
+4509,1458,2,Syndicate Encryption Key,/obj/item/device/encryptionkey/syndicate
+4510,1458,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4511,1458,6,Cryptographic Sequencer,/obj/item/weapon/card/emag
+4512,1458,1,Full Syndicate Toolbox,/obj/item/weapon/storage/toolbox/syndicate
+4513,1458,4,Bag of C-4 explosives,/obj/item/weapon/storage/backpack/dufflebag/c4
+4514,1461,10,Syndicate Medical Supply Kit,/obj/item/weapon/storage/firstaid/tactical
+4515,1461,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4516,1462,7,Energy Sword,/obj/item/weapon/melee/energy/sword/traitor
+4517,1463,6,Stechkin Pistol,/obj/item/weapon/gun/projectile/automatic/pistol
+4518,1463,3,9mm Mac-10 Magazine,/obj/item/ammo_box/magazine/uzim9mm
+4519,1463,1,Smuggler's Satchel,/obj/item/weapon/storage/backpack/satchel/flat
+4520,1464,6,Stechkin Pistol,/obj/item/weapon/gun/projectile/automatic/pistol
+4521,1464,2,Switchblade,/obj/item/weapon/switchblade
+4522,1464,2,Switchblade,/obj/item/weapon/switchblade

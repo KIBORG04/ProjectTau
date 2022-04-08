@@ -6333,3 +6333,487 @@ owner_id,id,name,role_name,is_roundstart_role,type,victory,faction_name,mind_nam
 1417,6332,Emergency Responder,Emergency Responder,0,/datum/role/emergency_responder,1,Emergency Response Team,Holden,akakiyfrix
 1417,6333,Emergency Responder,Emergency Responder,0,/datum/role/emergency_responder,1,Emergency Response Team,AURELIANIUM,mrveneficus
 1417,6334,Emergency Responder,Emergency Responder,0,/datum/role/emergency_responder,1,Emergency Response Team,Fi,mercurialaste
+1418,6335,Cortical Borer,Cortical Borer,0,/datum/role/borer,0,Borer Hivemind,Primary 2440,carpo22
+1419,6336,Xenomorph,Xenomorph,1,/datum/role/alien,1,Alien Hivemind,alien queen (74),sleak88
+1419,6337,Xenomorph,Xenomorph,1,/datum/role/alien,1,Alien Hivemind,alien hunter (520),maleyvich
+1419,6338,Xenomorph,Xenomorph,1,/datum/role/alien,1,Alien Hivemind,alien hunter (556),barzabelle
+1419,6339,Xenomorph,Xenomorph,1,/datum/role/alien,1,Alien Hivemind,alien sentinel (192),phantomelite
+1419,6340,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (386),fistashka
+1419,6341,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (768),steklianniiork
+1419,6342,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (50),kronosdyx
+1419,6343,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (47),dimshik
+1419,6344,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (381),karrasbring
+1419,6345,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (963),kenariys
+1419,6346,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (831),steklianniiork
+1419,6347,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien larva (409),dimshik
+1419,6348,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien larva (414),kenariys
+1419,6349,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien hunter (322),kronosdyx
+1419,6350,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien larva (49),fistashka
+1419,6351,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (841),karrasbring
+1419,6352,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (827),chise93
+1419,6353,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (582),karrasbring
+1419,6354,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien drone (262),chise93
+1419,6355,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien hunter (622),steklianniiork
+1419,6356,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (502),kapitansneg
+1419,6357,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien sentinel (254),kapitansneg
+1419,6358,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (325),fistashka
+1419,6359,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (814),kenariys
+1419,6360,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien sentinel (150),karrasbring
+1419,6361,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (474),kenariys
+1419,6362,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (535),dimshik
+1419,6363,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (823),androbetel
+1419,6364,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (819),fistashka
+1419,6365,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (197),knot94
+1419,6366,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (227),fistashka
+1419,6367,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (129),androbetel
+1419,6368,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (363),fistashka
+1419,6369,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (232),kenariys
+1419,6370,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (945),fistashka
+1419,6371,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (415),kenariys
+1419,6372,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien larva (161),fistashka
+1419,6373,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (960),androbetel
+1419,6374,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (179),kenariys
+1419,6375,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien larva (577),knot94
+1419,6376,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (191),112123qk
+1419,6377,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (761),dimshik
+1419,6378,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (293),richilakroch
+1419,6379,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (235),kenariys
+1419,6380,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (521),androbetel
+1419,6381,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (187),knot94
+1419,6382,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (1000),112123qk
+1419,6383,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (772),vadem007e
+1419,6384,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (943),lazarevvladimir
+1419,6385,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (567),richilakroch
+1419,6386,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (803),112123qk
+1419,6387,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (78),knot94
+1419,6388,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (385),112123qk
+1419,6389,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (279),knot94
+1419,6390,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (249),saravan
+1419,6391,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (263),valois
+1419,6392,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (239),richilakroch
+1419,6393,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien sentinel (789),vadem007e
+1419,6394,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (916),112123qk
+1419,6395,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (705),lazarevvladimir
+1419,6396,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (815),fistashka
+1419,6397,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (887),knot94
+1419,6398,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (48),saravan
+1419,6399,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien queen (371),richilakroch
+1419,6400,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (511),valois
+1419,6401,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (942),kapitansneg
+1419,6402,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (831),kronosdyx
+1419,6403,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (336),knot94
+1419,6404,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (503),112123qk
+1419,6405,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (517),notkripton
+1419,6406,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (977),lazarevvladimir
+1419,6407,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (752),barzabelle
+1419,6408,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (89),kapitansneg
+1419,6409,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (467),valois
+1419,6410,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (57),lazarevvladimir
+1419,6411,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (416),knot94
+1419,6412,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien sentinel (641),valois
+1419,6413,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (217),vladmar
+1419,6414,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (457),fistashka
+1419,6415,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (52),vkjkfn
+1419,6416,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (811),vladmar
+1419,6417,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (130),notkripton
+1419,6418,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (703),chise93
+1419,6419,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (339),knot94
+1419,6420,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (662),barzabelle
+1419,6421,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (127),notkripton
+1419,6422,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (72),kapitansneg
+1419,6423,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (847),saravan
+1419,6424,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (108),knot94
+1419,6425,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (36),kronosdyx
+1419,6426,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (557),fistashka
+1419,6427,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (111),knot94
+1419,6428,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (364),kapitansneg
+1419,6429,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (726),notkripton
+1419,6430,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (602),fistashka
+1419,6431,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (66),112123qk
+1419,6432,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien larva (402),lazarevvladimir
+1419,6433,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien larva (656),saravan
+1419,6434,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien larva (176),knot94
+1419,6435,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (969),kapitansneg
+1419,6436,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (629),vladmar
+1419,6437,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien sentinel (550),notkripton
+1419,6438,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (664),barzabelle
+1419,6439,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien hunter (267),112123qk
+1419,6440,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien sentinel (543),fistashka
+1419,6441,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (957),kronosdyx
+1419,6442,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (207),refug
+1419,6443,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (223),vladmar
+1419,6444,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (637),kronosdyx
+1419,6445,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien hunter (688),kapitansneg
+1419,6446,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (971),vladmar
+1419,6447,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (575),wyrmp
+1419,6448,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien sentinel (533),refug
+1419,6449,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (428),vladmar
+1419,6450,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (522),darkfurrsss
+1419,6451,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien larva (356),vkjkfn
+1419,6452,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (754),alekspeshkov
+1419,6453,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (97),saravan
+1419,6454,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (153),steklianniiork
+1419,6455,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (414),darkfurrsss
+1419,6456,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (295),lazarevvladimir
+1419,6457,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (318),lazarevvladimir
+1419,6458,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (576),saravan
+1419,6459,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (43),darkfurrsss
+1419,6460,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (790),darkfurrsss
+1419,6461,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (162),steklianniiork
+1419,6462,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien sentinel (277),kronosdyx
+1419,6463,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (733),steklianniiork
+1419,6464,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (497),barzabelle
+1419,6465,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (44),lazarevvladimir
+1419,6466,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (359),darkfurrsss
+1419,6467,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (264),lazarevvladimir
+1419,6468,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (247),vkjkfn
+1419,6469,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (412),alekspeshkov
+1419,6470,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien sentinel (253),lazarevvladimir
+1419,6471,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (848),steklianniiork
+1419,6472,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (597),steklianniiork
+1419,6473,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (579),wyrmp
+1419,6474,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (593),saravan
+1419,6475,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (999),alekspeshkov
+1419,6476,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (234),darkfurrsss
+1419,6477,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (144),germanrus
+1419,6478,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (248),alekspeshkov
+1419,6479,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (859),darkfurrsss
+1419,6480,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (779),wyrmp
+1419,6481,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (344),vkjkfn
+1419,6482,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (716),karrasbring
+1419,6483,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (155),refug
+1419,6484,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (112),vkjkfn
+1419,6485,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (317),steklianniiork
+1419,6486,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (129),alekspeshkov
+1419,6487,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (211),refug
+1419,6488,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (902),darkfurrsss
+1419,6489,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (667),wyrmp
+1419,6490,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (918),refug
+1419,6491,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (275),kronosdyx
+1419,6492,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (182),refug
+1419,6493,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (46),karrasbring
+1419,6494,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (957),germanrus
+1419,6495,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (509),kronosdyx
+1419,6496,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (971),refug
+1419,6497,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (177),steklianniiork
+1419,6498,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (721),karrasbring
+1419,6499,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien larva (891),refug
+1419,6500,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (742),112123qk
+1419,6501,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (308),alekspeshkov
+1419,6502,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (994),gref55
+1419,6503,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (724),alekspeshkov
+1419,6504,Xenomorph,Xenomorph,0,/datum/role/alien,1,Alien Hivemind,alien facehugger (804),germanrus
+1421,6505,Blob Overmind,Blob Overmind,0,/datum/role/blob_overmind,1,Blob Conglomerate,Blob Overmind (913),darkdragos
+1422,6506,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Kane Ayron,sleak88
+1423,6507,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Issar Hess,darkfurrsss
+1423,6508,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Oleg Osetrov,goeq
+1424,6509,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Jamal Freeman,xaviereagle
+1424,6510,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Rafael Sunders,colonist
+1424,6511,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Aramsha Jarmack,chikart
+1424,6512,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Frank Lloyd,ro2tcrab
+1426,6513,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Elizabeth Rubram,deadfan
+1429,6514,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Juan Williis,moonlight7
+1431,6515,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Seassant-An Nueve,walterje
+1431,6516,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Isaiah Vader,maleyvich
+1433,6517,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (157),fistashka
+1433,6518,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Juggernaut (775),podhad
+1433,6519,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (901),fistashka
+1434,6520,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Kakakahti,therisy
+1434,6521,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Yayahakah,aaaash
+1434,6522,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Yachitayahi,flythedemon
+1434,6523,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Yayatiyatichi,dashatar
+1434,6524,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Yachakahtakahki,archigald
+1436,6525,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Hakitahita,aktano
+1436,6526,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Tikahtichachika,dekr0s
+1436,6527,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Tayakachiyakaki,sol126
+1436,6528,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Kahiyayatachikikah,artur1601
+1436,6529,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Chihayahikiya,moonlight7
+1436,6530,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Kikikahikaha,maleyvich
+1438,6531,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Viktor Valentine,aktano
+1440,6532,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Natalia Koneva,zickusable
+1442,6533,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Friedrich Von Brandenburg,l4rever
+1443,6534,Traitor,Traitor,0,/datum/role/traitor,1,Traitor,Marcus Arrow,karpinti
+1444,6535,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Zikkykikati,flyingdebil
+1444,6536,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Flick Welty,cptechidna
+1446,6537,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Teddy,tommykamilov
+1447,6538,Traitor,Traitor,0,/datum/role/traitor,1,Traitor,Anna Flugel,danvercher
+1448,6539,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Lion Remark,alekspeshkov
+1448,6540,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Vitia Kosoi,typoi321
+1450,6541,Malf AI,Malf AI,1,/datum/role/malfAI,1,Malf AI,O-5,weedmoon
+1451,6542,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Lucas Gibson,dashatar
+1451,6543,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Mayron Demetrios,avande
+1452,6544,Emergency Responder,Emergency Responder,0,/datum/role/emergency_responder,1,Emergency Response Team,Ken,kenariys
+1452,6545,Emergency Responder,Emergency Responder,0,/datum/role/emergency_responder,1,Emergency Response Team,Sig,112123qk
+1452,6546,Emergency Responder,Emergency Responder,0,/datum/role/emergency_responder,1,Emergency Response Team,AURELIUS,mrveneficus
+1452,6547,Emergency Responder,Emergency Responder,0,/datum/role/emergency_responder,1,Emergency Response Team,Rosa,rogversnott
+1452,6548,Emergency Responder,Emergency Responder,0,/datum/role/emergency_responder,1,Emergency Response Team,Allan,fah3ujib
+1453,6549,Head Revolutionary,Head Revolutionary,1,/datum/role/rev_leader,1,Revolution,Jad Shock,artur1601
+1453,6550,Head Revolutionary,Head Revolutionary,1,/datum/role/rev_leader,1,Revolution,Korvo Forpean,gagexe
+1453,6551,Revolutionary,Revolutionary,0,/datum/role/rev,1,Revolution,Tucha Master,mmdi
+1453,6552,Revolutionary,Revolutionary,0,/datum/role/rev,1,Revolution,Tyler Jones,112123qk
+1453,6553,Revolutionary,Revolutionary,0,/datum/role/rev,1,Revolution,Hans Uberman,vkjkfn
+1453,6554,Revolutionary,Revolutionary,0,/datum/role/rev,1,Revolution,Kakotika,germanrus
+1453,6555,Revolutionary,Revolutionary,0,/datum/role/rev,1,Revolution,Alexander Newbern,reditt
+1453,6556,Revolutionary,Revolutionary,0,/datum/role/rev,1,Revolution,Randy Best,iygorsh
+1455,6557,Blob Cerebrate,Blob Cerebrate,0,/datum/role/blob_overmind/cerebrate,1,Blob Conglomerate,Blob Overmind (75),precisionandgrace
+1455,6558,Blob Cerebrate,Blob Cerebrate,0,/datum/role/blob_overmind/cerebrate,1,Blob Conglomerate,Blob Overmind (770),deahaka
+1457,6559,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Genadiy Tesla,tankistkiller
+1457,6560,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Loreto Bunten,theorangetim
+1457,6561,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,John Pavlov,hunterzk
+1457,6562,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Adam Grace,x10enon
+1458,6563,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Artemida Byblikova,heaptem
+1459,6564,Shadowling,Shadowling,1,/datum/role/shadowling,1,Shadowlings,Konstantin Morozov,rodionin
+1459,6565,Shadowling,Shadowling,1,/datum/role/shadowling,1,Shadowlings,Seamon Light,t1metocarry
+1459,6566,Thrall,Thrall,0,/datum/role/thrall,1,Shadowlings,Michael Goliafof,maximalist
+1459,6567,Thrall,Thrall,0,/datum/role/thrall,1,Shadowlings,Allen Richardson,fistashka
+1459,6568,Thrall,Thrall,0,/datum/role/thrall,1,Shadowlings,Tinara Nero,haoshay
+1460,6569,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Shagan Rock'Shur,kenshy4420
+1460,6570,Traitor,Traitor,0,/datum/role/traitor,1,Traitor,Daniel Mildred,phantomelite
+1460,6571,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Bruce Fitgerald,barzabelle
+1460,6572,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Aramsha Jarmack,chikart
+1460,6573,Traitor,Traitor,0,/datum/role/traitor,1,Traitor,Quiwz'xu Qox,grozaandgrom
+1461,6574,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,M'ark M'rshan,morkleb
+1461,6575,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Sergey Labuda,wandermu
+1461,6576,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Richard Reed,mryaroslav
+1461,6577,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Bryan James,calvinmind
+1461,6578,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Lucas Gibson,dashatar
+1463,6579,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (964),sleak88
+1463,6580,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (501),t1metocarry
+1463,6581,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (628),fistashka
+1464,6582,Blob Overmind,Blob Overmind,0,/datum/role/blob_overmind,1,Blob Conglomerate,Blob Overmind (41),t1metocarry
+1465,6583,Nuclear Operative Leader,Nuclear Operative Leader,1,/datum/role/operative/leader,1,Syndicate Operatives,Artemida Byblikova,heaptem
+1465,6584,Nuclear Operative,Nuclear Operative,1,/datum/role/operative,1,Syndicate Operatives,Viktor Valentine,aktano
+1465,6585,Nuclear Operative,Nuclear Operative,1,/datum/role/operative,1,Syndicate Operatives,Sergey Labuda,wandermu
+1465,6586,Nuclear Operative,Nuclear Operative,1,/datum/role/operative,1,Syndicate Operatives,Sivean Doulson,sivean
+1465,6587,Nuclear Operative,Nuclear Operative,1,/datum/role/operative,1,Syndicate Operatives,Seamon Light,t1metocarry
+1465,6588,Nuclear Operative,Nuclear Operative,1,/datum/role/operative,1,Syndicate Operatives,Mike Spenser,podliyfrancuz
+1465,6589,Nuclear Operative,Nuclear Operative,0,/datum/role/operative,1,Syndicate Operatives,Syndicate Robot-717,androbetel
+1467,6590,Nuclear Operative Leader,Nuclear Operative Leader,1,/datum/role/operative/leader,1,Syndicate Operatives,Lucas Gibson,dashatar
+1467,6591,Nuclear Operative,Nuclear Operative,1,/datum/role/operative,1,Syndicate Operatives,Hugo Richter,ruch
+1467,6592,Nuclear Operative,Nuclear Operative,1,/datum/role/operative,1,Syndicate Operatives,Luke Roadman,deahaka
+1467,6593,Nuclear Operative,Nuclear Operative,1,/datum/role/operative,1,Syndicate Operatives,Frugen Wufflecam,passional
+1467,6594,Nuclear Operative,Nuclear Operative,1,/datum/role/operative,1,Syndicate Operatives,M'ark M'rshan,morkleb
+1467,6595,Nuclear Operative,Nuclear Operative,1,/datum/role/operative,1,Syndicate Operatives,Richard Reed,mryaroslav
+1467,6596,Nuclear Operative,Nuclear Operative,0,/datum/role/operative,1,Syndicate Operatives,Syndicate Robot-247,androbetel
+1468,6597,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Silver Eyes,bunkyfly
+1469,6598,TraitorChan,TraitorChan,1,/datum/role/changeling/traitor,1,TraitorChan,Alexander Voronov,qwxizx
+1469,6599,TraitorChan,TraitorChan,1,/datum/role/changeling/traitor,1,TraitorChan,Mohamed McDonald,ni444
+1470,6600,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,John Mackenzie,pigla
+1470,6601,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Sergey Labuda,wandermu
+1470,6602,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Shagan Rock'Shur,kenshy4420
+1470,6603,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Illia Bronson,mefistomad
+1470,6604,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Quiwz'xu Qox,grozaandgrom
+1470,6605,Traitor,Traitor,1,/datum/role/traitor,1,Traitor,Tate Benford,precisionandgrace
+1470,6606,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Randy Best,iygorsh
+1470,6607,Traitor,Traitor,1,/datum/role/traitor,0,Traitor,Silver Eyes,bunkyfly
+1472,6608,Agent,Abductor Agent,1,/datum/role/abductor/agent,1,Abductor Team,Mothership Delta Agent,tryxah
+1472,6609,Scientist,Abductor Scientist,1,/datum/role/abductor/scientist,1,Abductor Team,Mothership Delta Scientist,fah3ujib
+1472,6610,Abducted,Abducted,0,/datum/role/abducted,1,Abductor Team,Harvey O'Neill,mmdi
+1472,6611,Abducted,Abducted,0,/datum/role/abducted,1,Abductor Team,Jason Snyder,xazard
+1473,6612,Agent,Abductor Agent,1,/datum/role/abductor/agent,1,Abductor Team,Mothership Theta Agent,marlestr
+1473,6613,Scientist,Abductor Scientist,1,/datum/role/abductor/scientist,1,Abductor Team,Mothership Theta Scientist,weedmoon
+1473,6614,Abducted,Abducted,0,/datum/role/abducted,1,Abductor Team,Maya Foxova,foxedhuman
+1473,6615,Abducted,Abducted,0,/datum/role/abducted,1,Abductor Team,Max Black,beliy
+1473,6616,Abducted,Abducted,0,/datum/role/abducted,1,Abductor Team,John Mackenzie,pigla
+1473,6617,Abducted,Abducted,0,/datum/role/abducted,1,Abductor Team,Balbesus,fluffycat510
+1473,6618,Abducted,Abducted,0,/datum/role/abducted,1,Abductor Team,Maya Foxova,foxedhuman
+1473,6619,Abducted,Abducted,0,/datum/role/abducted,1,Abductor Team,Alexei Zhukov,rodionin
+1474,6620,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Quiwz'xu Qox,grozaandgrom
+1474,6621,Traitor,Traitor,0,/datum/role/traitor,1,Traitor,Li'quxpixli Lenienq'wik,mercurialaste
+1474,6622,Traitor,Traitor,0,/datum/role/traitor,1,Traitor,Isaac Fletcher,sergeymedvedko
+1475,6623,Malf AI,Malf AI,1,/datum/role/malfAI,1,Malf AI,GLaDos,heaptem
+1476,6624,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Lucas Gibson,dashatar
+1476,6625,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Dragan Sheshel,ukline
+1476,6626,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Hayden Pearsall,kalter228dead
+1477,6627,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Kahkikahikahkayahi,caralmorgan
+1477,6628,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Chatikihiyaki,grozaandgrom
+1477,6629,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Yahatihihi,foxedhuman
+1477,6630,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Yakikachikaha,sykybekk
+1477,6631,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Yahihichikaka,dethlight
+1477,6632,Vox Raider,Vox Raider,1,/datum/role/vox_raider,1,Vox Shoal,Tihachatahakahchayata,bunkyfly
+1478,6633,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Cole Ward,darkska
+50211,6634,Custom Role,Custom,0,/datum/role/custom,1,"",Remy Ratatouille,fatfat
+1479,6635,Malf AI,Malf AI,1,/datum/role/malfAI,1,Malf AI,Cyanide,grozaandgrom
+1481,6636,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Wraith (641),grozaandgrom
+1481,6637,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Proteon (250),avande
+1482,6638,Undercover Officer,Undercover Officer,1,/datum/role/cop/undercover,1,Organized Crimes Department,Daniel Mildred,phantomelite
+1482,6639,Undercover Officer,Undercover Officer,1,/datum/role/cop/undercover,1,Organized Crimes Department,Aphelios Tildor,akakiyfrix
+1482,6640,Undercover Officer,Undercover Officer,1,/datum/role/cop/undercover,1,Organized Crimes Department,Lucas Aberg,diiiscord
+1482,6641,Armed Officer,OCD Officer,0,/datum/role/cop/beatcop/armored,1,Organized Crimes Department,fox,phantomelite
+1482,6642,Armed Officer,OCD Officer,0,/datum/role/cop/beatcop/armored,1,Organized Crimes Department,Volga,mryaroslav
+1482,6643,Armed Officer,OCD Officer,0,/datum/role/cop/beatcop/armored,1,Organized Crimes Department,Payton,avande
+1482,6644,Armed Officer,OCD Officer,0,/datum/role/cop/beatcop/armored,1,Organized Crimes Department,Alpha,valois
+1482,6645,Armed Officer,OCD Officer,0,/datum/role/cop/beatcop/armored,1,Organized Crimes Department,SSGT. Frost,kalter228dead
+1482,6646,Armed Officer,OCD Officer,0,/datum/role/cop/beatcop/armored,1,Organized Crimes Department,German Fisher,gosha2003
+1482,6647,Armed Officer,OCD Officer,0,/datum/role/cop/beatcop/armored,1,Organized Crimes Department,Kris Filby,maximalist
+1482,6648,Armed Officer,OCD Officer,0,/datum/role/cop/beatcop/armored,1,Organized Crimes Department,Mama,kapbi4lovelas
+1483,6649,Gangster,Gangster Leader,1,/datum/role/gangster/leader,1,Families,Weston Bell,weedmoon
+1483,6650,Gangster,Gangster Leader,1,/datum/role/gangster/leader,1,Families,Gikakhayikati,sweetmaurse
+1483,6651,Gangster,Gangster,0,/datum/role/gangster,1,Families,Zikkykikati,flyingdebil
+1483,6652,Gangster,Gangster,0,/datum/role/gangster,1,Families,Sigma O'Neill,mmdi
+1483,6653,Gangster,Gangster,0,/datum/role/gangster,1,Families,Artem Kotov,fluffycat510
+1483,6654,Gangster,Gangster,0,/datum/role/gangster,1,Families,Alroy Podkins,olimpover
+1483,6655,Gangster,Gangster,0,/datum/role/gangster,1,Families,Spike Schmidt,joebananashoe
+1483,6656,Gangster,Gangster,0,/datum/role/gangster,1,Families,Andy Willey,kapbi4lovelas
+1484,6657,Gangster,Gangster Leader,1,/datum/role/gangster/leader,1,Families,Makskim Shomski,herty
+1484,6658,Gangster,Gangster Leader,1,/datum/role/gangster/leader,1,Families,Isaiah Vader,maleyvich
+1484,6659,Gangster,Gangster,0,/datum/role/gangster,1,Families,Jean-Poul Marat,jeanpoul
+1484,6660,Gangster,Gangster,0,/datum/role/gangster,1,Families,Adrian Gordon,adriamgordon
+1484,6661,Gangster,Gangster,0,/datum/role/gangster,1,Families,Alexander Kuznetsov,sparta129312830918230
+1485,6662,Gangster,Gangster Leader,1,/datum/role/gangster/leader,1,Families,Seamon Light,t1metocarry
+1485,6663,Gangster,Gangster Leader,1,/datum/role/gangster/leader,1,Families,John Mackenzie,pigla
+1485,6664,Gangster,Gangster,0,/datum/role/gangster,1,Families,Mr.OldHonkus,mrveneficus
+1485,6665,Gangster,Gangster,0,/datum/role/gangster,1,Families,Vadim Wood,vadem007e
+1485,6666,Gangster,Gangster,0,/datum/role/gangster,1,Families,Rosemary Demuth,wopacpyckon
+1485,6667,Gangster,Gangster,0,/datum/role/gangster,1,Families,Ivan Huga,marlestr
+1485,6668,Gangster,Gangster,0,/datum/role/gangster,1,Families,Gwenevere Coldsmith,chip11n
+1485,6669,Gangster,Gangster,0,/datum/role/gangster,1,Families,Danny Roby,23as23as
+1487,6670,Space Ninja,Space Ninja,0,/datum/role/ninja,0,Spider Clan,Silencing Null,kenariys
+50207,6671,Gun Dealer,Gangster Dealer,0,/datum/role/traitor/dealer,0,"",Jaid,avande
+50207,6672,Gun Dealer,Gangster Dealer,0,/datum/role/traitor/dealer,0,"",Deadman,chise93
+1488,6673,Cult Harbinger,Cultist,1,/datum/role/cultist/leader,1,Cult Of Blood,Artemida Byblikova,heaptem
+1488,6674,Cultist,Cultist,1,/datum/role/cultist,1,Cult Of Blood,Shagan Rock'Shur,kenshy4420
+1488,6675,Cult Harbinger,Cultist,1,/datum/role/cultist/leader,1,Cult Of Blood,Mark McCarthy,vysserath
+1488,6676,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Volqrmixqu Lirqrrxuim,rogversnott
+1488,6677,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Arleen Morris,stepanzzz
+1488,6678,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Zikkykikati,flyingdebil
+1488,6679,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Randy Best,iygorsh
+1488,6680,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Troy Orgail,deahaka
+1488,6681,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Takirichi,mmdi
+1488,6682,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Artificer (316),nikmaestro
+1488,6683,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Proteon (246),nikmaestro
+1488,6684,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (59),foxiq
+1488,6685,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Juggernaut (86),artur1601
+1488,6686,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Juggernaut (12),artur1601
+1488,6687,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (75),artur1601
+1488,6688,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (606),artur1601
+1488,6689,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Artificer (960),artur1601
+1488,6690,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Artificer (182),artur1601
+1488,6691,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (882),artur1601
+1488,6692,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Proteon (366),artur1601
+1488,6693,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (25),112123qk
+1488,6694,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (200),nikmaestro
+1488,6695,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Juggernaut (127),onikuru
+1488,6696,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Artificer (937),flyingdebil
+1488,6697,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (864),vladmar
+1488,6698,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Proteon (934),artur1601
+1488,6699,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (839),germanrus
+1489,6700,Traitor,Traitor,0,/datum/role/traitor,0,Traitor,Randy Best,iygorsh
+1490,6701,Cult Harbinger,Cultist,1,/datum/role/cultist/leader,1,Cult Of Blood,M'ark M'rshan,morkleb
+1490,6702,Cultist,Cultist,1,/datum/role/cultist,1,Cult Of Blood,Oleg Osetrov,goeq
+1490,6703,Cult Harbinger,Cultist,1,/datum/role/cultist/leader,1,Cult Of Blood,Maya Foxova,foxedhuman
+1490,6704,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Luke Roadman,gamingdog
+1490,6705,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Johnathan Armstrong,petp0
+1490,6706,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The One Who Sees XX,mercurialaste
+1490,6707,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The One Who Sees I,kronosdyx
+1490,6708,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The Geometer of Blood II,tryxah
+1490,6709,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (651),tryxah
+1490,6710,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Dark One XVIII,kronosdyx
+1490,6711,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (783),kronosdyx
+1490,6712,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Artificer (400),mercurialaste
+1490,6713,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Nar-Sie VI,mercurialaste
+1490,6714,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Dark One XIX,tryxah
+1490,6715,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (969),tryxah
+1490,6716,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (333),mercurialaste
+1490,6717,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The One Who Sees XX,foxedhuman
+1490,6718,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The Geometer of Blood IV,kronosdyx
+1490,6719,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (501),kronosdyx
+1490,6720,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (66),foxedhuman
+1490,6721,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Dark One VIII,tryxah
+1490,6722,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (784),tryxah
+1490,6723,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Nar-Sie XI,kronosdyx
+1490,6724,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (827),kronosdyx
+1490,6725,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Dark One IX,foxedhuman
+1490,6726,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (770),foxedhuman
+1490,6727,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Nar-Sie III,vipo24
+1490,6728,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The Geometer of Blood XIX,mercurialaste
+1490,6729,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (665),mercurialaste
+1490,6730,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Proteon (500),vipo24
+1490,6731,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The Geometer of Blood XX,sleak88
+1490,6732,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (680),sleak88
+1490,6733,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Nar-Sie II,barakon
+1490,6734,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Juggernaut (698),barakon
+1490,6735,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The One Who Sees XII,foxedhuman
+1490,6736,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (860),foxedhuman
+1490,6737,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The One Who Sees X,sleak88
+1490,6738,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (818),sleak88
+1490,6739,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The Geometer of Blood XIX,mercurialaste
+1490,6740,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Artificer (560),mercurialaste
+1490,6741,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Dark One XII,kronosdyx
+1490,6742,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Juggernaut (72),kronosdyx
+1490,6743,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The Geometer of Blood XV,barakon
+1490,6744,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (204),barakon
+1490,6745,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Nar-Sie XVII,vipo24
+1490,6746,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (158),vipo24
+1490,6747,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The One Who Sees VII,sleak88
+1490,6748,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (386),sleak88
+1490,6749,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Dark One XII,tryxah
+1490,6750,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (161),tryxah
+1490,6751,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The Geometer of Blood V,foxedhuman
+1490,6752,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (294),foxedhuman
+1490,6753,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The Geometer of Blood XIII,kronosdyx
+1490,6754,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (652),kronosdyx
+1490,6755,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The Geometer of Blood IV,vipo24
+1490,6756,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (400),vipo24
+1490,6757,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Dark One VIII,tryxah
+1490,6758,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (407),tryxah
+1490,6759,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Nar-Sie III,mercurialaste
+1490,6760,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (247),mercurialaste
+1490,6761,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Nar-Sie XI,kronosdyx
+1490,6762,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (182),kronosdyx
+1490,6763,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The One Who Sees XI,barakon
+1490,6764,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (428),barakon
+1490,6765,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Dark One XIII,foxedhuman
+1490,6766,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Juggernaut (865),foxedhuman
+1490,6767,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Nar-Sie VII,chise93
+1490,6768,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (678),chise93
+1490,6769,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The One Who Sees XIII,weedmoon
+1490,6770,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (41),weedmoon
+1490,6771,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The One Who Sees IX,tryxah
+1490,6772,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (963),tryxah
+1490,6773,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Dark One XVII,foxedhuman
+1490,6774,Slave,Slave,0,/datum/role/slave,1,Cult Of Blood,Wraith (688),foxedhuman
+1490,6775,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The One Who Sees XX,chise93
+1490,6776,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of The One Who Sees XI,lotark
+1490,6777,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,homunculus of Nar-Sie XV,weedmoon
+1490,6778,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Proteon (469),nuclearknightoriginal
+1490,6779,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Wraith (327),daedrowe
+1490,6780,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (864),foxedhuman
+1490,6781,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (374),reaperthelavayka
+1490,6782,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Juggernaut (400),dudoncheg
+1490,6783,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Wraith (923),beliy
+1490,6784,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (150),aaaash
+1490,6785,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Proteon (838),pasha2oo
+1490,6786,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Artificer (346),reaperthelavayka
+1490,6787,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (967),mrveneficus
+1490,6788,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Proteon (581),deahaka
+1490,6789,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Juggernaut (663),pigla
+1490,6790,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (859),dekr0s
+1490,6791,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Artificer (905),marlestr
+1490,6792,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Artificer (618),xazard
+1490,6793,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (875),weedmoon
+1490,6794,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (33),holytreant
+1490,6795,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (897),darkminikin
+1490,6796,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (329),chise93
+1490,6797,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (44),kronosdyx
+1490,6798,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (773),fistashka
+1490,6799,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Artificer (574),fah3ujib
+1490,6800,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (781),lucyyyyy
+1490,6801,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Proteon (734),labomba
+1490,6802,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (310),petp0
+1490,6803,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (215),aaaash
+1490,6804,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Juggernaut (666),fistashka
+1490,6805,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (403),astyw
+1490,6806,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (783),weedmoon
+1490,6807,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (396),puzobor
+1490,6808,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Wraith (686),thepavellight
+1490,6809,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Juggernaut (849),saravan
+1490,6810,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (192),olimpover
+1490,6811,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Wraith (456),aaaash
+1490,6812,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Juggernaut (382),foxedhuman
+1490,6813,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (746),tryxah
+1490,6814,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (536),lotark
+1490,6815,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Proteon (173),dashatar
+1490,6816,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (84),foxedhuman
+1490,6817,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (898),alekspeshkov
+1490,6818,Cultist,Cultist,0,/datum/role/cultist,1,Cult Of Blood,Harvester (133),kempace

@@ -94,3 +94,102 @@ func getRootsByCheckboxes(preloads []string, checkboxes map[string]string) ([]do
 
 	return roots, processRoots, alphaRoots, betaRoots, gammaRoots
 }
+
+type InfoSlice []StatInfo
+
+func (info InfoSlice) Len() int {
+	return len(info)
+}
+func (info InfoSlice) Less(i, j int) bool {
+	return info[i].GetCount() < info[j].GetCount()
+}
+func (info InfoSlice) Swap(i, j int) {
+	info[i], info[j] = info[j], info[i]
+}
+func (info InfoSlice) hasName(name string) (*StatInfo, bool) {
+	for i := 0; i < len(info); i++ {
+		if info[i].GetName() == name {
+			return &info[i], true
+		}
+	}
+	return nil, false
+}
+
+type StatInfo interface {
+	GetName() string
+	GetCount() uint
+}
+
+type BaseInfo struct {
+	Name  string
+	Count uint
+}
+
+func (b BaseInfo) GetName() string {
+	return b.Name
+}
+
+func (b BaseInfo) GetCount() uint {
+	return b.Count
+}
+
+//type Test struct {
+//	TheName  string
+//	TheCount uint
+//	Some     string
+//	AndHZ    int
+//}
+//
+//func (t Test) GetName() string {
+//	return t.TheName
+//}
+//
+//func (t Test) GetCountCount() uint {
+//	return t.TheCount
+//}
+
+//
+//type Test2 struct {
+//	TheName    string
+//	TheCount   uint
+//	Afawfaw    string
+//	AndfwafaHZ int
+//}
+//
+//type Amogus struct {
+//	Test2
+//	fafkoaw string
+//}
+//
+//func (t Test2) GetName() string {
+//	return t.TheName
+//}
+//
+//func (t Test2) GetCountCount() uint {
+//	return t.TheCount
+//}
+//
+//func Some() {
+//	t2 := Test2{
+//		Afawfaw:    Alpha,
+//		AndfwafaHZ: 1,
+//		TheCount:   1,
+//		TheName:    "afwa",
+//	}
+//
+//	t := Test{
+//		Some:     Alpha,
+//		AndHZ:    1,
+//		TheCount: 1,
+//		TheName:  "afwa",
+//	}
+//
+//	a := Amogus{}
+//
+//	some := make(InfoSlice, 0)
+//	some = append(some, t)
+//	some = append(some, t2)
+//	some = append(some, a)
+//
+//	ab := Some11(some)
+//}

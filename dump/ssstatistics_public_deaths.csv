@@ -11455,3 +11455,615 @@ id,root_id,name,mob_type,assigned_role,special_role,real_name,mind_name,death_x,
 11454,50019,Ben Vorg,/mob/living/carbon/human,Test Subject,"",Ben Vorg,Ben Vorg,165,49,2,01:17,0,Flick Welty
 11455,50019,Tshepilov Sergei,/mob/living/carbon/human,Librarian,"",Tshepilov Sergei,Tshepilov Sergei,185,138,1,01:19,0,""
 11456,50019,Lizzard,/mob/living/carbon/human,MODE,Nuclear Operative Leader,Lizzard,Shagan Rock'Shur,230,207,1,01:19,0,""
+11457,50196,Unknown (as Ruben Foster),/mob/living/carbon/human,Security Officer,"",Ruben Foster,Ruben Foster,92,154,2,02:09,0,""
+11458,50196,Juan Williis,/mob/living/carbon/human,Recycler,"",Juan Williis,Juan Williis,111,148,2,02:57,0,""
+11459,50196,Charlton Nicholas,/mob/living/carbon/human,Test Subject,"",Charlton Nicholas,Charlton Nicholas,115,156,2,02:57,0,""
+11460,50196,Roy Surgovich,/mob/living/carbon/human,Test Subject,"",Roy Surgovich,Roy Surgovich,115,156,2,02:58,0,""
+11461,50196,Igor Collins,/mob/living/carbon/human,Security Cadet,"",Igor Collins,Igor Collins,122,159,2,02:58,0,""
+11462,50196,Seymour Raub,/mob/living/carbon/human,Station Engineer,"",Seymour Raub,Seymour Raub,108,161,2,03:00,0,""
+11463,50234,Kronos Fanth,/mob/living/carbon/human,Shaft Miner,"",Kronos Fanth,Kronos Fanth,144,45,6,00:08,0,""
+11464,50234,M'ark M'rshan,/mob/living/carbon/human,Roboticist,"",M'ark M'rshan,M'ark M'rshan,196,158,2,00:21,0,""
+11465,50234,Sal Lord,/mob/living/carbon/human,Scientist,"",Sal Lord,Sal Lord,195,159,2,00:23,0,""
+11466,50234,Jeremy Lloyd,/mob/living/carbon/human,Janitor,"",Jeremy Lloyd,Jeremy Lloyd,122,108,2,00:26,0,""
+11467,50234,Shisshve Ashita,/mob/living/carbon/human,Security Officer,"",Shisshve Ashita,Shisshve Ashita,185,159,2,00:28,0,John Don
+11468,50234,Vlad Omar,/mob/living/carbon/human,Xenobiologist,"",Vlad Omar,Vlad Omar,169,163,2,00:30,0,Vlad Omar
+11469,50234,Sam Bravo,/mob/living/carbon/human,Detective,"",Sam Bravo,Sam Bravo,170,163,2,00:34,0,""
+11470,50234,Sharon Nash,/mob/living/carbon/human,Security Officer,"",Sharon Nash,Sharon Nash,169,163,2,00:34,0,""
+11471,50234,Randy Best,/mob/living/carbon/human,Forensic Technician,"",Randy Best,Randy Best,171,164,2,00:34,0,""
+11472,50234,Silly Willy,/mob/living/carbon/human,Clown,"",Silly Willy,Silly Willy,170,164,2,00:34,0,""
+11473,50234,Unknown (as Patrick Cherry),/mob/living/carbon/human,Test Subject,"",Patrick Cherry,Patrick Cherry,161,158,2,00:42,0,""
+11474,50234,Hans Uberman,/mob/living/carbon/human,Xenobiologist,"",Hans Uberman,Hans Uberman,171,148,2,00:45,0,""
+11475,50234,Sam Samich,/mob/living/carbon/human,Roboticist,"",Sam Samich,Sam Samich,172,148,2,00:48,0,Shi'shi De She
+11476,50234,Artemida Byblikova,/mob/living/carbon/human,Paramedic,"",Artemida Byblikova,Artemida Byblikova,190,128,2,00:49,0,""
+11477,50234,Unknown (as Jin Relo),/mob/living/carbon/human,Security Cadet,"",Jin Relo,Jin Relo,125,154,2,00:50,0,Jin Relo
+11478,50234,Dextra,/mob/living/silicon/robot,Cyborg,"",Dextra,Issar Hess,156,135,2,00:55,0,Sam Samich
+11479,50234,Roy Surgovich,/mob/living/carbon/human,Technical Assistant,"",Roy Surgovich,Roy Surgovich,160,120,2,00:56,0,Sigma O'Neill
+11480,50234,Lion Remark,/mob/living/carbon/human,Geneticist,"",Lion Remark,Lion Remark,103,137,2,00:56,0,""
+11481,50234,Ali Azar,/mob/living/carbon/human,Chaplain,"",Ali Azar,Ali Azar,162,120,2,00:57,0,Sigma O'Neill
+11482,50234,Silas Green,/mob/living/carbon/human,Medical Intern,"",Silas Green,Silas Green,160,142,2,00:58,0,Unit-69
+11483,50234,Johnathan Armstrong,/mob/living/carbon/human,Medical Doctor,"",Johnathan Armstrong,Johnathan Armstrong,96,125,2,00:59,0,""
+11484,50234,Alroy Podkins,/mob/living/carbon/human,Medical Intern,"",Alroy Podkins,Alroy Podkins,98,127,2,00:59,0,Unit-69
+11485,50234,Unknown (as Karen),/mob/living/carbon/human,Chemist,"",Karen,Karen,128,158,2,01:06,0,John Don
+11486,50234,Warner Shaffer,/mob/living/carbon/human,Barber,"",Warner Shaffer,Warner Shaffer,93,140,2,01:06,0,""
+11487,50234,Jason Powell,/mob/living/carbon/human,Head of Security,"",Jason Powell,Jason Powell,106,127,2,01:06,0,Tate Benford
+11488,50234,Charlie Greene,/mob/living/carbon/human,Chief Engineer,"",Charlie Greene,Charlie Greene,163,112,2,01:06,0,""
+11489,50234,Unknown (as Tate Benford),/mob/living/carbon/human,Captain,"",Tate Benford,Tate Benford,111,129,2,01:09,0,""
+11490,50234,Patton Werry,/mob/living/carbon/human,Atmospheric Technician,"",Patton Werry,Patton Werry,90,110,2,01:12,0,""
+11491,50234,Unknown (as Ezekiel Woodward),/mob/living/carbon/human,Librarian,"",Ezekiel Woodward,Ezekiel Woodward,24,142,2,01:19,0,John Mackenzie
+11492,50234,M'ark M'rshan,/mob/living/carbon/human,Roboticist,"",M'ark M'rshan,M'ark M'rshan,27,142,2,01:20,0,Sigma O'Neill
+11493,50234,John Mackenzie,/mob/living/carbon/human,Test Subject,"",John Mackenzie,John Mackenzie,83,126,2,01:21,0,Unit-69
+11494,50199,Kane Ayron,/mob/living/carbon/human,Chef,Traitor,Kane Ayron,Kane Ayron,13,70,6,01:14,0,Issar Hess
+11495,50199,Unknown (as Issar Hess),/mob/living/carbon/human,Scientist,Traitor,Issar Hess,Issar Hess,150,100,2,01:36,0,Kshiya Less
+11496,50198,Unknown (as Allen Gray),/mob/living/carbon/human,Research Director,"",Allen Gray,Allen Gray,119,132,2,01:39,0,Allen Gray
+11497,50201,Colton Moore,/mob/living/carbon/human,Xenoarchaeologist,"",Colton Moore,Colton Moore,157,142,6,01:28,0,""
+11498,50197,Max Russell,/mob/living/carbon/human,Shaft Miner,"",Max Russell,Max Russell,22,142,2,00:25,0,""
+11499,50197,Jamal Freeman,/mob/living/carbon/human,Shaft Miner,Traitor,Jamal Freeman,Jamal Freeman,147,199,6,00:54,0,Rafael Sunders
+11500,50197,Igor Moon,/mob/living/carbon/human,Shaft Miner,"",Igor Moon,Igor Moon,117,75,6,01:16,0,Igor Moon
+11501,50197,Deimos,/mob/living/silicon/robot,Cyborg,"",Deimos,Otto Schulz,116,128,2,01:25,0,Rafael Sunders
+11502,50197,Emilia Wong,/mob/living/carbon/human,Detective,"",Emilia Wong,Emilia Wong,129,183,2,01:33,0,Aramsha Jarmack
+11503,50195,Alexander Sokolov,/mob/living/carbon/human,Test Subject,"",Alexander Sokolov,Alexander Sokolov,160,205,6,01:44,0,""
+11504,50195,Mike Ward,/mob/living/carbon/human,Quartermaster,"",Mike Ward,Mike Ward,127,162,2,01:46,0,""
+11505,50195,Joseph Dreyfus,/mob/living/carbon/human,Chief Medical Officer,"",Joseph Dreyfus,Joseph Dreyfus,161,102,2,02:32,0,""
+11506,50195,Joseph Dreyfus,/mob/living/carbon/human,Chief Medical Officer,"",Joseph Dreyfus,Joseph Dreyfus,167,106,2,04:13,0,""
+11507,50215,Unknown (as Gennady Whiteman),/mob/living/carbon/human,Security Officer,"",Gennady Whiteman,Gennady Whiteman,130,124,2,00:08,0,""
+11508,50215,Jad Shock,/mob/living/carbon/human,Mime,"",Jad Shock,Jad Shock,89,154,2,00:14,0,Isaiah Vader
+11509,50215,Isaiah Vader,/mob/living/carbon/human,Chef,Traitor,Isaiah Vader,Isaiah Vader,47,167,2,00:18,0,Seassant-An Nueve
+11510,50203,Unknown,/mob/living/carbon/human,Test Subject,"",Renato Sardini,Renato Sardini,180,114,2,01:37,0,Chloe Price
+11511,50216,Evangelina Shaffer,/mob/living/carbon/human,Shaft Miner,"",Evangelina Shaffer,Evangelina Shaffer,139,69,6,00:44,0,""
+11512,50216,Marcos Donkin,/mob/living/carbon/human,Test Subject,"",Marcos Donkin,Marcos Donkin,189,149,1,01:36,0,""
+11513,50216,Kellen Peters,/mob/living/carbon/human,Station Engineer,"",Kellen Peters,Kellen Peters,200,106,2,01:38,0,Kellen Peters
+11514,50227,Yachitayahi,/mob/living/carbon/human,MODE,Vox Raider,Yachitayahi,Yachitayahi,148,133,2,00:16,0,""
+11515,50227,Kakakahti,/mob/living/carbon/human,MODE,Vox Raider,Kakakahti,Kakakahti,172,130,2,00:18,0,Lim Al-Kuds
+11516,50227,Kakakahti,/mob/living/carbon/human,MODE,Vox Raider,Kakakahti,Kakakahti,172,130,2,00:18,0,Lim Al-Kuds
+11517,50227,Curly Mens,/mob/living/carbon/human,Security Officer,"",Curly Mens,Curly Mens,188,130,2,00:19,0,Yayahakah
+11518,50227,Unknown,/mob/living/carbon/human,Security Officer,"",Curly Mens,Curly Mens,144,104,2,00:33,0,Yayahakah
+11519,50222,Unknown (as Zordium),/mob/living/carbon/human,default,"",Zordium,Zordium,166,213,4,01:05,0,""
+11520,50212,Unknown,/mob/living/carbon/human,Test Subject,"",Sherwin Fly,Sherwin Fly,152,133,2,00:21,0,Seymour Briggs
+11521,50212,Seok Drummond,/mob/living/carbon/human,Security Officer,"",Seok Drummond,Seok Drummond,104,102,2,00:28,0,""
+11522,50212,Kahiyayatachikikah,/mob/living/carbon/human,MODE,Vox Raider,Kahiyayatachikikah,Kahiyayatachikikah,74,73,2,00:31,0,Elizabeth Rubram
+11523,50219,Makskim Shomski,/mob/living/carbon/human,Barber,"",Makskim Shomski,Makskim Shomski,145,115,2,00:08,0,""
+11524,50219,Makskim Shomski,/mob/living/carbon/human,Barber,"",Makskim Shomski,Makskim Shomski,152,110,2,00:09,0,""
+11525,50219,Makskim Shomski,/mob/living/carbon/human,Barber,"",Makskim Shomski,Makskim Shomski,147,111,2,00:12,0,""
+11526,50219,Mike Ward,/mob/living/carbon/human,Quartermaster,"",Mike Ward,Mike Ward,204,23,3,01:12,0,Sezaro Plamondo
+11527,50219,Sezaro Plamondo,/mob/living/carbon/human,Mime,"",Sezaro Plamondo,Sezaro Plamondo,196,123,3,01:19,0,Mike Ward
+11528,50226,Slen Franko,/mob/living/carbon/human,Shaft Miner,"",Slen Franko,Slen Franko,148,58,6,00:29,0,""
+11529,50226,Unknown,/mob/living/carbon/human,Shaft Miner,"",Slen Franko,Slen Franko,140,35,6,00:32,0,""
+11530,50200,Adam Sommer,/mob/living/carbon/human,Security Officer,"",Adam Sommer,Adam Sommer,195,58,2,00:42,0,Adam Sommer
+11531,50200,Seymour Briggs,/mob/living/carbon/human,Geneticist,"",Seymour Briggs,Seymour Briggs,192,135,2,00:52,0,""
+11532,50200,Seymour Briggs,/mob/living/carbon/human,Geneticist,"",Seymour Briggs,Seymour Briggs,192,135,2,00:52,0,""
+11533,50200,Koil Welher (as NOT SPECIFIED),/mob/living/carbon/human,Technical Assistant,"",Koil Welher,Koil Welher,159,144,2,01:00,0,Friedrich Von Brandenburg
+11534,50200,Vincent Rahl,/mob/living/carbon/human,Xenoarchaeologist,"",Vincent Rahl,Vincent Rahl,180,120,2,01:32,0,""
+11535,50200,Vincent Rahl,/mob/living/carbon/human,Xenoarchaeologist,"",Vincent Rahl,Vincent Rahl,68,169,2,01:41,1,""
+11536,50224,Jad Shock,/mob/living/carbon/human,Mime,"",Jad Shock,Jad Shock,89,123,2,00:33,0,Spike Schmidt
+11537,50224,Jad Shock,/mob/living/carbon/human,Mime,"",Jad Shock,Jad Shock,153,110,2,00:38,0,Spike Schmidt
+11538,50224,Jad Shock,/mob/living/carbon/human,Mime,"",Jad Shock,Jad Shock,153,111,2,00:43,0,Spike Schmidt
+11539,50224,Unknown,/mob/living/carbon/human,Mime,"",Jad Shock,Jad Shock,150,100,2,00:59,0,Spike Schmidt
+11540,50224,Jad Shock,/mob/living/carbon/human,Mime,"",Jad Shock,Jad Shock,150,100,2,01:02,0,Spike Schmidt
+11541,50206,Adrian Gordon,/mob/living/carbon/human,Technical Assistant,"",Adrian Gordon,Adrian Gordon,101,99,2,00:34,0,""
+11542,50206,Marat Werner,/mob/living/carbon/human,Recycler,"",Marat Werner,Marat Werner,86,109,2,01:12,0,""
+11543,50206,Patrick Rowley,/mob/living/carbon/human,Shaft Miner,"",Patrick Rowley,Patrick Rowley,119,85,6,01:34,0,Patrick Rowley
+11544,50204,Lucas Gibson,/mob/living/carbon/human,Head of Personnel,Traitor,Lucas Gibson,Lucas Gibson,116,129,2,00:24,0,""
+11545,50204,Leeland Rahl,/mob/living/carbon/human,Head of Security,"",Leeland Rahl,Leeland Rahl,197,227,3,00:25,0,""
+11546,50204,Kefal.Archigos.Filos,/mob/living/carbon/human,Station Engineer,"",Kefal.Archigos.Filos,Kefal.Archigos.Filos,127,82,2,00:26,0,Biba
+11547,50204,Chip Elderson,/mob/living/carbon/human,Scientist,"",Chip Elderson,Chip Elderson,157,135,2,00:28,0,""
+11548,50204,Koudi Cooper,/mob/living/carbon/human,Roboticist,"",Koudi Cooper,Koudi Cooper,147,141,2,00:28,0,""
+11549,50204,Keegan Hunt,/mob/living/carbon/human,Research Director,"",Keegan Hunt,Keegan Hunt,151,136,2,00:28,0,""
+11550,50204,Tamsin Winton,/mob/living/carbon/human,Security Officer,"",Tamsin Winton,Tamsin Winton,152,129,2,00:28,0,Merk
+11551,50204,M'ark M'rshan,/mob/living/carbon/human,Roboticist,"",M'ark M'rshan,M'ark M'rshan,151,136,2,00:28,0,""
+11552,50204,Cassian Winton,/mob/living/carbon/human,Chief Medical Officer,"",Cassian Winton,Cassian Winton,150,110,2,00:29,0,Merk
+11553,50204,Michael Langston,/mob/living/carbon/human,Medical Intern,"",Michael Langston,Michael Langston,146,121,2,00:29,0,Michael Langston
+11554,50204,Unknown (as Aurelius Aquilimus),/mob/living/carbon/human,Geneticist,"",Aurelius Aquilimus,Aurelius Aquilimus,156,121,2,00:29,0,""
+11555,50204,Unknown (as Alroy Podkins),/mob/living/carbon/human,Test Subject,"",Alroy Podkins,Alroy Podkins,135,116,2,00:30,0,""
+11556,50204,Jason Snyder,/mob/living/carbon/human,Medical Intern,"",Jason Snyder,Jason Snyder,167,111,2,00:30,0,""
+11557,50204,Unknown (as Joseph Hope),/mob/living/carbon/human,Scientist,"",Joseph Hope,Joseph Hope,118,141,2,00:30,0,""
+11558,50204,Aramsha Jarmack,/mob/living/carbon/human,Station Engineer,"",Aramsha Jarmack,Aramsha Jarmack,118,90,2,00:30,0,""
+11559,50204,Unknown (as Oldman Kirsan),/mob/living/carbon/human,Detective,"",Oldman Kirsan,Oldman Kirsan,130,101,2,00:30,0,""
+11560,50204,Puzobor Slavov,/mob/living/carbon/human,Mime,"",Puzobor Slavov,Puzobor Slavov,186,132,2,00:31,0,Puzobor Slavov
+11561,50204,Max Black,/mob/living/carbon/human,Janitor,"",Max Black,Max Black,163,111,2,00:31,0,Merk
+11562,50204,Unknown (as Reva Marks),/mob/living/carbon/human,Geneticist,"",Reva Marks,Reva Marks,162,128,2,00:31,0,Merk
+11563,50204,Maya Foxova,/mob/living/carbon/human,Warden,"",Maya Foxova,Maya Foxova,135,138,2,00:32,0,""
+11564,50204,Shi'shi De She,/mob/living/carbon/human,Security Officer,"",Shi'shi De She,Shi'shi De She,141,129,2,00:32,0,Merk
+11565,50204,Gatatikikichakiya,/mob/living/carbon/human,Atmospheric Technician,"",Gatatikikichakiya,Gatatikikichakiya,96,133,2,00:33,0,Quiwz'xu Qox
+11566,50204,Kuriu Qlio'kaf,/mob/living/carbon/human,Station Engineer,"",Kuriu Qlio'kaf,Kuriu Qlio'kaf,106,148,2,00:34,0,""
+11567,50204,John Mackenzie,/mob/living/carbon/human,Chemist,"",John Mackenzie,John Mackenzie,138,123,2,00:34,0,Merk
+11568,50204,Elliot Temere,/mob/living/carbon/human,Test Subject,"",Elliot Temere,Elliot Temere,174,177,2,00:36,0,""
+11569,50204,Reuben Hunt,/mob/living/carbon/human,Security Officer,"",Reuben Hunt,Reuben Hunt,135,129,2,00:39,0,Biba
+11570,50204,Richard Reed,/mob/living/carbon/human,Station Engineer,"",Richard Reed,Richard Reed,112,134,2,00:40,0,""
+11571,50204,Unknown (as Lion Remark),/mob/living/carbon/human,Virologist,"",Lion Remark,Lion Remark,155,94,2,00:40,0,MEOW
+11572,50204,Alex Ermakov,/mob/living/carbon/human,Recycler,"",Alex Ermakov,Alex Ermakov,48,129,2,00:41,0,""
+11573,50204,Dominick Addison,/mob/living/carbon/human,Chief Engineer,"",Dominick Addison,Dominick Addison,48,142,2,00:42,0,""
+11574,50204,Andrey Palkow,/mob/living/carbon/human,Bartender,"",Andrey Palkow,Andrey Palkow,90,133,2,00:42,0,SyndiClown
+11575,50204,Volqrmixqu Lirqrrxuim,/mob/living/carbon/human,Xenoarchaeologist,"",Volqrmixqu Lirqrrxuim,Volqrmixqu Lirqrrxuim,57,143,2,00:42,0,""
+11576,50204,Klein Maccubus,/mob/living/carbon/human,Medical Intern,"",Klein Maccubus,Klein Maccubus,104,142,2,00:42,0,Biba
+11577,50204,SyndiClown,/mob/living/carbon/human,Clown,"",SyndiClown,SyndiClown,45,140,2,00:42,0,Nitrogen
+11578,50204,Unknown (as Philipp Smith),/mob/living/carbon/human,Shaft Miner,"",Philipp Smith,Philipp Smith,50,141,2,00:42,0,Nitrogen
+11579,50204,Jesus Garneys,/mob/living/carbon/human,Psychiatrist,"",Jesus Garneys,Jesus Garneys,62,149,2,00:43,0,""
+11580,50204,Maxoun Gymovic,/mob/living/carbon/human,Chef,"",Maxoun Gymovic,Maxoun Gymovic,29,139,2,00:43,0,""
+11581,50204,Unknown (as Illia Bronson),/mob/living/carbon/human,Botanist,"",Illia Bronson,Illia Bronson,78,141,2,00:44,0,Merk
+11582,50204,Jin Relo,/mob/living/carbon/human,Security Cadet,"",Jin Relo,Jin Relo,55,141,2,00:44,0,Merk
+11583,50204,Luke Roadman,/mob/living/carbon/human,Xenobiologist,"",Luke Roadman,Luke Roadman,139,128,2,00:44,0,""
+11584,50204,Unknown (as Adolph Nastain),/mob/living/carbon/human,Security Cadet,"",Adolph Nastain,Adolph Nastain,137,155,2,00:46,0,""
+11585,50204,Unknown (as Bailey Patel),/mob/living/carbon/human,Station Engineer,"",Bailey Patel,Bailey Patel,126,152,2,00:46,0,""
+11586,50204,Danny Roby,/mob/living/carbon/human,Xenobiologist,"",Danny Roby,Danny Roby,26,142,2,00:46,0,Merk
+11587,50204,Unknown (as Isaac Fletcher),/mob/living/carbon/human,Internal Affairs Agent,"",Isaac Fletcher,Isaac Fletcher,116,161,2,00:47,0,""
+11588,50204,Unknown (as Ivan Huga),/mob/living/carbon/human,Chaplain,"",Ivan Huga,Ivan Huga,189,147,2,00:47,0,""
+11589,50204,Andre Bailey,/mob/living/carbon/human,Shaft Miner,"",Andre Bailey,Andre Bailey,136,75,6,00:54,0,Andre Bailey
+11590,50204,Unknown (as Nikolai Vakhmistrov),/mob/living/carbon/human,Chef,"",Nikolai Vakhmistrov,Nikolai Vakhmistrov,62,106,2,00:54,0,MEOW
+11591,50204,Johnathan Armstrong,/mob/living/carbon/human,Recycler,"",Johnathan Armstrong,Johnathan Armstrong,88,118,2,00:55,0,Johnathan Armstrong
+11592,50204,Unknown (as Najah Mujib),/mob/living/carbon/human,Paramedic,"",Najah Mujib,Najah Mujib,48,142,2,00:55,0,Merk
+11593,50204,Unknown,/mob/living/carbon/human/unathi,default,"",Милая согханочка из борде,Милая согханочка из борде,34,25,1,00:56,0,""
+11594,50204,Unknown (as Jean-Poul Marat),/mob/living/carbon/human,Botanist,"",Jean-Poul Marat,Jean-Poul Marat,48,142,2,00:59,0,MEOW
+11595,50204,SEX BEAR,/mob/living/carbon/human/tajaran,default,"",SEX BEAR,SEX BEAR,32,20,1,01:03,0,Ivan Huga
+11596,50204,Unknown,/mob/living/carbon/human/tajaran,default,"",Ken,Ken,25,18,1,01:03,0,SEX BEAR
+11597,50204,Rosemary Demuth,/mob/living/carbon/human,Technical Assistant,"",Rosemary Demuth,Rosemary Demuth,32,142,2,01:03,0,Merk
+11598,50204,maintenance drone (994),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (994),maintenance drone (994),138,104,2,01:04,0,""
+11599,50204,Mayron Demetrios,/mob/living/carbon/human,Technical Assistant,Traitor,Mayron Demetrios,Mayron Demetrios,151,41,2,01:05,0,Dar'zahr
+11600,50223,Arleen Morris,/mob/living/carbon/human,Station Engineer,"",Arleen Morris,Arleen Morris,119,159,2,00:36,0,Jad Shock
+11601,50223,Unknown (as Liam O'Shea),/mob/living/carbon/human,Chief Medical Officer,"",Liam O'Shea,Liam O'Shea,119,159,2,00:38,0,Jad Shock
+11602,50223,Roman Elinov,/mob/living/carbon/human,Security Officer,"",Roman Elinov,Roman Elinov,120,169,2,00:38,0,Jad Shock
+11603,50223,Horatio Highjack,/mob/living/carbon/human,Head of Personnel,"",Horatio Highjack,Horatio Highjack,108,120,2,00:43,0,Jad Shock
+11604,50223,Flick Welty,/mob/living/carbon/human,Recycler,"",Flick Welty,Flick Welty,110,63,6,00:52,0,""
+11605,50223,Oleg Osetrov,/mob/living/carbon/human,Warden,"",Oleg Osetrov,Oleg Osetrov,121,181,2,01:16,0,Patrick Sealis
+11606,50225,Jad Shock,/mob/living/carbon/human,Mime,"",Jad Shock,Jad Shock,136,115,2,00:04,0,Vlad Omar
+11607,50225,Unknown (as Vlad Omar),/mob/living/carbon/human,Security Cadet,"",Vlad Omar,Vlad Omar,178,146,2,00:14,0,maintenance drone (840)
+11608,50225,maintenance drone (840),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (840),maintenance drone (840),156,130,2,00:15,0,maintenance drone (840)
+11609,50225,maintenance drone (391),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (391),maintenance drone (391),145,102,2,00:38,0,Kshiya Less
+11610,50225,maintenance drone (614),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (614),maintenance drone (614),148,109,2,00:41,0,Sparkle
+11611,50220,Alex Ermakov,/mob/living/carbon/human,Recycler,"",Alex Ermakov,Alex Ermakov,89,101,2,00:05,0,""
+11612,50220,Alex Ermakov,/mob/living/carbon/human,Recycler,"",Alex Ermakov,Alex Ermakov,89,101,2,00:05,0,""
+11613,50220,Vadim Wood,/mob/living/carbon/human,Test Subject,"",Vadim Wood,Vadim Wood,138,159,2,00:09,0,""
+11614,50220,Unknown (as Keegan Hunt),/mob/living/carbon/human,Head of Security,"",Keegan Hunt,Keegan Hunt,102,145,2,00:10,0,""
+11615,50220,Hatika,/mob/living/carbon/human,Paramedic,"",Hatika,Hatika,102,147,2,00:10,0,""
+11616,50220,Unknown (as Maya Foxova),/mob/living/carbon/human,Captain,"",Maya Foxova,Maya Foxova,138,129,2,00:10,0,""
+11617,50220,Kane Sanders,/mob/living/carbon/human,Recycler,"",Kane Sanders,Kane Sanders,109,142,2,00:10,0,""
+11618,50220,Unknown (as Roman Elinov),/mob/living/carbon/human,Test Subject,"",Roman Elinov,Roman Elinov,117,141,2,00:10,0,""
+11619,50220,Tucha Master,/mob/living/carbon/human,Clown,"",Tucha Master,Tucha Master,90,153,2,00:10,0,""
+11620,50220,Jin Relo,/mob/living/carbon/human,Security Cadet,"",Jin Relo,Jin Relo,138,130,2,00:10,0,""
+11621,50220,Semyon Hatsunov,/mob/living/carbon/human,Test Subject,"",Semyon Hatsunov,Semyon Hatsunov,97,157,2,00:10,0,Norman Don
+11622,50220,Unknown (as Yrtem Kingdarli),/mob/living/carbon/human,Forensic Technician,"",Yrtem Kingdarli,Yrtem Kingdarli,184,136,2,00:11,0,""
+11623,50220,Unknown (as Lary Doger),/mob/living/carbon/human,Medical Doctor,"",Lary Doger,Lary Doger,102,116,2,00:11,0,""
+11624,50220,Issar Hess,/mob/living/carbon/human,Scientist,"",Issar Hess,Issar Hess,150,142,2,00:11,0,""
+11625,50220,Kshiya Less,/mob/living/carbon/human,Scientist,"",Kshiya Less,Kshiya Less,149,135,2,00:11,0,""
+11626,50220,Unknown (as Sivean Doulson),/mob/living/carbon/human,Roboticist,"",Sivean Doulson,Sivean Doulson,188,125,2,00:12,0,""
+11627,50220,Unknown (as Vlad Omar),/mob/living/carbon/human,Geneticist,"",Vlad Omar,Vlad Omar,146,115,2,00:13,0,""
+11628,50220,Unknown (as Alroy Podkins),/mob/living/carbon/human,Medical Intern,"",Alroy Podkins,Alroy Podkins,151,110,2,00:13,0,""
+11629,50220,Unknown (as Denis Brodskiy),/mob/living/carbon/human,Medical Doctor,"",Denis Brodskiy,Denis Brodskiy,121,111,2,00:13,0,""
+11630,50220,Unknown (as Jim Morris),/mob/living/carbon/human,Security Officer,"",Jim Morris,Jim Morris,104,108,2,00:14,0,""
+11631,50220,maintenance drone (246),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (246),maintenance drone (246),118,167,2,00:15,0,""
+11632,50220,Unknown (as Stefan Ray),/mob/living/carbon/human,Bartender,"",Stefan Ray,Stefan Ray,87,131,2,00:17,0,""
+11633,50208,Weston Bell,/mob/living/carbon/human,Detective,"",Weston Bell,Weston Bell,113,175,2,00:18,0,""
+11634,50208,Chloe Price,/mob/living/carbon/human,Librarian,"",Chloe Price,Chloe Price,157,128,2,00:54,0,Chloe Price
+11635,50208,Marat Werner,/mob/living/carbon/human,Recycler,"",Marat Werner,Marat Werner,67,118,2,01:16,0,""
+11636,50208,Patrick Rowley,/mob/living/carbon/human,Shaft Miner,"",Patrick Rowley,Patrick Rowley,145,118,2,01:43,0,Patrick Rowley
+11637,50208,Colton Moore,/mob/living/carbon/human,Xenoarchaeologist,"",Colton Moore,Colton Moore,20,34,4,01:46,0,""
+11638,50210,Adam Grace,/mob/living/carbon/human,Barber,Traitor,Adam Grace,Adam Grace,18,145,2,00:17,0,""
+11639,50210,Unknown (as Adam Grace),/mob/living/carbon/human,Barber,Traitor,Adam Grace,Adam Grace,18,145,2,00:19,0,""
+11640,50210,Loreto Bunten,/mob/living/carbon/human,Xenoarchaeologist,Traitor,Loreto Bunten,Loreto Bunten,123,152,6,00:26,0,""
+11641,50210,Unknown (as Werner Von Schmidt),/mob/living/carbon/human,Head of Personnel,"",Werner Von Schmidt,Werner Von Schmidt,112,120,2,00:34,0,John Pavlov
+11642,50210,Unknown (as Rose Willow),/mob/living/carbon/human,Security Officer,"",Rose Willow,Rose Willow,111,123,2,00:35,0,P.A.N
+11643,50210,Gleb Sobachkin,/mob/living/carbon/human,Shaft Miner,"",Gleb Sobachkin,Gleb Sobachkin,67,147,6,00:58,0,Gleb Sobachkin
+11644,50210,Unknown (as Liam O'Shea),/mob/living/carbon/human,Research Director,"",Liam O'Shea,Liam O'Shea,152,145,2,00:58,0,John Pavlov
+11645,50210,P.A.N,/mob/living/silicon/robot,Cyborg,"",P.A.N,Marcus Arrow,149,141,2,00:59,0,""
+11646,50210,John Pavlov,/mob/living/carbon/human,Medical Doctor,Traitor,John Pavlov,John Pavlov,153,145,2,00:59,0,""
+11647,50210,Unknown (as Liam O'Shea),/mob/living/carbon/human,Research Director,"",Liam O'Shea,Liam O'Shea,153,111,2,01:03,0,John Pavlov
+11648,50210,Unknown,/mob/living/carbon/human,Chef,Traitor,Artemida Byblikova,Artemida Byblikova,179,76,2,01:10,0,""
+11649,50210,Unknown (as Liam O'Shea),/mob/living/carbon/human,Research Director,"",Liam O'Shea,Liam O'Shea,138,134,2,01:21,0,P.A.N
+11650,50210,XAL,/mob/living/silicon/robot,Cyborg,"",XAL,XAL-113,135,128,2,01:24,0,""
+11651,50210,Loreto Bunten,/mob/living/carbon/human,Xenoarchaeologist,Traitor,Loreto Bunten,Loreto Bunten,149,110,2,01:33,0,""
+11652,50210,Unknown (as Ruben Foster),/mob/living/carbon/human,Bartender,"",Ruben Foster,Ruben Foster,92,132,2,01:41,0,Adolph Nastain
+11653,50210,Agent Addison,/mob/living/carbon/human,default,"",Agent Addison,Agent Addison,188,165,4,01:43,0,""
+11654,50209,Terry Hints,/mob/living/carbon/human,Station Engineer,"",Terry Hints,Terry Hints,151,111,2,00:24,0,""
+11655,50209,Artemida Byblikova,/mob/living/carbon/human,Scientist,"",Artemida Byblikova,Artemida Byblikova,187,89,4,00:32,0,""
+11656,50209,Lucas Aberg,/mob/living/carbon/human,Xenoarchaeologist,"",Lucas Aberg,Lucas Aberg,187,87,4,00:33,0,""
+11657,50209,Gikakhayikati,/mob/living/carbon/human,Geneticist,"",Gikakhayikati,Gikakhayikati,137,153,2,00:50,0,""
+11658,50209,Gikakhayikati,/mob/living/carbon/human,Geneticist,"",Gikakhayikati,Gikakhayikati,137,153,2,00:50,0,""
+11659,50209,Hatika,/mob/living/carbon/human,Paramedic,"",Hatika,Hatika,163,112,2,01:14,0,Leroy White
+11660,50209,Hatika,/mob/living/carbon/human,Paramedic,"",Hatika,Hatika,163,112,2,01:14,0,Leroy White
+11661,50209,Unknown,/mob/living/carbon/human,Paramedic,"","",Hatika,150,100,2,01:18,0,Zikkykikati
+11662,50209,Reva Marks,/mob/living/carbon/human,Chemist,"",Reva Marks,Reva Marks,148,119,2,01:19,0,Ivan Huga
+11663,50209,Bruce Fitgerald,/mob/living/carbon/human,Test Subject,Traitor,Bruce Fitgerald,Bruce Fitgerald,153,116,2,01:24,0,""
+11664,50209,suspicious drone (382),/mob/living/silicon/robot/drone/syndi,Cyborg,"",syndicate drone (382),syndicate drone (382),143,56,2,01:24,0,Dextra
+11665,50209,Gwenevere Coldsmith,/mob/living/carbon/human,Atmospheric Technician,"",Gwenevere Coldsmith,Gwenevere Coldsmith,128,159,2,01:27,0,""
+11666,50209,Bruce Fitgerald,/mob/living/carbon/human,Test Subject,Traitor,Bruce Fitgerald,Bruce Fitgerald,149,118,2,01:30,0,""
+11667,50209,Kanet'pruunance,/mob/living/carbon/human/shadowling,Shaft Miner,Shadowling,Kanet'pruunance,Seamon Light,101,161,2,01:38,0,""
+11668,50209,Unknown (as Hatika),/mob/living/carbon/human,Paramedic,"",Hatika,Hatika,149,100,2,01:38,0,""
+11669,50229,Lucas Gibson,/mob/living/carbon/human,Station Engineer,Traitor,Lucas Gibson,Lucas Gibson,96,167,2,00:44,0,""
+11670,50229,Slen Franko,/mob/living/carbon/human,Test Subject,"",Slen Franko,Slen Franko,108,93,2,01:08,0,""
+11671,50229,Esteban Berkheimer,/mob/living/carbon/human,Shaft Miner,"",Esteban Berkheimer,Esteban Berkheimer,123,57,6,01:16,0,""
+11672,50229,Unknown,/mob/living/carbon/human,Mime,Traitor,Bryan James,Bryan James,116,195,2,01:19,0,Dawson Dryfus
+11673,50229,Dmitriy Ulyanov,/mob/living/carbon/human,Detective,"",Dmitriy Ulyanov,Dmitriy Ulyanov,124,197,2,01:20,0,Drill Gnoos
+11674,50229,Overseer,/mob/living/carbon/human,default,"",Overseer,Overseer,60,53,4,01:22,0,""
+11675,50229,Unknown (as mouse (62)),/mob/living/carbon/human,Janitor,"",Adam Sommer,Adam Sommer,94,240,1,01:23,0,Vlad Omar
+11676,50229,Unknown (as Dmitriy Ulyanov),/mob/living/carbon/human,Detective,"",Dmitriy Ulyanov,Dmitriy Ulyanov,88,234,1,01:24,0,Drill Gnoos
+11677,50229,Adolph Nastain,/mob/living/carbon/human,Chemist,"",Adolph Nastain,Adolph Nastain,98,245,1,01:24,0,Adolph Nastain
+11678,50229,Unknown (as Jason Snyder),/mob/living/carbon/human,Chaplain,"",Jason Snyder,Jason Snyder,94,243,1,01:24,0,Semyon Hatsunov
+11679,50229,Luke Roadman,/mob/living/carbon/human,Test Subject,"",Luke Roadman,Luke Roadman,87,244,1,01:24,0,""
+11680,50229,Vlad Omar,/mob/living/carbon/human,Geneticist,"",Vlad Omar,Vlad Omar,94,238,1,01:24,0,""
+11681,50218,Kill Chop Deluxe,/mob/living/silicon/robot/syndicate,MODE,Nuclear Operative,Kill Chop Deluxe,Syndicate Robot-717,119,157,2,00:22,0,""
+11682,50218,Gorlex Maradeurs Operative,/mob/living/carbon/human,MODE,Nuclear Operative,Shaman,Sivean Doulson,127,201,2,00:23,0,""
+11737,50230,BIBA,/mob/living/carbon/human,Clown,"",BIBA,BIBA,97,142,2,00:43,0,""
+11683,50218,Gorlex Maradeurs Operative,/mob/living/carbon/human,MODE,Nuclear Operative,Operative Zed,Seamon Light,20,147,2,00:23,0,""
+11684,50218,Viktor Valentine,/mob/living/carbon/human,MODE,Nuclear Operative,Vendetta,Viktor Valentine,20,147,2,00:24,0,""
+11685,50218,Kane Sanders,/mob/living/carbon/human,Botanist,"",Kane Sanders,Kane Sanders,22,152,2,00:24,0,Alisa Don
+11686,50218,Claude Morgan,/mob/living/carbon/human,Head of Personnel,"",Claude Morgan,Claude Morgan,65,191,6,00:24,0,""
+11687,50218,Adam Browning Jr,/mob/living/carbon/human,Chemist,"",Adam Browning Jr,Adam Browning Jr,18,146,2,00:25,0,Troy Orgail
+11688,50218,OPERATIVES STANDBY,/mob/living/carbon/human,MODE,Nuclear Operative,OPERATIVES STANDBY,Sergey Labuda,119,195,2,00:25,0,Unit-69
+11689,50218,Roy Walker,/mob/living/carbon/human,Station Engineer,"",Roy Walker,Roy Walker,117,192,2,00:25,0,OPERATIVES STANDBY
+11690,50218,Maya Foxova,/mob/living/carbon/human,Captain,"",Maya Foxova,Maya Foxova,147,111,2,00:26,0,""
+11691,50218,Maya Foxova,/mob/living/carbon/human,Captain,"",Maya Foxova,Maya Foxova,147,111,2,00:26,0,""
+11692,50218,Skiddle,/mob/living/carbon/human,Clown,"",Skiddle,Skiddle,128,180,2,00:26,0,""
+11693,50218,Gorlex Maradeurs Operative,/mob/living/carbon/human,MODE,Nuclear Operative Leader,SEXY,Artemida Byblikova,130,200,2,00:27,0,""
+11694,50218,Arleen Morris,/mob/living/carbon/human,Station Engineer,"",Arleen Morris,Arleen Morris,117,193,2,00:29,0,""
+11695,50218,Maxoun Gymovic,/mob/living/carbon/human,Chef,"",Maxoun Gymovic,Maxoun Gymovic,82,125,2,00:29,0,""
+11696,50218,Gwenevere Coldsmith,/mob/living/carbon/human,Atmospheric Technician,"",Gwenevere Coldsmith,Gwenevere Coldsmith,131,75,2,00:29,0,""
+11697,50218,Zikkykikati,/mob/living/carbon/human,Medical Doctor,"",Zikkykikati,Zikkykikati,116,194,2,00:29,0,""
+11698,50218,Lary Doger,/mob/living/carbon/human,Medical Doctor,"",Lary Doger,Lary Doger,150,111,2,00:29,0,Tate Benford
+11699,50218,Tate Benford,/mob/living/carbon/human,Chief Medical Officer,"",Tate Benford,Tate Benford,134,138,2,00:29,0,""
+11700,50218,Jad Shock,/mob/living/carbon/human,Mime,"",Jad Shock,Jad Shock,92,126,2,00:29,0,""
+11701,50218,Alisa Don,/mob/living/carbon/human,Botanist,"",Alisa Don,Alisa Don,94,132,2,00:29,0,""
+11702,50218,Sneaky,/mob/living/carbon/human,MODE,Nuclear Operative,Sneaky,Mike Spenser,83,126,2,00:29,0,""
+11703,50218,Norman Don,/mob/living/carbon/human,Bartender,"",Norman Don,Norman Don,92,132,2,00:29,0,""
+11704,50218,Zeke Wheeler,/mob/living/carbon/human,Test Subject,"",Zeke Wheeler,Zeke Wheeler,94,133,2,00:29,0,""
+11705,50218,Ray Wardle,/mob/living/carbon/human,Chief Engineer,"",Ray Wardle,Ray Wardle,114,194,2,00:29,0,""
+11706,50218,Andre Isaakov,/mob/living/carbon/human,Xenobiologist,"",Andre Isaakov,Andre Isaakov,128,124,2,00:29,0,""
+11707,50218,Bryan James,/mob/living/carbon/human,Chef,"",Bryan James,Bryan James,83,127,2,00:29,0,""
+11708,50218,Kakotika,/mob/living/carbon/human,Test Subject,"",Kakotika,Kakotika,104,80,2,00:29,0,""
+11709,50218,Troy Orgail,/mob/living/carbon/human,Test Subject,"",Troy Orgail,Troy Orgail,89,180,2,00:29,0,""
+11710,50218,Andrey Palkow,/mob/living/carbon/human,Security Officer,"",Andrey Palkow,Andrey Palkow,118,195,2,00:29,0,Andrey Palkow
+11711,50218,Unit-69,/mob/living/silicon/robot,Cyborg,"",Unit-69,Danko Cesarre,122,190,2,00:29,0,""
+11712,50218,A-0,/mob/living/silicon/robot,Cyborg,"",A-0,Jin Relo,143,105,2,00:29,0,""
+11713,50218,Richard Reed,/mob/living/carbon/human,Station Engineer,"",Richard Reed,Richard Reed,118,151,2,00:29,0,""
+11714,50218,Zayden Fiddler,/mob/living/carbon/human,Head of Security,"",Zayden Fiddler,Zayden Fiddler,144,105,2,00:29,0,""
+11715,50218,Natalia Koneva,/mob/living/carbon/human,Security Officer,"",Natalia Koneva,Natalia Koneva,126,201,2,00:29,0,""
+11716,50218,Semyon Hatsunov,/mob/living/carbon/human,Test Subject,"",Semyon Hatsunov,Semyon Hatsunov,135,115,2,00:29,0,Andrey Palkow
+11717,50218,Tahikakiyata,/mob/living/carbon/human,Scientist,"",Tahikakiyata,Tahikakiyata,140,133,2,00:29,0,""
+11718,50218,Alroy Podkins (as Maya Foxova),/mob/living/carbon/human,Medical Intern,"",Alroy Podkins,Alroy Podkins,161,112,2,00:29,0,""
+11719,50218,Owen Tireman,/mob/living/carbon/human,Chaplain,"",Owen Tireman,Owen Tireman,184,145,2,00:29,0,Owen Tireman
+11720,50218,Vlad Omar,/mob/living/carbon/human,Geneticist,"",Vlad Omar,Vlad Omar,162,121,2,00:29,0,""
+11721,50218,Hatika,/mob/living/carbon/human,Paramedic,"",Hatika,Hatika,48,130,2,00:29,0,""
+11722,50218,Maya Foxova,/mob/living/carbon/human,Captain,"",Maya Foxova,Maya Foxova,159,114,2,00:29,0,""
+11723,50230,Jason Powell,/mob/living/carbon/human,Detective,"",Jason Powell,Jason Powell,113,176,2,00:35,0,Leon
+11724,50230,Otto Schulz,/mob/living/carbon/human,Security Officer,"",Otto Schulz,Otto Schulz,120,161,2,00:36,0,Kill Chop Deluxe
+11725,50230,Gorlex Maradeurs Operative,/mob/living/carbon/human,MODE,Nuclear Operative Leader,Leon,Lucas Gibson,121,181,2,00:36,0,""
+11726,50230,Adolph Nastain,/mob/living/carbon/human,Janitor,"",Adolph Nastain,Adolph Nastain,93,154,2,00:36,0,SYNDIMEOW
+11727,50230,Nitrogen,/mob/living/silicon/robot,Cyborg,"",Nitrogen,Nikita Bubencov,118,141,2,00:37,0,SYNDIMEOW
+11728,50230,Esteban Berkheimer,/mob/living/carbon/human,Security Officer,"",Esteban Berkheimer,Esteban Berkheimer,118,155,2,00:37,0,Kill Chop Deluxe
+11729,50230,Mei Kiryuin,/mob/living/carbon/human,Head of Personnel,"",Mei Kiryuin,Mei Kiryuin,132,177,2,00:37,0,Volgarik
+11730,50230,Aphelios Tildor,/mob/living/carbon/human,Station Engineer,"",Aphelios Tildor,Aphelios Tildor,115,141,2,00:38,0,SYNDIMEOW
+11731,50230,Curly Mens,/mob/living/carbon/human,Chief Medical Officer,"",Curly Mens,Curly Mens,114,177,2,00:38,0,""
+11732,50230,Alen Daylore,/mob/living/carbon/human,Security Officer,"",Alen Daylore,Alen Daylore,119,177,2,00:38,0,Kill Chop Deluxe
+11733,50230,Bios,/mob/living/silicon/robot,Cyborg,"",Bios,STLP-768,112,149,2,00:38,0,SYNDIMEOW
+11734,50230,Mark McCarthy,/mob/living/carbon/human,Chief Engineer,"",Mark McCarthy,Mark McCarthy,110,144,2,00:39,0,SYNDIMEOW
+11735,50230,Drill Gnoos,/mob/living/carbon/human,Test Subject,"",Drill Gnoos,Drill Gnoos,110,148,2,00:39,0,SYNDIMEOW
+11736,50230,Gary Greenwood,/mob/living/carbon/human,Test Subject,"",Gary Greenwood,Gary Greenwood,151,129,2,00:40,0,SYNDIMEOW
+11738,50230,Rich Goldenfield,/mob/living/carbon/human,MODE,Nuclear Operative,Rich Goldenfield,Frugen Wufflecam,98,142,2,00:43,0,Kill Chop Deluxe
+11739,50230,Randy Best,/mob/living/carbon/human,Mime,"",Randy Best,Randy Best,100,132,2,00:45,0,SYNDIMEOW
+11740,50230,Koil Welher,/mob/living/carbon/human,Technical Assistant,"",Koil Welher,Koil Welher,132,134,2,00:47,0,SYNDIMEOW
+11741,50230,John Anderson,/mob/living/carbon/human,Paramedic,"",John Anderson,John Anderson,147,115,2,00:48,0,SYNDIMEOW
+11742,50230,Vitia Kosoi,/mob/living/carbon/human,Medical Doctor,"",Vitia Kosoi,Vitia Kosoi,156,115,2,00:48,0,SYNDIMEOW
+11743,50230,Noelle Goodman,/mob/living/carbon/human,Technical Assistant,"",Noelle Goodman,Noelle Goodman,153,113,2,00:48,0,SYNDIMEOW
+11744,50230,Vlad Omar,/mob/living/carbon/human,Virologist,"",Vlad Omar,Vlad Omar,146,121,2,00:48,0,""
+11745,50230,Ianko Lavr,/mob/living/carbon/human,Scientist,"",Ianko Lavr,Ianko Lavr,66,126,2,00:49,0,""
+11746,50230,Gwenevere Coldsmith,/mob/living/carbon/human,Atmospheric Technician,"",Gwenevere Coldsmith,Gwenevere Coldsmith,127,81,2,00:50,0,Майрон
+11747,50230,Kronos Fanth,/mob/living/carbon/human,Xenobiologist,"",Kronos Fanth,Kronos Fanth,166,152,2,00:51,0,Kronos Fanth
+11748,50230,Kronos Fanth,/mob/living/carbon/human,Xenobiologist,"",Kronos Fanth,Kronos Fanth,166,152,2,00:51,0,Kronos Fanth
+11749,50230,maintenance drone (212),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (212),maintenance drone (212),124,133,2,00:52,0,Майрон
+11750,50230,Slen Franko,/mob/living/carbon/human,Station Engineer,"",Slen Franko,Slen Franko,170,155,2,00:55,0,""
+11751,50230,Koudi Cooper,/mob/living/carbon/human,Roboticist,"",Koudi Cooper,Koudi Cooper,85,146,2,00:58,0,SYNDIMEOW
+11752,50230,Honkomer,/mob/living/carbon/human,MODE,Nuclear Operative,bombman,Hugo Richter,153,111,2,00:58,0,""
+11753,50214,Kameron Hastings,/mob/living/carbon/human/bum,default,"",Kameron Hastings,Kameron Hastings,170,156,4,00:16,0,""
+11754,50214,Kameron Hastings,/mob/living/carbon/human/bum,default,"",Kameron Hastings,Kameron Hastings,170,156,4,00:16,0,""
+11755,50214,Trent Teagarden,/mob/living/carbon/human/bum,default,"",Trent Teagarden,Trent Teagarden,171,159,4,00:17,0,""
+11756,50214,Trent Teagarden,/mob/living/carbon/human/bum,default,"",Trent Teagarden,Trent Teagarden,171,159,4,00:17,0,""
+11757,50214,Issar Hess,/mob/living/carbon/human,Scientist,"",Issar Hess,Issar Hess,107,142,4,00:21,0,Kshiya Less
+11758,50214,Dominick Addison,/mob/living/carbon/human,Chief Engineer,"",Dominick Addison,Dominick Addison,119,81,2,00:28,0,Dominick Addison
+11759,50214,Dominick Addison,/mob/living/carbon/human,Chief Engineer,"",Dominick Addison,Dominick Addison,119,81,2,00:28,0,Dominick Addison
+11760,50214,maintenance drone (607),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (607),maintenance drone (607),150,75,6,00:29,0,Vlad Omar
+11761,50214,Ladybug Honks,/mob/living/carbon/human,Clown,"",Ladybug Honks,Ladybug Honks,96,131,2,00:36,0,Alvin Collins
+11762,50214,Jad Shock,/mob/living/carbon/human,Mime,"",Jad Shock,Jad Shock,107,181,2,00:36,0,Rosemary Demuth
+11763,50214,Lucas Aberg,/mob/living/carbon/human,Xenoarchaeologist,"",Lucas Aberg,Lucas Aberg,186,157,6,00:47,0,Vlad Omar
+11764,50214,Vlad Omar,/mob/living/carbon/human,Shaft Miner,"",Vlad Omar,Vlad Omar,175,156,6,00:48,0,Lucas Aberg
+11765,50214,Shi'shi De She,/mob/living/carbon/human,Security Officer,"",Shi'shi De She,Shi'shi De She,193,161,2,00:49,0,""
+11766,50214,Shi'shi De She,/mob/living/carbon/human,Shaft Miner,Traitor,Quiwz'xu Qox,Quiwz'xu Qox,194,165,2,00:51,0,Merk
+11767,50214,Seamon Light,/mob/living/carbon/human,Shaft Miner,"",Seamon Light,Seamon Light,92,160,6,00:57,0,""
+11768,50214,Maya Foxova,/mob/living/carbon/human,Captain,"",Maya Foxova,Maya Foxova,126,121,2,00:58,0,""
+11769,50214,Unknown,/mob/living/carbon/human,Mime,"",Jad Shock,Jad Shock,104,172,2,01:05,0,Rosemary Demuth
+11770,50214,Unknown,/mob/living/carbon/human,Security Cadet,"",Noel Whirlow,Noel Whirlow,141,174,2,01:08,0,Alexander Voronov
+11771,50214,Unknown,/mob/living/carbon/human,Security Cadet,"",Noel Whirlow,Noel Whirlow,141,174,2,01:08,0,Alexander Voronov
+11772,50214,maintenance drone (491),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (491),maintenance drone (491),127,128,2,01:12,0,Merk
+11773,50214,maintenance drone (833),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (833),maintenance drone (833),165,60,2,01:22,0,""
+11774,50214,Sivean Doulson,/mob/living/carbon/human,Scientist,"",Sivean Doulson,Sivean Doulson,139,142,2,01:31,0,Illia Bronson
+11775,50214,Sigma O'Neill,/mob/living/carbon/human,Medical Doctor,"",Sigma O'Neill,Sigma O'Neill,142,151,2,01:31,0,Illia Bronson
+11776,50214,Sivean Doulson,/mob/living/carbon/human,Scientist,"",Sivean Doulson,Sivean Doulson,142,152,2,01:32,0,Illia Bronson
+11777,50214,Illia Bronson,/mob/living/carbon/human,Botanist,Traitor,Illia Bronson,Illia Bronson,136,166,2,01:33,0,Merk
+11778,50214,Illia Bronson,/mob/living/carbon/human,Botanist,Traitor,Illia Bronson,Illia Bronson,136,166,2,01:33,0,Merk
+11779,50214,Unknown,/mob/living/carbon/human,Geneticist,"",Lim Al-Kuds,Lim Al-Kuds,147,111,2,01:34,0,Rosemary Demuth
+11780,50214,maintenance drone (454),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (454),maintenance drone (454),45,166,2,01:41,0,Tate Benford
+11781,50214,maintenance drone (413),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (413),maintenance drone (413),47,162,2,01:42,0,Tate Benford
+11782,50205,Shi'shi De She,/mob/living/carbon/human,Security Officer,"",Shi'shi De She,Shi'shi De She,161,93,2,00:27,0,""
+11783,50205,Shi'shi De She,/mob/living/carbon/human,Security Officer,"",Shi'shi De She,Shi'shi De She,161,93,2,00:27,0,""
+11784,50205,Hugo Richter,/mob/living/carbon/human,Virologist,"",Hugo Richter,Hugo Richter,120,66,2,00:52,0,""
+11785,50205,Rick Shorts,/mob/living/carbon/human,Shaft Miner,"",Rick Shorts,Rick Shorts,52,165,2,01:01,0,""
+11786,50205,Henderson Eliza,/mob/living/carbon/human/bum,default,"",Henderson Eliza,Henderson Eliza,90,160,2,01:01,0,""
+11787,50205,Henderson Eliza,/mob/living/carbon/human/bum,default,"",Henderson Eliza,Henderson Eliza,90,160,2,01:01,0,""
+11788,50205,Unknown,/mob/living/carbon/human,Medical Doctor,Traitor,Quiwz'xu Qox,Quiwz'xu Qox,106,185,2,01:02,0,Tamsin Winton
+11789,50205,Maya Foxova,/mob/living/carbon/human,Captain,Abducted,Maya Foxova,Maya Foxova,126,134,2,01:13,0,Mothership Theta Scientist
+11790,50205,maintenance drone (797),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (797),maintenance drone (797),126,57,2,01:24,0,""
+11791,50205,Max Black,/mob/living/carbon/human,Janitor,Abducted,Max Black,Max Black,179,118,2,01:25,0,Mothership Delta Agent
+11792,50205,M'ark M'rshan,/mob/living/carbon/human,Roboticist,"",M'ark M'rshan,M'ark M'rshan,65,163,2,01:28,0,Biba
+11793,50228,Dextra,/mob/living/silicon/robot,Cyborg,"",Dextra,Issar Hess,98,176,2,00:18,0,""
+11794,50228,Lucas Gibson,/mob/living/carbon/human,Xenoarchaeologist,Traitor,Lucas Gibson,Lucas Gibson,148,102,2,00:32,0,""
+11795,50228,Danko Cesarre,/mob/living/carbon/human,Janitor,"",Danko Cesarre,Danko Cesarre,99,129,2,00:39,0,""
+11796,50228,Semyon Hatsunov,/mob/living/carbon/human,Security Cadet,"",Semyon Hatsunov,Semyon Hatsunov,100,130,2,00:39,0,""
+11797,50228,Lorin Ackerley,/mob/living/carbon/human,Security Officer,"",Lorin Ackerley,Lorin Ackerley,111,142,2,00:39,0,""
+11798,50228,Patton Werry,/mob/living/carbon/human,Atmospheric Technician,"",Patton Werry,Patton Werry,119,89,2,00:40,0,Patton Werry
+11799,50228,Dragan Sheshel,/mob/living/carbon/human,Technical Assistant,Traitor,Dragan Sheshel,Dragan Sheshel,88,146,2,00:40,0,""
+11800,50228,Frugen Wufflecam,/mob/living/carbon/human,Mime,"",Frugen Wufflecam,Frugen Wufflecam,144,128,2,00:40,0,""
+11801,50228,Lim Al-Kuds,/mob/living/carbon/human,Head of Personnel,"",Lim Al-Kuds,Lim Al-Kuds,136,122,2,00:40,0,""
+11802,50228,Unknown (as Zarella Frei),/mob/living/carbon/human,Cargo Technician,"",Zarella Frei,Zarella Frei,49,129,2,00:40,0,""
+11803,50228,Unknown (as Dawson Dryfus),/mob/living/carbon/human,Security Officer,"",Dawson Dryfus,Dawson Dryfus,41,142,2,00:40,0,""
+11804,50228,Unknown (as John Mackenzie),/mob/living/carbon/human,Bartender,"",John Mackenzie,John Mackenzie,41,143,2,00:40,0,""
+11805,50228,Natalia Koneva,/mob/living/carbon/human,Head of Security,"",Natalia Koneva,Natalia Koneva,151,121,2,00:41,0,""
+11806,50228,Vitia Kosoi,/mob/living/carbon/human,Medical Doctor,"",Vitia Kosoi,Vitia Kosoi,138,100,2,00:41,0,""
+11807,50228,Adolph Keppel,/mob/living/carbon/human,Technical Assistant,"",Adolph Keppel,Adolph Keppel,129,155,2,00:41,0,Adolph Keppel
+11808,50228,Klein Maccubus,/mob/living/carbon/human,Chemist,"",Klein Maccubus,Klein Maccubus,138,106,2,00:41,0,""
+11809,50228,Unknown,/mob/living/carbon/human,Xenoarchaeologist,Traitor,Lucas Gibson,Lucas Gibson,127,124,2,00:41,0,Vitia Kosoi
+11810,50228,Gennady Whiteman,/mob/living/carbon/human,Security Officer,"",Gennady Whiteman,Gennady Whiteman,149,142,2,00:41,0,""
+11811,50228,Koudi Cooper,/mob/living/carbon/human,Roboticist,"",Koudi Cooper,Koudi Cooper,156,141,2,00:41,0,""
+11812,50228,Tyler Jones,/mob/living/carbon/human,Research Director,"",Tyler Jones,Tyler Jones,149,146,2,00:41,0,""
+11813,50228,Reuben Hunt,/mob/living/carbon/human,Warden,"",Reuben Hunt,Reuben Hunt,145,96,2,00:41,0,""
+11814,50228,Alroy Podkins,/mob/living/carbon/human,Forensic Technician,"",Alroy Podkins,Alroy Podkins,158,94,2,00:42,0,""
+11815,50228,Slen Franko,/mob/living/carbon/human,Internal Affairs Agent,"",Slen Franko,Slen Franko,174,132,2,00:44,0,""
+11816,50228,maintenance drone (175),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (175),maintenance drone (175),164,51,2,00:48,0,""
+11817,50228,Adolph Nastain,/mob/living/carbon/human,Chemist,"",Adolph Nastain,Adolph Nastain,31,143,2,00:48,0,""
+11818,50228,Richard Reed,/mob/living/carbon/human,Station Engineer,"",Richard Reed,Richard Reed,32,143,2,00:48,0,""
+11819,50228,maintenance drone (827),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (827),maintenance drone (827),167,44,2,00:51,0,""
+11820,50228,maintenance drone (463),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (463),maintenance drone (463),172,45,2,00:51,0,""
+11821,50228,maintenance drone (700),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (700),maintenance drone (700),166,51,2,00:53,0,""
+11822,50228,maintenance drone (301),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (301),maintenance drone (301),161,59,2,01:00,0,""
+11823,50228,Cash Murphy,/mob/living/carbon/human,Captain,"",Cash Murphy,Cash Murphy,31,143,2,01:01,0,""
+11824,50228,Alex Ermakov,/mob/living/carbon/human,Recycler,"",Alex Ermakov,Alex Ermakov,33,142,2,01:02,0,""
+11825,50228,maintenance drone (798),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (798),maintenance drone (798),164,44,2,01:03,0,""
+11826,50228,Lim Al-Kuds,/mob/living/carbon/human,Security Officer,"",Jesus Exery,Jesus Exery,111,134,2,01:03,0,""
+11827,50228,Max Russell,/mob/living/carbon/human,Shaft Miner,"",Max Russell,Max Russell,162,60,2,01:06,0,""
+11828,50228,maintenance drone (917),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (917),maintenance drone (917),175,45,2,01:09,0,""
+11829,50228,Dmitriy Ulyanov,/mob/living/carbon/human,Detective,"",Dmitriy Ulyanov,Dmitriy Ulyanov,190,140,1,01:16,0,""
+11830,50228,Diego Merryman,/mob/living/carbon/human,Recycler,"",Diego Merryman,Diego Merryman,93,107,2,01:26,0,""
+11831,50228,Hayden Pearsall,/mob/living/carbon/human,Chief Engineer,Traitor,Hayden Pearsall,Hayden Pearsall,92,242,1,01:29,0,Hayden Pearsall
+11832,50211,Tihachatahakahchayata,/mob/living/carbon/human,MODE,Vox Raider,Tihachatahakahchayata,Tihachatahakahchayata,218,20,1,00:00,0,""
+11833,50211,Yahatihihi,/mob/living/carbon/human,MODE,Vox Raider,Yahatihihi,Yahatihihi,209,207,3,00:13,0,""
+11834,50211,Isaac Fletcher,/mob/living/carbon/human,Medical Doctor,"",Isaac Fletcher,Isaac Fletcher,70,43,2,00:18,0,""
+11835,50211,Chatikihiyaki,/mob/living/carbon/human,MODE,Vox Raider,Chatikihiyaki,Chatikihiyaki,69,43,2,00:25,0,Unit-69
+11836,50211,Tihachatahakahchayata,/mob/living/carbon/human,MODE,Vox Raider,Tihachatahakahchayata,Tihachatahakahchayata,69,48,2,00:29,0,""
+11837,50211,Daniel Mildred,/mob/living/carbon/human,Security Officer,"",Daniel Mildred,Daniel Mildred,65,52,2,00:29,0,Kahkikahikahkayahi
+11838,50211,John Don,/mob/living/carbon/human,Paramedic,"",John Don,John Don,71,43,2,00:30,0,""
+11839,50211,Unknown,/mob/living/carbon/human,Security Officer,"",Daniel Mildred,Daniel Mildred,67,53,2,00:33,0,Kahkikahikahkayahi
+11840,50211,Jake Pliskin,/mob/living/carbon/human,Test Subject,"",Jake Pliskin,Jake Pliskin,136,136,2,00:35,0,Devon Miller
+11841,50211,Yahihichikaka,/mob/living/carbon/human,MODE,Vox Raider,Yahihichikaka,Yahihichikaka,72,56,2,00:37,0,""
+11842,50211,Unknown,/mob/living/carbon/human,Medical Doctor,"",Isaac Fletcher,Isaac Fletcher,66,52,2,00:40,0,Kahkikahikahkayahi
+11843,50211,Randy Best,/mob/living/carbon/human,Xenoarchaeologist,"",Randy Best,Randy Best,156,204,6,00:47,0,""
+11844,50232,Seamon Light,/mob/living/carbon/human,Shaft Miner,"",Seamon Light,Seamon Light,142,57,6,00:09,0,Seamon Light
+11845,50232,Lucas Gibson,/mob/living/carbon/human,Internal Affairs Agent,"",Lucas Gibson,Lucas Gibson,155,118,2,00:19,0,""
+11846,50232,Lucas Gibson,/mob/living/carbon/human,Internal Affairs Agent,"",Lucas Gibson,Lucas Gibson,155,118,2,00:19,0,""
+11847,50232,Alex Ermakov,/mob/living/carbon/human,Recycler,"",Alex Ermakov,Alex Ermakov,146,113,2,00:24,0,""
+11848,50232,Alex Ermakov,/mob/living/carbon/human,Recycler,"",Alex Ermakov,Alex Ermakov,146,113,2,00:24,0,""
+11849,50232,Koil Welher,/mob/living/carbon/human,Station Engineer,"",Koil Welher,Koil Welher,88,78,2,00:25,0,Koil Welher
+11850,50232,Unknown (as Davy Butchers),/mob/living/carbon/human,Chaplain,"",Davy Butchers,Davy Butchers,114,140,2,00:26,0,Aurelius Aquilimus
+11851,50232,Unknown (as Mark McCarthy),/mob/living/carbon/human,Research Director,"",Mark McCarthy,Mark McCarthy,175,42,2,00:34,0,""
+11852,50232,Sam Bravo,/mob/living/carbon/human,Security Officer,"",Sam Bravo,Sam Bravo,143,47,2,00:34,0,robIn
+11853,50232,MEOW,/mob/living/silicon/robot,Cyborg,"",MEOW,ARMA-367,127,176,2,00:37,0,""
+11854,50232,Esteban Berkheimer,/mob/living/carbon/human,Security Officer,"",Esteban Berkheimer,Esteban Berkheimer,75,44,6,00:38,0,""
+11855,50232,robIn,/mob/living/silicon/robot,Cyborg,"",robIn,Hugo Richter,128,180,2,00:38,0,Aurelius Aquilimus
+11856,50232,Unknown (as Kaela Pratt),/mob/living/carbon/human,Station Engineer,"",Kaela Pratt,Kaela Pratt,63,19,6,00:42,0,Dextra
+11857,50232,Zayden Fiddler,/mob/living/carbon/human,Head of Security,"",Zayden Fiddler,Zayden Fiddler,135,137,2,00:42,0,Troy Orgail
+11858,50232,Nikita Bubencov,/mob/living/carbon/human,Virologist,"",Nikita Bubencov,Nikita Bubencov,141,157,2,00:44,0,Nikita Bubencov
+11859,50232,Daniel Mildred,/mob/living/carbon/human,Head of Personnel,"",Daniel Mildred,Daniel Mildred,122,154,2,00:47,0,Troy Orgail
+11860,50232,Unknown (as Patrick Cherry),/mob/living/carbon/human,Test Subject,"",Patrick Cherry,Patrick Cherry,24,42,6,00:49,0,Dextra
+11861,50232,Mayron Demetrios,/mob/living/carbon/human,Janitor,"",Mayron Demetrios,Mayron Demetrios,58,135,2,00:49,0,""
+11862,50232,Mayron Demetrios,/mob/living/carbon/human,Janitor,"",Mayron Demetrios,Mayron Demetrios,58,135,2,00:49,0,""
+11863,50232,Unknown (as Sigma O'Neill),/mob/living/carbon/human,Medical Doctor,"",Sigma O'Neill,Sigma O'Neill,61,50,6,00:50,0,Dextra
+11864,50232,Vlad Omar,/mob/living/carbon/human,Security Officer,"",Vlad Omar,Vlad Omar,19,21,5,00:50,0,Dextra
+11865,50232,Unknown (as Noelle Goodman),/mob/living/carbon/human,Technical Assistant,"",Noelle Goodman,Noelle Goodman,23,139,3,00:51,0,Dextra
+11866,50232,Tamsin Winton,/mob/living/carbon/human,Medical Doctor,"",Tamsin Winton,Tamsin Winton,179,218,2,00:51,0,Dextra
+11867,50232,Unknown (as John Anderson),/mob/living/carbon/human,Xenobiologist,"",John Anderson,John Anderson,63,24,6,00:52,0,Dextra
+11868,50232,Sam Samich,/mob/living/carbon/human,Roboticist,"",Sam Samich,Sam Samich,75,45,6,00:53,0,Dextra
+11869,50232,maintenance drone (676),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (676),maintenance drone (676),128,142,2,00:54,0,Dextra
+11870,50232,maintenance drone (100),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (100),maintenance drone (100),135,136,2,00:55,0,Dextra
+11871,50232,Dmitriy Ulyanov,/mob/living/carbon/human,Detective,"",Dmitriy Ulyanov,Dmitriy Ulyanov,78,42,6,00:55,0,Randy Best
+11872,50232,Paral Dune,/mob/living/carbon/human,Atmospheric Technician,"",Paral Dune,Paral Dune,161,48,2,00:55,0,""
+11873,50232,Lion Remark,/mob/living/carbon/human,Recycler,"",Lion Remark,Lion Remark,61,54,6,00:55,0,Dextra
+11874,50232,Kate Shmidt,/mob/living/carbon/human,Paramedic,"",Kate Shmidt,Kate Shmidt,63,49,6,00:56,0,Dextra
+11875,50232,Unknown,/mob/living/carbon/human,Internal Affairs Agent,"",Lucas Gibson,Lucas Gibson,49,84,6,00:57,0,Troy Orgail
+11876,50232,Curly Mens,/mob/living/carbon/human,Shaft Miner,"",Curly Mens,Curly Mens,152,141,2,00:59,0,Dextra
+11877,50232,Chip Elderson,/mob/living/carbon/human,Scientist,"",Chip Elderson,Chip Elderson,149,145,2,00:59,0,""
+11878,50232,Zikkykikati,/mob/living/carbon/human,Station Engineer,"",Zikkykikati,Zikkykikati,148,109,2,01:01,0,""
+11879,50232,Aurelius Aquilimus,/mob/living/carbon/human,Mime,"",Aurelius Aquilimus,Aurelius Aquilimus,97,171,2,01:02,0,Gladwyn Marriman
+11880,50232,maintenance drone (707),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (707),maintenance drone (707),153,144,2,01:03,0,""
+11881,50232,Dragan Sheshel,/mob/living/carbon/human,Botanist,"",Dragan Sheshel,Dragan Sheshel,155,199,6,01:04,0,""
+11882,50232,John Anderson,/mob/living/carbon/human,Chef,"",John Anderson,John Anderson,150,116,2,01:04,0,Troy Orgail
+11883,50232,Brock Ellis,/mob/living/carbon/human,Xenoarchaeologist,"",Brock Ellis,Brock Ellis,150,115,2,01:13,0,""
+11884,50232,Brock Ellis,/mob/living/carbon/human,Xenoarchaeologist,"",Brock Ellis,Brock Ellis,164,120,2,01:23,0,""
+11885,50232,Evangelina Shaffer,/mob/living/carbon/human,Cargo Technician,"",Evangelina Shaffer,Evangelina Shaffer,59,162,2,01:36,0,""
+11886,50232,Lim Al-Kuds,/mob/living/carbon/human,Geneticist,"",Lim Al-Kuds,Lim Al-Kuds,98,242,1,01:38,0,""
+11887,50207,Li'quxpixli Lenienq'wik,/mob/living/carbon/human,Scientist,"",Li'quxpixli Lenienq'wik,Li'quxpixli Lenienq'wik,71,141,2,00:06,0,Rick Shorts
+11888,50207,Colvar Abram,/mob/living/carbon/human,Shaft Miner,"",Colvar Abram,Colvar Abram,148,62,6,00:08,0,""
+11889,50207,Tyler Jones,/mob/living/carbon/human,Station Engineer,Gangster Leader,Weston Bell,Weston Bell,90,56,2,00:23,0,Max Russell
+11890,50207,Ivan Huga,/mob/living/carbon/human,Test Subject,Gangster,Ivan Huga,Ivan Huga,140,109,2,00:48,0,""
+11891,50207,Jaid,/mob/living/carbon/human,default,Gangster Dealer,Jaid,Jaid,149,112,2,00:50,0,Aphelios Tildor
+11892,50207,Vadim Wood,/mob/living/carbon/human,Mime,Gangster,Vadim Wood,Vadim Wood,103,167,2,00:52,0,Jake Summy
+11893,50207,Richard Reed,/mob/living/carbon/human,Head of Personnel,"",Richard Reed,Richard Reed,118,137,2,00:58,0,Silencing Null
+11894,50207,Unknown,/mob/living/carbon/human,Head of Security,"",Keegan Hunt,Keegan Hunt,118,136,2,01:00,0,Silencing Null
+11895,50207,Unknown,/mob/living/carbon/human,Mime,Gangster,Vadim Wood,Vadim Wood,150,110,2,01:00,0,Jake Summy
+11896,50207,Daniel Mildred,/mob/living/carbon/human,Research Director,Undercover Officer,Daniel Mildred,Daniel Mildred,148,140,2,01:07,0,Silencing Null
+11897,50207,Aurili Septemus,/mob/living/carbon/human,Security Officer,"",Aurili Septemus,Aurili Septemus,84,125,2,01:12,0,Zikkykikati
+11898,50207,Aurili Septemus,/mob/living/carbon/human,Security Officer,"",Aurili Septemus,Aurili Septemus,84,125,2,01:12,0,Zikkykikati
+11899,50207,Adolph Nastain,/mob/living/carbon/human,Security Officer,"",Adolph Nastain,Adolph Nastain,129,189,2,01:13,0,Mr.OldHonkus
+11900,50207,Sigma O'Neill,/mob/living/carbon/human,Medical Doctor,Gangster,Sigma O'Neill,Sigma O'Neill,132,190,2,01:13,0,Mr.OldHonkus
+11901,50207,Vlad Omar,/mob/living/carbon/human,Security Cadet,"",Vlad Omar,Vlad Omar,132,189,2,01:13,0,""
+11902,50207,Zikkykikati,/mob/living/carbon/human,Medical Doctor,Gangster,Zikkykikati,Zikkykikati,124,191,2,01:14,0,""
+11903,50207,Gikakhayikati,/mob/living/carbon/human,Chef,Gangster Leader,Gikakhayikati,Gikakhayikati,127,186,2,01:17,0,""
+11904,50207,SSGT. Frost,/mob/living/carbon/human,default,OCD Officer,SSGT. Frost,SSGT. Frost,118,142,2,01:18,0,Silencing Null
+11905,50207,Kris Filby,/mob/living/carbon/human,default,OCD Officer,Kris Filby,Kris Filby,115,141,2,01:18,0,Silencing Null
+11906,50207,Jean-Poul Marat,/mob/living/carbon/human,Medical Intern,Gangster,Jean-Poul Marat,Jean-Poul Marat,123,140,2,01:19,0,Jean-Poul Marat
+11907,50207,Unknown (as Alexander Kuznetsov),/mob/living/carbon/human,Janitor,Gangster,Alexander Kuznetsov,Alexander Kuznetsov,119,142,2,01:19,0,""
+11908,50207,Adrian Gordon,/mob/living/carbon/human,Technical Assistant,Gangster,Adrian Gordon,Adrian Gordon,112,140,2,01:19,0,Mama
+11909,50207,Koudi Cooper,/mob/living/carbon/human,Security Cadet,"",Koudi Cooper,Koudi Cooper,134,120,2,01:22,0,Silencing Null
+11910,50207,Sebastian Pivovarov,/mob/living/carbon/human,MODE,Space Ninja,Silencing Null,Silencing Null,189,112,2,01:27,0,Silencing Null
+11911,50207,Mama,/mob/living/carbon/human,default,OCD Officer,Mama,Mama,153,116,2,01:30,0,Silencing Null
+11912,50221,Mike Spenser,/mob/living/carbon/human,Cargo Technician,"",Mike Spenser,Mike Spenser,119,102,2,00:48,0,""
+11913,50221,Jad Shock,/mob/living/carbon/human,Mime,"",Jad Shock,Jad Shock,121,141,2,01:13,0,Unit-69
+11914,50221,Thomas Remongton,/mob/living/carbon/human,Botanist,"",Thomas Remongton,Thomas Remongton,62,147,2,01:13,0,""
+11915,50221,Arthur Garland,/mob/living/carbon/human,Security Cadet,"",Arthur Garland,Arthur Garland,168,142,2,01:14,0,Troy Orgail
+11916,50221,Arthur Garland,/mob/living/carbon/human,Security Cadet,"",Arthur Garland,Arthur Garland,168,142,2,01:14,0,Troy Orgail
+11917,50221,Garrett Mills,/mob/living/carbon/human,Chaplain,"",Garrett Mills,Garrett Mills,151,125,2,01:15,0,Garrett Mills
+11918,50221,Lary Doger,/mob/living/carbon/human,Medical Doctor,"",Lary Doger,Lary Doger,162,107,2,01:15,0,Unit-69
+11919,50221,Lary Doger,/mob/living/carbon/human,Medical Doctor,"",Lary Doger,Lary Doger,162,107,2,01:15,0,Unit-69
+11920,50221,Spike Schmidt,/mob/living/carbon/human,Paramedic,"",Spike Schmidt,Spike Schmidt,167,107,2,01:15,0,""
+11921,50221,Spike Schmidt,/mob/living/carbon/human,Paramedic,"",Spike Schmidt,Spike Schmidt,167,107,2,01:15,0,""
+11922,50221,Zikkykikati,/mob/living/carbon/human,Station Engineer,Cultist,Zikkykikati,Zikkykikati,46,157,2,01:15,0,Arthur Garland
+11923,50221,Vlad Omar,/mob/living/carbon/human,Geneticist,"",Vlad Omar,Vlad Omar,103,140,2,01:15,0,""
+11924,50221,Zed Murray,/mob/living/carbon/human,Security Officer,"",Zed Murray,Zed Murray,48,155,2,01:16,0,Zikkykikati
+11925,50221,Unknown (as Horatio Highjack),/mob/living/carbon/human,Test Subject,"",Horatio Highjack,Horatio Highjack,47,161,2,01:16,0,Semyon Hatsunov
+11926,50221,Unknown (as Oleg Osetrov),/mob/living/carbon/human,Detective,"",Oleg Osetrov,Oleg Osetrov,46,154,2,01:16,0,Takirichi
+11927,50221,Sprinkledinkle,/mob/living/carbon/human,Clown,"",Sprinkledinkle,Sprinkledinkle,62,158,2,01:16,0,""
+11928,50221,Semyon Hatsunov,/mob/living/carbon/human,Security Officer,"",Semyon Hatsunov,Semyon Hatsunov,53,159,2,01:16,0,""
+11929,50221,Alisa Don,/mob/living/carbon/human,Botanist,"",Alisa Don,Alisa Don,78,130,2,01:17,0,Norman Don
+11930,50221,Unknown (as Vadim Wood),/mob/living/carbon/human,Test Subject,"",Vadim Wood,Vadim Wood,90,234,1,01:17,0,Volqrmixqu Lirqrrxuim
+11931,50221,Norman Don,/mob/living/carbon/human,Botanist,"",Norman Don,Norman Don,91,242,1,01:17,0,Norman Don
+11932,50221,Seamon Light,/mob/living/carbon/human,Shaft Miner,"",Seamon Light,Seamon Light,96,243,1,01:17,0,Seamon Light
+11933,50221,Unknown (as Roman Elinov),/mob/living/carbon/human,Test Subject,"",Roman Elinov,Roman Elinov,91,237,1,01:18,0,Volqrmixqu Lirqrrxuim
+11934,50221,Tate Benford,/mob/living/carbon/human,Chief Medical Officer,"",Tate Benford,Tate Benford,155,194,6,01:18,1,Tate Benford
+11935,50221,Unknown (as Jim Morris),/mob/living/carbon/human,Bartender,"",Jim Morris,Jim Morris,98,243,1,01:18,0,Volqrmixqu Lirqrrxuim
+11936,50221,Aramsha Jarmack,/mob/living/carbon/human,Janitor,"",Aramsha Jarmack,Aramsha Jarmack,86,241,1,01:18,0,""
+11937,50202,M'ark M'rshan,/mob/living/carbon/human,Roboticist,Cultist,M'ark M'rshan,M'ark M'rshan,153,111,2,00:15,0,""
+11938,50202,Kefal.Archigos.Filos,/mob/living/carbon/human,Xenobiologist,"",Kefal.Archigos.Filos,Kefal.Archigos.Filos,159,161,2,00:41,0,""
+11939,50202,Unknown,/mob/living/carbon/human/golem,default,"",Adamantine Golem (905),Adamantine Golem (905),156,20,1,00:41,0,Oleg Osetrov
+11940,50202,Unknown,/mob/living/carbon/human/golem,default,"",Adamantine Golem (360),Adamantine Golem (360),156,21,1,00:42,0,Oleg Osetrov
+11941,50202,Joseph Hope,/mob/living/carbon/human,Janitor,"",Joseph Hope,Joseph Hope,139,142,2,00:43,0,""
+11942,50202,Unknown (as Aurelius Aquilimus),/mob/living/carbon/human,Quartermaster,"",Aurelius Aquilimus,Aurelius Aquilimus,105,185,2,00:48,0,Aurelius Aquilimus
+11943,50202,homunculus of The One Who Sees I,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees I,homunculus of The One Who Sees I,161,20,1,00:53,0,""
+11944,50202,homunculus of The One Who Sees I,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees I,homunculus of The One Who Sees I,161,20,1,00:53,0,""
+11945,50202,maintenance drone (421),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (421),maintenance drone (421),126,177,2,00:55,0,Zayden Fiddler
+11946,50202,homunculus of The Geometer of Blood II,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood II,homunculus of The Geometer of Blood II,161,20,1,00:57,0,""
+11947,50202,homunculus of The Geometer of Blood II,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood II,homunculus of The Geometer of Blood II,161,20,1,00:57,0,""
+11948,50202,homunculus of Dark One XVIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XVIII,homunculus of Dark One XVIII,161,20,1,00:58,0,""
+11949,50202,homunculus of Dark One XVIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XVIII,homunculus of Dark One XVIII,161,20,1,00:58,0,""
+11950,50202,homunculus of The One Who Sees XX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees XX,homunculus of The One Who Sees XX,163,21,1,01:01,0,M'ark M'rshan
+11951,50202,homunculus of The One Who Sees XX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees XX,homunculus of The One Who Sees XX,163,21,1,01:01,0,M'ark M'rshan
+11952,50202,Zayden Fiddler,/mob/living/carbon/human,Warden,"",Zayden Fiddler,Zayden Fiddler,128,186,2,01:04,0,Vincent Rahl
+11953,50202,Randy Newdome,/mob/living/carbon/human,Technical Assistant,"",Randy Newdome,Randy Newdome,179,156,2,01:06,0,Oleg Osetrov
+11954,50202,homunculus of Nar-Sie VI,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie VI,homunculus of Nar-Sie VI,161,20,1,01:11,0,""
+11955,50202,homunculus of Nar-Sie VI,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie VI,homunculus of Nar-Sie VI,161,20,1,01:11,0,""
+11956,50202,Maya Foxova,/mob/living/carbon/human,Roboticist,Cultist,Maya Foxova,Maya Foxova,166,140,2,01:11,0,Maya Foxova
+11957,50202,homunculus of Dark One XIX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XIX,homunculus of Dark One XIX,160,22,1,01:11,0,""
+11958,50202,homunculus of Dark One XIX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XIX,homunculus of Dark One XIX,160,22,1,01:11,0,""
+11959,50202,homunculus of The One Who Sees XX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees XX,homunculus of The One Who Sees XX,161,20,1,01:12,0,""
+11960,50202,homunculus of The One Who Sees XX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees XX,homunculus of The One Who Sees XX,161,20,1,01:12,0,""
+11961,50202,homunculus of The Geometer of Blood IV,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood IV,homunculus of The Geometer of Blood IV,162,21,1,01:12,0,""
+11962,50202,homunculus of The Geometer of Blood IV,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood IV,homunculus of The Geometer of Blood IV,162,21,1,01:12,0,""
+11963,50202,Unknown (as Ivan Huga),/mob/living/carbon/human,Chaplain,"",Ivan Huga,Ivan Huga,161,118,2,01:12,0,maintenance drone (421)
+11964,50202,homunculus of Dark One VIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One VIII,homunculus of Dark One VIII,160,22,1,01:15,0,Oleg Osetrov
+11965,50202,homunculus of Dark One VIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One VIII,homunculus of Dark One VIII,160,22,1,01:15,0,Oleg Osetrov
+11966,50202,homunculus of Nar-Sie XI,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie XI,homunculus of Nar-Sie XI,160,22,1,01:16,0,""
+11967,50202,homunculus of Nar-Sie XI,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie XI,homunculus of Nar-Sie XI,160,22,1,01:16,0,""
+11968,50202,homunculus of Dark One IX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One IX,homunculus of Dark One IX,161,21,1,01:17,0,""
+11969,50202,homunculus of Dark One IX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One IX,homunculus of Dark One IX,161,21,1,01:17,0,""
+11970,50202,Adamantine Golem (166),/mob/living/carbon/human/golem,default,"",Adamantine Golem (166),Adamantine Golem (166),149,142,2,01:17,0,Natalia Koneva
+11971,50202,Luke Roadman,/mob/living/carbon/human,Xenobiologist,Cultist,Luke Roadman,Luke Roadman,151,141,2,01:17,0,Weston Bell
+11972,50202,homunculus of Nar-Sie III,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie III,homunculus of Nar-Sie III,161,21,1,01:17,0,""
+11973,50202,homunculus of Nar-Sie III,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie III,homunculus of Nar-Sie III,161,21,1,01:17,0,""
+11974,50202,homunculus of The Geometer of Blood XIX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood XIX,homunculus of The Geometer of Blood XIX,161,20,1,01:17,0,""
+11975,50202,homunculus of The Geometer of Blood XIX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood XIX,homunculus of The Geometer of Blood XIX,161,20,1,01:17,0,""
+11976,50202,Reva Marks,/mob/living/carbon/human,Geneticist,"",Reva Marks,Reva Marks,162,122,2,01:18,0,""
+11977,50202,homunculus of The Geometer of Blood XX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood XX,homunculus of The Geometer of Blood XX,161,21,1,01:18,0,""
+11978,50202,homunculus of The Geometer of Blood XX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood XX,homunculus of The Geometer of Blood XX,161,21,1,01:18,0,""
+11979,50202,homunculus of Nar-Sie II,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie II,homunculus of Nar-Sie II,161,21,1,01:19,0,""
+11980,50202,homunculus of Nar-Sie II,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie II,homunculus of Nar-Sie II,161,21,1,01:19,0,""
+11981,50202,homunculus of The One Who Sees XII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees XII,homunculus of The One Who Sees XII,178,97,2,01:20,0,""
+11982,50202,homunculus of The One Who Sees XII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees XII,homunculus of The One Who Sees XII,178,97,2,01:20,0,""
+11983,50202,homunculus of The One Who Sees X,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees X,homunculus of The One Who Sees X,162,21,1,01:20,0,""
+11984,50202,homunculus of The One Who Sees X,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees X,homunculus of The One Who Sees X,162,21,1,01:20,0,""
+11985,50202,homunculus of The Geometer of Blood XIX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood XIX,homunculus of The Geometer of Blood XIX,162,21,1,01:21,0,""
+11986,50202,homunculus of The Geometer of Blood XIX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood XIX,homunculus of The Geometer of Blood XIX,162,21,1,01:21,0,""
+11987,50202,homunculus of Dark One XII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XII,homunculus of Dark One XII,162,21,1,01:22,0,""
+11988,50202,homunculus of Dark One XII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XII,homunculus of Dark One XII,162,21,1,01:22,0,""
+11989,50202,homunculus of The Geometer of Blood XV,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood XV,homunculus of The Geometer of Blood XV,161,20,1,01:22,0,""
+11990,50202,homunculus of The Geometer of Blood XV,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood XV,homunculus of The Geometer of Blood XV,161,20,1,01:22,0,""
+11991,50202,homunculus of Nar-Sie XVII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie XVII,homunculus of Nar-Sie XVII,162,21,1,01:23,0,""
+11992,50202,homunculus of Nar-Sie XVII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie XVII,homunculus of Nar-Sie XVII,162,21,1,01:23,0,""
+11993,50202,homunculus of The One Who Sees VII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees VII,homunculus of The One Who Sees VII,162,21,1,01:23,0,""
+11994,50202,homunculus of The One Who Sees VII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees VII,homunculus of The One Who Sees VII,162,21,1,01:23,0,""
+11995,50202,Ulric Parker,/mob/living/carbon/human,Station Engineer,"",Ulric Parker,Ulric Parker,120,143,2,01:24,0,""
+11996,50202,homunculus of Dark One XII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XII,homunculus of Dark One XII,162,21,1,01:25,0,""
+11997,50202,homunculus of Dark One XII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XII,homunculus of Dark One XII,162,21,1,01:25,0,""
+11998,50202,homunculus of The Geometer of Blood V,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood V,homunculus of The Geometer of Blood V,162,21,1,01:25,0,""
+11999,50202,homunculus of The Geometer of Blood V,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood V,homunculus of The Geometer of Blood V,162,21,1,01:25,0,""
+12000,50202,Macey Hunter,/mob/living/carbon/human/bum,default,"",Macey Hunter,Macey Hunter,131,61,1,01:26,0,""
+12001,50202,homunculus of The Geometer of Blood XIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood XIII,homunculus of The Geometer of Blood XIII,161,21,1,01:26,0,""
+12002,50202,homunculus of The Geometer of Blood XIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood XIII,homunculus of The Geometer of Blood XIII,161,21,1,01:26,0,""
+12003,50202,homunculus of The Geometer of Blood IV,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood IV,homunculus of The Geometer of Blood IV,161,21,1,01:27,0,""
+12004,50202,homunculus of The Geometer of Blood IV,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The Geometer of Blood IV,homunculus of The Geometer of Blood IV,161,21,1,01:27,0,""
+12005,50202,homunculus of Dark One VIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One VIII,homunculus of Dark One VIII,161,21,1,01:27,0,""
+12006,50202,homunculus of Dark One VIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One VIII,homunculus of Dark One VIII,161,21,1,01:27,0,""
+12007,50202,homunculus of Nar-Sie III,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie III,homunculus of Nar-Sie III,161,21,1,01:28,0,""
+12008,50202,homunculus of Nar-Sie III,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie III,homunculus of Nar-Sie III,161,21,1,01:28,0,""
+12009,50202,homunculus of Nar-Sie XI,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie XI,homunculus of Nar-Sie XI,160,20,1,01:28,0,""
+12010,50202,homunculus of Nar-Sie XI,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie XI,homunculus of Nar-Sie XI,160,20,1,01:28,0,""
+12011,50202,homunculus of The One Who Sees XI,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees XI,homunculus of The One Who Sees XI,161,19,1,01:29,0,""
+12012,50202,homunculus of The One Who Sees XI,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees XI,homunculus of The One Who Sees XI,161,19,1,01:29,0,""
+12013,50202,Weston Bell,/mob/living/carbon/human,Detective,"",Weston Bell,Weston Bell,155,110,2,01:29,0,Adam Sommer
+12014,50202,homunculus of Dark One XIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XIII,homunculus of Dark One XIII,161,18,1,01:29,0,""
+12015,50202,homunculus of Dark One XIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XIII,homunculus of Dark One XIII,161,18,1,01:29,0,""
+12016,50202,Natalia Koneva,/mob/living/carbon/human,Security Officer,"",Natalia Koneva,Natalia Koneva,143,102,2,01:30,0,Cassian Winton
+12017,50202,John Mackenzie,/mob/living/carbon/human,Bartender,"",John Mackenzie,John Mackenzie,87,133,2,01:30,0,""
+12018,50202,homunculus of Nar-Sie VII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie VII,homunculus of Nar-Sie VII,161,19,1,01:30,0,""
+12019,50202,homunculus of Nar-Sie VII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie VII,homunculus of Nar-Sie VII,161,19,1,01:30,0,""
+12020,50202,Cassian Winton,/mob/living/carbon/human,Chief Medical Officer,"",Cassian Winton,Cassian Winton,149,111,2,01:31,0,""
+12021,50202,homunculus of The One Who Sees XIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees XIII,homunculus of The One Who Sees XIII,179,97,2,01:31,0,""
+12022,50202,homunculus of The One Who Sees XIII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees XIII,homunculus of The One Who Sees XIII,179,97,2,01:31,0,""
+12023,50202,Vincent Rahl,/mob/living/carbon/human,Security Cadet,"",Vincent Rahl,Vincent Rahl,156,129,2,01:31,0,Adolph Nastain
+12024,50202,Silly Willy (as Tamsin Winton),/mob/living/carbon/human,Clown,"",Silly Willy,Silly Willy,66,125,2,01:32,0,""
+12025,50202,Zayden Fiddler,/mob/living/carbon/human,Warden,"",Zayden Fiddler,Zayden Fiddler,155,121,2,01:32,0,""
+12026,50202,homunculus of The One Who Sees IX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees IX,homunculus of The One Who Sees IX,179,97,2,01:32,0,""
+12027,50202,homunculus of The One Who Sees IX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees IX,homunculus of The One Who Sees IX,179,97,2,01:32,0,""
+12028,50202,Johnathan Armstrong,/mob/living/carbon/human,Scientist,Cultist,Johnathan Armstrong,Johnathan Armstrong,147,110,2,01:33,0,Adolph Nastain
+12029,50202,Michael Langston,/mob/living/carbon/human,Geneticist,"",Michael Langston,Michael Langston,129,105,2,01:34,0,""
+12030,50202,Unknown (as Bailey Patel),/mob/living/carbon/human,Head of Security,"",Bailey Patel,Bailey Patel,134,136,2,01:34,0,""
+12031,50202,homunculus of Dark One XVII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XVII,homunculus of Dark One XVII,162,19,1,01:34,0,""
+12032,50202,homunculus of Dark One XVII,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Dark One XVII,homunculus of Dark One XVII,162,19,1,01:34,0,""
+12033,50202,Unknown (as Adam Sommer),/mob/living/carbon/human,Security Officer,"",Adam Sommer,Adam Sommer,135,111,2,01:34,0,Vincent Rahl
+12034,50202,Unknown,/mob/living/carbon/human,Security Cadet,"",Vincent Rahl,Vincent Rahl,179,97,2,01:34,0,Adolph Nastain
+12035,50202,Unknown,/mob/living/carbon/human,Security Officer,"",Tamsin Winton,Tamsin Winton,129,155,2,01:35,0,""
+12036,50202,Gatatikikichakiya,/mob/living/carbon/human,Atmospheric Technician,"",Gatatikikichakiya,Gatatikikichakiya,102,135,2,01:38,0,""
+12037,50202,Gatatikikichakiya,/mob/living/carbon/human,Atmospheric Technician,"",Gatatikikichakiya,Gatatikikichakiya,166,95,2,01:38,0,""
+12038,50202,Ivan Huga,/mob/living/carbon/human,Chaplain,"",Ivan Huga,Ivan Huga,153,111,2,01:39,0,""
+12039,50202,Ivan Huga,/mob/living/carbon/human,Chaplain,"",Ivan Huga,Ivan Huga,153,111,2,01:39,0,""
+12040,50202,Cassian Winton,/mob/living/carbon/human,Chief Medical Officer,"",Cassian Winton,Cassian Winton,149,108,2,01:39,0,""
+12041,50202,homunculus of The One Who Sees XX,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of The One Who Sees XX,homunculus of The One Who Sees XX,173,119,2,01:39,0,""
+12042,50202,Natalia Koneva,/mob/living/carbon/human,Security Officer,"",Natalia Koneva,Natalia Koneva,146,104,2,01:39,0,Cassian Winton
+12043,50202,homunculus of Nar-Sie XV,/mob/living/carbon/human/homunculus,default,Cultist,homunculus of Nar-Sie XV,homunculus of Nar-Sie XV,173,119,2,01:39,0,""
+12044,50202,maintenance drone (488),/mob/living/silicon/robot/drone/maintenance,Cyborg,"",maintenance drone (488),maintenance drone (488),184,134,2,01:39,0,""
+12045,50202,Minerva Everett,/mob/living/carbon/human,Medical Doctor,"",Minerva Everett,Minerva Everett,139,110,2,01:39,0,""
+12046,50202,Minerva Everett,/mob/living/carbon/human,Medical Doctor,"",Minerva Everett,Minerva Everett,139,110,2,01:39,0,""
+12047,50202,Weston Bell,/mob/living/carbon/human,Detective,"",Weston Bell,Weston Bell,140,112,2,01:39,0,Adam Sommer
+12048,50202,Lee Chautsan,/mob/living/carbon/human,Paramedic,"",Lee Chautsan,Lee Chautsan,64,168,2,01:39,0,""
+12049,50202,Nikita Bubencov,/mob/living/carbon/human,Chemist,"",Nikita Bubencov,Nikita Bubencov,139,112,2,01:39,0,""
+12050,50202,Nikita Bubencov,/mob/living/carbon/human,Chemist,"",Nikita Bubencov,Nikita Bubencov,139,112,2,01:39,0,""
+12051,50202,Puzobor Slavov,/mob/living/carbon/human,Test Subject,"",Puzobor Slavov,Puzobor Slavov,61,165,2,01:39,0,""
+12052,50202,Unknown (as Michael Langston),/mob/living/carbon/human,Geneticist,"",Michael Langston,Michael Langston,129,105,2,01:39,0,""
+12053,50202,Tahikaeeti,/mob/living/carbon/human,Cargo Technician,"",Tahikaeeti,Tahikaeeti,46,142,2,01:40,0,""
+12054,50202,Maham'ru Jar'Mahar,/mob/living/carbon/human,Mime,"",Maham'ru Jar'Mahar,Maham'ru Jar'Mahar,65,157,2,01:40,0,Maham'ru Jar'Mahar
+12055,50202,Romeo Roberts,/mob/living/carbon/human,Librarian,"",Romeo Roberts,Romeo Roberts,65,139,2,01:40,0,Romeo Roberts
+12056,50202,Adolph Nastain,/mob/living/carbon/human,Medical Doctor,"",Adolph Nastain,Adolph Nastain,68,169,2,01:40,0,Adolph Nastain
+12057,50202,Nendo Galaxy,/mob/living/carbon/human,Recycler,"",Nendo Galaxy,Nendo Galaxy,90,103,2,01:41,0,Nendo Galaxy
+12058,50202,Nendo Galaxy,/mob/living/carbon/human,Recycler,"",Nendo Galaxy,Nendo Galaxy,90,103,2,01:41,0,Nendo Galaxy
+12059,50202,Lucifer Desketi,/mob/living/carbon/human,Head of Personnel,"",Lucifer Desketi,Lucifer Desketi,122,141,2,01:41,0,Lucifer Desketi
+12060,50202,Lucas Gibson,/mob/living/carbon/human,Cargo Technician,"",Lucas Gibson,Lucas Gibson,64,136,2,01:41,0,""
+12061,50202,Lion Remark,/mob/living/carbon/human,Virologist,"",Lion Remark,Lion Remark,160,79,2,01:42,0,""
+12062,50202,Nikolai Vakhmistrov,/mob/living/carbon/human,Recycler,"",Nikolai Vakhmistrov,Nikolai Vakhmistrov,75,113,2,01:42,0,Nendo Galaxy
+12063,50202,Nikolai Vakhmistrov,/mob/living/carbon/human,Recycler,"",Nikolai Vakhmistrov,Nikolai Vakhmistrov,75,113,2,01:42,0,Nendo Galaxy
+12064,50202,Alroy Podkins,/mob/living/carbon/human,Test Subject,"",Alroy Podkins,Alroy Podkins,76,150,2,01:42,0,Adolph Nastain
+12065,50202,Elliot Temere,/mob/living/carbon/human,Test Subject,"",Elliot Temere,Elliot Temere,72,175,2,01:42,0,""
+12066,50202,M'ark M'rshan,/mob/living/carbon/human,Roboticist,Cultist,M'ark M'rshan,M'ark M'rshan,64,168,2,01:42,0,Randy Newdome
+12067,50202,Illia Bronson,/mob/living/carbon/human,Botanist,"",Illia Bronson,Illia Bronson,35,148,2,01:43,0,""
+12068,50202,Lion Remark,/mob/living/carbon/human,Virologist,"",Lion Remark,Lion Remark,160,79,2,01:44,0,""
