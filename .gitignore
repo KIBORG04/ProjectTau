@@ -2,3 +2,4 @@
 .idea/
 config.yaml
 *.exe
+pg_data/

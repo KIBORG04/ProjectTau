@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pg_data:/usr/src/postgresql/data
+    environment:
+      POSTGRES_DB: ssstatistics
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /usr/src/postgresql/data
+    restart: always
+  projecttau:
+    build: .
+    container_name: projecttau
+    ports:
+     - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ssstatistics
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    restart: always
