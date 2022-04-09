@@ -10,6 +10,7 @@ import (
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/charts"
 	"ssstatistics/internal/utils"
+	"strings"
 )
 
 type ServerCheckbox struct {
@@ -223,11 +224,6 @@ func Cult(c *gin.Context) {
 	})
 }
 
-func UplinkPOST(c *gin.Context) {
-	setCheckboxStates(c)
-	UplinkGET(c)
-}
-
 type UplinkInfo struct {
 	Name      string
 	Count     uint
@@ -247,6 +243,7 @@ func (b UplinkInfo) GetCount() uint {
 type UplinkRoleInfo struct {
 	Name        string
 	Count       uint
+	Id          string
 	UplinkInfos InfoSlice
 }
 
@@ -255,6 +252,11 @@ func (b UplinkRoleInfo) GetName() string {
 }
 func (b UplinkRoleInfo) GetCount() uint {
 	return b.Count
+}
+
+func UplinkPOST(c *gin.Context) {
+	setCheckboxStates(c)
+	UplinkGET(c)
 }
 
 func UplinkGET(c *gin.Context) {
@@ -306,6 +308,7 @@ func UplinkGET(c *gin.Context) {
 					if !ok {
 						newUplinkInfo := &UplinkRoleInfo{
 							Name:  roleName,
+							Id:    strings.ReplaceAll(strings.ToLower(roleName), " ", ""),
 							Count: 1,
 						}
 						s := StatInfo(newUplinkInfo)
@@ -328,6 +331,120 @@ func UplinkGET(c *gin.Context) {
 
 	c.HTML(200, "uplink.html", gin.H{
 		"uplinkPurchases":  uplinkRoles,
+		"serverCheckboxes": checkboxStates,
+	})
+}
+
+type ObjectiveInfo struct {
+	Type    string
+	Count   uint
+	Wins    uint
+	Winrate uint
+}
+
+func (b ObjectiveInfo) GetName() string {
+	return b.Type
+}
+func (b ObjectiveInfo) GetCount() uint {
+	return b.Count
+}
+
+type OwnerByObjectivesInfo struct {
+	Owner          string
+	Count          uint
+	Id             string
+	ObjectiveInfos InfoSlice
+}
+
+func (b OwnerByObjectivesInfo) GetName() string {
+	return b.Owner
+}
+func (b OwnerByObjectivesInfo) GetCount() uint {
+	return b.Count
+}
+
+func ObjectivesPOST(c *gin.Context) {
+	setCheckboxStates(c)
+	ObjectivesGET(c)
+}
+
+func ObjectivesGET(c *gin.Context) {
+	checkboxStates := getCheckboxStates(c)
+	_, processRoots, _, _, _ := getRootsByCheckboxes([]string{"Factions.FactionObjectives", "Factions.Members.RoleObjectives"}, checkboxStates)
+
+	objectiveHolders := make(InfoSlice, 0)
+
+	addObjectiveInfo := func(owner *OwnerByObjectivesInfo, objective domain.Objectives) {
+		owner.Count++
+		var isWin uint
+		if objective.Completed == ObjectiveWIN {
+			isWin = 1
+		}
+
+		foundInfo, ok := owner.ObjectiveInfos.hasName(objective.Type)
+		var objectiveInfo *ObjectiveInfo
+		if ok {
+			objectiveInfo = (*foundInfo).(*ObjectiveInfo)
+			objectiveInfo.Count++
+			objectiveInfo.Wins += isWin
+			objectiveInfo.Winrate = objectiveInfo.Wins * 100 / objectiveInfo.Count
+		} else {
+			objectiveInfo = &ObjectiveInfo{
+				Type:    objective.Type,
+				Count:   1,
+				Wins:    isWin,
+				Winrate: isWin * 100,
+			}
+			owner.ObjectiveInfos = append(owner.ObjectiveInfos, objectiveInfo)
+		}
+	}
+
+	for _, root := range processRoots {
+		for _, faction := range root.Factions {
+			if len(faction.FactionObjectives) > 0 {
+				foundInfo, ok := objectiveHolders.hasName(faction.FactionName)
+				var holderInfo *OwnerByObjectivesInfo
+				if ok {
+					holderInfo = (*foundInfo).(*OwnerByObjectivesInfo)
+				} else {
+					holderInfo = &OwnerByObjectivesInfo{
+						Owner: faction.FactionName,
+						Id:    strings.ReplaceAll(strings.ToLower(faction.FactionName), " ", ""),
+					}
+					objectiveHolders = append(objectiveHolders, holderInfo)
+				}
+				for _, objective := range faction.FactionObjectives {
+					// IDK HOW
+					if objective.Type == "" {
+						continue
+					}
+					addObjectiveInfo(holderInfo, domain.Objectives(objective))
+				}
+			}
+
+			for _, role := range faction.Members {
+				if len(role.RoleObjectives) > 0 {
+					foundInfo, ok := objectiveHolders.hasName(role.RoleName)
+					var holderInfo *OwnerByObjectivesInfo
+					if ok {
+						holderInfo = (*foundInfo).(*OwnerByObjectivesInfo)
+					} else {
+						holderInfo = &OwnerByObjectivesInfo{
+							Owner: role.RoleName,
+							Id:    strings.ReplaceAll(strings.ToLower(role.RoleName), " ", ""),
+						}
+						objectiveHolders = append(objectiveHolders, holderInfo)
+					}
+					for _, objective := range role.RoleObjectives {
+						addObjectiveInfo(holderInfo, domain.Objectives(objective))
+					}
+				}
+			}
+		}
+	}
+
+	c.HTML(200, "objectives.html", gin.H{
+		"objectiveHolders": objectiveHolders,
 		"serverCheckboxes": checkboxStates,
 	})
 }
