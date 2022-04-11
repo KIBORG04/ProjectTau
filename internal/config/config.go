@@ -16,6 +16,11 @@ type GlobalConfig struct {
 		Port     string `yaml:"port"`
 		Dbname   string `yaml:"dbname"`
 	} `yaml:"db"`
+	AdminConfig struct {
+		Login    string `yaml:"login"`
+		Password string `yaml:"password"`
+	} `yaml:"admin"`
+	Proxy string `yaml:"proxy"`
 }
 
 func LoadConfigurations() {

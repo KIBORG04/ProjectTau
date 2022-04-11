@@ -46,10 +46,6 @@ func CreateConnection() {
 			//Logger:                                   logger.Default.LogMode(logger.Silent),
 		})
 
-	//tables, _ := Database.Migrator().GetTables()
-	//for _, table := range tables {
-	//	Database.Migrator().DropTable(table)
-	//}
 	AutoMigrate()
 
 }

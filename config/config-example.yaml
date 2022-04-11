@@ -1,0 +1,14 @@
+# remove -example from the file name
+db:
+  host: localhost
+  user: postgres
+  password: postgres
+  dbname: ssstatistics
+  port: 5432
+
+admin:
+  login: admin
+  password: 1234
+
+proxy: 127.0.0.1
+

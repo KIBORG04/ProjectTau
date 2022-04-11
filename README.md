@@ -5,12 +5,15 @@
 git clone https://github.com/KIBORG04/ProjectTau.git
 ```
 
-Свои настройки конфигурации вы можете указать в `./config/config.yaml` и `docker-compose.yml`,
-но и без них все должно запуститься.
+Для открытия конфигов, вам необходимо убрать из названия файла `./config/config-example.yaml` 
+постфикс `-example`. Затем вписать свои настройки.
+
+Свои настройки конфигурации вы можете указать в `./config/config.yaml` и `docker-compose.yml`.
 
 Затем пишите:
 
 ```shell
+docker-compose build
 docker-compose up
 ```
 

@@ -1,6 +1,7 @@
 package controller
 
 import (
+	c "ssstatistics/internal/config"
 	"ssstatistics/internal/service/parser"
 	"ssstatistics/internal/service/stats"
 	"time"
@@ -45,7 +46,7 @@ func initializeRoutes() {
 	// Group using gin.BasicAuth() middleware
 	// gin.Accounts is a shortcut for map[string]string
 	authorized := router.Group("/admin", gin.BasicAuth(gin.Accounts{
-		"admin": "1234",
+		c.Config.AdminConfig.Login: c.Config.AdminConfig.Password,
 	}))
 
 	// hit "localhost:8080/admin/secrets
@@ -61,6 +62,10 @@ func initializeRoutes() {
 
 func Run() {
 	router = gin.Default()
+	err := router.SetTrustedProxies([]string{c.Config.Proxy})
+	if err != nil {
+		return
+	}
 	router.LoadHTMLGlob("web/templates/*")
 
 	initializeRoutes()
