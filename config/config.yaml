@@ -1,6 +1,0 @@
-db:
-  host: localhost
-  user: postgres
-  password: postgres
-  dbname: ssstatistics
-  port: 5432
