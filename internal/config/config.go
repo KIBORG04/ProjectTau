@@ -2,6 +2,7 @@ package config
 
 import (
 	"os"
+	"syscall"
 
 	"github.com/go-yaml/yaml"
 )
@@ -20,7 +21,8 @@ type GlobalConfig struct {
 		Login    string `yaml:"login"`
 		Password string `yaml:"password"`
 	} `yaml:"admin"`
-	Proxy string `yaml:"proxy"`
+	Proxy   string `yaml:"proxy"`
+	BaseUrl string
 }
 
 func LoadConfigurations() {
@@ -32,4 +34,9 @@ func LoadConfigurations() {
 	if err != nil {
 		panic(err)
 	}
+	baseUrl, found := syscall.Getenv("BASE_URL")
+	if !found {
+		baseUrl = ""
+	}
+	Config.BaseUrl = baseUrl
 }

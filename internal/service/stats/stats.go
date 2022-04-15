@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/exp/slices"
 	"sort"
+	"ssstatistics/internal/config"
 	"ssstatistics/internal/domain"
 	"ssstatistics/internal/keymap"
 	r "ssstatistics/internal/repository"
@@ -13,18 +14,33 @@ import (
 	"strings"
 )
 
+func BasicGET(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
+	baseContext := gin.H{
+		"baseUrl": config.Config.BaseUrl,
+	}
+
+	code, file, context := f(c)
+
+	for k, v := range baseContext {
+		context[k] = v
+	}
+
+	c.HTML(code, file, context)
+}
+
+func BasicPOST(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
+	setCheckboxStates(c)
+	BasicGET(c, f)
+}
+
 type ServerCheckbox struct {
 	Checkboxes []string `form:"server[]"`
 }
 
-func RootPOST(c *gin.Context) {
-	setCheckboxStates(c)
-	RootGET(c)
-}
-
-func RootGET(c *gin.Context) {
+func RootGET(c *gin.Context) (int, string, gin.H) {
 	checkboxStates := getCheckboxStates(c)
-	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRootsByCheckboxes([]string{"Deaths"}, checkboxStates)
+	query := r.Database.Preload("Deaths")
+	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRootsByCheckboxes(query, checkboxStates)
 
 	crewDeathsCount := make(keymap.MyMap[string, uint], 0)
 	crewDeathsSum := 0
@@ -58,15 +74,15 @@ func RootGET(c *gin.Context) {
 	sort.Stable(sort.Reverse(crewDeathsCount))
 	sort.Stable(sort.Reverse(roleDeathsCount))
 
-	var links domain.Link
+	var link domain.Link
 	str := fmt.Sprintf("%%%d%%", lastRoot.RoundID)
-	r.Database.Where("link LIKE ?", str).First(&links)
+	r.Database.Where("link LIKE ?", str).First(&link)
 
-	c.HTML(200, "index.html", gin.H{
+	return 200, "index.html", gin.H{
 		"totalRounds": len(roots),
 		"version":     lastRoot.Version,
 		"lastRound":   lastRoot.RoundID,
-		"lastDate":    links.Date,
+		"lastDate":    link.Date,
 
 		"alphaRounds": len(alphaRoots),
 		"betaRounds":  len(betaRoots),
@@ -80,7 +96,7 @@ func RootGET(c *gin.Context) {
 		"roleDeathsSum":   roleDeathsSum,
 
 		"serverCheckboxes": checkboxStates,
-	})
+	}
 }
 
 type FactionInfo struct {
@@ -136,14 +152,10 @@ func completedObjectives[T any](objectives []T) uint {
 	return completed
 }
 
-func GamemodesPOST(c *gin.Context) {
-	setCheckboxStates(c)
-	GamemodesGET(c)
-}
-
-func GamemodesGET(c *gin.Context) {
+func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 	checkboxStates := getCheckboxStates(c)
-	_, processRoots, _, _, _ := getRootsByCheckboxes([]string{"Factions.FactionObjectives", "Factions.Members.RoleObjectives"}, checkboxStates)
+	query := r.Database.Preload("Factions.FactionObjectives").Preload("Factions.Members.RoleObjectives")
+	_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
 
 	factionsSum := 0
 	factionsCount := make(InfoSlice, 0)
@@ -207,21 +219,21 @@ func GamemodesGET(c *gin.Context) {
 	sort.Sort(sort.Reverse(factionsCount))
 	sort.Sort(sort.Reverse(rolesCount))
 
-	c.HTML(200, "gamemodes.html", gin.H{
+	return 200, "gamemodes.html", gin.H{
 		"factionsSum":      factionsSum,
 		"factionsCount":    factionsCount,
 		"rolesSum":         rolesSum,
 		"rolesCount":       rolesCount,
 		"serverCheckboxes": checkboxStates,
-	})
+	}
 }
 
-func Cult(c *gin.Context) {
+func Cult(c *gin.Context) (int, string, gin.H) {
 	render := charts.Cult()
 
-	c.HTML(200, "chart.html", gin.H{
+	return 200, "chart.html", gin.H{
 		"charts": render,
-	})
+	}
 }
 
 type UplinkInfo struct {
@@ -254,18 +266,14 @@ func (b UplinkRoleInfo) GetCount() uint {
 	return b.Count
 }
 
-func UplinkPOST(c *gin.Context) {
-	setCheckboxStates(c)
-	UplinkGET(c)
-}
-
-func UplinkGET(c *gin.Context) {
+func UplinkGET(c *gin.Context) (int, string, gin.H) {
 	checkboxStates := getCheckboxStates(c)
-	_, processRoots, _, _, _ := getRootsByCheckboxes([]string{"Factions.Members.UplinkInfo.UplinkPurchases"}, checkboxStates)
+	query := r.Database.Preload("Factions.Members.UplinkInfo.UplinkPurchases")
+	_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
 
 	uplinkRoles := make(InfoSlice, 0)
 
-	addUplinkInfo := func(infos InfoSlice, counter *uint, purchase *domain.UplinkPurchases, faction *domain.Factions, role *domain.Role) InfoSlice {
+	addUplinkInfo := func(infos InfoSlice, purchase *domain.UplinkPurchases, faction *domain.Factions, role *domain.Role) InfoSlice {
 		foundInfo, ok := infos.hasName(purchase.ItemType)
 		var isWin uint
 		if faction != nil {
@@ -290,7 +298,6 @@ func UplinkGET(c *gin.Context) {
 			uplinkInfo.TotalCost += uint(purchase.Cost)
 
 		}
-		*counter++
 		return infos
 	}
 
@@ -318,7 +325,7 @@ func UplinkGET(c *gin.Context) {
 						(*foundInfo).(*UplinkRoleInfo).Count++
 					}
 					newUplinkInfo := (*foundInfo).(*UplinkRoleInfo)
-					newUplinkInfo.UplinkInfos = addUplinkInfo(newUplinkInfo.UplinkInfos, &newUplinkInfo.Count, &purchase, useFaction, &role)
+					newUplinkInfo.UplinkInfos = addUplinkInfo(newUplinkInfo.UplinkInfos, &purchase, useFaction, &role)
 				}
 			}
 		}
@@ -329,10 +336,10 @@ func UplinkGET(c *gin.Context) {
 		sort.Sort(sort.Reverse(uplinkRoleInfo.UplinkInfos))
 	}
 
-	c.HTML(200, "uplink.html", gin.H{
+	return 200, "uplink.html", gin.H{
 		"uplinkPurchases":  uplinkRoles,
 		"serverCheckboxes": checkboxStates,
-	})
+	}
 }
 
 type ObjectiveInfo struct {
@@ -363,14 +370,10 @@ func (b OwnerByObjectivesInfo) GetCount() uint {
 	return b.Count
 }
 
-func ObjectivesPOST(c *gin.Context) {
-	setCheckboxStates(c)
-	ObjectivesGET(c)
-}
-
-func ObjectivesGET(c *gin.Context) {
+func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 	checkboxStates := getCheckboxStates(c)
-	_, processRoots, _, _, _ := getRootsByCheckboxes([]string{"Factions.FactionObjectives", "Factions.Members.RoleObjectives"}, checkboxStates)
+	query := r.Database.Preload("Factions.FactionObjectives").Preload("Factions.Members.RoleObjectives")
+	_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
 
 	objectiveHolders := make(InfoSlice, 0)
 
@@ -443,8 +446,37 @@ func ObjectivesGET(c *gin.Context) {
 		}
 	}
 
-	c.HTML(200, "objectives.html", gin.H{
+	return 200, "objectives.html", gin.H{
 		"objectiveHolders": objectiveHolders,
 		"serverCheckboxes": checkboxStates,
-	})
+	}
+}
+
+func RoundGET(c *gin.Context) (int, string, gin.H) {
+	roundId := c.Param("id")
+	if utils.RoundId.FindString(roundId) == "" {
+		return 400, "error.html", gin.H{
+			"error": fmt.Sprintf("%s is not round id.", roundId),
+		}
+	}
+	root, err := r.EagerFindByRoundId(roundId)
+	if err != nil {
+		return 404, "error.html", gin.H{
+			"error": fmt.Sprintf("%s round not found.", roundId),
+		}
+	}
+	return 200, "round.html", gin.H{
+		"root": root,
+	}
+}
+
+func RoundsGET(c *gin.Context) (int, string, gin.H) {
+	checkboxStates := getCheckboxStates(c)
+	query := r.Database.Limit(100).Order("round_id DESC")
+	_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
+
+	return 200, "rounds.html", gin.H{
+		"roots":            processRoots,
+		"serverCheckboxes": checkboxStates,
+	}
 }

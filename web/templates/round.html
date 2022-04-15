@@ -1,0 +1,195 @@
+<!--chart.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="fs-5 badge bg-primary text-wrap" style="width: 100%">
+            {{ .root.RoundID }} - {{ .root.Duration }} - {{ .root.Map }} - {{ .root.Mode }} - {{ .root.ModeResult }}
+            - {{ .root.ServerAddress }}
+        </div>
+        {{ $l := len .root.Factions }}
+        {{ if ne $l 0 }}
+            <div class="col">
+                {{ range .root.Factions }}
+                    <div class="fs-5 badge bg-secondary text-wrap mt-2" style="width: 100%">
+                        {{ .Name }}
+                    </div>
+                    {{ $l = len .FactionObjectives }}
+                    {{ if ne $l 0 }}
+                        <ul class="list-group">
+                            {{ range .FactionObjectives }}
+                                {{ $isWin := .Completed }}
+                                {{ if eq $isWin "SUCCESS" }}
+                                    {{ $isWin = "success" }}
+                                {{ else }}
+                                    {{ $isWin = "danger" }}
+                                {{ end }}
+                                <li class="list-group-item list-group-item-{{ $isWin }} ps-3 pt-0 pb-0">
+                                    {{ .ExplanationText }} <span style="font-weight: bold">{{ .Completed }}</span>
+                                </li>
+                            {{ end }}
+                        </ul>
+                    {{ end }}
+                    {{ $l = len .Members }}
+                    {{ if ne $l 0 }}
+                        <button class="btn btn-outline-secondary mt-1" style="width: 100%;font-weight: bold"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#members{{ .ID }}"
+                                aria-expanded="false" aria-controls="members{{ .ID }}">
+                            Open Members
+                        </button>
+                        <div class="collapse" id="members{{ .ID }}">
+                            <ul class="list-group">
+                                {{ range .Members }}
+                                {{ $l = len .RoleObjectives }}
+                                <ul class="list-group list-group-horizontal">
+                                    <li class="list-group-item" style="width: 100%">{{ .RoleName }}</li>
+                                    <li class="list-group-item" style="width: 100%">{{ .MindName }}</li>
+                                    <li class="list-group-item" style="width: 100%">{{ .MindCkey }}</li>
+                                    {{ if ne $l 0}}
+                                        <button class="btn btn-outline-secondary"
+                                                style="width: 80%" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#role{{ .ID }}"
+                                                aria-expanded="false" aria-controls="role{{ .ID }}">
+                                            Open Info
+                                        </button>
+                                    {{ end }}
+                                </ul>
+                                <div class="collapse mt-2 mb-2" id="role{{ .ID }}">
+                                    {{ if ne $l 0 }}
+                                        <ul class="list-group">
+                                            {{ range .RoleObjectives }}
+                                                {{ $isWin := .Completed }}
+                                                {{ if eq $isWin "SUCCESS" }}
+                                                    {{ $isWin = "success" }}
+                                                {{ else }}
+                                                    {{ $isWin = "danger" }}
+                                                {{ end }}
+                                                <li class="list-group-item list-group-item-{{ $isWin }} ps-3 pt-0 pb-0">
+                                                    {{ .ExplanationText }} <span
+                                                            style="font-weight: bold">{{ .Completed }}</span>
+                                                </li>
+                                            {{ end }}
+                                        </ul>
+                                    {{ end }}
+                                    {{ if ne .UplinkInfo.ID 0 }}
+                                        <ul class="list-group list-group-horizontal">
+                                            <li class="list-group-item"
+                                                style="width: 100%;font-weight: bold;">
+                                                Всего ТК - {{ .UplinkInfo.TotalTC }}
+                                            </li>
+                                            <li class="list-group-item"
+                                                style="width: 100%;font-weight: bold;">
+                                                Потрачено ТК - {{ .UplinkInfo.SpentTC }}
+                                            </li>
+                                        </ul>
+                                        {{ $l = len .UplinkInfo.UplinkPurchases }}
+                                        {{ if ne $l 0 }}
+                                            <table class="table table-sm table-bordered table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">Предмет</th>
+                                                    <th scope="col">Стоимость</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {{ range .UplinkInfo.UplinkPurchases }}
+                                                    <tr>
+                                                        <td>{{ .Bundlename }}</td>
+                                                        <td>{{ .Cost }}</td>
+                                                    </tr>
+                                                {{ end }}
+                                                </tbody>
+                                            </table>
+                                        {{ end }}
+                                    {{ end }}
+                                </div>
+                            </ul>
+                            {{ end }}
+                        </div>
+                        <br>
+                    {{ end }}
+                {{ end }}
+            </div>
+        {{ end }}
+        <div class="col">
+            <div class="fs-5 badge bg-secondary text-wrap mt-2" style="width: 100%">
+                Экипаж
+            </div>
+            <table id="manifest" class="table table-sm table-hover table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Профессия</th>
+                    <th scope="col">Роль</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{ range .root.ManifestEntries }}
+                    <tr>
+                        <th scope="row">{{ .Name }}</th>
+                        <td>{{ .AssignedRole }}</td>
+                        <td>{{ .SpecialRole }}</td>
+                    </tr>
+                {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="fs-5 badge bg-secondary text-wrap mt-2" style="width: 100%">
+                Смерти
+            </div>
+            <table id="deaths" class="table table-sm table-hover table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Профессия</th>
+                    <th scope="col">Роль</th>
+                    <th scope="col">Время смерти</th>
+                    <th scope="col" style="color: red">BRUTE</th>
+                    <th scope="col" style="color: orange">BURN</th>
+                    <th scope="col" style="color: green">TOXIN</th>
+                    <th scope="col" style="color: blue">OXY</th>
+                    <th scope="col" style="color: pink">BRAIN</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{ range .root.Deaths }}
+                    <tr>
+                        <th scope="row">{{ .RealName }}</th>
+                        <td>{{ .AssignedRole }}</td>
+                        <td>{{ .SpecialRole }}</td>
+                        <td>{{ .TimeOfDeath }}</td>
+                        <td style="color: red">{{ .Damage.Brute }}</td>
+                        <td style="color: orange">{{ .Damage.Fire }}</td>
+                        <td style="color: green">{{ .Damage.Toxin }}</td>
+                        <td style="color: blue">{{ .Damage.Oxy }}</td>
+                        <td style="color: pink">{{ .Damage.Brain }}</td>
+                    </tr>
+                {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}
+<script>
+    $(function () {
+        $('#deaths').DataTable({
+            paging: false,
+            searching: false,
+            info: false,
+        });
+        $('#manifest').DataTable({
+            lengthChange: false,
+        });
+    });
+</script>

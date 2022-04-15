@@ -3,8 +3,8 @@ package stats
 import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/exp/slices"
+	"gorm.io/gorm"
 	"ssstatistics/internal/domain"
-	r "ssstatistics/internal/repository"
 	"strings"
 )
 
@@ -57,14 +57,11 @@ func getCheckboxStates(c *gin.Context) map[string]string {
 	return checkboxesStates
 }
 
-func getRootsByCheckboxes(preloads []string, checkboxes map[string]string) ([]domain.Root, []*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root) {
+// db is configured
+func getRootsByCheckboxes(db *gorm.DB, checkboxes map[string]string) ([]domain.Root, []*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root) {
 	var roots []domain.Root
 
-	query := r.Database
-	for _, v := range preloads {
-		query = query.Preload(v)
-	}
-	query.Find(&roots)
+	db.Find(&roots)
 
 	var processRoots []*domain.Root
 

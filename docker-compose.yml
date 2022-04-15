@@ -22,6 +22,7 @@ services:
     depends_on:
       - db
     environment:
+      BASE_URL: ""
       POSTGRES_HOST: db
       POSTGRES_PORT: 5432
       POSTGRES_DB: ssstatistics

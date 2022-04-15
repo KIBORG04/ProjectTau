@@ -29,42 +29,66 @@ func runCollector(c *gin.Context) {
 }
 
 func initializeRoutes() {
-	router.GET("/", stats.RootGET)
-	router.POST("/", stats.RootPOST)
+	base := router.Group(c.Config.BaseUrl)
 
-	router.GET("/gamemodes", stats.GamemodesGET)
-	router.POST("/gamemodes", stats.GamemodesPOST)
+	GET := func(f func(*gin.Context) (int, string, gin.H)) func(*gin.Context) {
+		return func(c *gin.Context) {
+			stats.BasicGET(c, f)
+		}
+	}
 
-	router.GET("/uplink", stats.UplinkGET)
-	router.POST("/uplink", stats.UplinkPOST)
+	POST := func(f func(*gin.Context) (int, string, gin.H)) func(*gin.Context) {
+		return func(c *gin.Context) {
+			stats.BasicPOST(c, f)
+		}
+	}
 
-	router.GET("/objectives", stats.ObjectivesGET)
-	router.POST("/objectives", stats.ObjectivesPOST)
+	{
+		base.GET("/", GET(stats.RootGET))
+		base.POST("/", POST(stats.RootGET))
 
-	router.GET("/cult", stats.Cult)
+		base.GET("/gamemodes", GET(stats.GamemodesGET))
+		base.POST("/gamemodes", POST(stats.GamemodesGET))
+
+		base.GET("/uplink", GET(stats.UplinkGET))
+		base.POST("/uplink", POST(stats.UplinkGET))
+
+		base.GET("/objectives", GET(stats.ObjectivesGET))
+		base.POST("/objectives", POST(stats.ObjectivesGET))
+
+		base.GET("/rounds", GET(stats.RoundsGET))
+		base.POST("/rounds", POST(stats.RoundsGET))
+
+		base.GET("/round/:id", GET(stats.RoundGET))
+		base.GET("/round", GET(stats.RoundsGET))
+
+		base.GET("/cult", GET(stats.Cult))
+	}
 
 	// Group using gin.BasicAuth() middleware
 	// gin.Accounts is a shortcut for map[string]string
-	authorized := router.Group("/admin", gin.BasicAuth(gin.Accounts{
+	authorized := base.Group("/admin", gin.BasicAuth(gin.Accounts{
 		c.Config.AdminConfig.Login: c.Config.AdminConfig.Password,
 	}))
-
-	// hit "localhost:8080/admin/secrets
-	authorized.GET("/secrets", func(c *gin.Context) {
-		user := c.MustGet(gin.AuthUserKey).(string)
-		c.HTML(200, "secrets.html", gin.H{
-			"user": user,
+	{
+		// hit "localhost:8080/admin/secrets
+		authorized.GET("/secrets", func(c *gin.Context) {
+			user := c.MustGet(gin.AuthUserKey).(string)
+			c.HTML(200, "secrets.html", gin.H{
+				"user": user,
+			})
 		})
-	})
 
-	authorized.POST("/secrets", runCollector)
+		authorized.POST("/secrets", runCollector)
+	}
+
 }
 
 func Run() {
 	router = gin.Default()
 	err := router.SetTrustedProxies([]string{c.Config.Proxy})
 	if err != nil {
-		return
+		panic(err)
 	}
 	router.LoadHTMLGlob("web/templates/*")
 
