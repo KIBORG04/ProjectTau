@@ -472,7 +472,7 @@ func RoundGET(c *gin.Context) (int, string, gin.H) {
 
 func RoundsGET(c *gin.Context) (int, string, gin.H) {
 	checkboxStates := getCheckboxStates(c)
-	query := r.Database.Limit(100).Order("round_id DESC")
+	query := r.Database.Order("round_id DESC").Limit(100)
 	_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
 
 	return 200, "rounds.html", gin.H{
