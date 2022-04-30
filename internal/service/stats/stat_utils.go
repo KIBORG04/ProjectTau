@@ -1,10 +1,13 @@
 package stats
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/exp/slices"
 	"gorm.io/gorm"
 	"ssstatistics/internal/domain"
+	"ssstatistics/internal/utils"
+	"strconv"
 	"strings"
 )
 
@@ -128,4 +131,30 @@ func (b BaseInfo) GetName() string {
 
 func (b BaseInfo) GetCount() uint {
 	return b.Count
+}
+
+func isStationPlayer(assignment, name string) bool {
+	return slices.Contains(stationPositions, assignment) && utils.IsDrone.FindString(name) == ""
+}
+
+type RoundTime struct {
+	Hour uint
+	Min  uint
+}
+
+func ParseRoundTime(time string) (RoundTime, error) {
+	if time == "" {
+		return RoundTime{}, fmt.Errorf("empty time")
+	}
+	strs := strings.Split(time, ":")
+
+	hour, err := strconv.Atoi(strs[0])
+	if err != nil {
+		return RoundTime{}, err
+	}
+	min, err := strconv.Atoi(strs[1])
+	if err != nil {
+		return RoundTime{}, err
+	}
+	return RoundTime{Hour: uint(hour), Min: uint(min)}, nil
 }

@@ -22,6 +22,7 @@
                     <th scope="col">Всего задач</th>
                     <th scope="col">Выполнено задач</th>
                     <th scope="col">Винрейт задач</th>
+                    <th scope="col">Среднее ливеров<br>в начале раунда</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,7 @@
                         <td>{{ .TotalObjectives }}</td>
                         <td>{{ .CompletedObjectives }}</td>
                         <td>{{ .PercentObjectives }}%</td>
+                        <td>{{ .AvgLeavers }}</td>
                     </tr>
                 {{ end }}
                 </tbody>

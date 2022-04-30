@@ -56,7 +56,7 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		modesCount = keymap.AddElem(modesCount, root.Mode, 1)
 		modesSum++
 		for _, death := range root.Deaths {
-			if slices.Contains(stationPositions, death.AssignedRole) && utils.IsDrone.FindString(death.Name) == "" {
+			if isStationPlayer(death.AssignedRole, death.Name) {
 				crewDeathsCount = keymap.AddElem(crewDeathsCount, death.AssignedRole, 1)
 				crewDeathsSum++
 			}
@@ -108,6 +108,8 @@ type FactionInfo struct {
 	TotalObjectives     uint
 	CompletedObjectives uint
 	PercentObjectives   uint
+	Leavers             uint
+	AvgLeavers          float32
 }
 
 func (b FactionInfo) GetName() string {
@@ -154,7 +156,7 @@ func completedObjectives[T any](objectives []T) uint {
 
 func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 	checkboxStates := getCheckboxStates(c)
-	query := r.Database.Preload("Factions.FactionObjectives").Preload("Factions.Members.RoleObjectives")
+	query := r.Database.Preload("LeaveStats").Preload("Factions.FactionObjectives").Preload("Factions.Members.RoleObjectives")
 	_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
 
 	factionsSum := 0
@@ -164,6 +166,22 @@ func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 	rolesCount := make(InfoSlice, 0)
 
 	for _, root := range processRoots {
+		var leavers uint
+		for _, leaveStat := range root.LeaveStats {
+			if isStationPlayer(leaveStat.AssignedRole, leaveStat.Name) && leaveStat.LeaveType != "" {
+				roundTime, err := ParseRoundTime(leaveStat.LeaveTime)
+				if err != nil {
+					continue
+				}
+				if leaveStat.LeaveType == Cryo && roundTime.Min < 15 {
+					continue
+				} else if 5 < roundTime.Min && roundTime.Min < 30 {
+					leavers++
+				} else if leaveStat.LeaveType == Cryo && roundTime.Min < 45 { // body is in cryo for 15 minutes
+					leavers++
+				}
+			}
+		}
 		for _, faction := range root.Factions {
 			foundInfo, ok := factionsCount.hasName(faction.FactionName)
 			if !ok {
@@ -176,6 +194,8 @@ func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 					TotalObjectives:     uint(len(faction.FactionObjectives)),
 					CompletedObjectives: completedObjectives(faction.FactionObjectives),
 					PercentObjectives:   completedObjectives(faction.FactionObjectives) * 100 / utils.Max(uint(len(faction.FactionObjectives)), 1),
+					Leavers:             leavers,
+					AvgLeavers:          float32(leavers),
 				})
 			} else {
 				factionInfo := (*foundInfo).(*FactionInfo)
@@ -186,6 +206,8 @@ func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 				factionInfo.TotalObjectives += uint(len(faction.FactionObjectives))
 				factionInfo.CompletedObjectives += completedObjectives(faction.FactionObjectives)
 				factionInfo.PercentObjectives = factionInfo.CompletedObjectives * 100 / utils.Max(factionInfo.TotalObjectives, 1)
+				factionInfo.Leavers += leavers
+				factionInfo.AvgLeavers = float32(factionInfo.Leavers) / float32(factionInfo.Count)
 			}
 			factionsSum++
 

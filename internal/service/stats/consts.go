@@ -18,6 +18,13 @@ const (
 	ObjectiveLFAIL = "FAIL"
 )
 
+const (
+	GhostedInCryo = "Ghosted in Cryopod"
+	Cryo          = "Cryopod"
+	Ghosted       = "Ghosted"
+	Disconnected  = "Disconnected"
+)
+
 var (
 	commandPositions = []string{
 		"Captain",
