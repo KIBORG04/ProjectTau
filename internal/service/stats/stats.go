@@ -273,30 +273,37 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 
 	uplinkRoles := make(InfoSlice, 0)
 
-	addUplinkInfo := func(infos InfoSlice, purchase *domain.UplinkPurchases, faction *domain.Factions, role *domain.Role) InfoSlice {
-		foundInfo, ok := infos.hasName(purchase.ItemType)
+	addUplinkInfo := func(infos InfoSlice, purchases []domain.UplinkPurchases, faction *domain.Factions, role *domain.Role) InfoSlice {
 		var isWin uint
 		if faction != nil {
 			isWin = uint(faction.Victory)
 		} else {
 			isWin = uint(role.Victory)
 		}
-		if !ok {
-			infos = append(infos, &UplinkInfo{
-				Name:      purchase.Bundlename,
-				Count:     1,
-				Type:      purchase.ItemType,
-				Wins:      isWin,
-				Winrate:   isWin * 100,
-				TotalCost: uint(purchase.Cost),
-			})
-		} else {
-			uplinkInfo := (*foundInfo).(*UplinkInfo)
-			uplinkInfo.Count++
-			uplinkInfo.Wins += isWin
-			uplinkInfo.Winrate = uplinkInfo.Wins * 100 / uplinkInfo.Count
-			uplinkInfo.TotalCost += uint(purchase.Cost)
 
+		processed := make([]string, 0, len(purchases))
+
+		for _, purchase := range purchases {
+			foundInfo, ok := infos.hasName(purchase.ItemType)
+			if !ok {
+				infos = append(infos, &UplinkInfo{
+					Name:      purchase.Bundlename,
+					Count:     1,
+					Type:      purchase.ItemType,
+					Wins:      isWin,
+					Winrate:   isWin * 100,
+					TotalCost: uint(purchase.Cost),
+				})
+			} else {
+				uplinkInfo := (*foundInfo).(*UplinkInfo)
+				if !slices.Contains(processed, purchase.ItemType) {
+					uplinkInfo.Count++
+					uplinkInfo.Wins += isWin
+					uplinkInfo.Winrate = uplinkInfo.Wins * 100 / uplinkInfo.Count
+				}
+				uplinkInfo.TotalCost += uint(purchase.Cost)
+			}
+			processed = append(processed, purchase.ItemType)
 		}
 		return infos
 	}
@@ -304,29 +311,32 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 	for _, root := range processRoots {
 		for _, faction := range root.Factions {
 			for _, role := range faction.Members {
-				for _, purchase := range role.UplinkInfo.UplinkPurchases {
-					roleName := role.RoleName
-					var useFaction *domain.Factions
-					if faction.FactionName == "Syndicate Operatives" || faction.FactionName == "Revolution" {
-						roleName = faction.FactionName
-						useFaction = &faction
-					}
-					foundInfo, ok := uplinkRoles.hasName(roleName)
-					if !ok {
-						newUplinkInfo := &UplinkRoleInfo{
-							Name:  roleName,
-							Id:    strings.ReplaceAll(strings.ToLower(roleName), " ", ""),
-							Count: 1,
-						}
-						s := StatInfo(newUplinkInfo)
-						foundInfo = &s
-						uplinkRoles = append(uplinkRoles, newUplinkInfo)
-					} else {
-						(*foundInfo).(*UplinkRoleInfo).Count++
-					}
-					newUplinkInfo := (*foundInfo).(*UplinkRoleInfo)
-					newUplinkInfo.UplinkInfos = addUplinkInfo(newUplinkInfo.UplinkInfos, &purchase, useFaction, &role)
+				if len(role.UplinkInfo.UplinkPurchases) == 0 {
+					continue
 				}
+				roleName := role.RoleName
+
+				var useFaction domain.Factions
+				if faction.FactionName == "Syndicate Operatives" || faction.FactionName == "Revolution" {
+					roleName = faction.FactionName
+					useFaction = faction
+				}
+				foundInfo, ok := uplinkRoles.hasName(roleName)
+				if !ok {
+					newUplinkInfo := &UplinkRoleInfo{
+						Name:  roleName,
+						Id:    strings.ReplaceAll(strings.ToLower(roleName), " ", ""),
+						Count: 1,
+					}
+					s := StatInfo(newUplinkInfo)
+					foundInfo = &s
+					uplinkRoles = append(uplinkRoles, newUplinkInfo)
+				} else {
+					(*foundInfo).(*UplinkRoleInfo).Count++
+				}
+
+				newUplinkInfo := (*foundInfo).(*UplinkRoleInfo)
+				newUplinkInfo.UplinkInfos = addUplinkInfo(newUplinkInfo.UplinkInfos, role.UplinkInfo.UplinkPurchases, &useFaction, &role)
 			}
 		}
 	}
