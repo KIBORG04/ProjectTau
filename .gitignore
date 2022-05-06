@@ -1,6 +1,7 @@
 .vscode/
 .idea/
 *.exe
+*.exe~
 pg_data/
 config.yaml
 config/config.yaml

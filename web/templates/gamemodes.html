@@ -3,12 +3,30 @@
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
+<div class="alert alert-info mt-4" role="alert">
+    <h4 class="alert-heading">Пояснение к информации!</h4>
+    <p>Всё разделено на два блока: фракций и ролей. Цифра рядом с названием группы - сколько всего было обработано штук.</p>
+    <hr>
+    <p>Винрейт определяется по довольно сложной схеме. Если у фракции есть задачи, типо культа и шедоулингов, то выполнение задачи является победой фракции.
+        Если же задач у фракции нет, типо трейторов и чейнджлингов, то победой будет является выполнение всех задач всех членов фракции.</p>
+    <p>С ролями все легче. Если задач нет, то автоматическая победа.</p>
+    <hr>
+    <p>Статистика малфа сломана!</p>
+    <hr>
+    <p>Колонки:</p>
+    <ul>
+        <li>Среднее ливеров - это примерный показатель количества людей, которые каким-либо образом вышли из раунда в начале игры.
+            Конкретно ведется подсчет между 5-й и 30-й минутой. Для ливнувших через крио идёт надбавка в 15 минут.</li>
+        <li>Винрейт задач - коэффициент, который показывает, сколько было выполнено задач. На самом деле, не несет много смысла.</li>
+    </ul>
+</div>
+
 <div class="container mt-4">
     <div class="row">
         <div class="col">
             <ul class="list-group list-group-flush">
                 <div class="fs-5 badge bg-secondary text-wrap">
-                    Фракции: {{ .factionsSum }}
+                    Фракции - {{ .factionsSum }}
                 </div>
             </ul>
             <table id="factions" class="table table-sm table-hover table-striped">
@@ -45,7 +63,7 @@
         <div class="col">
             <ul class="list-group list-group-flush">
                 <div class="fs-5 badge bg-secondary text-wrap">
-                    Роли: {{ .rolesSum }}
+                    Роли - {{ .rolesSum }}
                 </div>
             </ul>
             <table id="roles" class="table table-sm table-hover table-striped">

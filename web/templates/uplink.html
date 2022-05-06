@@ -3,6 +3,19 @@
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
+<div class="alert alert-info mt-4" role="alert">
+    <h4 class="alert-heading">Пояснение к информации!</h4>
+    <p>Все покупки в аплинке разделены на группы по ролям. В шапке группы указана сама роль и сколько ролей вообще использовала аплинк.</p>
+    <hr>
+    <p>Колонки:</p>
+    <ul>
+        <li>Общее количество - сколько в сумме куплено предметов.</li>
+        <li>Уникальное кол-во - была ли покупка в раунде.</li>
+        <li>Победы и винрейт высчитываются из Уникального количества.</li>
+        <li>Потрачено ТК - сколько в сумме было потрачено телекристаллов.</li>
+    </ul>
+</div>
+
 <div class="container mt-4">
     <div class="row">
         {{ range .uplinkPurchases }}
@@ -16,7 +29,8 @@
                     <thead>
                     <tr>
                         <th scope="col">Название</th>
-                        <th scope="col">Кол-во</th>
+                        <th scope="col">Общее кол-во</th>
+                        <th scope="col">Уник-альное кол-во</th>
                         <th scope="col">Побед</th>
                         <th scope="col">Винрейт</th>
                         <th scope="col">Потрачено ТК</th>
@@ -26,6 +40,7 @@
                     {{ range .UplinkInfos }}
                         <tr>
                             <th scope="row">{{ .Name }}</th>
+                            <td >{{ .TotalCount }}</td>
                             <td>{{ .Count }}</td>
                             <td>{{ .Wins }}</td>
                             <td>{{ .Winrate }}%</td>

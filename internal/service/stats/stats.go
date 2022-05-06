@@ -259,12 +259,13 @@ func Cult(c *gin.Context) (int, string, gin.H) {
 }
 
 type UplinkInfo struct {
-	Name      string
-	Count     uint
-	Type      string
-	Wins      uint
-	Winrate   uint
-	TotalCost uint
+	Name       string
+	Count      uint
+	TotalCount uint
+	Type       string
+	Wins       uint
+	Winrate    uint
+	TotalCost  uint
 }
 
 func (b UplinkInfo) GetName() string {
@@ -309,21 +310,23 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 			foundInfo, ok := infos.hasName(purchase.ItemType)
 			if !ok {
 				infos = append(infos, &UplinkInfo{
-					Name:      purchase.Bundlename,
-					Count:     1,
-					Type:      purchase.ItemType,
-					Wins:      isWin,
-					Winrate:   isWin * 100,
-					TotalCost: uint(purchase.Cost),
+					Name:       purchase.Bundlename,
+					Count:      1,
+					TotalCount: 1,
+					Type:       purchase.ItemType,
+					Wins:       isWin,
+					Winrate:    isWin * 100,
+					TotalCost:  uint(purchase.Cost),
 				})
 			} else {
 				uplinkInfo := (*foundInfo).(*UplinkInfo)
+				uplinkInfo.TotalCount++
+				uplinkInfo.TotalCost += uint(purchase.Cost)
 				if !slices.Contains(processed, purchase.ItemType) {
 					uplinkInfo.Count++
 					uplinkInfo.Wins += isWin
 					uplinkInfo.Winrate = uplinkInfo.Wins * 100 / uplinkInfo.Count
 				}
-				uplinkInfo.TotalCost += uint(purchase.Cost)
 			}
 			processed = append(processed, purchase.ItemType)
 		}
