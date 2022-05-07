@@ -97,10 +97,14 @@ type CommunicationLogs struct {
 	ID      int32
 	RootID  int32
 	Time    string `json:"time" gorm:"size:256"`
-	Title   string `json:"title" gorm:"size:256"`
+	Title   string `json:"title"`
 	Content string `json:"content"`
 	Author  string `json:"author" gorm:"size:256"`
 	Type    string `json:"type" gorm:"size:256"`
+}
+
+func (d *CommunicationLogs) ColumnsMigration(dx *gorm.DB) {
+	dx.Migrator().AlterColumn(&d, "Title")
 }
 
 type Damage struct {
