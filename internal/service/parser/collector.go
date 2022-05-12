@@ -13,11 +13,16 @@ import (
 	"time"
 )
 
+type RoundDto struct {
+	link string
+	date string
+}
+
 var loggerStats = log.New(os.Stderr, "[Statistics] ", log.Lmsgprefix|log.Ltime)
 var loggerGet = log.New(os.Stderr, "[GET Request] ", log.Lmsgprefix|log.Ltime)
 
 type Collector struct {
-	processUrls []string
+	processUrls []*RoundDto
 	Logs        []string
 }
 
@@ -44,41 +49,39 @@ func (c *Collector) CollectUrls(startDate time.Time) {
 }
 
 func (c *Collector) trySaveUrl(date *time.Time) {
-	mutex.Lock()
-	urls := r.FindAllByDate(date)
-	mutex.Unlock()
-	if urls == nil {
-		return
-	}
-	if len(urls) > 0 {
-		mutex.Lock()
-		c.processUrls = append(c.processUrls, urls...)
-		mutex.Unlock()
-		return
-	}
-
 	dateUrl := dateUrl(date)
-	roundId := c.roundIds(dateUrl)
-	if roundId == nil {
+	roundIds := c.roundIds(dateUrl)
+	if roundIds == nil {
 		return
 	}
 
 	mutex.Lock()
-	for _, v := range roundId {
+	for _, v := range roundIds {
+		roundId := u.RoundId.FindString(v)
+		if len(roundId) == 0 {
+			c.saveLogs(loggerStats, fmt.Sprintf("%s not contain digits of the round", v))
+			return
+		}
+		_, err := r.FindByRoundId(roundId)
+		if err == nil {
+			continue
+		}
 		url := statUrl(date, v)
-		c.processUrls = append(c.processUrls, url)
-		r.Save(&d.Link{Link: url, Date: date.Format("2006-01-02")})
+		c.processUrls = append(c.processUrls, &RoundDto{
+			link: url,
+			date: date.Format("2006-01-02"),
+		})
 	}
 	mutex.Unlock()
 }
 
 func (c *Collector) CollectStatistics() {
-	for _, url := range c.processUrls {
+	for _, link := range c.processUrls {
 		waitGroup.Add(1)
-		go func(url string) {
+		go func(link *RoundDto) {
 			defer waitGroup.Done()
-			c.collectByUrl(url)
-		}(url)
+			c.collectByUrl(link)
+		}(link)
 	}
 	waitGroup.Wait()
 }
@@ -106,29 +109,17 @@ func (c *Collector) requestGET(url string) *http.Response {
 	return resp
 }
 
-func (c *Collector) collectByUrl(url string) {
-	roundId := u.RoundId.FindString(url)
-	if len(roundId) == 0 {
-		c.saveLogs(loggerStats, fmt.Sprintf("%s not contain digits of the round", url))
-		return
-	}
-
-	mutex.Lock()
-	_, err := r.FindByRoundId(roundId)
-	mutex.Unlock()
-	if err == nil {
-		return
-	}
-
-	resp := c.requestGET(url)
+func (c *Collector) collectByUrl(link *RoundDto) {
+	resp := c.requestGET(link.link)
 
 	var root d.Root
 	dec := json.NewDecoder(resp.Body)
 	dec.DisallowUnknownFields()
-	err = dec.Decode(&root)
+	err := dec.Decode(&root)
 	if err != nil {
 		fmt.Println(err)
 	}
+	root.Date = link.date
 
 	mutex.Lock()
 	r.Save(&root)

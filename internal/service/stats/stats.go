@@ -74,15 +74,11 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 	sort.Stable(sort.Reverse(crewDeathsCount))
 	sort.Stable(sort.Reverse(roleDeathsCount))
 
-	var link domain.Link
-	str := fmt.Sprintf("%%%d%%", lastRoot.RoundID)
-	r.Database.Where("link LIKE ?", str).First(&link)
-
 	return 200, "index.html", gin.H{
 		"totalRounds": len(roots),
 		"version":     lastRoot.Version,
 		"lastRound":   lastRoot.RoundID,
-		"lastDate":    link.Date,
+		"lastDate":    lastRoot.Date,
 
 		"alphaRounds": len(alphaRoots),
 		"betaRounds":  len(betaRoots),
