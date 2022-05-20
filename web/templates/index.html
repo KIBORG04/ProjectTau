@@ -5,21 +5,22 @@
 
 <div class="container mt-4">
     <div class="row">
-        <div class="col">
+        <div class="col" style="width: 33%">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Версия статистики: {{ .version }}</li>
                 <li class="list-group-item">Последнее обновление БД: {{ .lastDate }}</li>
                 <li class="list-group-item">Последний раунд в БД: {{ .lastRound }}</li>
             </ul>
         </div>
-        <div class="col">
+        <div class="col" style="width: 33%">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Раундов в статистике: {{ .totalRounds }}</li>
                 <li class="list-group-item">Раундов на первом: {{ .alphaRounds }}</li>
                 <li class="list-group-item">Раундов на втором: {{ .betaRounds }}</li>
                 <li class="list-group-item">Раундов на третьем: {{ .gammaRounds }}</li>
                 <li class="list-group-item">ᅠ</li>
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#crewDeathsSum"
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#crewDeathsSum"
                         aria-expanded="false" aria-controls="collapseExample">
                     Смертей экипажа: {{ .crewDeathsSum }}
                 </button>
@@ -29,7 +30,8 @@
                     {{ end }}
                 </div>
                 <li class="list-group-item">ᅠ</li>
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#roleDeathsSum"
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#roleDeathsSum"
                         aria-expanded="false" aria-controls="collapseExample">
                     Смертей ролей: {{ .roleDeathsSum }}
                 </button>
@@ -38,19 +40,39 @@
                         <li class="list-group-item ps-3 pt-0 pb-0">{{ .Key }}: {{ .Value }}</li>
                     {{ end }}
                 </div>
+                <li class="list-group-item">ᅠ</li>
+                <ul class="list-group list-group-flush">
+                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#modesSum"
+                            aria-expanded="false" aria-controls="collapseExample">
+                        Количество режимов: {{ .modesSum }}
+                    </button>
+                    <div class="collapse" id="modesSum">
+                        {{ range .modesCount }}
+                            <li class="list-group-item ps-3 pt-0 pb-0">{{ .Key }}: {{ .Value }}</li>
+                        {{ end }}
+                    </div>
+                </ul>
             </ul>
         </div>
-        <div class="col">
+        <div class="col" style="width: 33%">
             <ul class="list-group list-group-flush">
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#modesSum"
-                        aria-expanded="false" aria-controls="collapseExample">
-                    Количество режимов: {{ .modesSum }}
-                </button>
-                <div class="collapse" id="modesSum">
-                    {{ range .modesCount }}
-                        <li class="list-group-item ps-3 pt-0 pb-0">{{ .Key }}: {{ .Value }}</li>
+                <figure class="text-end">
+                    <p class="h5">{{ .randComm.Title }}</p>
+                    <p class="fs-6"> {{ .randComm.Content }} </p>
+                    {{ if ne .randComm.Author "" }}
+                        <figcaption class="blockquote-footer">
+                            {{ .randComm.Author }}
+                        </figcaption>
                     {{ end }}
-                </div>
+                </figure>
+                <figure class="text-end">
+                    <p class="h5">{{ .lastAchievement.Title }}</p>
+                    <p class="fs-6"> {{ .lastAchievement.Desc }} </p>
+                    <figcaption class="blockquote-footer">
+                        {{ .lastAchievement.Key }} - {{ .lastAchievement.Name }}
+                    </figcaption>
+                </figure>
             </ul>
         </div>
     </div>

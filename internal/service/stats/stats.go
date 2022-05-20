@@ -39,7 +39,7 @@ type ServerCheckbox struct {
 
 func RootGET(c *gin.Context) (int, string, gin.H) {
 	checkboxStates := getCheckboxStates(c)
-	query := r.Database.Preload("Deaths")
+	query := r.Database.Preload("Deaths").Preload("CommunicationLogs").Preload("Achievements")
 	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRootsByCheckboxes(query, checkboxStates)
 
 	crewDeathsCount := make(keymap.MyMap[string, uint], 0)
@@ -50,6 +50,8 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 
 	modesCount := make(keymap.MyMap[string, uint], 0)
 	modesSum := 0
+
+	var allAchievement []domain.Achievement
 
 	var lastRoot *domain.Root
 	for _, root := range processRoots {
@@ -68,7 +70,15 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		if lastRoot == nil || root.RoundID > lastRoot.RoundID {
 			lastRoot = root
 		}
+		if len(root.Achievements) > 0 {
+			allAchievement = append(allAchievement, root.Achievements...)
+		}
 	}
+
+	randRoot := utils.Pick(processRoots)
+	randComm := utils.Pick(randRoot.CommunicationLogs)
+
+	lastAchievement := utils.Pick(allAchievement)
 
 	sort.Stable(sort.Reverse(modesCount))
 	sort.Stable(sort.Reverse(crewDeathsCount))
@@ -90,6 +100,9 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		"crewDeathsSum":   crewDeathsSum,
 		"roleDeathsCount": roleDeathsCount,
 		"roleDeathsSum":   roleDeathsSum,
+
+		"randComm":        randComm,
+		"lastAchievement": lastAchievement,
 
 		"serverCheckboxes": checkboxStates,
 	}
@@ -303,13 +316,26 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 		processed := make([]string, 0, len(purchases))
 
 		for _, purchase := range purchases {
-			foundInfo, ok := infos.hasName(purchase.ItemType)
+			itemType := purchase.ItemType
+			itemName := purchase.Bundlename
+			// бандлу с рандомным лутом ставится такое же название, что и виду коробки
+			// покупка "рандомного итема" имеет тот же тайп, но цену в 0
+			if itemType == "/obj/item/weapon/storage/box/syndicate" {
+				if purchase.Cost > 0 {
+					itemType = itemName
+				} else {
+					itemName = "Random Item"
+					itemType = "Random Item"
+				}
+			}
+
+			foundInfo, ok := infos.hasName(itemType)
 			if !ok {
 				infos = append(infos, &UplinkInfo{
-					Name:       purchase.Bundlename,
+					Name:       itemName,
 					Count:      1,
 					TotalCount: 1,
-					Type:       purchase.ItemType,
+					Type:       itemType,
 					Wins:       isWin,
 					Winrate:    isWin * 100,
 					TotalCost:  uint(purchase.Cost),
@@ -318,13 +344,13 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 				uplinkInfo := (*foundInfo).(*UplinkInfo)
 				uplinkInfo.TotalCount++
 				uplinkInfo.TotalCost += uint(purchase.Cost)
-				if !slices.Contains(processed, purchase.ItemType) {
+				if !slices.Contains(processed, itemType) {
 					uplinkInfo.Count++
 					uplinkInfo.Wins += isWin
 					uplinkInfo.Winrate = uplinkInfo.Wins * 100 / uplinkInfo.Count
 				}
 			}
-			processed = append(processed, purchase.ItemType)
+			processed = append(processed, itemType)
 		}
 		return infos
 	}
@@ -337,10 +363,10 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 				}
 				roleName := role.RoleName
 
-				var useFaction domain.Factions
+				var useFaction *domain.Factions
 				if faction.FactionName == "Syndicate Operatives" || faction.FactionName == "Revolution" {
 					roleName = faction.FactionName
-					useFaction = faction
+					useFaction = &faction
 				}
 				foundInfo, ok := uplinkRoles.hasName(roleName)
 				if !ok {
@@ -357,14 +383,9 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 				}
 
 				newUplinkInfo := (*foundInfo).(*UplinkRoleInfo)
-				newUplinkInfo.UplinkInfos = addUplinkInfo(newUplinkInfo.UplinkInfos, role.UplinkInfo.UplinkPurchases, &useFaction, &role)
+				newUplinkInfo.UplinkInfos = addUplinkInfo(newUplinkInfo.UplinkInfos, role.UplinkInfo.UplinkPurchases, useFaction, &role)
 			}
 		}
-	}
-
-	for _, role := range uplinkRoles {
-		uplinkRoleInfo := role.(*UplinkRoleInfo)
-		sort.Sort(sort.Reverse(uplinkRoleInfo.UplinkInfos))
 	}
 
 	return 200, "uplink.html", gin.H{
