@@ -57,22 +57,26 @@
         </div>
         <div class="col" style="width: 33%">
             <ul class="list-group list-group-flush">
-                <figure class="text-end">
-                    <p class="h5">{{ .randComm.Title }}</p>
-                    <p class="fs-6"> {{ .randComm.Content }} </p>
-                    {{ if ne .randComm.Author "" }}
+                {{ if ne .randComm.Title "" }}
+                    <figure class="text-end">
+                        <p class="h5">{{ .randComm.Title }}</p>
+                        <p class="fs-6"> {{ .randComm.Content }} </p>
+                        {{ if ne .randComm.Author "" }}
+                            <figcaption class="blockquote-footer">
+                                {{ .randComm.Author }}
+                            </figcaption>
+                        {{ end }}
+                    </figure>
+                {{ end }}
+                {{ if ne .lastAchievement.Title "" }}
+                    <figure class="text-end">
+                        <p class="h5">{{ .lastAchievement.Title }}</p>
+                        <p class="fs-6"> {{ .lastAchievement.Desc }} </p>
                         <figcaption class="blockquote-footer">
-                            {{ .randComm.Author }}
+                            {{ .lastAchievement.Key }} as {{ .lastAchievement.Name }}
                         </figcaption>
-                    {{ end }}
-                </figure>
-                <figure class="text-end">
-                    <p class="h5">{{ .lastAchievement.Title }}</p>
-                    <p class="fs-6"> {{ .lastAchievement.Desc }} </p>
-                    <figcaption class="blockquote-footer">
-                        {{ .lastAchievement.Key }} - {{ .lastAchievement.Name }}
-                    </figcaption>
-                </figure>
+                    </figure>
+                {{ end }}
             </ul>
         </div>
     </div>

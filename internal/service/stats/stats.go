@@ -75,20 +75,35 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		}
 	}
 
-	randRoot := utils.Pick(processRoots)
-	randComm := utils.Pick(randRoot.CommunicationLogs)
-
-	lastAchievement := utils.Pick(allAchievement)
-
 	sort.Stable(sort.Reverse(modesCount))
 	sort.Stable(sort.Reverse(crewDeathsCount))
 	sort.Stable(sort.Reverse(roleDeathsCount))
 
+	var randRoot *domain.Root
+	if len(processRoots) > 0 {
+		randRoot = utils.Pick(processRoots)
+	}
+
+	var randComm domain.CommunicationLogs
+	if randRoot != nil && len(randRoot.CommunicationLogs) > 0 {
+		randComm = utils.Pick(randRoot.CommunicationLogs)
+	}
+
+	var lastAchievement domain.Achievement
+	if len(allAchievement) > 0 {
+		lastAchievement = utils.Pick(allAchievement)
+	}
+
+	var notNilLastRoot domain.Root
+	if lastRoot != nil {
+		notNilLastRoot = *lastRoot
+	}
+
 	return 200, "index.html", gin.H{
 		"totalRounds": len(roots),
-		"version":     lastRoot.Version,
-		"lastRound":   lastRoot.RoundID,
-		"lastDate":    lastRoot.Date,
+		"version":     notNilLastRoot.Version,
+		"lastRound":   notNilLastRoot.RoundID,
+		"lastDate":    notNilLastRoot.Date,
 
 		"alphaRounds": len(alphaRoots),
 		"betaRounds":  len(betaRoots),
