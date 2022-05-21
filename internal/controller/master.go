@@ -9,12 +9,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const currentStatistics = "02-27-2022"
-
 var router *gin.Engine
 
 func runCollector(c *gin.Context) {
-	startDate, _ := time.Parse("01-02-2006", currentStatistics)
+	startDate, _ := time.Parse("2006-01-02", stats.CurrentStatistics)
 
 	collector := parser.Collector{}
 	collector.CollectUrls(startDate)
@@ -61,6 +59,9 @@ func initializeRoutes() {
 
 		base.GET("/round/:id", GET(stats.RoundGET))
 		base.GET("/round", GET(stats.RoundsGET))
+
+		base.GET("/tops", GET(stats.TopsGET))
+		base.POST("/tops", POST(stats.TopsGET))
 
 		base.GET("/cult", GET(stats.Cult))
 	}

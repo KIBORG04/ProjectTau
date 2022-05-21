@@ -104,6 +104,7 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		"version":     notNilLastRoot.Version,
 		"lastRound":   notNilLastRoot.RoundID,
 		"lastDate":    notNilLastRoot.Date,
+		"firstDate":   CurrentStatistics,
 
 		"alphaRounds": len(alphaRoots),
 		"betaRounds":  len(betaRoots),
@@ -545,5 +546,15 @@ func RoundsGET(c *gin.Context) (int, string, gin.H) {
 	return 200, "rounds.html", gin.H{
 		"roots":            processRoots,
 		"serverCheckboxes": checkboxStates,
+	}
+}
+
+func TopsGET(c *gin.Context) (int, string, gin.H) {
+	//checkboxStates := getCheckboxStates(c)
+	//query := r.Database.Preload("Deaths")
+	//_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
+
+	return 200, "tops.html", gin.H{
+		"topSlice": "slice",
 	}
 }
