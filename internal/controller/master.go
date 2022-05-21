@@ -91,6 +91,7 @@ func Run() {
 		panic(err)
 	}
 	router.LoadHTMLGlob("web/templates/*")
+	router.Static("/web/static/", "./web/static")
 
 	initializeRoutes()
 
