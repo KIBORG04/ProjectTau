@@ -333,6 +333,9 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 
 		for _, purchase := range purchases {
 			itemType := purchase.ItemType
+			if itemType == "" {
+				itemType = purchase.Bundlename
+			}
 			itemName := purchase.Bundlename
 			// бандлу с рандомным лутом ставится такое же название, что и виду коробки
 			// покупка "рандомного итема" имеет тот же тайп, но цену в 0
