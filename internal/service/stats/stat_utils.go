@@ -168,3 +168,7 @@ func isRoundStartLeaver(stat domain.LeaveStats) bool {
 	}
 	return false
 }
+
+func ckey(str string) string {
+	return strings.ReplaceAll(strings.ToLower(str), " ", "")
+}

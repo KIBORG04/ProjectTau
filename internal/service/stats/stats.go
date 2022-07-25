@@ -376,7 +376,7 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 				if !ok {
 					newUplinkInfo := &UplinkRoleInfo{
 						Name:  roleName,
-						Id:    strings.ReplaceAll(strings.ToLower(roleName), " ", ""),
+						Id:    ckey(roleName),
 						Count: 1,
 					}
 					s := StatInfo(newUplinkInfo)
@@ -466,7 +466,7 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 				} else {
 					holderInfo = &OwnerByObjectivesInfo{
 						Owner: faction.FactionName,
-						Id:    strings.ReplaceAll(strings.ToLower(faction.FactionName), " ", ""),
+						Id:    ckey(faction.FactionName),
 					}
 					objectiveHolders = append(objectiveHolders, holderInfo)
 				}
@@ -488,7 +488,7 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 					} else {
 						holderInfo = &OwnerByObjectivesInfo{
 							Owner: role.RoleName,
-							Id:    strings.ReplaceAll(strings.ToLower(role.RoleName), " ", ""),
+							Id:    ckey(role.RoleName),
 						}
 						objectiveHolders = append(objectiveHolders, holderInfo)
 					}
@@ -550,6 +550,8 @@ type TopInfo struct {
 	NameColumn  string
 	CountColumn string
 	PlayersInfo InfoSlice
+
+	ValuePostfix string
 }
 
 func (t *TopInfo) AddPlayerCount(name string) {
@@ -565,7 +567,6 @@ func (t *TopInfo) SetPlayerAndValue(name string, value uint) {
 }
 
 func (t *TopInfo) ChangePlayerAndValue(name string, value uint, setRule func(uint, uint) uint) {
-
 	foundInfo, ok := t.PlayersInfo.hasName(name)
 	var holderInfo *PlayerTopInfo
 	if ok {
@@ -585,11 +586,32 @@ func TopsGET(c *gin.Context) (int, string, gin.H) {
 		Preload("Deaths").
 		Preload("ManifestEntries").
 		Preload("LeaveStats").
-		Preload("Score")
+		Preload("Score").
+		Preload("Factions.FactionObjectives").
+		Preload("Factions.Members.RoleObjectives")
 
 	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
 	tops := make([]*TopInfo, 0)
+	gamemodeTops := make([]*TopInfo, 0)
+
+	hasId := func(slice []*TopInfo, id string) bool {
+		for _, topInfo := range slice {
+			if topInfo.Id == id {
+				return true
+			}
+		}
+		return false
+	}
+
+	getTopById := func(slice []*TopInfo, id string) *TopInfo {
+		for _, topInfo := range slice {
+			if topInfo.Id == id {
+				return topInfo
+			}
+		}
+		return nil
+	}
 
 	deathTop := &TopInfo{
 		Id:          "deaths",
@@ -616,10 +638,11 @@ func TopsGET(c *gin.Context) (int, string, gin.H) {
 	tops = append(tops, leaversTop)
 
 	richestTop := &TopInfo{
-		Id:          "rich",
-		Title:       "Богатейших",
-		NameColumn:  "Имя",
-		CountColumn: "Денег $",
+		Id:           "rich",
+		Title:        "Богатейших",
+		NameColumn:   "Имя",
+		CountColumn:  "Денег",
+		ValuePostfix: "$",
 	}
 	tops = append(tops, richestTop)
 
@@ -631,6 +654,7 @@ func TopsGET(c *gin.Context) (int, string, gin.H) {
 	}
 	tops = append(tops, damagedTop)
 
+	ckeyAntagsPlayed := make(map[string]map[string]map[string]uint)
 	for _, root := range processRoots {
 		for _, death := range root.Deaths {
 			// wtf
@@ -650,12 +674,114 @@ func TopsGET(c *gin.Context) (int, string, gin.H) {
 			}
 		}
 
+		for _, faction := range root.Factions {
+			if slices.Contains(teamlRoles, faction.FactionName) && !hasId(gamemodeTops, ckey(faction.FactionName)) {
+				title := faction.FactionName
+				if value, ok := shortModeName[faction.FactionName]; ok {
+					title = value
+				}
+				gamemodeTop := &TopInfo{
+					Id:           ckey(faction.FactionName),
+					Title:        title,
+					NameColumn:   "Ckey",
+					CountColumn:  "Winrate",
+					ValuePostfix: "%",
+				}
+				gamemodeTops = append(gamemodeTops, gamemodeTop)
+			}
+
+			processedCkeys := make([]string, 0, len(faction.Members))
+			for _, role := range faction.Members {
+				if slices.Contains(processedCkeys, role.MindCkey) {
+					continue
+				}
+
+				// uniq mode checks
+				if faction.FactionName == "Cult Of Blood" &&
+					(utils.IsMobName.FindString(role.MindName) != "" || strings.Contains(role.MindName, "familiar")) {
+					continue
+				}
+
+				if slices.Contains(soloRoles, role.RoleName) && !hasId(gamemodeTops, ckey(role.RoleName)) {
+					title := role.RoleName
+					if value, ok := shortModeName[role.RoleName]; ok {
+						title = value
+					}
+					gamemodeTop := &TopInfo{
+						Id:           ckey(role.RoleName),
+						Title:        title,
+						NameColumn:   "Ckey",
+						CountColumn:  "Winrate",
+						ValuePostfix: "%",
+					}
+					gamemodeTops = append(gamemodeTops, gamemodeTop)
+				}
+
+				if _, ok := ckeyAntagsPlayed[role.MindCkey]; !ok {
+					antagMap := make(map[string]map[string]uint)
+					ckeyAntagsPlayed[role.MindCkey] = antagMap
+				}
+
+				if slices.Contains(teamlRoles, faction.FactionName) {
+					if _, ok := ckeyAntagsPlayed[role.MindCkey][faction.FactionName]; !ok {
+						infoMap := map[string]uint{
+							"Victory": uint(faction.Victory),
+							"Count":   1,
+						}
+						ckeyAntagsPlayed[role.MindCkey][faction.FactionName] = infoMap
+					} else {
+						ckeyAntagsPlayed[role.MindCkey][faction.FactionName]["Victory"] += uint(faction.Victory)
+						ckeyAntagsPlayed[role.MindCkey][faction.FactionName]["Count"] += 1
+					}
+				}
+
+				if slices.Contains(soloRoles, role.RoleName) {
+					roleWin := uint(role.Victory)
+					if faction.FactionName == "Shadowlings" {
+						roleWin = uint(faction.Victory)
+					}
+					if _, ok := ckeyAntagsPlayed[role.MindCkey][role.RoleName]; !ok {
+						infoMap := map[string]uint{
+							"Victory": roleWin,
+							"Count":   1,
+						}
+						ckeyAntagsPlayed[role.MindCkey][role.RoleName] = infoMap
+					} else {
+						ckeyAntagsPlayed[role.MindCkey][role.RoleName]["Victory"] += roleWin
+						ckeyAntagsPlayed[role.MindCkey][role.RoleName]["Count"] += 1
+					}
+				}
+
+				processedCkeys = append(processedCkeys, role.MindCkey)
+			}
+		}
+
 		richestTop.SetPlayerAndValue(root.Score.Richestkey, uint(root.Score.Richestcash))
 		damagedTop.SetPlayerAndValue(root.Score.Dmgestkey, uint(root.Score.Dmgestdamage))
 	}
 
+	for player, antagInfo := range ckeyAntagsPlayed {
+		for antag, antagOptions := range antagInfo {
+			if antagOptions["Count"] > 10 {
+				antagTop := getTopById(gamemodeTops, ckey(antag))
+				antagTop.SetPlayerAndValue(player, uint(float32(antagOptions["Victory"]*100)/float32(antagOptions["Count"])))
+			}
+		}
+	}
 	// remove useless positions
 	for _, top := range tops {
+		if len(top.PlayersInfo) == 0 {
+			tops = utils.RemoveElem(tops, top)
+		}
+		sort.Sort(sort.Reverse(top.PlayersInfo))
+		if len(top.PlayersInfo) > 10 {
+			top.PlayersInfo = slices.Delete(top.PlayersInfo, 10, len(top.PlayersInfo))
+		}
+	}
+	for _, top := range gamemodeTops {
+		if len(top.PlayersInfo) == 0 {
+			gamemodeTops = utils.RemoveElem(gamemodeTops, top)
+		}
 		sort.Sort(sort.Reverse(top.PlayersInfo))
 		if len(top.PlayersInfo) > 10 {
 			top.PlayersInfo = slices.Delete(top.PlayersInfo, 10, len(top.PlayersInfo))
@@ -663,6 +789,7 @@ func TopsGET(c *gin.Context) (int, string, gin.H) {
 	}
 
 	return 200, "tops.html", gin.H{
-		"topSlice": tops,
+		"topSlice":         tops,
+		"gamemodeTopSlice": gamemodeTops,
 	}
 }

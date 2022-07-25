@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"golang.org/x/exp/slices"
 	"math/rand"
 
 	"golang.org/x/exp/constraints"
@@ -16,6 +17,12 @@ func Slice2Map[T constraints.Integer](slice []string) map[string]T {
 
 func Pick[T any](from []T) T {
 	return from[rand.Intn(len(from))]
+}
+
+func RemoveElem[s comparable](slice []s, elem s) []s {
+	indx := slices.Index(slice, elem)
+	slice[indx] = slice[len(slice)-1]
+	return slice[:len(slice)-1]
 }
 
 func GetKeyByValue[T, R comparable](myMap map[R]T, el T) R {

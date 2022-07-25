@@ -100,6 +100,41 @@ var (
 	}
 
 	stationPositions []string
+
+	soloRoles = []string{
+		"TraitorChan",
+		"Traitor",
+		"Wizard",
+		"Changeling",
+		"Cortical Borer",
+		"Space Ninja",
+		// tau ceti.........
+		"Shadowling",
+		"Thrall",
+	}
+
+	teamlRoles = []string{
+		"Organized Crimes Department",
+		"Cult Of Blood",
+		"Revolution",
+		"Syndicate Operatives",
+		"Blob Conglomerate",
+		"Abductor Team",
+		"Alien Hivemind",
+		"Vox Shoal",
+		"Zobmies",
+		"Families",
+	}
+
+	shortModeName = map[string]string{
+		"Organized Crimes Department": "OCD",
+		"Cult Of Blood":               "Cult",
+		"Blob Conglomerate":           "Blobs",
+		"Abductor Team":               "Abductors",
+		"Alien Hivemind":              "Aliens",
+		"Syndicate Operatives":        "The Nuke",
+		"fwafaw":                      "fwaf",
+	}
 )
 
 func PopulatePositions() {
