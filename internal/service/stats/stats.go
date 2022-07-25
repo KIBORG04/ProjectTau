@@ -16,7 +16,8 @@ import (
 
 func BasicGET(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
 	baseContext := gin.H{
-		"baseUrl": config.Config.BaseUrl,
+		"baseUrl":          config.Config.BaseUrl,
+		"serverCheckboxes": getCheckboxStates(c),
 	}
 
 	code, file, context := f(c)
@@ -38,9 +39,8 @@ type ServerCheckbox struct {
 }
 
 func RootGET(c *gin.Context) (int, string, gin.H) {
-	checkboxStates := getCheckboxStates(c)
 	query := r.Database.Preload("Deaths").Preload("CommunicationLogs").Preload("Achievements")
-	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRootsByCheckboxes(query, checkboxStates)
+	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRootsByCheckboxes(query, c)
 
 	crewDeathsCount := make(keymap.MyMap[string, uint], 0)
 	crewDeathsSum := 0
@@ -119,8 +119,6 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 
 		"randComm":        randComm,
 		"lastAchievement": lastAchievement,
-
-		"serverCheckboxes": checkboxStates,
 	}
 }
 
@@ -180,9 +178,8 @@ func completedObjectives[T any](objectives []T) uint {
 }
 
 func GamemodesGET(c *gin.Context) (int, string, gin.H) {
-	checkboxStates := getCheckboxStates(c)
 	query := r.Database.Preload("LeaveStats").Preload("Factions.FactionObjectives").Preload("Factions.Members.RoleObjectives")
-	_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
+	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
 	factionsSum := 0
 	factionsCount := make(InfoSlice, 0)
@@ -193,18 +190,8 @@ func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 	for _, root := range processRoots {
 		var leavers uint
 		for _, leaveStat := range root.LeaveStats {
-			if isStationPlayer(leaveStat.AssignedRole, leaveStat.Name) && leaveStat.LeaveType != "" {
-				roundTime, err := ParseRoundTime(leaveStat.LeaveTime)
-				if err != nil {
-					continue
-				}
-				if leaveStat.LeaveType == Cryo && roundTime.Min < 15 {
-					continue
-				} else if 5 < roundTime.Min && roundTime.Min < 30 {
-					leavers++
-				} else if leaveStat.LeaveType == Cryo && roundTime.Min < 45 { // body is in cryo for 15 minutes
-					leavers++
-				}
+			if isStationPlayer(leaveStat.AssignedRole, leaveStat.Name) && isRoundStartLeaver(leaveStat) {
+				leavers++
 			}
 		}
 		for _, faction := range root.Factions {
@@ -267,11 +254,10 @@ func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 	sort.Sort(sort.Reverse(rolesCount))
 
 	return 200, "gamemodes.html", gin.H{
-		"factionsSum":      factionsSum,
-		"factionsCount":    factionsCount,
-		"rolesSum":         rolesSum,
-		"rolesCount":       rolesCount,
-		"serverCheckboxes": checkboxStates,
+		"factionsSum":   factionsSum,
+		"factionsCount": factionsCount,
+		"rolesSum":      rolesSum,
+		"rolesCount":    rolesCount,
 	}
 }
 
@@ -315,9 +301,8 @@ func (b UplinkRoleInfo) GetCount() uint {
 }
 
 func UplinkGET(c *gin.Context) (int, string, gin.H) {
-	checkboxStates := getCheckboxStates(c)
 	query := r.Database.Preload("Factions.Members.UplinkInfo.UplinkPurchases")
-	_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
+	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
 	uplinkRoles := make(InfoSlice, 0)
 
@@ -408,8 +393,7 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 	}
 
 	return 200, "uplink.html", gin.H{
-		"uplinkPurchases":  uplinkRoles,
-		"serverCheckboxes": checkboxStates,
+		"uplinkPurchases": uplinkRoles,
 	}
 }
 
@@ -442,9 +426,8 @@ func (b OwnerByObjectivesInfo) GetCount() uint {
 }
 
 func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
-	checkboxStates := getCheckboxStates(c)
 	query := r.Database.Preload("Factions.FactionObjectives").Preload("Factions.Members.RoleObjectives")
-	_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
+	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
 	objectiveHolders := make(InfoSlice, 0)
 
@@ -519,7 +502,6 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 
 	return 200, "objectives.html", gin.H{
 		"objectiveHolders": objectiveHolders,
-		"serverCheckboxes": checkboxStates,
 	}
 }
 
@@ -542,22 +524,145 @@ func RoundGET(c *gin.Context) (int, string, gin.H) {
 }
 
 func RoundsGET(c *gin.Context) (int, string, gin.H) {
-	checkboxStates := getCheckboxStates(c)
 	query := r.Database.Order("round_id DESC").Limit(100)
-	_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
+	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
 	return 200, "rounds.html", gin.H{
-		"roots":            processRoots,
-		"serverCheckboxes": checkboxStates,
+		"roots": processRoots,
+	}
+}
+
+type PlayerTopInfo struct {
+	Name  string
+	Value uint
+}
+
+func (p PlayerTopInfo) GetName() string {
+	return p.Name
+}
+func (p PlayerTopInfo) GetCount() uint {
+	return p.Value
+}
+
+type TopInfo struct {
+	Id          string
+	Title       string
+	NameColumn  string
+	CountColumn string
+	PlayersInfo InfoSlice
+}
+
+func (t *TopInfo) AddPlayerCount(name string) {
+	t.ChangePlayerAndValue(name, 1, func(a uint, b uint) uint {
+		return a + b
+	})
+}
+
+func (t *TopInfo) SetPlayerAndValue(name string, value uint) {
+	t.ChangePlayerAndValue(name, value, func(a uint, b uint) uint {
+		return b
+	})
+}
+
+func (t *TopInfo) ChangePlayerAndValue(name string, value uint, setRule func(uint, uint) uint) {
+
+	foundInfo, ok := t.PlayersInfo.hasName(name)
+	var holderInfo *PlayerTopInfo
+	if ok {
+		holderInfo = (*foundInfo).(*PlayerTopInfo)
+		holderInfo.Value = setRule(holderInfo.Value, value)
+	} else {
+		holderInfo = &PlayerTopInfo{
+			Name:  name,
+			Value: value,
+		}
+		t.PlayersInfo = append(t.PlayersInfo, holderInfo)
 	}
 }
 
 func TopsGET(c *gin.Context) (int, string, gin.H) {
-	//checkboxStates := getCheckboxStates(c)
-	//query := r.Database.Preload("Deaths")
-	//_, processRoots, _, _, _ := getRootsByCheckboxes(query, checkboxStates)
+	query := r.Database.
+		Preload("Deaths").
+		Preload("ManifestEntries").
+		Preload("LeaveStats").
+		Preload("Score")
+
+	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
+
+	tops := make([]*TopInfo, 0)
+
+	deathTop := &TopInfo{
+		Id:          "deaths",
+		Title:       "Смертей",
+		NameColumn:  "Имя",
+		CountColumn: "Количество",
+	}
+	tops = append(tops, deathTop)
+
+	roundsPlayedTop := &TopInfo{
+		Id:          "zadrots",
+		Title:       "Задротов",
+		NameColumn:  "Имя",
+		CountColumn: "Раундов",
+	}
+	tops = append(tops, roundsPlayedTop)
+
+	leaversTop := &TopInfo{
+		Id:          "leavers",
+		Title:       "Ливеров",
+		NameColumn:  "Имя",
+		CountColumn: "Количество",
+	}
+	tops = append(tops, leaversTop)
+
+	richestTop := &TopInfo{
+		Id:          "rich",
+		Title:       "Богатейших",
+		NameColumn:  "Имя",
+		CountColumn: "Денег $",
+	}
+	tops = append(tops, richestTop)
+
+	damagedTop := &TopInfo{
+		Id:          "damaged",
+		Title:       "Избитых",
+		NameColumn:  "Имя",
+		CountColumn: "Урон",
+	}
+	tops = append(tops, damagedTop)
+
+	for _, root := range processRoots {
+		for _, death := range root.Deaths {
+			// wtf
+			if death.MindName == "Unknown" || death.MindName == "unknown" {
+				continue
+			}
+			deathTop.AddPlayerCount(death.MindName)
+		}
+		for _, entry := range root.ManifestEntries {
+			if isStationPlayer(entry.AssignedRole, entry.Name) {
+				roundsPlayedTop.AddPlayerCount(entry.Name)
+			}
+		}
+		for _, stat := range root.LeaveStats {
+			if isStationPlayer(stat.AssignedRole, stat.Name) && isRoundStartLeaver(stat) {
+				leaversTop.AddPlayerCount(stat.Name)
+			}
+		}
+
+		richestTop.SetPlayerAndValue(root.Score.Richestkey, uint(root.Score.Richestcash))
+		damagedTop.SetPlayerAndValue(root.Score.Dmgestkey, uint(root.Score.Dmgestdamage))
+	}
+
+	// remove useless positions
+	for _, top := range tops {
+		sort.Sort(sort.Reverse(top.PlayersInfo))
+		if len(top.PlayersInfo) > 10 {
+			top.PlayersInfo = slices.Delete(top.PlayersInfo, 10, len(top.PlayersInfo))
+		}
+	}
 
 	return 200, "tops.html", gin.H{
-		"topSlice": "slice",
+		"topSlice": tops,
 	}
 }

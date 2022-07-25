@@ -61,7 +61,9 @@ func getCheckboxStates(c *gin.Context) map[string]string {
 }
 
 // db is configured
-func getRootsByCheckboxes(db *gorm.DB, checkboxes map[string]string) ([]domain.Root, []*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root) {
+func getRootsByCheckboxes(db *gorm.DB, c *gin.Context) ([]domain.Root, []*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root) {
+	checkboxes := getCheckboxStates(c)
+
 	var roots []domain.Root
 
 	db.Find(&roots)
@@ -120,19 +122,6 @@ type StatInfo interface {
 	GetCount() uint
 }
 
-type BaseInfo struct {
-	Name  string
-	Count uint
-}
-
-func (b BaseInfo) GetName() string {
-	return b.Name
-}
-
-func (b BaseInfo) GetCount() uint {
-	return b.Count
-}
-
 func isStationPlayer(assignment, name string) bool {
 	return slices.Contains(stationPositions, assignment) && utils.IsDrone.FindString(name) == ""
 }
@@ -157,4 +146,25 @@ func ParseRoundTime(time string) (RoundTime, error) {
 		return RoundTime{}, err
 	}
 	return RoundTime{Hour: uint(hour), Min: uint(min)}, nil
+}
+
+func isRoundStartLeaver(stat domain.LeaveStats) bool {
+	if stat.LeaveType == "" {
+		return false
+	}
+
+	roundTime, err := ParseRoundTime(stat.LeaveTime)
+	if err != nil {
+		return false
+	}
+	if stat.LeaveType == Cryo && roundTime.Min < 15 {
+		return false
+	}
+	if 5 < roundTime.Min && roundTime.Min < 30 {
+		return true
+	}
+	if stat.LeaveType == Cryo && roundTime.Min < 45 { // body is in cryo for 15 minutes
+		return true
+	}
+	return false
 }

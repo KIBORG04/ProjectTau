@@ -21,6 +21,8 @@ var Models = []any{
 	&UplinkPurchases{},
 	&Aspects{},
 	&RitenameByCount{},
+
+	&Player{},
 }
 
 type MyMigrator interface {
