@@ -27,7 +27,7 @@ func runCollector(c *gin.Context) {
 }
 
 func initializeRoutes() {
-	base := router.Group(c.Config.BaseUrl)
+	base := router.Group("")
 
 	GET := func(f func(*gin.Context) (int, string, gin.H)) func(*gin.Context) {
 		return func(c *gin.Context) {
