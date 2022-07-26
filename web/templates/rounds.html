@@ -28,7 +28,6 @@
             </tr>
             </thead>
             <tbody>
-            {{ $baseUrl := .baseUrl }}
             {{ range .roots }}
                 <tr>
                     <th scope="row">{{ .RoundID }} </th>
@@ -38,7 +37,7 @@
                     <td>{{ .Mode }}</td>
                     <td>{{ .ModeResult }}</td>
                     <td>{{ .ServerAddress }}</td>
-                    <td><a class="btn btn-primary btn-lg btn-sm" role="button" href="{{$baseUrl}}/round/{{.RoundID}}">{{ .RoundID }}</a></td>
+                    <td><a class="btn btn-primary btn-lg btn-sm" role="button" href="/round/{{.RoundID}}">{{ .RoundID }}</a></td>
                 </tr>
             {{ end }}
             </tbody>
