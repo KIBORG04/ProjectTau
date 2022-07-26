@@ -43,6 +43,7 @@ func CreateConnection() {
 		postgres.Open(dsn),
 		&gorm.Config{
 			DisableForeignKeyConstraintWhenMigrating: true,
+			PrepareStmt:                              true,
 			//Logger:                                   logger.Default.LogMode(logger.Silent),
 		})
 
