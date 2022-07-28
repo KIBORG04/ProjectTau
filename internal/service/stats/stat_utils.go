@@ -61,12 +61,12 @@ func getCheckboxStates(c *gin.Context) map[string]string {
 }
 
 // db is configured
-func getRootsByCheckboxes(db *gorm.DB, c *gin.Context) ([]domain.Root, []*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root) {
+func getRootsByCheckboxes(db *gorm.DB, c *gin.Context) ([]*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root) {
 	checkboxes := getCheckboxStates(c)
 
-	var roots []domain.Root
+	var roots []*domain.Root
 
-	db.Find(&roots)
+	db.Omit("CompletionHTML").Find(&roots)
 
 	var processRoots []*domain.Root
 
@@ -77,19 +77,19 @@ func getRootsByCheckboxes(db *gorm.DB, c *gin.Context) ([]domain.Root, []*domain
 		root := rr
 		switch root.ServerAddress {
 		case ServerAlphaAddress:
-			alphaRoots = append(alphaRoots, &root)
+			alphaRoots = append(alphaRoots, root)
 			if checkboxes[Alpha] != "" {
-				processRoots = append(processRoots, &root)
+				processRoots = append(processRoots, root)
 			}
 		case ServerBetaAddress:
-			betaRoots = append(betaRoots, &root)
+			betaRoots = append(betaRoots, root)
 			if checkboxes[Beta] != "" {
-				processRoots = append(processRoots, &root)
+				processRoots = append(processRoots, root)
 			}
 		case ServerGammaAddress:
-			gammaRoots = append(gammaRoots, &root)
+			gammaRoots = append(gammaRoots, root)
 			if checkboxes[Gamma] != "" {
-				processRoots = append(processRoots, &root)
+				processRoots = append(processRoots, root)
 			}
 		}
 	}
@@ -171,4 +171,10 @@ func isRoundStartLeaver(stat domain.LeaveStats) bool {
 
 func ckey(str string) string {
 	return strings.ReplaceAll(strings.ToLower(str), " ", "")
+}
+
+func PreloadSelect(args ...string) func(*gorm.DB) *gorm.DB {
+	return func(tx *gorm.DB) *gorm.DB {
+		return tx.Select(args)
+	}
 }

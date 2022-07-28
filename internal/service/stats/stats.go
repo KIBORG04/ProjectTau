@@ -39,7 +39,10 @@ type ServerCheckbox struct {
 }
 
 func RootGET(c *gin.Context) (int, string, gin.H) {
-	query := r.Database.Preload("Deaths").Preload("CommunicationLogs").Preload("Achievements")
+	query := r.Database.
+		Preload("Deaths", PreloadSelect("RootID", "Name", "SpecialRole", "AssignedRole")).
+		Preload("CommunicationLogs", PreloadSelect("RootID", "Title", "Content", "Author")).
+		Preload("Achievements", PreloadSelect("RootID", "Title", "Desc", "Key", "Name"))
 	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRootsByCheckboxes(query, c)
 
 	crewDeathsCount := make(keymap.MyMap[string, uint], 0)
@@ -178,7 +181,12 @@ func completedObjectives[T any](objectives []T) uint {
 }
 
 func GamemodesGET(c *gin.Context) (int, string, gin.H) {
-	query := r.Database.Preload("LeaveStats").Preload("Factions.FactionObjectives").Preload("Factions.Members.RoleObjectives")
+	query := r.Database.
+		Preload("LeaveStats", PreloadSelect("RootID", "Name", "AssignedRole", "LeaveTime", "LeaveType")).
+		Preload("Factions", PreloadSelect("ID", "RootID", "FactionName", "Victory")).
+		Preload("Factions.FactionObjectives", PreloadSelect("OwnerID", "Completed")).
+		Preload("Factions.Members", PreloadSelect("ID", "OwnerID", "RoleName", "Victory")).
+		Preload("Factions.Members.RoleObjectives", PreloadSelect("OwnerID", "Completed"))
 	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
 	factionsSum := 0
