@@ -309,7 +309,11 @@ func (b UplinkRoleInfo) GetCount() uint {
 }
 
 func UplinkGET(c *gin.Context) (int, string, gin.H) {
-	query := r.Database.Preload("Factions.Members.UplinkInfo.UplinkPurchases")
+	query := r.Database.
+		Preload("Factions", PreloadSelect("ID", "RootID", "Victory", "FactionName")).
+		Preload("Factions.Members", PreloadSelect("ID", "OwnerID", "Victory", "RoleName")).
+		Preload("Factions.Members.UplinkInfo", PreloadSelect("ID", "RoleID")).
+		Preload("Factions.Members.UplinkInfo.UplinkPurchases", PreloadSelect("UplinkInfoID", "ItemType", "Bundlename", "Cost"))
 	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
 	uplinkRoles := make(InfoSlice, 0)
@@ -434,7 +438,11 @@ func (b OwnerByObjectivesInfo) GetCount() uint {
 }
 
 func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
-	query := r.Database.Preload("Factions.FactionObjectives").Preload("Factions.Members.RoleObjectives")
+	query := r.Database.
+		Preload("Factions", PreloadSelect("ID", "RootID", "FactionName")).
+		Preload("Factions.FactionObjectives", PreloadSelect("OwnerID", "Type", "Completed")).
+		Preload("Factions.Members", PreloadSelect("ID", "OwnerID", "RoleName")).
+		Preload("Factions.Members.RoleObjectives", PreloadSelect("OwnerID", "Type", "Completed"))
 	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
 	objectiveHolders := make(InfoSlice, 0)
@@ -591,12 +599,12 @@ func (t *TopInfo) ChangePlayerAndValue(name string, value uint, setRule func(uin
 
 func TopsGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.
-		Preload("Deaths").
-		Preload("ManifestEntries").
-		Preload("LeaveStats").
-		Preload("Score").
-		Preload("Factions.FactionObjectives").
-		Preload("Factions.Members.RoleObjectives")
+		Preload("Deaths", PreloadSelect("RootID", "MindName")).
+		Preload("ManifestEntries", PreloadSelect("RootID", "AssignedRole", "Name")).
+		Preload("LeaveStats", PreloadSelect("RootID", "AssignedRole", "Name", "LeaveTime", "LeaveType")).
+		Preload("Score", PreloadSelect("ID", "RootID", "Richestkey", "Richestcash", "Dmgestkey", "Dmgestdamage")).
+		Preload("Factions", PreloadSelect("RootID", "ID", "FactionName", "Victory")).
+		Preload("Factions.Members", PreloadSelect("ID", "OwnerID", "MindCkey", "MindName", "RoleName", "Victory"))
 
 	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
