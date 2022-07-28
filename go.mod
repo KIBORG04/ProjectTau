@@ -8,7 +8,7 @@ require (
 	github.com/lib/pq v1.10.4
 	golang.org/x/exp v0.0.0-20220321155233-aaef6dbbfd82
 	gorm.io/driver/postgres v1.3.1
-	gorm.io/gorm v1.23.3
+	gorm.io/gorm v1.23.8
 )
 
 require (

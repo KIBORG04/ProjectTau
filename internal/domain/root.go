@@ -7,7 +7,7 @@ import (
 
 type Root struct {
 	Date      string
-	RoundID   int32      `json:"round_id" gorm:"primaryKey"`
+	RoundID   int32      `json:"round_id" gorm:"primaryKey;uniqueIndex"`
 	Version   int32      `json:"version"`
 	Mode      string     `json:"mode" gorm:"size:128"`
 	StartTime string     `json:"start_time" gorm:"size:16"`
@@ -33,8 +33,8 @@ type Root struct {
 }
 
 type Achievement struct {
-	ID     int32
-	RootID int32
+	ID     int32  `gorm:"uniqueIndex"`
+	RootID int32  `gorm:"index"`
 	Key    string `json:"key" gorm:"size:256"`
 	Name   string `json:"name" gorm:"size:256"`
 	Title  string `json:"title" gorm:"size:256"`
@@ -42,8 +42,8 @@ type Achievement struct {
 }
 
 type Score struct {
-	ID             int32
-	RootID         int32
+	ID             int32          `gorm:"uniqueIndex"`
+	RootID         int32          `gorm:"index"`
 	Crewscore      int32          `json:"crewscore"`
 	Rating         string         `json:"rating" gorm:"size:256"`
 	Stuffshipped   int32          `json:"stuffshipped"`
@@ -95,8 +95,8 @@ func (d *Score) ColumnsMigration(dx *gorm.DB) {
 }
 
 type CommunicationLogs struct {
-	ID      int32
-	RootID  int32
+	ID      int32  `gorm:"uniqueIndex"`
+	RootID  int32  `gorm:"index"`
 	Time    string `json:"time" gorm:"size:256"`
 	Title   string `json:"title"`
 	Content string `json:"content"`
@@ -109,8 +109,8 @@ func (d *CommunicationLogs) ColumnsMigration(dx *gorm.DB) {
 }
 
 type Damage struct {
-	ID       int32
-	DeathsID int32
+	ID       int32   `gorm:"uniqueIndex"`
+	DeathsID int32   `gorm:"uniqueIndex"`
 	Brute    float64 `json:"BRUTE"`
 	Fire     float64 `json:"FIRE"`
 	Toxin    float64 `json:"TOXIN"`
@@ -120,8 +120,8 @@ type Damage struct {
 }
 
 type Deaths struct {
-	ID               int32
-	RootID           int32
+	ID               int32  `gorm:"uniqueIndex"`
+	RootID           int32  `gorm:"index"`
 	Name             string `json:"name" gorm:"size:256"`
 	MobType          string `json:"mob_type" gorm:"size:256"`
 	AssignedRole     string `json:"assigned_role" gorm:"size:256"`
@@ -142,8 +142,8 @@ func (d *Deaths) ColumnsMigration(dx *gorm.DB) {
 }
 
 type Explosions struct {
-	ID               int32
-	RootID           int32
+	ID               int32 `gorm:"uniqueIndex"`
+	RootID           int32 `gorm:"index"`
 	EpicenterX       int32 `json:"epicenter_x"`
 	EpicenterY       int32 `json:"epicenter_y"`
 	EpicenterZ       int32 `json:"epicenter_z"`
@@ -154,8 +154,8 @@ type Explosions struct {
 }
 
 type ManifestEntries struct {
-	ID           int32
-	RootID       int32
+	ID           int32          `gorm:"uniqueIndex"`
+	RootID       int32          `gorm:"index"`
 	Name         string         `json:"name" gorm:"size:256"`
 	AssignedRole string         `json:"assigned_role" gorm:"size:256"`
 	SpecialRole  string         `json:"special_role" gorm:"size:256"`
@@ -163,8 +163,8 @@ type ManifestEntries struct {
 }
 
 type LeaveStats struct {
-	ID           int32
-	RootID       int32
+	ID           int32          `gorm:"uniqueIndex"`
+	RootID       int32          `gorm:"index"`
 	Name         string         `json:"name" gorm:"size:256"`
 	StartTime    string         `json:"start_time" gorm:"size:256"`
 	AssignedRole string         `json:"assigned_role" gorm:"size:256"`

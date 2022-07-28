@@ -2,12 +2,11 @@ package repository
 
 import (
 	"fmt"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 	"os"
 	"ssstatistics/internal/config"
 	d "ssstatistics/internal/domain"
-
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
 )
 
 var Database *gorm.DB

@@ -1,8 +1,8 @@
 package domain
 
 type Factions struct {
-	RootID            int32
-	ID                int32
+	RootID            int32               `gorm:"index"`
+	ID                int32               `gorm:"uniqueIndex"`
 	Name              string              `json:"name" gorm:"size:256"`
 	FactionName       string              `json:"id" gorm:"size:256"`
 	MinorVictory      int32               `json:"minor_victory"`
@@ -14,8 +14,8 @@ type Factions struct {
 }
 
 type Role struct {
-	OwnerID          int32
-	ID               int32
+	OwnerID          int32            `gorm:"index"`
+	ID               int32            `gorm:"uniqueIndex"`
 	Name             string           `json:"name" gorm:"size:256"`
 	RoleName         string           `json:"id" gorm:"size:256"`
 	IsRoundstartRole int32            `json:"is_roundstart_role"`
@@ -31,8 +31,8 @@ type Role struct {
 type FactionObjectives Objectives
 type RoleObjectives Objectives
 type Objectives struct {
-	ID                 int32
-	OwnerID            int32
+	ID                 int32  `gorm:"uniqueIndex"`
+	OwnerID            int32  `gorm:"index"`
 	Owner              string `json:"owner" gorm:"size:256"`
 	ExplanationText    string `json:"explanation_text"`
 	Completed          string `json:"completed" gorm:"size:16"`
@@ -43,24 +43,24 @@ type Objectives struct {
 }
 
 type UplinkInfo struct {
-	ID              int32
-	RoleID          int32
+	ID              int32             `gorm:"uniqueIndex"`
+	RoleID          int32             `gorm:"index"`
 	TotalTC         int32             `json:"total_TC"`
 	SpentTC         int32             `json:"spent_TC"`
 	UplinkPurchases []UplinkPurchases `json:"uplink_purchases"`
 }
 
 type UplinkPurchases struct {
-	ID           int32
-	UplinkInfoID int32
+	ID           int32  `gorm:"uniqueIndex"`
+	UplinkInfoID int32  `gorm:"index"`
 	Cost         int32  `json:"cost"`
 	Bundlename   string `json:"bundlename" gorm:"size:256"`
 	ItemType     string `json:"item_type" gorm:"size:256"`
 }
 
 type CultInfo struct {
-	ID                 int32
-	FactionsID         int32
+	ID                 int32           `gorm:"uniqueIndex"`
+	FactionsID         int32           `gorm:"index"`
 	Aspects            Aspects         `json:"aspects"`
 	RitenameByCount    RitenameByCount `json:"ritename_by_count"`
 	RealNumberMembers  int32           `json:"real_number_members"`
@@ -72,8 +72,8 @@ type CultInfo struct {
 }
 
 type Aspects struct {
-	ID         int32
-	CultInfoID int32
+	ID         int32 `gorm:"uniqueIndex"`
+	CultInfoID int32 `gorm:"index"`
 	Mortem     int32 `json:"Mortem"`
 	Cruciatu   int32 `json:"cruciatu"`
 	Progressus int32 `json:"Progressus"`
@@ -93,8 +93,8 @@ type Aspects struct {
 }
 
 type RitenameByCount struct {
-	ID              int32
-	CultInfoID      int32
+	ID              int32 `gorm:"uniqueIndex"`
+	CultInfoID      int32 `gorm:"index"`
 	Deathalarm      int32 `json:"Ангел-хранитель"`
 	Sacrifice       int32 `json:"Жертвоприношение"`
 	Convert         int32 `json:"Обращение"`

@@ -3,7 +3,7 @@ package main
 import (
 	"ssstatistics/internal/config"
 	"ssstatistics/internal/controller"
-	r "ssstatistics/internal/repository"
+	db "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/stats"
 )
 
@@ -12,6 +12,6 @@ func main() {
 
 	stats.PopulatePositions()
 
-	r.CreateConnection()
+	db.CreateConnection()
 	controller.Run()
 }
