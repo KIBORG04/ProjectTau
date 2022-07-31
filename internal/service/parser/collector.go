@@ -8,6 +8,7 @@ import (
 	"os"
 	d "ssstatistics/internal/domain"
 	r "ssstatistics/internal/repository"
+	"ssstatistics/internal/service/stats"
 	u "ssstatistics/internal/utils"
 	"sync"
 	"time"
@@ -30,6 +31,15 @@ var (
 	waitGroup sync.WaitGroup
 	mutex     sync.Mutex
 )
+
+func RunRoundCollector() []string {
+	startDate, _ := time.Parse("2006-01-02", stats.CurrentStatistics)
+
+	collector := Collector{}
+	collector.CollectUrls(startDate)
+	collector.CollectStatistics()
+	return collector.Logs
+}
 
 func (c *Collector) CollectUrls(startDate time.Time) {
 	currentDate := startDate

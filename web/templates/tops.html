@@ -3,6 +3,8 @@
 <div class="alert alert-info mt-4" role="alert">
     <h4 class="alert-heading">Пояснение к информации!</h4>
     В топ по режимам и ролям попадают только люди, которые сыграли больше <b>10 игр</b>!
+    <br>
+    Фича с разными серверами пока не имплементирована.
 </div>
 
 
@@ -10,62 +12,66 @@
     <div class="row">
         <h3 class="text-center border-bottom pb-2">Всякое</h3>
         {{ range $index, $element := .topSlice }}
-            <div class="col-3">
-                <ul class="list-group list-group-flush">
-                    <div class="fs-5 badge bg-secondary text-wrap">
-                        Топ-10 {{ $element.Title }}
-                    </div>
-                </ul>
-                <table id="{{ $element.Id }}" class="table table-sm table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th scope="col">{{ $element.NameColumn }}</th>
-                        <th scope="col">{{ $element.CountColumn }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{ range .PlayersInfo }}
+            {{ if eq $element.Tag 0 }}
+                <div class="col-3">
+                    <ul class="list-group list-group-flush">
+                        <div class="fs-5 badge bg-secondary text-wrap">
+                            Топ-10 {{ $element.Title }}
+                        </div>
+                    </ul>
+                    <table ID="{{ $element.ID }}" class="table table-sm table-striped">
+                        <thead>
                         <tr>
-                            <td></td>
-                            <td style="white-space: nowrap">{{ .Name }}</td>
-                            <td>{{ .Value }}{{ $element.ValuePostfix }}</td>
+                            <th>#</th>
+                            <th scope="col">{{ $element.KeyColumnName }}</th>
+                            <th scope="col">{{ $element.ValueColumnName }}</th>
                         </tr>
-                    {{ end }}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                        {{ range .TopMembers }}
+                            <tr>
+                                <td></td>
+                                <td style="white-space: nowrap">{{ .Key }}</td>
+                                <td>{{ .Value }}{{ $element.ValuePostfix }}</td>
+                            </tr>
+                        {{ end }}
+                        </tbody>
+                    </table>
+                </div>
+            {{ end }}
         {{ end }}
     </div>
     <!-- Full copypase of the code above-->
     <div class="row">
         <h3 class="text-center border-bottom pb-2">Одиночные и командные роли</h3>
-        {{ range $index, $element := .gamemodeTopSlice }}
-            <div class="col-3">
-                <ul class="list-group list-group-flush">
-                    <div class="fs-5 badge bg-secondary text-wrap">
-                        Топ-10 {{ $element.Title }}
-                    </div>
-                </ul>
-                <table id="{{ $element.Id }}" class="table table-sm table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th scope="col">{{ $element.NameColumn }}</th>
-                        <th scope="col">{{ $element.CountColumn }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{ range .PlayersInfo }}
+        {{ range $index, $element := .topSlice }}
+            {{ if eq $element.Tag 1 }}
+                <div class="col-3">
+                    <ul class="list-group list-group-flush">
+                        <div class="fs-5 badge bg-secondary text-wrap">
+                            Топ-10 {{ $element.Title }}
+                        </div>
+                    </ul>
+                    <table ID="{{ $element.ID }}" class="table table-sm table-striped">
+                        <thead>
                         <tr>
-                            <td></td>
-                            <td style="white-space: nowrap">{{ .Name }}</td>
-                            <td>{{ .Value }}{{ $element.ValuePostfix }}</td>
+                            <th>#</th>
+                            <th scope="col">{{ $element.KeyColumnName }}</th>
+                            <th scope="col">{{ $element.ValueColumnName }}</th>
                         </tr>
-                    {{ end }}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                        {{ range .TopMembers }}
+                            <tr>
+                                <td></td>
+                                <td style="white-space: nowrap">{{ .Key }}</td>
+                                <td>{{ .Value }}{{ $element.ValuePostfix }}</td>
+                            </tr>
+                        {{ end }}
+                        </tbody>
+                    </table>
+                </div>
+            {{ end }}
         {{ end }}
     </div>
 </div>
@@ -74,13 +80,13 @@
 <script>
     $(function () {
         {{ range .topSlice }}
-        $('#{{ .Id }}').DataTable({
+        $('#{{ .ID }}').DataTable({
             paging: false,
             searching: false,
             info: false,
             ordering: false,
             rowCallback: function (oSettings) {
-                var table = $('#{{ .Id }}').dataTable(), // получаем таблицу
+                var table = $('#{{ .ID }}').dataTable(), // получаем таблицу
                     rows = table.fnGetNodes(); // получаем все строки, а не только на текущей страниц
 
                 $(rows).each(function () {
@@ -90,13 +96,13 @@
         });
         {{ end }}
         {{ range .gamemodeTopSlice }}
-        $('#{{ .Id }}').DataTable({
+        $('#{{ .ID }}').DataTable({
             paging: false,
             searching: false,
             info: false,
             ordering: false,
             rowCallback: function (oSettings) {
-                var table = $('#{{ .Id }}').dataTable(), // получаем таблицу
+                var table = $('#{{ .ID }}').dataTable(), // получаем таблицу
                     rows = table.fnGetNodes(); // получаем все строки, а не только на текущей страниц
 
                 $(rows).each(function () {

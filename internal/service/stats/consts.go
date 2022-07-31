@@ -14,6 +14,12 @@ const (
 	Gamma = "Gamma"
 )
 
+var ServerByAddress = map[string]string{
+	Alpha: ServerAlphaAddress,
+	Beta:  ServerBetaAddress,
+	Gamma: ServerGammaAddress,
+}
+
 const (
 	ObjectiveWIN   = "SUCCESS"
 	ObjectiveHALF  = "HALF"
@@ -101,7 +107,7 @@ var (
 
 	stationPositions []string
 
-	soloRoles = []string{
+	SoloRoles = []string{
 		"TraitorChan",
 		"Traitor",
 		"Wizard",
@@ -113,7 +119,7 @@ var (
 		"Thrall",
 	}
 
-	teamlRoles = []string{
+	TeamlRoles = []string{
 		"Organized Crimes Department",
 		"Cult Of Blood",
 		"Revolution",
@@ -126,7 +132,7 @@ var (
 		"Families",
 	}
 
-	shortModeName = map[string]string{
+	ShortModeName = map[string]string{
 		"Organized Crimes Department": "OCD",
 		"Cult Of Blood":               "Cult",
 		"Blob Conglomerate":           "Blobs",

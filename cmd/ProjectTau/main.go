@@ -13,5 +13,8 @@ func main() {
 	stats.PopulatePositions()
 
 	db.CreateConnection()
+
+	controller.InitializeRegularCallbacks()
+
 	controller.Run()
 }

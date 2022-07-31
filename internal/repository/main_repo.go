@@ -64,3 +64,9 @@ func AutoMigrate() {
 func Save(v any) {
 	Database.Save(v)
 }
+
+func PreloadSelect(args ...string) func(*gorm.DB) *gorm.DB {
+	return func(tx *gorm.DB) *gorm.DB {
+		return tx.Select(args)
+	}
+}

@@ -66,7 +66,14 @@ func getRootsByCheckboxes(db *gorm.DB, c *gin.Context) ([]*domain.Root, []*domai
 
 	var roots []*domain.Root
 
-	db.Omit("CompletionHTML").Find(&roots)
+	for k, v := range checkboxes {
+		if v != "" {
+			db.Or("server_address = ?", ServerByAddress[k])
+		}
+	}
+
+	db.Omit("CompletionHTML").
+		Find(&roots)
 
 	var processRoots []*domain.Root
 
@@ -108,7 +115,7 @@ func (info InfoSlice) Less(i, j int) bool {
 func (info InfoSlice) Swap(i, j int) {
 	info[i], info[j] = info[j], info[i]
 }
-func (info InfoSlice) hasName(name string) (*StatInfo, bool) {
+func (info InfoSlice) HasName(name string) (*StatInfo, bool) {
 	for i := 0; i < len(info); i++ {
 		if info[i].GetName() == name {
 			return &info[i], true
@@ -122,7 +129,7 @@ type StatInfo interface {
 	GetCount() uint
 }
 
-func isStationPlayer(assignment, name string) bool {
+func IsStationPlayer(assignment, name string) bool {
 	return slices.Contains(stationPositions, assignment) && utils.IsDrone.FindString(name) == ""
 }
 
@@ -148,7 +155,7 @@ func ParseRoundTime(time string) (RoundTime, error) {
 	return RoundTime{Hour: uint(hour), Min: uint(min)}, nil
 }
 
-func isRoundStartLeaver(stat domain.LeaveStats) bool {
+func IsRoundStartLeaver(stat domain.LeaveStats) bool {
 	if stat.LeaveType == "" {
 		return false
 	}
@@ -169,12 +176,6 @@ func isRoundStartLeaver(stat domain.LeaveStats) bool {
 	return false
 }
 
-func ckey(str string) string {
+func Ckey(str string) string {
 	return strings.ReplaceAll(strings.ToLower(str), " ", "")
-}
-
-func PreloadSelect(args ...string) func(*gorm.DB) *gorm.DB {
-	return func(tx *gorm.DB) *gorm.DB {
-		return tx.Select(args)
-	}
 }

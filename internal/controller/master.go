@@ -1,28 +1,29 @@
 package controller
 
 import (
+	"github.com/gin-gonic/gin"
 	c "ssstatistics/internal/config"
 	"ssstatistics/internal/service/parser"
 	"ssstatistics/internal/service/stats"
-	"time"
-
-	"github.com/gin-gonic/gin"
+	"ssstatistics/internal/service/tops"
 )
 
 var router *gin.Engine
 
-func runCollector(c *gin.Context) {
-	startDate, _ := time.Parse("2006-01-02", stats.CurrentStatistics)
+func runUpdateDB(c *gin.Context) {
+	var logs []string
 
-	collector := parser.Collector{}
-	collector.CollectUrls(startDate)
-
-	collector.CollectStatistics()
+	for _, callback := range RegularCallbacks {
+		callbackLogs := callback()
+		for _, s := range callbackLogs {
+			logs = append(logs, s)
+		}
+	}
 
 	user := c.MustGet(gin.AuthUserKey).(string)
 	c.HTML(200, "secrets.html", gin.H{
 		"user": user,
-		"logs": collector.Logs,
+		"logs": logs,
 	})
 }
 
@@ -80,7 +81,7 @@ func initializeRoutes() {
 			})
 		})
 
-		authorized.POST("/secrets", runCollector)
+		authorized.POST("/secrets", runUpdateDB)
 	}
 
 }
@@ -97,4 +98,13 @@ func Run() {
 	initializeRoutes()
 
 	router.Run(":8080")
+}
+
+type RegularCallback func() []string
+
+var RegularCallbacks []RegularCallback
+
+func InitializeRegularCallbacks() {
+	RegularCallbacks = append(RegularCallbacks, parser.RunRoundCollector)
+	RegularCallbacks = append(RegularCallbacks, tops.ParseTopData)
 }

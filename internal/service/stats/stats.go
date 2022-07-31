@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/exp/slices"
+	"gorm.io/gorm/clause"
 	"sort"
 	"ssstatistics/internal/config"
 	"ssstatistics/internal/domain"
@@ -11,7 +12,6 @@ import (
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/charts"
 	"ssstatistics/internal/utils"
-	"strings"
 )
 
 func BasicGET(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
@@ -40,9 +40,9 @@ type ServerCheckbox struct {
 
 func RootGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.
-		Preload("Deaths", PreloadSelect("RootID", "Name", "SpecialRole", "AssignedRole")).
-		Preload("CommunicationLogs", PreloadSelect("RootID", "Title", "Content", "Author")).
-		Preload("Achievements", PreloadSelect("RootID", "Title", "Desc", "Key", "Name"))
+		Preload("Deaths", r.PreloadSelect("RootID", "Name", "SpecialRole", "AssignedRole")).
+		Preload("CommunicationLogs", r.PreloadSelect("RootID", "Title", "Content", "Author")).
+		Preload("Achievements", r.PreloadSelect("RootID", "Title", "Desc", "Key", "Name"))
 	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRootsByCheckboxes(query, c)
 
 	crewDeathsCount := make(keymap.MyMap[string, uint], 0)
@@ -61,7 +61,7 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		modesCount = keymap.AddElem(modesCount, root.Mode, 1)
 		modesSum++
 		for _, death := range root.Deaths {
-			if isStationPlayer(death.AssignedRole, death.Name) {
+			if IsStationPlayer(death.AssignedRole, death.Name) {
 				crewDeathsCount = keymap.AddElem(crewDeathsCount, death.AssignedRole, 1)
 				crewDeathsSum++
 			}
@@ -182,11 +182,11 @@ func completedObjectives[T any](objectives []T) uint {
 
 func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.
-		Preload("LeaveStats", PreloadSelect("RootID", "Name", "AssignedRole", "LeaveTime", "LeaveType")).
-		Preload("Factions", PreloadSelect("ID", "RootID", "FactionName", "Victory")).
-		Preload("Factions.FactionObjectives", PreloadSelect("OwnerID", "Completed")).
-		Preload("Factions.Members", PreloadSelect("ID", "OwnerID", "RoleName", "Victory")).
-		Preload("Factions.Members.RoleObjectives", PreloadSelect("OwnerID", "Completed"))
+		Preload("LeaveStats", r.PreloadSelect("RootID", "Name", "AssignedRole", "LeaveTime", "LeaveType")).
+		Preload("Factions", r.PreloadSelect("ID", "RootID", "FactionName", "Victory")).
+		Preload("Factions.FactionObjectives", r.PreloadSelect("OwnerID", "Completed")).
+		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "RoleName", "Victory")).
+		Preload("Factions.Members.RoleObjectives", r.PreloadSelect("OwnerID", "Completed"))
 	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
 	factionsSum := 0
@@ -198,12 +198,12 @@ func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 	for _, root := range processRoots {
 		var leavers uint
 		for _, leaveStat := range root.LeaveStats {
-			if isStationPlayer(leaveStat.AssignedRole, leaveStat.Name) && isRoundStartLeaver(leaveStat) {
+			if IsStationPlayer(leaveStat.AssignedRole, leaveStat.Name) && IsRoundStartLeaver(leaveStat) {
 				leavers++
 			}
 		}
 		for _, faction := range root.Factions {
-			foundInfo, ok := factionsCount.hasName(faction.FactionName)
+			foundInfo, ok := factionsCount.HasName(faction.FactionName)
 			if !ok {
 				factionsCount = append(factionsCount, &FactionInfo{
 					Name:                faction.FactionName,
@@ -232,7 +232,7 @@ func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 			factionsSum++
 
 			for _, role := range faction.Members {
-				foundInfo, ok := rolesCount.hasName(role.RoleName)
+				foundInfo, ok := rolesCount.HasName(role.RoleName)
 				if !ok {
 					rolesCount = append(rolesCount, &RolesInfo{
 						Name:                role.RoleName,
@@ -310,10 +310,10 @@ func (b UplinkRoleInfo) GetCount() uint {
 
 func UplinkGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.
-		Preload("Factions", PreloadSelect("ID", "RootID", "Victory", "FactionName")).
-		Preload("Factions.Members", PreloadSelect("ID", "OwnerID", "Victory", "RoleName")).
-		Preload("Factions.Members.UplinkInfo", PreloadSelect("ID", "RoleID")).
-		Preload("Factions.Members.UplinkInfo.UplinkPurchases", PreloadSelect("UplinkInfoID", "ItemType", "Bundlename", "Cost"))
+		Preload("Factions", r.PreloadSelect("ID", "RootID", "Victory", "FactionName")).
+		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "Victory", "RoleName")).
+		Preload("Factions.Members.UplinkInfo", r.PreloadSelect("ID", "RoleID")).
+		Preload("Factions.Members.UplinkInfo.UplinkPurchases", r.PreloadSelect("UplinkInfoID", "ItemType", "Bundlename", "Cost"))
 	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
 	uplinkRoles := make(InfoSlice, 0)
@@ -345,7 +345,7 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 				}
 			}
 
-			foundInfo, ok := infos.hasName(itemType)
+			foundInfo, ok := infos.HasName(itemType)
 			if !ok {
 				infos = append(infos, &UplinkInfo{
 					Name:       itemName,
@@ -384,11 +384,11 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 					roleName = faction.FactionName
 					useFaction = &faction
 				}
-				foundInfo, ok := uplinkRoles.hasName(roleName)
+				foundInfo, ok := uplinkRoles.HasName(roleName)
 				if !ok {
 					newUplinkInfo := &UplinkRoleInfo{
 						Name:  roleName,
-						Id:    ckey(roleName),
+						Id:    Ckey(roleName),
 						Count: 1,
 					}
 					s := StatInfo(newUplinkInfo)
@@ -439,10 +439,10 @@ func (b OwnerByObjectivesInfo) GetCount() uint {
 
 func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.
-		Preload("Factions", PreloadSelect("ID", "RootID", "FactionName")).
-		Preload("Factions.FactionObjectives", PreloadSelect("OwnerID", "Type", "Completed")).
-		Preload("Factions.Members", PreloadSelect("ID", "OwnerID", "RoleName")).
-		Preload("Factions.Members.RoleObjectives", PreloadSelect("OwnerID", "Type", "Completed"))
+		Preload("Factions", r.PreloadSelect("ID", "RootID", "FactionName")).
+		Preload("Factions.FactionObjectives", r.PreloadSelect("OwnerID", "Type", "Completed")).
+		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "RoleName")).
+		Preload("Factions.Members.RoleObjectives", r.PreloadSelect("OwnerID", "Type", "Completed"))
 	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
 
 	objectiveHolders := make(InfoSlice, 0)
@@ -454,7 +454,7 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 			isWin = 1
 		}
 
-		foundInfo, ok := owner.ObjectiveInfos.hasName(objective.Type)
+		foundInfo, ok := owner.ObjectiveInfos.HasName(objective.Type)
 		var objectiveInfo *ObjectiveInfo
 		if ok {
 			objectiveInfo = (*foundInfo).(*ObjectiveInfo)
@@ -475,14 +475,14 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 	for _, root := range processRoots {
 		for _, faction := range root.Factions {
 			if len(faction.FactionObjectives) > 0 {
-				foundInfo, ok := objectiveHolders.hasName(faction.FactionName)
+				foundInfo, ok := objectiveHolders.HasName(faction.FactionName)
 				var holderInfo *OwnerByObjectivesInfo
 				if ok {
 					holderInfo = (*foundInfo).(*OwnerByObjectivesInfo)
 				} else {
 					holderInfo = &OwnerByObjectivesInfo{
 						Owner: faction.FactionName,
-						Id:    ckey(faction.FactionName),
+						Id:    Ckey(faction.FactionName),
 					}
 					objectiveHolders = append(objectiveHolders, holderInfo)
 				}
@@ -497,14 +497,14 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 
 			for _, role := range faction.Members {
 				if len(role.RoleObjectives) > 0 {
-					foundInfo, ok := objectiveHolders.hasName(role.RoleName)
+					foundInfo, ok := objectiveHolders.HasName(role.RoleName)
 					var holderInfo *OwnerByObjectivesInfo
 					if ok {
 						holderInfo = (*foundInfo).(*OwnerByObjectivesInfo)
 					} else {
 						holderInfo = &OwnerByObjectivesInfo{
 							Owner: role.RoleName,
-							Id:    ckey(role.RoleName),
+							Id:    Ckey(role.RoleName),
 						}
 						objectiveHolders = append(objectiveHolders, holderInfo)
 					}
@@ -548,264 +548,15 @@ func RoundsGET(c *gin.Context) (int, string, gin.H) {
 	}
 }
 
-type PlayerTopInfo struct {
-	Name  string
-	Value uint
-}
-
-func (p PlayerTopInfo) GetName() string {
-	return p.Name
-}
-func (p PlayerTopInfo) GetCount() uint {
-	return p.Value
-}
-
-type TopInfo struct {
-	Id          string
-	Title       string
-	NameColumn  string
-	CountColumn string
-	PlayersInfo InfoSlice
-
-	ValuePostfix string
-}
-
-func (t *TopInfo) AddPlayerCount(name string) {
-	t.ChangePlayerAndValue(name, 1, func(a uint, b uint) uint {
-		return a + b
-	})
-}
-
-func (t *TopInfo) SetPlayerAndValue(name string, value uint) {
-	t.ChangePlayerAndValue(name, value, func(a uint, b uint) uint {
-		return b
-	})
-}
-
-func (t *TopInfo) ChangePlayerAndValue(name string, value uint, setRule func(uint, uint) uint) {
-	foundInfo, ok := t.PlayersInfo.hasName(name)
-	var holderInfo *PlayerTopInfo
-	if ok {
-		holderInfo = (*foundInfo).(*PlayerTopInfo)
-		holderInfo.Value = setRule(holderInfo.Value, value)
-	} else {
-		holderInfo = &PlayerTopInfo{
-			Name:  name,
-			Value: value,
-		}
-		t.PlayersInfo = append(t.PlayersInfo, holderInfo)
-	}
-}
-
 func TopsGET(c *gin.Context) (int, string, gin.H) {
-	query := r.Database.
-		Preload("Deaths", PreloadSelect("RootID", "MindName")).
-		Preload("ManifestEntries", PreloadSelect("RootID", "AssignedRole", "Name")).
-		Preload("LeaveStats", PreloadSelect("RootID", "AssignedRole", "Name", "LeaveTime", "LeaveType")).
-		Preload("Score", PreloadSelect("ID", "RootID", "Richestkey", "Richestcash", "Dmgestkey", "Dmgestdamage")).
-		Preload("Factions", PreloadSelect("RootID", "ID", "FactionName", "Victory")).
-		Preload("Factions.Members", PreloadSelect("ID", "OwnerID", "MindCkey", "MindName", "RoleName", "Victory"))
+	var tops []*domain.Top
 
-	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
-
-	tops := make([]*TopInfo, 0)
-	gamemodeTops := make([]*TopInfo, 0)
-
-	hasId := func(slice []*TopInfo, id string) bool {
-		for _, topInfo := range slice {
-			if topInfo.Id == id {
-				return true
-			}
-		}
-		return false
-	}
-
-	getTopById := func(slice []*TopInfo, id string) *TopInfo {
-		for _, topInfo := range slice {
-			if topInfo.Id == id {
-				return topInfo
-			}
-		}
-		return nil
-	}
-
-	deathTop := &TopInfo{
-		Id:          "deaths",
-		Title:       "Смертей",
-		NameColumn:  "Имя",
-		CountColumn: "Количество",
-	}
-	tops = append(tops, deathTop)
-
-	roundsPlayedTop := &TopInfo{
-		Id:          "zadrots",
-		Title:       "Задротов",
-		NameColumn:  "Имя",
-		CountColumn: "Раундов",
-	}
-	tops = append(tops, roundsPlayedTop)
-
-	leaversTop := &TopInfo{
-		Id:          "leavers",
-		Title:       "Ливеров",
-		NameColumn:  "Имя",
-		CountColumn: "Количество",
-	}
-	tops = append(tops, leaversTop)
-
-	richestTop := &TopInfo{
-		Id:           "rich",
-		Title:        "Богатейших",
-		NameColumn:   "Имя",
-		CountColumn:  "Денег",
-		ValuePostfix: "$",
-	}
-	tops = append(tops, richestTop)
-
-	damagedTop := &TopInfo{
-		Id:          "damaged",
-		Title:       "Избитых",
-		NameColumn:  "Имя",
-		CountColumn: "Урон",
-	}
-	tops = append(tops, damagedTop)
-
-	ckeyAntagsPlayed := make(map[string]map[string]map[string]uint)
-	for _, root := range processRoots {
-		for _, death := range root.Deaths {
-			// wtf
-			if death.MindName == "Unknown" || death.MindName == "unknown" {
-				continue
-			}
-			deathTop.AddPlayerCount(death.MindName)
-		}
-		for _, entry := range root.ManifestEntries {
-			if isStationPlayer(entry.AssignedRole, entry.Name) {
-				roundsPlayedTop.AddPlayerCount(entry.Name)
-			}
-		}
-		for _, stat := range root.LeaveStats {
-			if isStationPlayer(stat.AssignedRole, stat.Name) && isRoundStartLeaver(stat) {
-				leaversTop.AddPlayerCount(stat.Name)
-			}
-		}
-
-		for _, faction := range root.Factions {
-			if slices.Contains(teamlRoles, faction.FactionName) && !hasId(gamemodeTops, ckey(faction.FactionName)) {
-				title := faction.FactionName
-				if value, ok := shortModeName[faction.FactionName]; ok {
-					title = value
-				}
-				gamemodeTop := &TopInfo{
-					Id:           ckey(faction.FactionName),
-					Title:        title,
-					NameColumn:   "Ckey",
-					CountColumn:  "Winrate",
-					ValuePostfix: "%",
-				}
-				gamemodeTops = append(gamemodeTops, gamemodeTop)
-			}
-
-			processedCkeys := make([]string, 0, len(faction.Members))
-			for _, role := range faction.Members {
-				if slices.Contains(processedCkeys, role.MindCkey) {
-					continue
-				}
-
-				// uniq mode checks
-				if faction.FactionName == "Cult Of Blood" &&
-					(utils.IsMobName.FindString(role.MindName) != "" || strings.Contains(role.MindName, "familiar")) {
-					continue
-				}
-
-				if slices.Contains(soloRoles, role.RoleName) && !hasId(gamemodeTops, ckey(role.RoleName)) {
-					title := role.RoleName
-					if value, ok := shortModeName[role.RoleName]; ok {
-						title = value
-					}
-					gamemodeTop := &TopInfo{
-						Id:           ckey(role.RoleName),
-						Title:        title,
-						NameColumn:   "Ckey",
-						CountColumn:  "Winrate",
-						ValuePostfix: "%",
-					}
-					gamemodeTops = append(gamemodeTops, gamemodeTop)
-				}
-
-				if _, ok := ckeyAntagsPlayed[role.MindCkey]; !ok {
-					antagMap := make(map[string]map[string]uint)
-					ckeyAntagsPlayed[role.MindCkey] = antagMap
-				}
-
-				if slices.Contains(teamlRoles, faction.FactionName) {
-					if _, ok := ckeyAntagsPlayed[role.MindCkey][faction.FactionName]; !ok {
-						infoMap := map[string]uint{
-							"Victory": uint(faction.Victory),
-							"Count":   1,
-						}
-						ckeyAntagsPlayed[role.MindCkey][faction.FactionName] = infoMap
-					} else {
-						ckeyAntagsPlayed[role.MindCkey][faction.FactionName]["Victory"] += uint(faction.Victory)
-						ckeyAntagsPlayed[role.MindCkey][faction.FactionName]["Count"] += 1
-					}
-				}
-
-				if slices.Contains(soloRoles, role.RoleName) {
-					roleWin := uint(role.Victory)
-					if faction.FactionName == "Shadowlings" {
-						roleWin = uint(faction.Victory)
-					}
-					if _, ok := ckeyAntagsPlayed[role.MindCkey][role.RoleName]; !ok {
-						infoMap := map[string]uint{
-							"Victory": roleWin,
-							"Count":   1,
-						}
-						ckeyAntagsPlayed[role.MindCkey][role.RoleName] = infoMap
-					} else {
-						ckeyAntagsPlayed[role.MindCkey][role.RoleName]["Victory"] += roleWin
-						ckeyAntagsPlayed[role.MindCkey][role.RoleName]["Count"] += 1
-					}
-				}
-
-				processedCkeys = append(processedCkeys, role.MindCkey)
-			}
-		}
-
-		richestTop.SetPlayerAndValue(root.Score.Richestkey, uint(root.Score.Richestcash))
-		damagedTop.SetPlayerAndValue(root.Score.Dmgestkey, uint(root.Score.Dmgestdamage))
-	}
-
-	for player, antagInfo := range ckeyAntagsPlayed {
-		for antag, antagOptions := range antagInfo {
-			if antagOptions["Count"] > 10 {
-				antagTop := getTopById(gamemodeTops, ckey(antag))
-				antagTop.SetPlayerAndValue(player, uint(float32(antagOptions["Victory"]*100)/float32(antagOptions["Count"])))
-			}
-		}
-	}
-	// remove useless positions
-	for _, top := range tops {
-		if len(top.PlayersInfo) == 0 {
-			tops = utils.RemoveElem(tops, top)
-		}
-		sort.Sort(sort.Reverse(top.PlayersInfo))
-		if len(top.PlayersInfo) > 10 {
-			top.PlayersInfo = slices.Delete(top.PlayersInfo, 10, len(top.PlayersInfo))
-		}
-	}
-	for _, top := range gamemodeTops {
-		if len(top.PlayersInfo) == 0 {
-			gamemodeTops = utils.RemoveElem(gamemodeTops, top)
-		}
-		sort.Sort(sort.Reverse(top.PlayersInfo))
-		if len(top.PlayersInfo) > 10 {
-			top.PlayersInfo = slices.Delete(top.PlayersInfo, 10, len(top.PlayersInfo))
-		}
-	}
+	r.Database.
+		Preload(clause.Associations).
+		Order("Title").
+		Find(&tops)
 
 	return 200, "tops.html", gin.H{
-		"topSlice":         tops,
-		"gamemodeTopSlice": gamemodeTops,
+		"topSlice": tops,
 	}
 }

@@ -23,6 +23,8 @@ var Models = []any{
 	new(RitenameByCount),
 
 	new(Player),
+	new(Top),
+	new(TopMember),
 }
 
 type MyMigrator interface {
