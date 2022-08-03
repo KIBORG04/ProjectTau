@@ -13,30 +13,32 @@
         <h3 class="text-center border-bottom pb-2">Всякое</h3>
         {{ range $index, $element := .topSlice }}
             {{ if eq $element.Tag 0 }}
-                <div class="col-3">
+                <div class="col-sm-12 col-lg-4">
                     <ul class="list-group list-group-flush">
-                        <div class="fs-5 badge bg-secondary text-wrap">
+                        <div class="fs-5 badge bg-primary text-wrap">
                             Топ-10 {{ $element.Title }}
                         </div>
                     </ul>
-                    <table ID="{{ $element.ID }}" class="table table-sm table-striped">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th scope="col">{{ $element.KeyColumnName }}</th>
-                            <th scope="col">{{ $element.ValueColumnName }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {{ range .TopMembers }}
+                    <div class="table-responsive">
+                        <table ID="{{ $element.ID }}" class="table table-sm table-striped">
+                            <thead>
                             <tr>
-                                <td></td>
-                                <td style="white-space: nowrap">{{ .Key }}</td>
-                                <td>{{ .Value }}{{ $element.ValuePostfix }}</td>
+                                <th>#</th>
+                                <th scope="col">{{ $element.KeyColumnName }}</th>
+                                <th scope="col">{{ $element.ValueColumnName }}</th>
                             </tr>
-                        {{ end }}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {{ range .TopMembers }}
+                                <tr>
+                                    <td></td>
+                                    <td style="white-space: nowrap">{{ .Key }}</td>
+                                    <td>{{ .Value }}{{ $element.ValuePostfix }}</td>
+                                </tr>
+                            {{ end }}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             {{ end }}
         {{ end }}
@@ -46,30 +48,32 @@
         <h3 class="text-center border-bottom pb-2">Одиночные и командные роли</h3>
         {{ range $index, $element := .topSlice }}
             {{ if eq $element.Tag 1 }}
-                <div class="col-3">
+                <div class="col-sm-12 col-lg-4">
                     <ul class="list-group list-group-flush">
-                        <div class="fs-5 badge bg-secondary text-wrap">
+                        <div class="fs-5 badge bg-primary text-wrap">
                             Топ-10 {{ $element.Title }}
                         </div>
                     </ul>
-                    <table ID="{{ $element.ID }}" class="table table-sm table-striped">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th scope="col">{{ $element.KeyColumnName }}</th>
-                            <th scope="col">{{ $element.ValueColumnName }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {{ range .TopMembers }}
+                    <div class="table-responsive">
+                        <table ID="{{ $element.ID }}" class="table table-sm table-striped">
+                            <thead>
                             <tr>
-                                <td></td>
-                                <td style="white-space: nowrap">{{ .Key }}</td>
-                                <td>{{ .Value }}{{ $element.ValuePostfix }}</td>
+                                <th>#</th>
+                                <th scope="col">{{ $element.KeyColumnName }}</th>
+                                <th scope="col">{{ $element.ValueColumnName }}</th>
                             </tr>
-                        {{ end }}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {{ range .TopMembers }}
+                                <tr>
+                                    <td></td>
+                                    <td style="white-space: nowrap">{{ .Key }}</td>
+                                    <td>{{ .Value }}{{ $element.ValuePostfix }}</td>
+                                </tr>
+                            {{ end }}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             {{ end }}
         {{ end }}
