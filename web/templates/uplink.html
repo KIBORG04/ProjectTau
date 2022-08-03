@@ -19,34 +19,36 @@
         {{ range .uplinkPurchases }}
             <div class="col">
                 <ul class="list-group list-group-flush">
-                    <div class="fs-5 badge bg-secondary text-wrap">
+                    <div class="fs-5 badge bg-primary text-wrap">
                         {{ .Name }} - {{ .Count }}
                     </div>
                 </ul>
-                <table id="{{ .Id }}" class="table table-sm table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">Название</th>
-                        <th scope="col">Общее кол-во</th>
-                        <th scope="col">Уник-альное кол-во</th>
-                        <th scope="col">Побед</th>
-                        <th scope="col">Винрейт</th>
-                        <th scope="col">Потрачено ТК</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{ range .UplinkInfos }}
+                <div class="table-responsive">
+                    <table id="{{ .Id }}" class="table table-sm table-hover table-striped">
+                        <thead>
                         <tr>
-                            <th scope="row">{{ .Name }}</th>
-                            <td >{{ .TotalCount }}</td>
-                            <td>{{ .Count }}</td>
-                            <td>{{ .Wins }}</td>
-                            <td>{{ .Winrate }}%</td>
-                            <td>{{ .TotalCost }}</td>
+                            <th scope="col">Название</th>
+                            <th scope="col">Общее кол-во</th>
+                            <th scope="col">Уник-альное кол-во</th>
+                            <th scope="col">Побед</th>
+                            <th scope="col">Винрейт</th>
+                            <th scope="col">Потрачено ТК</th>
                         </tr>
-                    {{ end }}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {{ range .UplinkInfos }}
+                            <tr>
+                                <th scope="row">{{ .Name }}</th>
+                                <td >{{ .TotalCount }}</td>
+                                <td>{{ .Count }}</td>
+                                <td>{{ .Wins }}</td>
+                                <td>{{ .Winrate }}%</td>
+                                <td>{{ .TotalCost }}</td>
+                            </tr>
+                        {{ end }}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         {{ end }}
     </div>

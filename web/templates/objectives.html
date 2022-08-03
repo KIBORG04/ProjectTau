@@ -12,30 +12,32 @@
     {{ range .objectiveHolders }}
       <div class="col">
         <ul class="list-group list-group-flush">
-          <div class="fs-5 badge bg-secondary text-wrap">
+          <div class="fs-5 badge bg-primary text-wrap">
             {{ .Owner }} - {{ .Count }}
           </div>
         </ul>
-        <table id="{{ .Id }}" class="table table-sm table-hover table-striped">
-          <thead>
-          <tr>
-            <th scope="col">Тип</th>
-            <th scope="col">Кол-во</th>
-            <th scope="col">Побед</th>
-            <th scope="col">Винрейт</th>
-          </tr>
-          </thead>
-          <tbody>
-          {{ range .ObjectiveInfos }}
+        <div class="table-responsive">
+          <table id="{{ .Id }}" class="table table-sm table-hover table-striped">
+            <thead>
             <tr>
-              <th scope="row">{{ .Type }}</th>
-              <td>{{ .Count }}</td>
-              <td>{{ .Wins }}</td>
-              <td>{{ .Winrate }}%</td>
+              <th scope="col">Тип</th>
+              <th scope="col">Кол-во</th>
+              <th scope="col">Побед</th>
+              <th scope="col">Винрейт</th>
             </tr>
-          {{ end }}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+            {{ range .ObjectiveInfos }}
+              <tr>
+                <th scope="row" class="obj-type">{{ .Type }}</th>
+                <td>{{ .Count }}</td>
+                <td>{{ .Wins }}</td>
+                <td>{{ .Winrate }}%</td>
+              </tr>
+            {{ end }}
+            </tbody>
+          </table>
+        </div>
       </div>
     {{ end }}
   </div>
@@ -45,6 +47,9 @@
 {{ template "footer.html" .}}
 
 <script>
+  $(".obj-type").each( function(){
+    $(this).text($(this).text().split("/").at(-1));
+  });
   $(function () {
     {{ range .objectiveHolders }}
     $('#{{ .Id }}').DataTable({

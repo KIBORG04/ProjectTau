@@ -11,7 +11,7 @@
         {{ if ne $l 0 }}
             <div class="col">
                 {{ range .root.Factions }}
-                    <div class="fs-5 badge bg-secondary text-wrap mt-2" style="width: 100%">
+                    <div class="fs-5 badge bg-primary text-wrap mt-2" style="width: 100%">
                         {{ .Name }}
                     </div>
                     {{ $l = len .FactionObjectives }}
@@ -95,22 +95,24 @@
                                         </ul>
                                         {{ $l = len .UplinkInfo.UplinkPurchases }}
                                         {{ if ne $l 0 }}
-                                            <table class="table table-sm table-bordered table-striped">
-                                                <thead>
-                                                <tr>
-                                                    <th scope="col">Предмет</th>
-                                                    <th scope="col">Стоимость</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {{ range .UplinkInfo.UplinkPurchases }}
+                                            <div class="table-responsive">
+                                                <table class="table table-sm table-bordered table-striped">
+                                                    <thead>
                                                     <tr>
-                                                        <td>{{ .Bundlename }}</td>
-                                                        <td>{{ .Cost }}</td>
+                                                        <th scope="col">Предмет</th>
+                                                        <th scope="col">Стоимость</th>
                                                     </tr>
-                                                {{ end }}
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody>
+                                                    {{ range .UplinkInfo.UplinkPurchases }}
+                                                        <tr>
+                                                            <td>{{ .Bundlename }}</td>
+                                                            <td>{{ .Cost }}</td>
+                                                        </tr>
+                                                    {{ end }}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         {{ end }}
                                     {{ end }}
                                 </div>
@@ -123,64 +125,68 @@
             </div>
         {{ end }}
         <div class="col">
-            <div class="fs-5 badge bg-secondary text-wrap mt-2" style="width: 100%">
+            <div class="fs-5 badge bg-primary text-wrap mt-2" style="width: 100%">
                 Экипаж
             </div>
-            <table id="manifest" class="table table-sm table-hover table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Профессия</th>
-                    <th scope="col">Роль</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{ range .root.ManifestEntries }}
+            <div class="table-responsive">
+                <table id="manifest" class="table table-sm table-hover table-striped">
+                    <thead>
                     <tr>
-                        <th scope="row">{{ .Name }}</th>
-                        <td>{{ .AssignedRole }}</td>
-                        <td>{{ .SpecialRole }}</td>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Профессия</th>
+                        <th scope="col">Роль</th>
                     </tr>
-                {{ end }}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {{ range .root.ManifestEntries }}
+                        <tr>
+                            <th scope="row">{{ .Name }}</th>
+                            <td>{{ .AssignedRole }}</td>
+                            <td>{{ .SpecialRole }}</td>
+                        </tr>
+                    {{ end }}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <div class="fs-5 badge bg-secondary text-wrap mt-2" style="width: 100%">
+            <div class="fs-5 badge bg-primary text-wrap mt-2" style="width: 100%">
                 Смерти
             </div>
-            <table id="deaths" class="table table-sm table-hover table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Профессия</th>
-                    <th scope="col">Роль</th>
-                    <th scope="col">Время смерти</th>
-                    <th scope="col" style="color: red">BRUTE</th>
-                    <th scope="col" style="color: orange">BURN</th>
-                    <th scope="col" style="color: green">TOXIN</th>
-                    <th scope="col" style="color: blue">OXY</th>
-                    <th scope="col" style="color: pink">BRAIN</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{ range .root.Deaths }}
+            <div class="table-responsive">
+                <table id="deaths" class="table table-sm table-hover table-striped">
+                    <thead>
                     <tr>
-                        <th scope="row">{{ .MindName }}</th>
-                        <td>{{ .AssignedRole }}</td>
-                        <td>{{ .SpecialRole }}</td>
-                        <td>{{ .TimeOfDeath }}</td>
-                        <td style="color: red">{{ .Damage.Brute }}</td>
-                        <td style="color: orange">{{ .Damage.Fire }}</td>
-                        <td style="color: green">{{ .Damage.Toxin }}</td>
-                        <td style="color: blue">{{ .Damage.Oxy }}</td>
-                        <td style="color: pink">{{ .Damage.Brain }}</td>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Профессия</th>
+                        <th scope="col">Роль</th>
+                        <th scope="col">Время смерти</th>
+                        <th scope="col" style="color: red">BRUTE</th>
+                        <th scope="col" style="color: orange">BURN</th>
+                        <th scope="col" style="color: green">TOXIN</th>
+                        <th scope="col" style="color: blue">OXY</th>
+                        <th scope="col" style="color: pink">BRAIN</th>
                     </tr>
-                {{ end }}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {{ range .root.Deaths }}
+                        <tr>
+                            <th scope="row">{{ .MindName }}</th>
+                            <td>{{ .AssignedRole }}</td>
+                            <td>{{ .SpecialRole }}</td>
+                            <td>{{ .TimeOfDeath }}</td>
+                            <td style="color: red">{{ .Damage.Brute }}</td>
+                            <td style="color: orange">{{ .Damage.Fire }}</td>
+                            <td style="color: green">{{ .Damage.Toxin }}</td>
+                            <td style="color: blue">{{ .Damage.Oxy }}</td>
+                            <td style="color: pink">{{ .Damage.Brain }}</td>
+                        </tr>
+                    {{ end }}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
