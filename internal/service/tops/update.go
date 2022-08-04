@@ -45,6 +45,12 @@ func (t *TopInfo) AddPlayerCount(name string) {
 	})
 }
 
+func (t *TopInfo) SetPlayerAndMaxValue(name string, value int) {
+	t.ChangePlayerAndValue(name, value, func(a int, b int) int {
+		return utils.Max(a, b)
+	})
+}
+
 func (t *TopInfo) SetPlayerAndValue(name string, value int) {
 	t.ChangePlayerAndValue(name, value, func(a int, b int) int {
 		return b
@@ -225,8 +231,12 @@ func ParseTopData() []string {
 			}
 		}
 
-		staticTopTypes["rich"].SetPlayerAndValue(root.Score.Richestkey, int(root.Score.Richestcash))
-		staticTopTypes["damaged"].SetPlayerAndValue(root.Score.Dmgestkey, int(root.Score.Dmgestdamage))
+		if root.Score.Richestkey != "" {
+			staticTopTypes["rich"].SetPlayerAndMaxValue(root.Score.Richestkey, int(root.Score.Richestcash))
+		}
+		if root.Score.Dmgestkey != "" {
+			staticTopTypes["damaged"].SetPlayerAndMaxValue(root.Score.Dmgestkey, int(root.Score.Dmgestdamage))
+		}
 	}
 
 	for player, antagInfo := range ckeyAntagsPlayed {
