@@ -140,14 +140,28 @@ func ParseTopData() []string {
 			}
 			staticTopTypes["deaths"].AddPlayerCount(death.MindName)
 		}
+
+		processedEntries := make([]string, 0, len(root.ManifestEntries))
 		for _, entry := range root.ManifestEntries {
+			// wtf
+			if slices.Contains(processedEntries, entry.Name) {
+				continue
+			}
 			if stats.IsStationPlayer(entry.AssignedRole, entry.Name) {
 				staticTopTypes["zadrots"].AddPlayerCount(entry.Name)
+				processedEntries = append(processedEntries, entry.Name)
 			}
 		}
+
+		processedLeaves := make([]string, 0, len(root.LeaveStats))
 		for _, stat := range root.LeaveStats {
+			// wtf
+			if slices.Contains(processedLeaves, stat.Name) {
+				continue
+			}
 			if stats.IsStationPlayer(stat.AssignedRole, stat.Name) && stats.IsRoundStartLeaver(stat) {
 				staticTopTypes["leavers"].AddPlayerCount(stat.Name)
+				processedLeaves = append(processedLeaves, stat.Name)
 			}
 		}
 
