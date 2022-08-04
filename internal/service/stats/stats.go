@@ -38,6 +38,7 @@ type ServerCheckbox struct {
 	Checkboxes []string `form:"server[]"`
 }
 
+// RootGET TODO: remove keymap.KeyMap
 func RootGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.
 		Preload("Deaths", r.PreloadSelect("RootID", "Name", "SpecialRole", "AssignedRole")).
@@ -55,6 +56,7 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 	modesSum := 0
 
 	var allAchievement []domain.Achievement
+	var sortedAnnounces []domain.CommunicationLogs
 
 	var lastRoot *domain.Root
 	for _, root := range processRoots {
@@ -76,20 +78,21 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		if len(root.Achievements) > 0 {
 			allAchievement = append(allAchievement, root.Achievements...)
 		}
+		for _, log := range root.CommunicationLogs {
+			// TODO: Это убирает не только скучные анноунсы, но еще и кучу интересных. Пофиксить в общем.
+			if log.Author != "" && log.Title != "" {
+				sortedAnnounces = append(sortedAnnounces, log)
+			}
+		}
 	}
 
 	sort.Stable(sort.Reverse(modesCount))
 	sort.Stable(sort.Reverse(crewDeathsCount))
 	sort.Stable(sort.Reverse(roleDeathsCount))
 
-	var randRoot *domain.Root
-	if len(processRoots) > 0 {
-		randRoot = utils.Pick(processRoots)
-	}
-
 	var randComm domain.CommunicationLogs
-	if randRoot != nil && len(randRoot.CommunicationLogs) > 0 {
-		randComm = utils.Pick(randRoot.CommunicationLogs)
+	if len(sortedAnnounces) > 0 {
+		randComm = utils.Pick(sortedAnnounces)
 	}
 
 	var lastAchievement domain.Achievement

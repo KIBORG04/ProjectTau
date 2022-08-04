@@ -68,6 +68,7 @@ func getRootsByCheckboxes(db *gorm.DB, c *gin.Context) ([]*domain.Root, []*domai
 
 	for k, v := range checkboxes {
 		if v != "" {
+			// its a WHERE .. OR ..
 			db.Or("server_address = ?", ServerByAddress[k])
 		}
 	}
