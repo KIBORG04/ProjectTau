@@ -56,7 +56,7 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 	modesSum := 0
 
 	var allAchievement []domain.Achievement
-	var sortedAnnounces []domain.CommunicationLogs
+	var allAnnounces []domain.CommunicationLogs
 
 	var lastRoot *domain.Root
 	for _, root := range processRoots {
@@ -79,10 +79,7 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 			allAchievement = append(allAchievement, root.Achievements...)
 		}
 		for _, log := range root.CommunicationLogs {
-			// TODO: Это убирает не только скучные анноунсы, но еще и кучу интересных. Пофиксить в общем.
-			if log.Author != "" && log.Title != "" {
-				sortedAnnounces = append(sortedAnnounces, log)
-			}
+			allAnnounces = append(allAnnounces, log)
 		}
 	}
 
@@ -91,8 +88,8 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 	sort.Stable(sort.Reverse(roleDeathsCount))
 
 	var randComm domain.CommunicationLogs
-	if len(sortedAnnounces) > 0 {
-		randComm = utils.Pick(sortedAnnounces)
+	if len(allAnnounces) > 0 {
+		randComm = utils.Pick(allAnnounces)
 	}
 
 	var lastAchievement domain.Achievement

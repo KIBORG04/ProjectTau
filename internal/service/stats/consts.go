@@ -9,9 +9,9 @@ const (
 const CurrentStatistics = "2022-02-27"
 
 const (
-	Alpha = "Alpha"
-	Beta  = "Beta"
-	Gamma = "Gamma"
+	Alpha = "Tau I"
+	Beta  = "Tau II"
+	Gamma = "Tau III"
 )
 
 var ServerByAddress = map[string]string{

@@ -24,7 +24,6 @@ var loggerGet = log.New(os.Stderr, "[GET Request] ", log.Lmsgprefix|log.Ltime)
 
 type Collector struct {
 	processUrls []*RoundDto
-	Logs        []string
 }
 
 var (
@@ -38,7 +37,9 @@ func RunRoundCollector() []string {
 	collector := Collector{}
 	collector.CollectUrls(startDate)
 	collector.CollectStatistics()
-	return collector.Logs
+	return []string{
+		fmt.Sprintf("%d Rounds Collected", len(collector.processUrls)),
+	}
 }
 
 func (c *Collector) CollectUrls(startDate time.Time) {
@@ -97,8 +98,6 @@ func (c *Collector) CollectStatistics() {
 }
 
 func (c *Collector) saveLogs(logger *log.Logger, text any) {
-	textStr := fmt.Sprintln(text)
-	c.Logs = append(c.Logs, textStr)
 	logger.Println(text)
 }
 

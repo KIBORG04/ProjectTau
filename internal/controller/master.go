@@ -3,6 +3,7 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	c "ssstatistics/internal/config"
+	"ssstatistics/internal/service/cleaning"
 	"ssstatistics/internal/service/parser"
 	"ssstatistics/internal/service/stats"
 	"ssstatistics/internal/service/tops"
@@ -107,4 +108,5 @@ var RegularCallbacks []RegularCallback
 func InitializeRegularCallbacks() {
 	RegularCallbacks = append(RegularCallbacks, parser.RunRoundCollector)
 	RegularCallbacks = append(RegularCallbacks, tops.ParseTopData)
+	RegularCallbacks = append(RegularCallbacks, cleaning.CleanAnnounces)
 }
