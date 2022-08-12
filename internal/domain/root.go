@@ -77,7 +77,7 @@ type Score struct {
 	Clownabuse     int32          `json:"clownabuse"`
 	Richestname    string         `json:"richestname"`
 	Richestjob     string         `json:"richestjob"`
-	Richestcash    int32          `json:"richestcash"`
+	Richestcash    float64        `json:"richestcash"`
 	Richestkey     string         `json:"richestkey"`
 	Dmgestname     string         `json:"dmgestname"`
 	Dmgestjob      string         `json:"dmgestjob"`
@@ -89,6 +89,7 @@ func (d *Score) ColumnsMigration(dx *gorm.DB) {
 	dx.Migrator().AlterColumn(&d, "Richestname")
 	dx.Migrator().AlterColumn(&d, "Richestjob")
 	dx.Migrator().AlterColumn(&d, "Richestkey")
+	dx.Migrator().AlterColumn(&d, "Richestcash")
 	dx.Migrator().AlterColumn(&d, "Dmgestname")
 	dx.Migrator().AlterColumn(&d, "Dmgestjob")
 	dx.Migrator().AlterColumn(&d, "Dmgestkey")
