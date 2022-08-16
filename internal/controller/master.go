@@ -3,23 +3,13 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	c "ssstatistics/internal/config"
-	"ssstatistics/internal/service/cleaning"
-	"ssstatistics/internal/service/parser"
 	"ssstatistics/internal/service/stats"
-	"ssstatistics/internal/service/tops"
 )
 
 var router *gin.Engine
 
 func runUpdateDB(c *gin.Context) {
-	var logs []string
-
-	for _, callback := range RegularCallbacks {
-		callbackLogs := callback()
-		for _, s := range callbackLogs {
-			logs = append(logs, s)
-		}
-	}
+	logs := StartUpdaters()
 
 	user := c.MustGet(gin.AuthUserKey).(string)
 	c.HTML(200, "secrets.html", gin.H{
@@ -65,7 +55,15 @@ func initializeRoutes() {
 		base.GET("/tops", GET(stats.TopsGET))
 		base.POST("/tops", POST(stats.TopsGET))
 
+		base.GET("/mmr", GET(stats.MmrGET))
+		base.POST("/mmr", POST(stats.MmrGET))
+
 		base.GET("/cult", GET(stats.Cult))
+	}
+
+	api := base.Group("/api")
+	{
+		api.GET("/mmr", stats.ApiMmrGET)
 	}
 
 	// Group using gin.BasicAuth() middleware
@@ -99,14 +97,4 @@ func Run() {
 	initializeRoutes()
 
 	router.Run(":8080")
-}
-
-type RegularCallback func() []string
-
-var RegularCallbacks []RegularCallback
-
-func InitializeRegularCallbacks() {
-	RegularCallbacks = append(RegularCallbacks, parser.RunRoundCollector)
-	RegularCallbacks = append(RegularCallbacks, tops.ParseTopData)
-	RegularCallbacks = append(RegularCallbacks, cleaning.CleanAnnounces)
 }

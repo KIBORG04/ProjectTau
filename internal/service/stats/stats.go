@@ -560,3 +560,7 @@ func TopsGET(c *gin.Context) (int, string, gin.H) {
 		"topSlice": tops,
 	}
 }
+
+func MmrGET(c *gin.Context) (int, string, gin.H) {
+	return 200, "mmr.html", gin.H{}
+}

@@ -14,7 +14,7 @@ func main() {
 
 	db.CreateConnection()
 
-	controller.InitializeRegularCallbacks()
+	controller.InitializeUpdaters()
 
 	controller.Run()
 }

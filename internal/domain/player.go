@@ -1,5 +1,6 @@
 package domain
 
 type Player struct {
-	ckey string
+	Ckey string `gorm:"primaryKey;uniqueIndex"`
+	MMR  int32
 }

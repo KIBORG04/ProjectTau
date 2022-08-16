@@ -1,0 +1,103 @@
+{{ template "header.html" .}}
+
+<div class="alert alert-info mt-4" role="alert">
+    <h4 class="alert-heading">Пояснение к информации!</h4>
+    Изначально к каждому присвоено значение в <span style="color: darkblue">1000 ММР</span>.
+    <br>
+    При победе на соло антаганисте или командой вам начисляется <span style="color: limegreen">25 очков</span>.
+    При поражение снимается <span style="color: red">30 очков</span>.
+</div>
+
+
+<div class="container">
+    <div class="text-center fs-5 font-monospace" id="mmr_placeholder">
+    </div>
+</div>
+
+{{ template "footer.html" .}}
+<script>
+    let mmrData;
+    $.getJSON("/api/mmr", function (data) {
+        mmrData = new Map([...data.entries()].sort((a, b) => b[1].MMR - a[1].MMR));
+        let html = "";
+
+        const top10 = [];
+        let indx = 0;
+        for (const [key, value] of mmrData) {
+            if (indx === 10) {
+                break;
+            }
+            top10.push(`<div id='${value.Ckey}'>${indx + 1}. ${value.Ckey} ${value.MMR}</div>`);
+            indx++;
+        }
+        top10.forEach((v) => html += v);
+
+        html += "<div>...</div>"
+
+        html += "<div><input type='text' name='ckey_finder' id='ckey_finder' placeholder='ckey' /></div>"
+        html += "<div><span id='ckey_finder_text'></span></div>"
+
+        html += "<div>...</div>"
+
+        mmrData = new Map([...data.entries()].sort((a, b) => a[1].MMR - b[1].MMR));
+        const antiTop10 = [];
+        indx = 0;
+        for (const [key, value] of mmrData) {
+            if (indx === 10) {
+                break;
+            }
+            antiTop10.push(`<div id='${value.Ckey}'>${mmrData.size - indx}. ${value.Ckey} ${value.MMR}</div>`);
+            indx++;
+        }
+        antiTop10.reverse();
+        antiTop10.forEach((v) => html += v);
+        $("#mmr_placeholder").append(html);
+    })
+
+    function getIndxByCkey(ckey, map) {
+        let indx = 0;
+        for (const [key, value] of map) {
+            if (value.Ckey === ckey) {
+                return indx;
+            }
+            indx++;
+        }
+        return -1;
+    }
+
+    $('#mmr_placeholder').keyup(function () {
+        const val = $('#ckey_finder').val().toLowerCase();
+        const finded = $('#ckey_finder_text');
+        if (val === "") {
+            finded.empty();
+            return
+        }
+
+        const mmrSorted = new Map([...mmrData.entries()].sort((a, b) => b[1].MMR - a[1].MMR));
+        const filtered = new Map([...mmrSorted.entries()].filter(value => value[1].Ckey.indexOf(val) >= 0));
+
+        let html = "";
+
+        const filteredHtml = [];
+        let indx = 0;
+        for (const [key, value] of filtered) {
+            if (indx === 10) {
+                break;
+            }
+            filteredHtml.push(
+                [
+                    getIndxByCkey(value.Ckey, mmrSorted),
+                    `<div id='${value.Ckey}'>${getIndxByCkey(value.Ckey, mmrSorted) + 1}. ${value.Ckey} ${value.MMR}</div>`
+                ]);
+            indx++;
+        }
+        filteredHtml.sort((a, b) => a[0] - b[0]);
+        filteredHtml.forEach((v) => html += v[1]);
+        console.log(filteredHtml)
+
+        finded.empty();
+        finded.append(html);
+        console.log(mmrSorted)
+    });
+
+</script>
