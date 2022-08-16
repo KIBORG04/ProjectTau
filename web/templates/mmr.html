@@ -10,7 +10,7 @@
 
 
 <div class="container">
-    <div class="text-center fs-5 font-monospace">
+    <div class="text-center fs-5 font-monospace" id="mmr_pohui">
         <div id="mmr_placeholder">
             <div class="spinner-border" role="status"></div>
         </div>
@@ -68,7 +68,7 @@
         return -1;
     }
 
-    $('#mmr_placeholder').keyup(function () {
+    $('#mmr_pohui').keyup(function () {
         const val = $('#ckey_finder').val().toLowerCase();
         const finded = $('#ckey_finder_text');
         if (val === "") {
