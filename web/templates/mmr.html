@@ -10,7 +10,10 @@
 
 
 <div class="container">
-    <div class="text-center fs-5 font-monospace" id="mmr_placeholder">
+    <div class="text-center fs-5 font-monospace">
+        <div id="mmr_placeholder">
+            <div class="spinner-border" role="status"></div>
+        </div>
     </div>
 </div>
 
@@ -51,7 +54,7 @@
         }
         antiTop10.reverse();
         antiTop10.forEach((v) => html += v);
-        $("#mmr_placeholder").append(html);
+        $("#mmr_placeholder").replaceWith(html);
     })
 
     function getIndxByCkey(ckey, map) {
