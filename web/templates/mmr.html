@@ -10,50 +10,107 @@
 
 
 <div class="container">
-    <div class="text-center fs-5 font-monospace" id="mmr_pohui">
-        <div id="mmr_placeholder">
-            <div class="spinner-border" role="status"></div>
+    <div class="text-center fs-5" id="mmr_pohui">
+        <div class="row justify-content-center ">
+            <div class="col-auto">
+                <div id="mmr_placeholder">
+                    <div class="spinner-border" role="status"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 {{ template "footer.html" .}}
 <script>
+    function getRankImage(ckey, mmrPosition, totalPositions) {
+        let img = "";
+        let alt = "";
+        if (mmrPosition === 1) {
+            img = "evilcrab";
+            alt = "top1";
+        } else if (mmrPosition === 2) {
+            img = "crab";
+            alt = "top2";
+        } else if (mmrPosition === 3) {
+            img = "rat";
+            alt = "top3";
+        } else if (ckey === "kiborg04") {
+            img = "kiborg";
+            alt = "god";
+        } else if (mmrPosition > 3 && mmrPosition <= totalPositions / 2) {
+            img = "mushroom";
+            alt = "default_chel";
+        } else if (mmrPosition === totalPositions || mmrPosition >= totalPositions - 10) {
+            img = "chic";
+            alt = "unrobust";
+        } else {
+            img = "mouse";
+            alt = "default_chel";
+        }
+        return `<img src="/web/static/images/ranks/${img}.png" alt="${alt}" width="32px" height="32px" style="margin-top: -50%; position: inherit;">`
+    }
+
+    function getRow(num, img, ckey, mmr, tr_class = "") {
+        let row = `<tr class='${tr_class}'>`
+        row += `<th class='text-start'>${num}</th>`
+        row += `<th class='text-start' >${img}</th>`
+        row += `<td class='text-start'>${ckey}</td>`
+        row += `<td class='text-end'>${mmr}</td>`
+        row += `</tr>`
+        return row
+    }
+
     let mmrData;
     $.getJSON("/api/mmr", function (data) {
         mmrData = new Map([...data.entries()].sort((a, b) => b[1].MMR - a[1].MMR));
-        let html = "";
+        let html = `<table id="mmr_table" class="table table-responsive table-sm table-borderless">`;
+        html += `<thead>`
+        html += `<tr>`
+        html += `<th class='text-start'>#</th>`
+        html += `<th class='text-start'></th>`
+        html += `<th class='text-start'>Ckey</th>`
+        html += `<th class='text-end'>MMR</th>`
+        html += `</tr>`
+        html += `</thead>`
+        html += `<tbody>`
 
         const top10 = [];
         let indx = 0;
+        let mmrPosition = 1;
         for (const [key, value] of mmrData) {
             if (indx === 10) {
                 break;
             }
-            top10.push(`<div id='${value.Ckey}'>${indx + 1}. ${value.Ckey} ${value.MMR}</div>`);
+            top10.push(getRow(indx + 1, getRankImage(value.Ckey, mmrPosition, mmrData.size), value.Ckey, value.MMR))
             indx++;
+            mmrPosition++;
         }
         top10.forEach((v) => html += v);
 
-        html += "<div>...</div>"
+        html += getRow("<hr>", "<hr>", "<hr>", "<hr>")
 
-        html += "<div><input type='text' name='ckey_finder' id='ckey_finder' placeholder='ckey' /></div>"
-        html += "<div><span id='ckey_finder_text'></span></div>"
+        html += getRow("", "", "<input type='text' name='ckey_finder' id='ckey_finder' placeholder='ckey' />", "", "mmr_input")
 
-        html += "<div>...</div>"
+        html += getRow("<hr>", "<hr>", "<hr>", "<hr>")
 
         mmrData = new Map([...data.entries()].sort((a, b) => a[1].MMR - b[1].MMR));
         const antiTop10 = [];
         indx = 0;
+        mmrPosition = mmrData.size
         for (const [key, value] of mmrData) {
             if (indx === 10) {
                 break;
             }
-            antiTop10.push(`<div id='${value.Ckey}'>${mmrData.size - indx}. ${value.Ckey} ${value.MMR}</div>`);
+            antiTop10.push(getRow(mmrData.size - indx, getRankImage(value.Ckey, mmrPosition, mmrData.size), value.Ckey, value.MMR))
             indx++;
+            mmrPosition--;
         }
         antiTop10.reverse();
         antiTop10.forEach((v) => html += v);
+
+        html += "</tbody>"
+        html += "</table>"
         $("#mmr_placeholder").replaceWith(html);
     })
 
@@ -70,9 +127,10 @@
 
     $('#mmr_pohui').keyup(function () {
         const val = $('#ckey_finder').val().toLowerCase();
-        const finded = $('#ckey_finder_text');
         if (val === "") {
-            finded.empty();
+            $('#mmr_table tbody').find('.can_remove_me').each(function () {
+                $(this).remove()
+            });
             return
         }
 
@@ -83,6 +141,7 @@
 
         const filteredHtml = [];
         let indx = 0;
+        let mmrPosition = 1;
         for (const [key, value] of filtered) {
             if (indx === 10) {
                 break;
@@ -90,15 +149,20 @@
             filteredHtml.push(
                 [
                     getIndxByCkey(value.Ckey, mmrSorted),
-                    `<div id='${value.Ckey}'>${getIndxByCkey(value.Ckey, mmrSorted) + 1}. ${value.Ckey} ${value.MMR}</div>`
+                    getRow(getIndxByCkey(value.Ckey, mmrSorted) + 1, getRankImage(value.Ckey, getIndxByCkey(value.Ckey, mmrSorted) + 1, mmrData.size), value.Ckey, value.MMR, "can_remove_me")
                 ]);
             indx++;
+            mmrPosition++;
         }
         filteredHtml.sort((a, b) => a[0] - b[0]);
         filteredHtml.forEach((v) => html += v[1]);
 
-        finded.empty();
-        finded.append(html);
+        $('#mmr_table tbody').find('.can_remove_me').each(function () {
+            $(this).remove()
+        });
+        $('#mmr_table tbody').find('.mmr_input').each(function () {
+            $(this).after(html)
+        });
     });
 
 </script>
