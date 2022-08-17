@@ -53,7 +53,7 @@
 
     function getRow(num, img, ckey, mmr, tr_class = "") {
         let row = `<tr class='${tr_class}'>`
-        row += `<th class='text-start'>${num}</th>`
+        row += `<th class='text-end'>${num}</th>`
         row += `<th class='text-start' >${img}</th>`
         row += `<td class='text-start'>${ckey}</td>`
         row += `<td class='text-end'>${mmr}</td>`
@@ -67,7 +67,7 @@
         let html = `<table id="mmr_table" class="table table-responsive table-sm table-borderless">`;
         html += `<thead>`
         html += `<tr>`
-        html += `<th class='text-start'>#</th>`
+        html += `<th class='text-end'>#</th>`
         html += `<th class='text-start'></th>`
         html += `<th class='text-start'>Ckey</th>`
         html += `<th class='text-end'>MMR</th>`
