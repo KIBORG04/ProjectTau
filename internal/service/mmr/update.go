@@ -32,8 +32,12 @@ func ParseMMR() []string {
 
 	for _, root := range roots {
 		for _, faction := range root.Factions {
+			processedCkeys := make([]string, 0, len(faction.Members))
 			for _, role := range faction.Members {
 				if role.MindCkey == "" {
+					continue
+				}
+				if slices.Contains(processedCkeys, role.MindCkey) {
 					continue
 				}
 
@@ -52,7 +56,7 @@ func ParseMMR() []string {
 				} else if win == 0 {
 					playersMMR[role.MindCkey] = playersMMR[role.MindCkey] - 30
 				}
-
+				processedCkeys = append(processedCkeys, role.MindCkey)
 			}
 		}
 	}
