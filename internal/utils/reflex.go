@@ -2,7 +2,6 @@ package utils
 
 import (
 	"encoding/json"
-
 	"golang.org/x/exp/slices"
 )
 

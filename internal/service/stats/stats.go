@@ -564,3 +564,7 @@ func TopsGET(c *gin.Context) (int, string, gin.H) {
 func MmrGET(c *gin.Context) (int, string, gin.H) {
 	return 200, "mmr.html", gin.H{}
 }
+
+func MapsGET(c *gin.Context) (int, string, gin.H) {
+	return 200, "maps.html", gin.H{}
+}

@@ -139,6 +139,10 @@ type RoundTime struct {
 	Min  uint
 }
 
+func (r RoundTime) ToSeconds() uint {
+	return r.Hour*3600 + r.Min*60
+}
+
 func ParseRoundTime(time string) (RoundTime, error) {
 	if time == "" {
 		return RoundTime{}, fmt.Errorf("empty time")
