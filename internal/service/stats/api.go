@@ -14,14 +14,14 @@ func ApiMmrGET(c *gin.Context) {
 
 	type mmr struct {
 		Ckey string
-		MMR  uint
+		MMR  int32
 	}
 
 	var mmrs []*mmr
 	for _, player := range players {
 		mmrs = append(mmrs, &mmr{
 			Ckey: player.Ckey,
-			MMR:  uint(player.MMR),
+			MMR:  player.MMR,
 		})
 	}
 
