@@ -139,5 +139,7 @@ func ParseMapsInfo() []string {
 
 	r.SaveMapStats(mapStats)
 
+	maps = make([]*mapStruct, 0, len(maps))
+
 	return []string{fmt.Sprintf("For %d map statistics parsed", len(mapStats))}
 }
