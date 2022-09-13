@@ -106,7 +106,7 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		"totalRounds": len(roots),
 		"version":     notNilLastRoot.Version,
 		"lastRound":   notNilLastRoot.RoundID,
-		"lastDate":    notNilLastRoot.Date,
+		"lastDate":    utils.TrimPGDate(notNilLastRoot.Date),
 		"firstDate":   CurrentStatistics,
 
 		"alphaRounds": len(alphaRoots),
