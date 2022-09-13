@@ -26,6 +26,7 @@ type Role struct {
 	MindName         string           `json:"mind_name" gorm:"size:256"`
 	MindCkey         string           `json:"mind_ckey" gorm:"size:256"`
 	UplinkInfo       UplinkInfo       `json:"uplink_info" gorm:"foreignKey:RoleID"`
+	ChangelingInfo   ChangelingInfo   `json:"changeling_info" gorm:"foreignKey:RoleID"`
 }
 
 type FactionObjectives Objectives
@@ -56,6 +57,22 @@ type UplinkPurchases struct {
 	Cost         int32  `json:"cost"`
 	Bundlename   string `json:"bundlename" gorm:"size:256"`
 	ItemType     string `json:"item_type" gorm:"size:256"`
+}
+
+type ChangelingInfo struct {
+	ID                 int32                `gorm:"uniqueIndex"`
+	RoleID             int32                `gorm:"index"`
+	VictimsNumber      int32                `json:"victims_number"`
+	SpentTC            int32                `json:"spent_TC"`
+	ChangelingPurchase []ChangelingPurchase `json:"changeling_purchase"`
+}
+
+type ChangelingPurchase struct {
+	ID               int32  `gorm:"uniqueIndex"`
+	ChangelingInfoID int32  `gorm:"index"`
+	Cost             int32  `json:"cost"`
+	PowerType        string `json:"power_type"`
+	PowerName        string `json:"power_name" gorm:"size:256"`
 }
 
 type CultInfo struct {

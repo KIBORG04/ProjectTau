@@ -51,7 +51,10 @@ func CreateConnection() {
 }
 
 func AutoMigrate() {
-	Database.AutoMigrate(d.Models...) // Not Fucking Auto
+	err := Database.AutoMigrate(d.Models...)
+	if err != nil {
+		println(err.Error())
+	} // Not Fucking Auto
 	// Manual migrate
 	for _, model := range d.Models {
 		switch t := model.(type) {

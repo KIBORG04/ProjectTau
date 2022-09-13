@@ -6,7 +6,7 @@ import (
 )
 
 type Root struct {
-	Date      string
+	Date      string     `gorm:"type:date"`
 	RoundID   int32      `json:"round_id" gorm:"primaryKey;uniqueIndex"`
 	Version   int32      `json:"version"`
 	Mode      string     `json:"mode" gorm:"size:128"`

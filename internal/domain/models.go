@@ -19,6 +19,8 @@ var Models = []any{
 	new(CultInfo),
 	new(UplinkInfo),
 	new(UplinkPurchases),
+	new(ChangelingInfo),
+	new(ChangelingPurchase),
 	new(Aspects),
 	new(RitenameByCount),
 
