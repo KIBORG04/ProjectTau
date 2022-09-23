@@ -1,7 +1,10 @@
 package stats
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
+	"ssstatistics/internal/bots/telegram"
 	"ssstatistics/internal/domain"
 	r "ssstatistics/internal/repository"
 )
@@ -54,4 +57,39 @@ func ApiMapsGet(c *gin.Context) {
 	}
 
 	c.JSON(200, maps)
+}
+
+func ApiSendFeedback(c *gin.Context) {
+	type FeedbackForm struct {
+		Username string `json:"username"`
+		Text     string `json:"text"`
+	}
+
+	var form FeedbackForm
+	if err := c.BindJSON(&form); err != nil {
+		c.JSON(http.StatusBadRequest, "Некорректный запрос.")
+		return
+	}
+
+	if len(form.Username) < 3 || len(form.Username) > 50 {
+		c.JSON(http.StatusBadRequest, "В имени должно быть от 3х до 50 символов.")
+		return
+	}
+
+	if len(form.Text) < 10 || len(form.Text) > 255 {
+		c.JSON(http.StatusBadRequest, "В сообщение должно быть от 10 до 255 символов..")
+		return
+	}
+
+	msg := fmt.Sprintf(`
+	Name: *%s*
+	
+Text: %s`, form.Username, form.Text)
+
+	err := telegram.Bot.Send(msg)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+	c.JSON(http.StatusOK, "Сообщение отправлено.")
 }

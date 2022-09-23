@@ -10,5 +10,9 @@ admin:
   login: admin
   password: 1234
 
+telegram:
+  token: fawfabaw123
+  trustedChatIDs: [12314141, 1321313]
+
 proxy: 127.0.0.1
 

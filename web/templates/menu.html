@@ -38,7 +38,11 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/mmr">MMR</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/feedback">Feedback</a>
+                </li>
             </ul>
+
             {{ $l := not .serverCheckboxes }}
             {{ if ne $l true }}
                 {{ $l = len .serverCheckboxes }}

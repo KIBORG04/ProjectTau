@@ -568,3 +568,7 @@ func MmrGET(c *gin.Context) (int, string, gin.H) {
 func MapsGET(c *gin.Context) (int, string, gin.H) {
 	return 200, "maps.html", gin.H{}
 }
+
+func FeedbackGET(c *gin.Context) (int, string, gin.H) {
+	return 200, "feedback.html", gin.H{}
+}

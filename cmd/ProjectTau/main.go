@@ -1,6 +1,7 @@
 package main
 
 import (
+	"ssstatistics/internal/bots/telegram"
 	"ssstatistics/internal/config"
 	"ssstatistics/internal/controller"
 	db "ssstatistics/internal/repository"
@@ -13,6 +14,8 @@ func main() {
 	stats.PopulatePositions()
 
 	db.CreateConnection()
+
+	telegram.Initialize()
 
 	controller.InitializeUpdaters()
 

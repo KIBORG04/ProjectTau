@@ -21,6 +21,10 @@ type GlobalConfig struct {
 		Login    string `yaml:"login"`
 		Password string `yaml:"password"`
 	} `yaml:"admin"`
+	TelegramBot struct {
+		Token          string `yaml:"token"`
+		TrustedChatIDs []int  `yaml:"trustedChatIDs"`
+	} `yaml:"telegram"`
 	Proxy   string `yaml:"proxy"`
 	BaseUrl string
 }
