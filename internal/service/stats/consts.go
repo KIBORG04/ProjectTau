@@ -6,7 +6,7 @@ const (
 	ServerGammaAddress = "game.taucetistation.org:2508"
 )
 
-const CurrentStatistics = "2022-02-27"
+const CurrentStatisticsDate = "2022-02-27"
 
 const (
 	Alpha = "Tau I"

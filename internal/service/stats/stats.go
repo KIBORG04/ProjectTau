@@ -34,17 +34,13 @@ func BasicPOST(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
 	BasicGET(c, f)
 }
 
-type ServerCheckbox struct {
-	Checkboxes []string `form:"server[]"`
-}
-
 // RootGET TODO: remove keymap.KeyMap
 func RootGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.
 		Preload("Deaths", r.PreloadSelect("RootID", "Name", "SpecialRole", "AssignedRole")).
 		Preload("CommunicationLogs", r.PreloadSelect("RootID", "Title", "Content", "Author")).
 		Preload("Achievements", r.PreloadSelect("RootID", "Title", "Desc", "Key", "Name"))
-	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRootsByCheckboxes(query, c)
+	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRoots(query, c)
 
 	crewDeathsCount := make(keymap.MyMap[string, uint], 0)
 	crewDeathsSum := 0
@@ -107,7 +103,7 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		"version":     notNilLastRoot.Version,
 		"lastRound":   notNilLastRoot.RoundID,
 		"lastDate":    utils.TrimPGDate(notNilLastRoot.Date),
-		"firstDate":   CurrentStatistics,
+		"firstDate":   CurrentStatisticsDate,
 
 		"alphaRounds": len(alphaRoots),
 		"betaRounds":  len(betaRoots),
@@ -187,7 +183,7 @@ func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 		Preload("Factions.FactionObjectives", r.PreloadSelect("OwnerID", "Completed")).
 		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "RoleName", "Victory")).
 		Preload("Factions.Members.RoleObjectives", r.PreloadSelect("OwnerID", "Completed"))
-	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
+	_, processRoots, _, _, _ := getRoots(query, c)
 
 	factionsSum := 0
 	factionsCount := make(InfoSlice, 0)
@@ -314,7 +310,7 @@ func UplinkGET(c *gin.Context) (int, string, gin.H) {
 		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "Victory", "RoleName")).
 		Preload("Factions.Members.UplinkInfo", r.PreloadSelect("ID", "RoleID")).
 		Preload("Factions.Members.UplinkInfo.UplinkPurchases", r.PreloadSelect("UplinkInfoID", "ItemType", "Bundlename", "Cost"))
-	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
+	_, processRoots, _, _, _ := getRoots(query, c)
 
 	uplinkRoles := make(InfoSlice, 0)
 
@@ -443,7 +439,7 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 		Preload("Factions.FactionObjectives", r.PreloadSelect("OwnerID", "Type", "Completed")).
 		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "RoleName")).
 		Preload("Factions.Members.RoleObjectives", r.PreloadSelect("OwnerID", "Type", "Completed"))
-	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
+	_, processRoots, _, _, _ := getRoots(query, c)
 
 	objectiveHolders := make(InfoSlice, 0)
 
@@ -541,7 +537,7 @@ func RoundGET(c *gin.Context) (int, string, gin.H) {
 
 func RoundsGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.Order("round_id DESC").Limit(100)
-	_, processRoots, _, _, _ := getRootsByCheckboxes(query, c)
+	_, processRoots, _, _, _ := getRoots(query, c)
 
 	return 200, "rounds.html", gin.H{
 		"roots": processRoots,

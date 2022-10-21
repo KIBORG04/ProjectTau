@@ -32,7 +32,7 @@ var (
 )
 
 func RunRoundCollector() []string {
-	startDate, _ := time.Parse("2006-01-02", stats.CurrentStatistics)
+	startDate, _ := time.Parse("2006-01-02", stats.CurrentStatisticsDate)
 
 	collector := Collector{}
 	collector.CollectUrls(startDate)

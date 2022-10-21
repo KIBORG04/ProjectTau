@@ -9,7 +9,12 @@ import (
 	"ssstatistics/internal/utils"
 	"strconv"
 	"strings"
+	"time"
 )
+
+type ServerCheckbox struct {
+	Checkboxes []string `form:"server[]"`
+}
 
 func setCheckboxStates(c *gin.Context) {
 	var serversForm ServerCheckbox
@@ -61,17 +66,36 @@ func getCheckboxStates(c *gin.Context) map[string]string {
 }
 
 // db is configured
-func getRootsByCheckboxes(db *gorm.DB, c *gin.Context) ([]*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root) {
+func getRoots(db *gorm.DB, c *gin.Context) ([]*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root) {
 	checkboxes := getCheckboxStates(c)
 
 	var roots []*domain.Root
 
-	for k, v := range checkboxes {
-		if v != "" {
-			// its a WHERE .. OR ..
-			db.Or("server_address = ?", ServerByAddress[k])
+	startDate := c.PostForm("date_start")
+	endDate := c.PostForm("date_end")
+
+	if startDate != "" && endDate != "" {
+		startStatisticsDateTime, _ := time.Parse("2006-01-02", CurrentStatisticsDate)
+		startDateTime, _ := time.Parse("2006-01-02", startDate)
+		endDateTime, _ := time.Parse("2006-01-02", endDate)
+		nowTime := time.Now()
+		if (startDateTime.After(startStatisticsDateTime) || startDateTime.Equal(startStatisticsDateTime)) &&
+			(endDateTime.Day() <= nowTime.Day() && endDateTime.Month() <= nowTime.Month() && endDateTime.Year() <= nowTime.Year()) {
+			db.Where("date BETWEEN ? AND ?", startDate, endDate)
 		}
 	}
+
+	// cringe and cringe orm
+	checkboxesKeys := make([]string, 0, len(checkboxes))
+	for k, v := range checkboxes {
+		if v != "" {
+			checkboxesKeys = append(checkboxesKeys, k)
+		} else {
+			checkboxesKeys = append(checkboxesKeys, "")
+		}
+	}
+	db.Where("server_address = ? OR server_address = ? OR server_address = ?",
+		ServerByAddress[checkboxesKeys[0]], ServerByAddress[checkboxesKeys[1]], ServerByAddress[checkboxesKeys[2]])
 
 	db.Omit("CompletionHTML").
 		Find(&roots)

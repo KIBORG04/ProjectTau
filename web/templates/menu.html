@@ -43,24 +43,36 @@
                 </li>
             </ul>
 
-            {{ $l := not .serverCheckboxes }}
-            {{ if ne $l true }}
-                {{ $l = len .serverCheckboxes }}
-                {{ if ne $l 0 }}
-                    <form class="d-flex" method="post">
+            <form class="d-flex" method="post">
+                <div class="mt-2 me-2">
+                    <label for="date_start" class="form-label">Start</label>
+                    <input id="date_start" name="date_start" type="date" value="2022-02-27" min="2022-02-27"/>
+                    <label for="date_end" class="form-label">End</label>
+                    <input id="date_end" name="date_end" type="date" min="2022-02-27"/>
+                </div>
+                {{ $l := not .serverCheckboxes }}
+                {{ if ne $l true }}
+                    {{ $l = len .serverCheckboxes }}
+                    {{ if ne $l 0 }}
                         <div class="mt-2">
                             {{ range $k, $checkboxState := .serverCheckboxes }}
                                 <span class="form-check-inline">
                                 <input type="checkbox" class="form-check-input" id="{{ $k }}" value="{{ $k }}"
                                        name="server[]" {{ $checkboxState }}>
                                 <label class="form-check-label" for="{{ $k }}">{{ $k }}</label>
-                            </span>
+                                </span>
                             {{ end }}
                         </div>
-                        <button type="submit" class="btn btn-outline-secondary">Update</button>
-                    </form>
+                    {{ end }}
                 {{ end }}
-            {{ end }}
+                <button type="submit" class="btn btn-outline-primary">Update</button>
+            </form>
         </div>
     </div>
 </nav>
+<script>
+    const date = new Date();
+    document.getElementById('date_end').valueAsDate = date;
+    document.getElementById('date_end').max = date.toISOString().split("T")[0];
+    document.getElementById('date_start').max = date.toISOString().split("T")[0];
+</script>
