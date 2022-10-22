@@ -5,12 +5,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/exp/slices"
 	"gorm.io/gorm/clause"
+	"image"
 	"sort"
 	"ssstatistics/internal/config"
 	"ssstatistics/internal/domain"
 	"ssstatistics/internal/keymap"
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/charts"
+	"ssstatistics/internal/service/heatmap"
 	"ssstatistics/internal/utils"
 )
 
@@ -37,7 +39,8 @@ func BasicPOST(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
 // RootGET TODO: remove keymap.KeyMap
 func RootGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.
-		Preload("Deaths", r.PreloadSelect("RootID", "Name", "SpecialRole", "AssignedRole")).
+		Preload("Deaths", r.PreloadSelect("RootID", "Name", "SpecialRole", "AssignedRole", "DeathX", "DeathY", "DeathZ")).
+		Preload("Explosions", r.PreloadSelect("RootID", "EpicenterX", "EpicenterY", "EpicenterZ")).
 		Preload("CommunicationLogs", r.PreloadSelect("RootID", "Title", "Content", "Author")).
 		Preload("Achievements", r.PreloadSelect("RootID", "Title", "Desc", "Key", "Name"))
 	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRoots(query, c)
@@ -50,6 +53,9 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 
 	modesCount := make(keymap.MyMap[string, uint], 0)
 	modesSum := 0
+
+	deathCoords := make([]image.Point, 0, crewDeathsSum)
+	explosionCoords := make([]image.Point, 0)
 
 	var allAchievement []domain.Achievement
 	var allAnnounces []domain.CommunicationLogs
@@ -67,6 +73,9 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 				roleDeathsCount = keymap.AddElem(roleDeathsCount, death.SpecialRole, 1)
 				roleDeathsSum++
 			}
+			if death.DeathZ == 2 && root.Map == "Box Station" {
+				deathCoords = append(deathCoords, image.Point{int(death.DeathX), int(death.DeathY)})
+			}
 		}
 		if lastRoot == nil || root.RoundID > lastRoot.RoundID {
 			lastRoot = root
@@ -76,6 +85,11 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		}
 		for _, log := range root.CommunicationLogs {
 			allAnnounces = append(allAnnounces, log)
+		}
+		for _, explosion := range root.Explosions {
+			if explosion.EpicenterZ == 2 {
+				explosionCoords = append(explosionCoords, image.Point{int(explosion.EpicenterX), int(explosion.EpicenterY)})
+			}
 		}
 	}
 
@@ -97,6 +111,9 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 	if lastRoot != nil {
 		notNilLastRoot = *lastRoot
 	}
+
+	heatmap.New("deaths", deathCoords)
+	heatmap.New("explosions", explosionCoords)
 
 	return 200, "index.html", gin.H{
 		"totalRounds": len(roots),
