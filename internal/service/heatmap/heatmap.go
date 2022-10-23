@@ -6,83 +6,119 @@ import (
 	"image/color"
 	"image/draw"
 	"image/png"
+	"io"
 	"math"
 	"os"
 )
 
-func image2RGBA(src image.Image) *image.RGBA {
-	b := src.Bounds()
-	img := image.NewRGBA(b)
-	draw.Draw(img, b, src, image.Point{}, draw.Src)
+const MapSize = 255
+
+type Mapper struct {
+	src  image.Image
+	dest *image.NRGBA
+}
+
+func NewMapper(_src image.Image) Mapper {
+	mapper := Mapper{src: _src}
+	mapper.dest = mapper.image2RGBA()
+	return mapper
+}
+
+func (m *Mapper) image2RGBA() *image.NRGBA {
+	b := m.src.Bounds()
+	img := image.NewNRGBA(b)
+	//draw.Draw(img, b, &image.Uniform{C: color.Transparent}, image.Point{}, draw.Src)
+	draw.Draw(img, b, m.src, image.Point{}, draw.Src)
 	return img
 }
 
-func tileCoords2Point(x, y int) image.Point {
-	// 4 is size of 1 tile on nano map image
+func (m *Mapper) tileCoords2Point(x, y int) image.Point {
+	b := m.src.Bounds()
+	tileSize := b.Max.X / MapSize
+	someShitX := 0
+	someShitY := 0
+	if tileSize == 4 {
+		someShitX = 5
+		someShitY = 1025
+	} else if tileSize == 32 {
+		someShitX = tileSize
+		someShitY = tileSize * MapSize
+	}
 	return image.Point{
-		X: (x * 4) - 5,
-		Y: 1025 - (y * 4),
+		X: (x * tileSize) - someShitX,
+		Y: someShitY - (y * tileSize),
 	}
 }
 
-func drawTiles(src *image.RGBA, coords image.Point, color *image.Uniform) {
+func (m *Mapper) drawTile(coords image.Point, color *image.Uniform) {
 	x := coords.X
 	y := coords.Y
-	draw.Draw(src, image.Rect(x, y, x+4, y+4), color, image.Point{}, draw.Over)
+	b := m.src.Bounds()
+	tileSize := b.Max.X / MapSize
+	draw.Draw(m.dest, image.Rect(x, y, x+tileSize, y+tileSize), color, image.Point{}, draw.Over)
 }
 
-func getHeatColor(x, max float64) *image.Uniform {
+func (m *Mapper) getHeatColor(x, max float64) *image.Uniform {
 	x = math.Log(x)
 	max = math.Log(max)
 	coef := math.Sqrt(x / max)
 	y := math.Abs(240 - 240*coef)
 	r, g, b := colorutil.HslToRgb(y, 1, 0.5)
-	return &image.Uniform{C: color.RGBA{uint8(r), uint8(g), uint8(b), 255}}
+	return &image.Uniform{C: color.NRGBA{r, g, b, 128}}
 }
 
-func New(name string, data []image.Point) {
-	file, err := os.Open("nanomap_exodus_1.png")
+func (m *Mapper) SaveTo(img io.Writer) error {
+	err := png.Encode(img, m.dest)
 	if err != nil {
-		panic(err)
+		return err
+	}
+	return nil
+}
+
+func Create(outName string, data []image.Point) error {
+	file, err := os.Open("boxstation-1.png")
+	if err != nil {
+		return err
 	}
 	defer file.Close()
 
-	tempFile, _ := os.Create(name + ".png")
-	defer tempFile.Close()
+	heatMapOverlay, _ := os.Create(outName + ".png")
+	defer heatMapOverlay.Close()
 
 	mapPng, err := png.Decode(file)
 	if err != nil {
-		panic(err)
+		return err
 	}
+	mapper := NewMapper(mapPng)
 
-	mapImage := image2RGBA(mapPng)
-
-	duplicates := make([][]int, 255)
-	for i := 0; i < len(duplicates); i++ {
-		duplicates[i] = make([]int, 255)
+	mapData := make([][]int, 255)
+	for i := 0; i < len(mapData); i++ {
+		mapData[i] = make([]int, 255)
 	}
 
 	max := 0
 	for _, p := range data {
-		duplicates[p.X][p.Y] += 1
-		if duplicates[p.X][p.Y] > max {
-			max = duplicates[p.X][p.Y]
+		mapData[p.X][p.Y] += 1
+		if mapData[p.X][p.Y] > max {
+			max = mapData[p.X][p.Y]
 		}
 	}
 
-	for i := 0; i < len(duplicates); i++ {
-		for j := 0; j < len(duplicates); j++ {
-			if duplicates[i][j] == 0 {
+	for i := 0; i < len(mapData); i++ {
+		for j := 0; j < len(mapData); j++ {
+			if mapData[i][j] == 0 {
 				continue
 			}
-			point := tileCoords2Point(i, j)
-			clr := getHeatColor(float64(duplicates[i][j]), float64(max))
-			drawTiles(mapImage, point, clr)
+			point := mapper.tileCoords2Point(i, j)
+			clr := mapper.getHeatColor(float64(mapData[i][j]), float64(max))
+			mapper.drawTile(point, clr)
 		}
 	}
 
-	err = png.Encode(tempFile, mapImage)
+	err = mapper.SaveTo(heatMapOverlay)
 	if err != nil {
-		panic(err)
+		return err
 	}
+
+	return nil
 }

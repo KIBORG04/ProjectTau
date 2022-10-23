@@ -12,7 +12,6 @@ import (
 	"ssstatistics/internal/keymap"
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/charts"
-	"ssstatistics/internal/service/heatmap"
 	"ssstatistics/internal/utils"
 )
 
@@ -112,8 +111,9 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		notNilLastRoot = *lastRoot
 	}
 
-	heatmap.New("deaths", deathCoords)
-	heatmap.New("explosions", explosionCoords)
+	// TODO
+	// heatmap.Create("deaths", deathCoords)
+	// heatmap.Create("explosions", explosionCoords)
 
 	return 200, "index.html", gin.H{
 		"totalRounds": len(roots),
