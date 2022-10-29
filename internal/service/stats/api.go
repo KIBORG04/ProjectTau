@@ -31,7 +31,7 @@ func ApiMmrGET(c *gin.Context) {
 	c.JSON(200, mmrs)
 }
 
-func ApiMapsGet(c *gin.Context) {
+func ApiMapsGET(c *gin.Context) {
 	var MapStatistics []*domain.MapStats
 	r.Database.
 		Preload("MapAttributes").
@@ -92,4 +92,29 @@ Text: %s`, form.Username, form.Text)
 		return
 	}
 	c.JSON(http.StatusOK, "Сообщение отправлено.")
+}
+
+func ApiHeatmapsGET(c *gin.Context) {
+	type Request struct {
+		// explosions, deaths
+		Type          string `form:"type"`
+		MapResolution string `form:"mapresolution"`
+		MapName       string `form:"mapname"`
+	}
+
+	type Response struct {
+		MapBase64 string
+		Error     string
+	}
+
+	var query Request
+	err := c.BindQuery(&query)
+	if err != nil {
+		c.JSON(200, Response{Error: "The request is incorrect"})
+		return
+	}
+
+	c.JSON(200, Response{
+		MapBase64: "SoSi He-x bibu",
+		Error:     "228 Server shlet tebya нахуй."})
 }

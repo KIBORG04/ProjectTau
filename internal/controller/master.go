@@ -64,15 +64,19 @@ func initializeRoutes() {
 		base.GET("/cult", GET(stats.Cult))
 
 		base.GET("/feedback", GET(stats.FeedbackGET))
+
+		base.GET("/heatmaps", GET(stats.HeatmapsGET))
 	}
 
 	api := base.Group("/api")
 	{
 		api.GET("/mmr", stats.ApiMmrGET)
 
-		api.GET("/maps", stats.ApiMapsGet)
+		api.GET("/maps", stats.ApiMapsGET)
 
 		api.POST("/send_feedback", stats.ApiSendFeedback)
+
+		api.GET("/heatmaps", stats.ApiHeatmapsGET)
 	}
 
 	// Group using gin.BasicAuth() middleware

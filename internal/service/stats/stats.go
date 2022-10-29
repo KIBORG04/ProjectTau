@@ -39,7 +39,7 @@ func BasicPOST(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
 func RootGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.
 		Preload("Deaths", r.PreloadSelect("RootID", "Name", "SpecialRole", "AssignedRole", "DeathX", "DeathY", "DeathZ")).
-		Preload("Explosions", r.PreloadSelect("RootID", "EpicenterX", "EpicenterY", "EpicenterZ")).
+		Preload("Explosions", r.PreloadSelect("RootID", "EpicenterX", "EpicenterY", "EpicenterZ", "DevastationRange", "HeavyImpactRange", "LightImpactRange", "FlashRange")).
 		Preload("CommunicationLogs", r.PreloadSelect("RootID", "Title", "Content", "Author")).
 		Preload("Achievements", r.PreloadSelect("RootID", "Title", "Desc", "Key", "Name"))
 	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRoots(query, c)
@@ -86,7 +86,7 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 			allAnnounces = append(allAnnounces, log)
 		}
 		for _, explosion := range root.Explosions {
-			if explosion.EpicenterZ == 2 {
+			if explosion.EpicenterZ == 2 && root.Map == "Box Station" && explosion.DevastationRange == 0 && explosion.HeavyImpactRange == 0 && explosion.LightImpactRange == 2 && explosion.FlashRange == 3 {
 				explosionCoords = append(explosionCoords, image.Point{int(explosion.EpicenterX), int(explosion.EpicenterY)})
 			}
 		}
@@ -112,8 +112,8 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 	}
 
 	// TODO
-	// heatmap.Create("deaths", deathCoords)
-	// heatmap.Create("explosions", explosionCoords)
+	// go heatmap.Create(c.Request.Context(), "deaths", deathCoords)
+	//go heatmap.Create(c.Request.Context(), "explosions", explosionCoords)
 
 	return 200, "index.html", gin.H{
 		"totalRounds": len(roots),
@@ -584,4 +584,8 @@ func MapsGET(c *gin.Context) (int, string, gin.H) {
 
 func FeedbackGET(c *gin.Context) (int, string, gin.H) {
 	return 200, "feedback.html", gin.H{}
+}
+
+func HeatmapsGET(c *gin.Context) (int, string, gin.H) {
+	return 200, "heatmaps.html", gin.H{}
 }
