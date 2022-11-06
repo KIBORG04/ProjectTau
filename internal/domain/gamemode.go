@@ -63,7 +63,6 @@ type ChangelingInfo struct {
 	ID                 int32                `gorm:"uniqueIndex"`
 	RoleID             int32                `gorm:"index"`
 	VictimsNumber      int32                `json:"victims_number"`
-	SpentTC            int32                `json:"spent_TC"`
 	ChangelingPurchase []ChangelingPurchase `json:"changeling_purchase"`
 }
 

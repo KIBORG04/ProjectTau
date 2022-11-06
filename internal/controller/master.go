@@ -66,6 +66,10 @@ func initializeRoutes() {
 		base.GET("/feedback", GET(stats.FeedbackGET))
 
 		base.GET("/heatmaps", GET(stats.HeatmapsGET))
+
+		base.GET("/changling", GET(stats.ChanglingGET))
+		base.POST("/changling", POST(stats.ChanglingGET))
+
 	}
 
 	api := base.Group("/api")
@@ -77,6 +81,9 @@ func initializeRoutes() {
 		api.POST("/send_feedback", stats.ApiSendFeedback)
 
 		api.GET("/heatmaps", stats.ApiHeatmapsGET)
+
+		api.GET("/changling", stats.ApiChanglingGET)
+		api.POST("/changling", stats.ApiChanglingGET)
 	}
 
 	// Group using gin.BasicAuth() middleware

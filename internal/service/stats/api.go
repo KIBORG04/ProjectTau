@@ -7,6 +7,7 @@ import (
 	"ssstatistics/internal/bots/telegram"
 	"ssstatistics/internal/domain"
 	r "ssstatistics/internal/repository"
+	"strings"
 )
 
 func ApiMmrGET(c *gin.Context) {
@@ -117,4 +118,72 @@ func ApiHeatmapsGET(c *gin.Context) {
 	c.JSON(200, Response{
 		MapBase64: "SoSi He-x bibu",
 		Error:     "228 Server shlet tebya нахуй."})
+}
+
+type (
+	changlingRole struct {
+		Count              uint
+		ChanglingAbilities map[string]*changlingAbilities
+	}
+
+	changlingAbilities struct {
+		Name      string
+		Count     uint
+		Wins      uint
+		Winrate   uint
+		TotalCost uint
+	}
+)
+
+func ApiChanglingGET(c *gin.Context) {
+	roleAbilitiesMap := make(map[string]*changlingRole)
+
+	query := r.Database.
+		Preload("Factions", r.PreloadSelect("ID", "RootID", "Victory", "FactionName")).
+		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "Victory", "RoleName")).
+		Preload("Factions.Members.ChangelingInfo", r.PreloadSelect("ID", "RoleID")).
+		Preload("Factions.Members.ChangelingInfo.ChangelingPurchase", r.PreloadSelect("ChangelingInfoID", "PowerType", "PowerName", "Cost"))
+	_, processRoots, _, _, _ := getRoots(query, c)
+
+	for _, root := range processRoots {
+		for _, faction := range root.Factions {
+			for _, member := range faction.Members {
+				if len(member.ChangelingInfo.ChangelingPurchase) == 0 {
+					continue
+				}
+				role, ok := roleAbilitiesMap[member.RoleName]
+				if !ok {
+					role = &changlingRole{
+						Count:              1,
+						ChanglingAbilities: make(map[string]*changlingAbilities),
+					}
+					roleAbilitiesMap[member.RoleName] = role
+				} else {
+					role.Count++
+				}
+
+				for _, purchase := range member.ChangelingInfo.ChangelingPurchase {
+					powerType := strings.Split(purchase.PowerType, "/")
+					abilityType := powerType[len(powerType)-1]
+					ability, ok := role.ChanglingAbilities[abilityType]
+					if !ok {
+						role.ChanglingAbilities[abilityType] = &changlingAbilities{
+							Name:      purchase.PowerName,
+							Count:     1,
+							Wins:      uint(member.Victory),
+							Winrate:   uint(member.Victory * 100),
+							TotalCost: uint(purchase.Cost),
+						}
+					} else {
+						ability.Count++
+						ability.Wins += uint(member.Victory)
+						ability.Winrate = ability.Wins * 100 / ability.Count
+						ability.TotalCost += uint(purchase.Cost)
+					}
+				}
+			}
+		}
+	}
+
+	c.JSON(200, roleAbilitiesMap)
 }

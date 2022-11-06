@@ -1,0 +1,115 @@
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+<div class="alert alert-info mt-4" role="alert">
+    <h4 class="alert-heading">Пояснение к информации!</h4>
+    <h5>СТАТИСТИКА ВВЕДЕНА С 11.09.2022, СМЫСЛА СТАВИТЬ ДАТУ НИЖЕ НЕТ!</h5>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div id="left_col" class="col col-auto">
+            <div class="spinner-border" role="status"></div>
+        </div>
+        <div id="data_col" class="col">
+            <div class="spinner-border" role="status"></div>
+        </div>
+    </div>
+</div>
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}
+
+<script>
+    startPost({})
+
+    $("#date_start").change(function () {
+        startPost({date_start: $(this).val()})
+    });
+
+    $("#date_end").change(function () {
+        startPost({date_end: $(this).val()})
+    });
+
+    function startPost(dates) {
+        $("#left_col").html(`<div class="spinner-border" role="status"></div>`)
+        $("#data_col").html(`<div class="spinner-border" role="status"></div>`)
+
+        $.post("/api/changling", dates, createHtml, "json")
+    }
+
+    let myData = {};
+
+    function createHtml(data) {
+        myData = Object.keys(data).sort().reduce(
+            (obj, key) => {
+                obj[key] = data[key];
+                return obj;
+            },
+            {}
+        )
+        debugger
+        const dataKeys = Object.keys(myData)
+        const dataAbilities = Object.keys(myData[dataKeys[0]].ChanglingAbilities)
+        let leftColItems = dataKeys.map((str) =>
+            `<button
+                type="button"
+                class="list-group-item list-group-item-action"
+                data-bs-toggle="collapse"
+                data-bs-target="#${str}"
+                aria-expanded="false"
+                aria-controls="${str}">
+                  ${str} <span class="badge bg-primary rounded-pill">${myData[str].Count}</span>
+                </button>`)
+        let leftCol = `<div class="list-group">${leftColItems.join("")}</div>`
+        $("#left_col").html(leftCol)
+
+        let dataCol = `<div class="table-responsive">`
+
+        const tableHeaders = Object.keys(myData[dataKeys[0]].ChanglingAbilities[dataAbilities[0]]).map((str) => `<th scope="col">${str}</th>`)
+
+        let firstElemShown = false
+        for (const key in myData) {
+            dataCol += `<div class="collapse ${!firstElemShown ? "show" : ""}" id="${key}">`
+            firstElemShown = true
+            dataCol += `<div class="fs-5 badge bg-secondary text-wrap">${key}</div>`
+            dataCol += `<table id="${key}-table" class="table table-sm table-hover table-striped">`
+            dataCol += `<thead><tr>`
+            dataCol += tableHeaders.join("")
+            dataCol += `</tr></thead>`
+            dataCol += `<tbody>`
+            for (const ability in myData[key].ChanglingAbilities) {
+                dataCol += `<tr>`
+                for (const abilityHeader in myData[key].ChanglingAbilities[ability]) {
+                    const abilityRow = myData[key].ChanglingAbilities[ability][abilityHeader];
+                    if(abilityHeader === "Name") {
+                        dataCol += `<th scope="row" class="obj-type">${abilityRow}</th>`
+                    } else if(abilityHeader === "Winrate") {
+                        dataCol += `<td>${abilityRow}%</td>`
+                    } else {
+                        dataCol += `<td>${abilityRow}</td>`
+                    }
+                }
+                dataCol += `</tr>`
+            }
+            dataCol += `</tbody>`
+            dataCol += `</table>`
+            dataCol += `</div>`
+        }
+
+        dataCol += `</div>`
+
+        $("#data_col").html(dataCol)
+
+        for (const key in myData) {
+            $(`#${key}-table`).DataTable({
+                paging: false,
+                searching: false,
+                info: false,
+            });
+        }
+
+    }
+
+
+</script>

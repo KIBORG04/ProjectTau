@@ -71,8 +71,8 @@ func getRoots(db *gorm.DB, c *gin.Context) ([]*domain.Root, []*domain.Root, []*d
 
 	var roots []*domain.Root
 
-	startDate := c.PostForm("date_start")
-	endDate := c.PostForm("date_end")
+	startDate := c.DefaultPostForm("date_start", "2022-02-27")
+	endDate := c.DefaultPostForm("date_end", time.Now().Format("2006-01-02"))
 
 	if startDate != "" && endDate != "" {
 		startStatisticsDateTime, _ := time.Parse("2006-01-02", CurrentStatisticsDate)
