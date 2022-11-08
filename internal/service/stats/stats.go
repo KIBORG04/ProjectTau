@@ -3,7 +3,6 @@ package stats
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"golang.org/x/exp/slices"
 	"gorm.io/gorm/clause"
 	"image"
 	"sort"
@@ -290,136 +289,8 @@ func Cult(c *gin.Context) (int, string, gin.H) {
 	}
 }
 
-type UplinkInfo struct {
-	Name       string
-	Count      uint
-	TotalCount uint
-	Type       string
-	Wins       uint
-	Winrate    uint
-	TotalCost  uint
-}
-
-func (b UplinkInfo) GetName() string {
-	return b.Type
-}
-func (b UplinkInfo) GetCount() uint {
-	return b.Count
-}
-
-type UplinkRoleInfo struct {
-	Name        string
-	Count       uint
-	Id          string
-	UplinkInfos InfoSlice
-}
-
-func (b UplinkRoleInfo) GetName() string {
-	return b.Name
-}
-func (b UplinkRoleInfo) GetCount() uint {
-	return b.Count
-}
-
 func UplinkGET(c *gin.Context) (int, string, gin.H) {
-	query := r.Database.
-		Preload("Factions", r.PreloadSelect("ID", "RootID", "Victory", "FactionName")).
-		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "Victory", "RoleName")).
-		Preload("Factions.Members.UplinkInfo", r.PreloadSelect("ID", "RoleID")).
-		Preload("Factions.Members.UplinkInfo.UplinkPurchases", r.PreloadSelect("UplinkInfoID", "ItemType", "Bundlename", "Cost"))
-	_, processRoots, _, _, _ := getRoots(query, c)
-
-	uplinkRoles := make(InfoSlice, 0)
-
-	addUplinkInfo := func(infos InfoSlice, purchases []domain.UplinkPurchases, faction *domain.Factions, role *domain.Role) InfoSlice {
-		var isWin uint
-		if faction != nil {
-			isWin = uint(faction.Victory)
-		} else {
-			isWin = uint(role.Victory)
-		}
-
-		processed := make([]string, 0, len(purchases))
-
-		for _, purchase := range purchases {
-			itemType := purchase.ItemType
-			if itemType == "" {
-				itemType = purchase.Bundlename
-			}
-			itemName := purchase.Bundlename
-			// бандлу с рандомным лутом ставится такое же название, что и виду коробки
-			// покупка "рандомного итема" имеет тот же тайп, но цену в 0
-			if itemType == "/obj/item/weapon/storage/box/syndicate" {
-				if purchase.Cost > 0 {
-					itemType = itemName
-				} else {
-					itemName = "Random Item"
-					itemType = "Random Item"
-				}
-			}
-
-			foundInfo, ok := infos.HasName(itemType)
-			if !ok {
-				infos = append(infos, &UplinkInfo{
-					Name:       itemName,
-					Count:      1,
-					TotalCount: 1,
-					Type:       itemType,
-					Wins:       isWin,
-					Winrate:    isWin * 100,
-					TotalCost:  uint(purchase.Cost),
-				})
-			} else {
-				uplinkInfo := (*foundInfo).(*UplinkInfo)
-				uplinkInfo.TotalCount++
-				uplinkInfo.TotalCost += uint(purchase.Cost)
-				if !slices.Contains(processed, itemType) {
-					uplinkInfo.Count++
-					uplinkInfo.Wins += isWin
-					uplinkInfo.Winrate = uplinkInfo.Wins * 100 / uplinkInfo.Count
-				}
-			}
-			processed = append(processed, itemType)
-		}
-		return infos
-	}
-
-	for _, root := range processRoots {
-		for _, faction := range root.Factions {
-			for _, role := range faction.Members {
-				if len(role.UplinkInfo.UplinkPurchases) == 0 {
-					continue
-				}
-				roleName := role.RoleName
-
-				var useFaction *domain.Factions
-				if faction.FactionName == "Syndicate Operatives" || faction.FactionName == "Revolution" {
-					roleName = faction.FactionName
-					useFaction = &faction
-				}
-				foundInfo, ok := uplinkRoles.HasName(roleName)
-				if !ok {
-					newUplinkInfo := &UplinkRoleInfo{
-						Name:  roleName,
-						Id:    Ckey(roleName),
-						Count: 1,
-					}
-					s := StatInfo(newUplinkInfo)
-					foundInfo = &s
-					uplinkRoles = append(uplinkRoles, newUplinkInfo)
-				} else {
-					(*foundInfo).(*UplinkRoleInfo).Count++
-				}
-
-				newUplinkInfo := (*foundInfo).(*UplinkRoleInfo)
-				newUplinkInfo.UplinkInfos = addUplinkInfo(newUplinkInfo.UplinkInfos, role.UplinkInfo.UplinkPurchases, useFaction, &role)
-			}
-		}
-	}
-
-	return 200, "uplink.html", gin.H{
-		"uplinkPurchases": uplinkRoles,
-	}
+	return 200, "uplink.html", gin.H{}
 }
 
 type ObjectiveInfo struct {

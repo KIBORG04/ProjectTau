@@ -38,6 +38,14 @@
         $.post("/api/changling", dates, createHtml, "json")
     }
 
+    const HumanColumnName = {
+        "Name": "Название",
+        "Count": "Общее кол-во",
+        "Wins": "Побед",
+        "Winrate": "Винрейт",
+        "TotalCost": "Потрачено генов",
+    }
+
     let myData = {};
 
     function createHtml(data) {
@@ -48,7 +56,6 @@
             },
             {}
         )
-        debugger
         const dataKeys = Object.keys(myData)
         const dataAbilities = Object.keys(myData[dataKeys[0]].ChanglingAbilities)
         let leftColItems = dataKeys.map((str) =>
@@ -66,7 +73,7 @@
 
         let dataCol = `<div class="table-responsive">`
 
-        const tableHeaders = Object.keys(myData[dataKeys[0]].ChanglingAbilities[dataAbilities[0]]).map((str) => `<th scope="col">${str}</th>`)
+        const tableHeaders = Object.keys(myData[dataKeys[0]].ChanglingAbilities[dataAbilities[0]]).map((str) => `<th scope="col">${HumanColumnName[str]}</th>`)
 
         let firstElemShown = false
         for (const key in myData) {

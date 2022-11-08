@@ -3,6 +3,8 @@ package stats
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/exp/slices"
+	"gorm.io/gorm"
 	"net/http"
 	"ssstatistics/internal/bots/telegram"
 	"ssstatistics/internal/domain"
@@ -136,14 +138,14 @@ type (
 )
 
 func ApiChanglingGET(c *gin.Context) {
-	roleAbilitiesMap := make(map[string]*changlingRole)
-
 	query := r.Database.
 		Preload("Factions", r.PreloadSelect("ID", "RootID", "Victory", "FactionName")).
 		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "Victory", "RoleName")).
 		Preload("Factions.Members.ChangelingInfo", r.PreloadSelect("ID", "RoleID")).
 		Preload("Factions.Members.ChangelingInfo.ChangelingPurchase", r.PreloadSelect("ChangelingInfoID", "PowerType", "PowerName", "Cost"))
 	_, processRoots, _, _, _ := getRoots(query, c)
+
+	roleAbilitiesMap := make(map[string]*changlingRole)
 
 	for _, root := range processRoots {
 		for _, faction := range root.Factions {
@@ -186,4 +188,120 @@ func ApiChanglingGET(c *gin.Context) {
 	}
 
 	c.JSON(200, roleAbilitiesMap)
+}
+
+type (
+	UplinkRoleInfo struct {
+		Name        string
+		Count       uint
+		UplinkInfos map[string]*UplinkInfo
+	}
+
+	UplinkInfo struct {
+		Name       string
+		Count      uint
+		TotalCount uint
+		Wins       uint
+		Winrate    uint
+		TotalCost  uint
+	}
+)
+
+func ApiUplinkGET(c *gin.Context) {
+	query := r.Database.
+		Preload("Factions", r.PreloadSelect("ID", "RootID", "Victory", "FactionName"), func(tx *gorm.DB) *gorm.DB {
+			return tx.Where("faction_name <> ?", "Custom Squad")
+		}).
+		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "Victory", "RoleName"), func(tx *gorm.DB) *gorm.DB {
+			return tx.Where("id in (select role_id from uplink_infos where id in (select uplink_info_id from uplink_purchases))")
+		}).
+		Preload("Factions.Members.UplinkInfo", r.PreloadSelect("ID", "RoleID")).
+		Preload("Factions.Members.UplinkInfo.UplinkPurchases", r.PreloadSelect("UplinkInfoID", "ItemType", "Bundlename", "Cost"))
+	_, processRoots, _, _, _ := getRoots(query, c)
+
+	uplinkRolesMap := make(map[string]*UplinkRoleInfo, 0)
+
+	for _, root := range processRoots {
+		for _, faction := range root.Factions {
+			if faction.FactionName == "Custom Squad" {
+				continue
+			}
+			for _, role := range faction.Members {
+				if len(role.UplinkInfo.UplinkPurchases) == 0 {
+					continue
+				}
+				roleName := role.RoleName
+
+				var useFaction bool
+				if faction.FactionName == "Syndicate Operatives" || faction.FactionName == "Revolution" {
+					roleName = faction.FactionName
+					useFaction = true
+				}
+				uplinkRole, ok := uplinkRolesMap[Ckey(roleName)]
+				if !ok {
+					uplinkRole = &UplinkRoleInfo{
+						Name:        roleName,
+						Count:       1,
+						UplinkInfos: make(map[string]*UplinkInfo),
+					}
+					uplinkRolesMap[Ckey(roleName)] = uplinkRole
+				} else {
+					uplinkRole.Count++
+				}
+				var isWin uint
+				if useFaction {
+					isWin = uint(faction.Victory)
+				} else {
+					isWin = uint(role.Victory)
+				}
+
+				processed := make([]string, 0, len(role.UplinkInfo.UplinkPurchases))
+				for _, purchase := range role.UplinkInfo.UplinkPurchases {
+					itemType := purchase.ItemType
+					if itemType == "" {
+						itemType = purchase.Bundlename
+					}
+					if itemType != "/obj/item/weapon/storage/box/syndicate" {
+						splitType := strings.Split(purchase.ItemType, "/")
+						itemType = splitType[len(splitType)-1]
+					}
+					itemName := purchase.Bundlename
+					// бандлу с рандомным лутом ставится такое же название, что и виду коробки
+					// покупка "рандомного итема" имеет тот же тайп, но цену в 0
+					if itemType == "/obj/item/weapon/storage/box/syndicate" {
+						if purchase.Cost > 0 {
+							itemType = Ckey(itemName)
+						} else {
+							itemName = "Random Item"
+							itemType = "RandomItem"
+						}
+					}
+
+					uplinkPurchase, ok := uplinkRole.UplinkInfos[itemType]
+					if !ok {
+						uplinkPurchase = &UplinkInfo{
+							Name:       itemName,
+							Count:      1,
+							TotalCount: 1,
+							Wins:       isWin,
+							Winrate:    isWin * 100,
+							TotalCost:  uint(purchase.Cost),
+						}
+						uplinkRole.UplinkInfos[itemType] = uplinkPurchase
+					} else {
+						uplinkPurchase.TotalCount++
+						uplinkPurchase.TotalCost += uint(purchase.Cost)
+						if !slices.Contains(processed, itemType) {
+							uplinkPurchase.Count++
+							uplinkPurchase.Wins += isWin
+							uplinkPurchase.Winrate = uplinkPurchase.Wins * 100 / uplinkPurchase.Count
+						}
+					}
+					processed = append(processed, itemType)
+				}
+			}
+		}
+	}
+
+	c.JSON(200, uplinkRolesMap)
 }
