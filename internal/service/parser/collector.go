@@ -120,7 +120,9 @@ func (c *Collector) requestGET(url string) *http.Response {
 
 func (c *Collector) collectByUrl(link *RoundDto) {
 	resp := c.requestGET(link.link)
-
+	if resp == nil {
+		return
+	}
 	var root d.Root
 	dec := json.NewDecoder(resp.Body)
 	dec.DisallowUnknownFields()

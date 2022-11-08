@@ -258,17 +258,15 @@ func ApiUplinkGET(c *gin.Context) {
 				processed := make([]string, 0, len(role.UplinkInfo.UplinkPurchases))
 				for _, purchase := range role.UplinkInfo.UplinkPurchases {
 					itemType := purchase.ItemType
+					itemName := purchase.Bundlename
 					if itemType == "" {
-						itemType = purchase.Bundlename
-					}
-					if itemType != "/obj/item/weapon/storage/box/syndicate" {
+						itemType = Ckey(purchase.Bundlename)
+					} else if itemType != "/obj/item/weapon/storage/box/syndicate" {
 						splitType := strings.Split(purchase.ItemType, "/")
 						itemType = splitType[len(splitType)-1]
-					}
-					itemName := purchase.Bundlename
-					// бандлу с рандомным лутом ставится такое же название, что и виду коробки
-					// покупка "рандомного итема" имеет тот же тайп, но цену в 0
-					if itemType == "/obj/item/weapon/storage/box/syndicate" {
+					} else if itemType == "/obj/item/weapon/storage/box/syndicate" {
+						// бандлу с рандомным лутом ставится такое же название, что и виду коробки
+						// покупка "рандомного итема" имеет тот же тайп, но цену в 0
 						if purchase.Cost > 0 {
 							itemType = Ckey(itemName)
 						} else {
