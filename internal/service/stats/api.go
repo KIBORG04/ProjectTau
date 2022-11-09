@@ -209,12 +209,15 @@ type (
 
 func ApiUplinkGET(c *gin.Context) {
 	query := r.Database.
-		Preload("Factions", r.PreloadSelect("ID", "RootID", "Victory", "FactionName"), func(tx *gorm.DB) *gorm.DB {
-			return tx.Where("faction_name <> ?", "Custom Squad")
-		}).
-		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "Victory", "RoleName"), func(tx *gorm.DB) *gorm.DB {
-			return tx.Where("id in (select role_id from uplink_infos where id in (select uplink_info_id from uplink_purchases))")
-		}).
+		Preload("Factions",
+			r.PreloadSelect("ID", "RootID", "Victory", "FactionName"),
+			func(tx *gorm.DB) *gorm.DB {
+				return tx.Where("faction_name <> ?", "Custom Squad")
+			}).
+		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "Victory", "RoleName"),
+			func(tx *gorm.DB) *gorm.DB {
+				return tx.Where("id in (select role_id from uplink_infos where id in (select uplink_info_id from uplink_purchases))")
+			}).
 		Preload("Factions.Members.UplinkInfo", r.PreloadSelect("ID", "RoleID")).
 		Preload("Factions.Members.UplinkInfo.UplinkPurchases", r.PreloadSelect("UplinkInfoID", "ItemType", "Bundlename", "Cost"))
 	_, processRoots, _, _, _ := getRoots(query, c)

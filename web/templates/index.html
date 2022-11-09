@@ -27,7 +27,7 @@
                 </button>
                 <div class="collapse" id="crewDeathsSum">
                     {{ range .crewDeathsCount }}
-                        <li class="list-group-item ps-3 pt-0 pb-0">{{ .Key }}: {{ .Value }}</li>
+                        <li class="list-group-item ps-3 pt-0 pb-0">{{ .Name }}: {{ .Count }}</li>
                     {{ end }}
                 </div>
                 <button class="btn btn-outline-secondary  mt-5" type="button" data-bs-toggle="collapse"
@@ -37,7 +37,7 @@
                 </button>
                 <div class="collapse" id="roleDeathsSum">
                     {{ range .roleDeathsCount }}
-                        <li class="list-group-item ps-3 pt-0 pb-0">{{ .Key }}: {{ .Value }}</li>
+                        <li class="list-group-item ps-3 pt-0 pb-0">{{ .Name }}: {{ .Count }}</li>
                     {{ end }}
                 </div>
                 <ul class="list-group list-group-flush  mt-5">
@@ -48,7 +48,7 @@
                     </button>
                     <div class="collapse" id="modesSum">
                         {{ range .modesCount }}
-                            <li class="list-group-item ps-3 pt-0 pb-0">{{ .Key }}: {{ .Value }}</li>
+                            <li class="list-group-item ps-3 pt-0 pb-0">{{ .Name }}: {{ .Count }}</li>
                         {{ end }}
                     </div>
                 </ul>

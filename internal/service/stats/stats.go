@@ -3,12 +3,11 @@ package stats
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
-	"image"
 	"sort"
 	"ssstatistics/internal/config"
 	"ssstatistics/internal/domain"
-	"ssstatistics/internal/keymap"
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/charts"
 	"ssstatistics/internal/utils"
@@ -36,94 +35,123 @@ func BasicPOST(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
 
 // RootGET TODO: remove keymap.KeyMap
 func RootGET(c *gin.Context) (int, string, gin.H) {
-	query := r.Database.
-		Preload("Deaths", r.PreloadSelect("RootID", "Name", "SpecialRole", "AssignedRole", "DeathX", "DeathY", "DeathZ")).
-		Preload("Explosions", r.PreloadSelect("RootID", "EpicenterX", "EpicenterY", "EpicenterZ", "DevastationRange", "HeavyImpactRange", "LightImpactRange", "FlashRange")).
-		Preload("CommunicationLogs", r.PreloadSelect("RootID", "Title", "Content", "Author")).
-		Preload("Achievements", r.PreloadSelect("RootID", "Title", "Desc", "Key", "Name"))
-	roots, processRoots, alphaRoots, betaRoots, gammaRoots := getRoots(query, c)
+	type Group struct {
+		Name  string
+		Count int
+	}
 
-	crewDeathsCount := make(keymap.MyMap[string, uint], 0)
-	crewDeathsSum := 0
+	var modesCount []Group
+	r.Database.Model(&domain.Root{}).
+		Select("mode as name, count(mode) as count").
+		Where("mode <> ''").
+		Group("mode").
+		Order("count desc").
+		Scan(&modesCount)
 
-	roleDeathsCount := make(keymap.MyMap[string, uint], 0)
-	roleDeathsSum := 0
+	var modesSum int
+	for _, group := range modesCount {
+		modesSum += group.Count
+	}
 
-	modesCount := make(keymap.MyMap[string, uint], 0)
-	modesSum := 0
+	var crewDeathsCount []Group
+	r.Database.Model(&domain.Deaths{}).
+		Select("assigned_role as name, count(assigned_role) as count").
+		Where("assigned_role in (?)", stationPositions).
+		Where("name not like 'maintenance drone%'").
+		Group("assigned_role").
+		Order("count desc").
+		Scan(&crewDeathsCount)
 
+	var crewDeathsSum int
+	for _, group := range crewDeathsCount {
+		crewDeathsSum += group.Count
+	}
+
+	var roleDeathsCount []Group
+	r.Database.Model(&domain.Deaths{}).
+		Select("special_role as name, count(special_role) as count").
+		Where("special_role <> ''").
+		Group("special_role").
+		Order("count desc").
+		Scan(&roleDeathsCount)
+
+	var roleDeathsSum int
+	for _, group := range roleDeathsCount {
+		roleDeathsSum += group.Count
+	}
+
+	/* TODO:
 	deathCoords := make([]image.Point, 0, crewDeathsSum)
 	explosionCoords := make([]image.Point, 0)
 
-	var allAchievement []domain.Achievement
-	var allAnnounces []domain.CommunicationLogs
-
-	var lastRoot *domain.Root
 	for _, root := range processRoots {
-		modesCount = keymap.AddElem(modesCount, root.Mode, 1)
-		modesSum++
 		for _, death := range root.Deaths {
-			if IsStationPlayer(death.AssignedRole, death.Name) {
-				crewDeathsCount = keymap.AddElem(crewDeathsCount, death.AssignedRole, 1)
-				crewDeathsSum++
-			}
-			if death.SpecialRole != "" {
-				roleDeathsCount = keymap.AddElem(roleDeathsCount, death.SpecialRole, 1)
-				roleDeathsSum++
-			}
 			if death.DeathZ == 2 && root.Map == "Box Station" {
 				deathCoords = append(deathCoords, image.Point{int(death.DeathX), int(death.DeathY)})
 			}
-		}
-		if lastRoot == nil || root.RoundID > lastRoot.RoundID {
-			lastRoot = root
-		}
-		if len(root.Achievements) > 0 {
-			allAchievement = append(allAchievement, root.Achievements...)
-		}
-		for _, log := range root.CommunicationLogs {
-			allAnnounces = append(allAnnounces, log)
 		}
 		for _, explosion := range root.Explosions {
 			if explosion.EpicenterZ == 2 && root.Map == "Box Station" && explosion.DevastationRange == 0 && explosion.HeavyImpactRange == 0 && explosion.LightImpactRange == 2 && explosion.FlashRange == 3 {
 				explosionCoords = append(explosionCoords, image.Point{int(explosion.EpicenterX), int(explosion.EpicenterY)})
 			}
 		}
-	}
 
-	sort.Stable(sort.Reverse(modesCount))
-	sort.Stable(sort.Reverse(crewDeathsCount))
-	sort.Stable(sort.Reverse(roleDeathsCount))
+	Preload("Explosions", r.PreloadSelect("RootID", "EpicenterX", "EpicenterY", "EpicenterZ", "DevastationRange", "HeavyImpactRange", "LightImpactRange", "FlashRange")).
+	go heatmap.Create(c.Request.Context(), "deaths", deathCoords)
+	go heatmap.Create(c.Request.Context(), "explosions", explosionCoords)
+	}*/
 
 	var randComm domain.CommunicationLogs
-	if len(allAnnounces) > 0 {
-		randComm = utils.Pick(allAnnounces)
-	}
+	r.Database.Model(&randComm).Select("Title", "Content", "Author").Order("random()").Limit(1).
+		Find(&randComm)
 
 	var lastAchievement domain.Achievement
-	if len(allAchievement) > 0 {
-		lastAchievement = utils.Pick(allAchievement)
+	r.Database.Model(&lastAchievement).Select("Title", "Desc", "Key", "Name").Order("random()").Limit(1).
+		Find(&lastAchievement)
+
+	var lastRoot domain.Root
+	r.Database.Model(&lastRoot).Select("Version", "RoundID", "Date").Order("round_id desc").Limit(1).
+		Find(&lastRoot)
+
+	var rootsStatistics []struct {
+		Server string
+		Count  int
 	}
 
-	var notNilLastRoot domain.Root
-	if lastRoot != nil {
-		notNilLastRoot = *lastRoot
-	}
+	r.Database.Model(&domain.Root{}).
+		Select("server_address as server, count(server_address) as count").
+		Where("server_address <> ''").
+		Group("server_address").
+		Scan(&rootsStatistics)
 
-	// TODO
-	// go heatmap.Create(c.Request.Context(), "deaths", deathCoords)
-	//go heatmap.Create(c.Request.Context(), "explosions", explosionCoords)
+	var (
+		totalRoots      int
+		totalAlphaRoots int
+		totalBetaaRoots int
+		totalGammaRoots int
+	)
+	for _, root := range rootsStatistics {
+		totalRoots += root.Count
+		switch root.Server {
+		case ServerAlphaAddress:
+			totalAlphaRoots += root.Count
+		case ServerBetaAddress:
+			totalBetaaRoots += root.Count
+		case ServerGammaAddress:
+			totalGammaRoots += root.Count
+		}
+	}
 
 	return 200, "index.html", gin.H{
-		"totalRounds": len(roots),
-		"version":     notNilLastRoot.Version,
-		"lastRound":   notNilLastRoot.RoundID,
-		"lastDate":    utils.TrimPGDate(notNilLastRoot.Date),
+		"totalRounds": totalRoots,
+		"version":     lastRoot.Version,
+		"lastRound":   lastRoot.RoundID,
+		"lastDate":    utils.TrimPGDate(lastRoot.Date),
 		"firstDate":   CurrentStatisticsDate,
 
-		"alphaRounds": len(alphaRoots),
-		"betaRounds":  len(betaRoots),
-		"gammaRounds": len(gammaRoots),
+		"alphaRounds": totalAlphaRoots,
+		"betaRounds":  totalBetaaRoots,
+		"gammaRounds": totalGammaRoots,
 
 		"modesCount":      modesCount,
 		"modesSum":        modesSum,
@@ -325,7 +353,11 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.
 		Preload("Factions", r.PreloadSelect("ID", "RootID", "FactionName")).
 		Preload("Factions.FactionObjectives", r.PreloadSelect("OwnerID", "Type", "Completed")).
-		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "RoleName")).
+		Preload("Factions.Members",
+			r.PreloadSelect("ID", "OwnerID", "RoleName"),
+			func(tx *gorm.DB) *gorm.DB {
+				return tx.Where("id in (select owner_id from role_objectives)")
+			}).
 		Preload("Factions.Members.RoleObjectives", r.PreloadSelect("OwnerID", "Type", "Completed"))
 	_, processRoots, _, _, _ := getRoots(query, c)
 
