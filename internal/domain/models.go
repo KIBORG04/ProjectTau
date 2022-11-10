@@ -25,8 +25,6 @@ var Models = []any{
 	new(RitenameByCount),
 
 	new(Player),
-	new(MapStats),
-	new(MapAttribute),
 	new(Top),
 	new(TopMember),
 }

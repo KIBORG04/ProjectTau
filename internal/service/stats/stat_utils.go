@@ -65,12 +65,7 @@ func getCheckboxStates(c *gin.Context) map[string]string {
 	return checkboxesStates
 }
 
-// db is configured
-func getRoots(db *gorm.DB, c *gin.Context) ([]*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root, []*domain.Root) {
-	checkboxes := getCheckboxStates(c)
-
-	var roots []*domain.Root
-
+func applyDBQueryByDate(db *gorm.DB, c *gin.Context) {
 	startDate := c.DefaultPostForm("date_start", "2022-02-27")
 	endDate := c.DefaultPostForm("date_end", time.Now().Format("2006-01-02"))
 
@@ -84,7 +79,9 @@ func getRoots(db *gorm.DB, c *gin.Context) ([]*domain.Root, []*domain.Root, []*d
 			db.Where("date BETWEEN ? AND ?", startDate, endDate)
 		}
 	}
+}
 
+func applyDBQueryByServers(db *gorm.DB, checkboxes map[string]string) {
 	// cringe and cringe orm
 	checkboxesKeys := make([]string, 0, len(checkboxes))
 	for k, v := range checkboxes {
@@ -97,36 +94,40 @@ func getRoots(db *gorm.DB, c *gin.Context) ([]*domain.Root, []*domain.Root, []*d
 	db.Where("server_address = ? OR server_address = ? OR server_address = ?",
 		ServerByAddress[checkboxesKeys[0]], ServerByAddress[checkboxesKeys[1]], ServerByAddress[checkboxesKeys[2]])
 
+}
+
+// db is configured
+func getRoots(db *gorm.DB, c *gin.Context) []*domain.Root {
+	checkboxes := getCheckboxStates(c)
+
+	var roots []*domain.Root
+
+	applyDBQueryByDate(db, c)
+	applyDBQueryByServers(db, checkboxes)
+
 	db.Omit("CompletionHTML").
 		Find(&roots)
 
 	var processRoots []*domain.Root
-
-	var alphaRoots []*domain.Root
-	var betaRoots []*domain.Root
-	var gammaRoots []*domain.Root
 	for _, rr := range roots {
 		root := rr
 		switch root.ServerAddress {
 		case ServerAlphaAddress:
-			alphaRoots = append(alphaRoots, root)
 			if checkboxes[Alpha] != "" {
 				processRoots = append(processRoots, root)
 			}
 		case ServerBetaAddress:
-			betaRoots = append(betaRoots, root)
 			if checkboxes[Beta] != "" {
 				processRoots = append(processRoots, root)
 			}
 		case ServerGammaAddress:
-			gammaRoots = append(gammaRoots, root)
 			if checkboxes[Gamma] != "" {
 				processRoots = append(processRoots, root)
 			}
 		}
 	}
 
-	return roots, processRoots, alphaRoots, betaRoots, gammaRoots
+	return processRoots
 }
 
 type InfoSlice []StatInfo

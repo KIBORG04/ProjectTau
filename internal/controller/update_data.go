@@ -39,7 +39,6 @@ func InitializeDBUpdaters() {
 	DBUpdaters = append(DBUpdaters, tops.ParseTopData)
 	DBUpdaters = append(DBUpdaters, mmr.ParseMMR)
 	DBUpdaters = append(DBUpdaters, maps.FixMaxShit)
-	DBUpdaters = append(DBUpdaters, maps.ParseMapsInfo)
 	DBUpdaters = append(DBUpdaters, cleaning.CleanAnnounces)
 }
 

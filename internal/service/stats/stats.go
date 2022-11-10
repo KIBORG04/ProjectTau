@@ -227,7 +227,7 @@ func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 		Preload("Factions.FactionObjectives", r.PreloadSelect("OwnerID", "Completed")).
 		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "RoleName", "Victory")).
 		Preload("Factions.Members.RoleObjectives", r.PreloadSelect("OwnerID", "Completed"))
-	_, processRoots, _, _, _ := getRoots(query, c)
+	processRoots := getRoots(query, c)
 
 	factionsSum := 0
 	factionsCount := make(InfoSlice, 0)
@@ -359,7 +359,7 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 				return tx.Where("id in (select owner_id from role_objectives)")
 			}).
 		Preload("Factions.Members.RoleObjectives", r.PreloadSelect("OwnerID", "Type", "Completed"))
-	_, processRoots, _, _, _ := getRoots(query, c)
+	processRoots := getRoots(query, c)
 
 	objectiveHolders := make(InfoSlice, 0)
 
@@ -457,7 +457,7 @@ func RoundGET(c *gin.Context) (int, string, gin.H) {
 
 func RoundsGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.Order("round_id DESC").Limit(100)
-	_, processRoots, _, _, _ := getRoots(query, c)
+	processRoots := getRoots(query, c)
 
 	return 200, "rounds.html", gin.H{
 		"roots": processRoots,

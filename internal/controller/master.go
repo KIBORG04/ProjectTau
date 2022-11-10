@@ -77,6 +77,7 @@ func initializeRoutes() {
 		api.GET("/mmr", stats.ApiMmrGET)
 
 		api.GET("/maps", stats.ApiMapsGET)
+		api.POST("/maps", stats.ApiMapsGET)
 
 		api.POST("/send_feedback", stats.ApiSendFeedback)
 

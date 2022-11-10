@@ -15,24 +15,24 @@
 {{ template "footer.html" .}}
 <script>
     const HumanizeAttribute = {
-        "Picked": "Выбрано раз",
-        "AvgDuration": "Длительность",
-        "AvgCrewsocre": "Очков станции",
-        "AvgStuffshipped": "Карго отправило предметов",
-        "AvgStuffharvested": "Собрано растений",
-        "AvgOremined": "Добыто руды",
-        "AvgResearchdone": "Исследований",
-        "AvgPowerloss": " АПЦ с 0% заряда",
-        "AvgMess": "Количество Грязи",
-        "AvgMeals": "Еды сделано",
-        "AvgNuked": "Станция взорвана",
-        "AvgRecAntags": "Деконверчено антагов",
-        "AvgCrewEscaped": "Улетело экипажа",
-        "AvgCrewDead": "Умерло экипажа",
-        "AvgCrewTotal": "Всего экипажа",
-        "AvgCrewSurvived": "Выжило экипажа",
-        "AvgFoodeaten": "Съедено еды",
-        "AvgClownabuse": "Ударов по клоуну",
+        "Count": "Выбрано раз",
+        "Duration": "Длительность",
+        "Crewscore": "Очков станции",
+        "Stuffshipped": "Карго отправило предметов",
+        "Stuffharvested": "Собрано растений",
+        "Oremined": "Добыто руды",
+        "Researchdone": "Исследований",
+        "Powerloss": " АПЦ с 0% заряда",
+        "Mess": "Количество Грязи",
+        "Meals": "Еды сделано",
+        "Nuked": "Станция взорвана",
+        "Recantags": "Деконверчено антагов",
+        "Crewescaped": "Улетело экипажа",
+        "Crewdead": "Умерло экипажа",
+        "Crewtotal": "Всего экипажа",
+        "Crewsurvived": "Выжило экипажа",
+        "Foodeaten": "Съедено еды",
+        "Clownabuse": "Ударов по клоуну",
     };
 
     const Server2Name = {
@@ -44,54 +44,71 @@
     function sec2duration(seconds) {
         let hours = Math.floor(seconds / 60 / 60);
         let minutes = Math.floor(seconds / 60) - hours * 60;
-        hours = (hours > 10) ? hours : "0" + hours
-        minutes = (minutes > 10) ? minutes : "0" + minutes
+        hours = (hours >= 10) ? hours : "0" + hours
+        minutes = (minutes >= 10) ? minutes : "0" + minutes
         return `${hours}:${minutes}`
     }
 
-    $.getJSON("/api/maps", function (data) {
-        let servers = data.reduce((acc, elem) => acc.add(elem.ServerID), new Set())
+    $("#date_start").change(function () {
+        startPost({date_start: $(this).val()})
+    });
+
+    $("#date_end").change(function () {
+        startPost({date_end: $(this).val()})
+    });
+
+
+    startPost({})
+
+    function startPost(dates) {
+        $("#maps_placeholder").html(`<div class="spinner-border" role="status"></div>`)
+        $.post("/api/maps", dates, createHtml, "json")
+    }
+
+    function createHtml(data) {
+        let servers = data.reduce((acc, elem) => acc.add(elem.Server), new Set())
         servers = Array.from(servers).sort()
 
         let dataByAttribute = {}
         for (const datum of data) {
-            for (const attributesKey in datum.Attributes) {
+            for (const attributesKey in datum) {
+                if (attributesKey === "Name" || attributesKey === "Server") {
+                    continue
+                }
                 if (!dataByAttribute[attributesKey]) {
                     dataByAttribute[attributesKey] = []
                 }
                 const arr = dataByAttribute[attributesKey]
                 arr.push({
-                    MapName: datum.MapName,
-                    ServerID: datum.ServerID,
-                    Value: datum.Attributes[attributesKey]
+                    Name: datum.Name,
+                    Server: datum.Server,
+                    Value: datum[attributesKey]
                 })
                 for (const elem of dataByAttribute[attributesKey]) {
-                    dataByAttribute[attributesKey].sort((a, b) => (a.MapName > b.MapName) ? 1 : ((b.MapName > a.MapName) ? -1 : 0))
+                    dataByAttribute[attributesKey].sort((a, b) => (a.Name > b.Name) ? 1 : ((b.Name > a.Name) ? -1 : 0))
                 }
             }
         }
-        console.log(dataByAttribute)
 
         let uniqMapsByServer = []
         for (const datum of data) {
-            if (!uniqMapsByServer[datum.ServerID]) {
-                uniqMapsByServer[datum.ServerID] = []
+            if (!uniqMapsByServer[datum.Server]) {
+                uniqMapsByServer[datum.Server] = []
             }
-            uniqMapsByServer[datum.ServerID].push(datum.MapName)
-            uniqMapsByServer[datum.ServerID].sort()
+            uniqMapsByServer[datum.Server].push(datum.Name)
+            uniqMapsByServer[datum.Server].sort()
         }
-        console.log(uniqMapsByServer)
 
         let html = ""
-        for (const serverID of servers) {
-            html += `<p class='h2 text-center'>${Server2Name[serverID]}</p>`
+        for (const Server of servers) {
+            html += `<p class='h2 text-center'>${Server2Name[Server]}</p>`
             html += `<div class="table-responsive">`
-            html += `<table id="${serverID.substring(serverID.length - 4)}" class="table table-bordered table-sm table-hover table-striped">`
+            html += `<table id="${Server.substring(Server.length - 4)}" class="table table-bordered table-sm table-hover table-striped">`
 
             html += `<thead>`
             html += `<tr>`
             html += `<th># Средние значения</th>`
-            for (const map of uniqMapsByServer[serverID]) {
+            for (const map of uniqMapsByServer[Server]) {
                 html += `<th class='text-center'>${map}</th>`
             }
             html += `</tr>`
@@ -102,10 +119,10 @@
                 html += `<th>${HumanizeAttribute[key]}</th>`
 
                 for (const elem of dataByAttribute[key]) {
-                    if (elem.ServerID !== serverID) {
+                    if (elem.Server !== Server) {
                         continue;
                     }
-                    if (key === "AvgDuration") {
+                    if (key === "Duration") {
                         html += `<td class='text-center'>${sec2duration(elem.Value)}</td>`
                     } else {
                         html += `<td class='text-center'>${Math.round(elem.Value * 100) / 100}</td>`
@@ -118,6 +135,15 @@
             html += `</div>`
         }
 
-        $("#maps_placeholder").replaceWith(html);
-    })
+        $("#maps_placeholder").html(html);
+
+        for (const Server of servers) {
+           $(`#${Server.substring(Server.length - 4)}`).DataTable({
+                paging: false,
+                searching: false,
+                info: false,
+                ordering: false,
+            });
+        }
+    }
 </script>

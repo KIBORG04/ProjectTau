@@ -35,31 +35,77 @@ func ApiMmrGET(c *gin.Context) {
 }
 
 func ApiMapsGET(c *gin.Context) {
-	var MapStatistics []*domain.MapStats
-	r.Database.
-		Preload("MapAttributes").
-		Find(&MapStatistics)
-
-	type simpleMapStats struct {
-		MapName    string
-		ServerID   string
-		Attributes map[string]string
+	var mapStatistics []*struct {
+		Name           string
+		Server         string
+		Count          int
+		Crewscore      float32
+		Stuffshipped   float32
+		Stuffharvested float32
+		Oremined       float32
+		Researchdone   float32
+		Powerloss      float32
+		Mess           float32
+		Meals          float32
+		Nuked          float32
+		Recantags      float32
+		Crewescaped    float32
+		Crewdead       float32
+		Crewtotal      float32
+		Crewsurvived   float32
+		Foodeaten      float32
+		Clownabuse     float32
+		Duration       float32
 	}
 
-	var maps []*simpleMapStats
-	for _, stats := range MapStatistics {
-		simpleMapStat := &simpleMapStats{
-			MapName:    stats.MapName,
-			ServerID:   stats.ServerID,
-			Attributes: make(map[string]string),
+	query := r.Database.Table("roots r").
+		Select("r.map as name, " +
+			"r.server_address as server, " +
+			"avg(s.crewscore) as crewscore, " +
+			"avg(s.stuffshipped) as stuffshipped, " +
+			"avg(s.stuffharvested) as stuffharvested, " +
+			"avg(s.oremined) as oremined, " +
+			"avg(s.researchdone) as researchdone, " +
+			"avg(s.powerloss) as powerloss, " +
+			"avg(s.mess) as mess, " +
+			"avg(s.meals) as meals, " +
+			"avg(s.nuked) as nuked, " +
+			"avg(s.rec_antags) as RecAntags, " +
+			"avg(s.crew_escaped) as crewescaped, " +
+			"avg(s.crew_dead) as crewdead, " +
+			"avg(s.crew_total) as crewtotal, " +
+			"avg(s.crew_survived) as crewsurvived, " +
+			"avg(s.foodeaten) as foodeaten, " +
+			"avg(s.clownabuse) as clownabuse, " +
+			"count(r.map) as count").
+		Joins("join scores s on s.root_id = r.round_id").
+		Group("r.map, r.server_address")
+	applyDBQueryByDate(query, c)
+	query.Find(&mapStatistics)
+
+	var roots []*domain.Root
+	query = r.Database.Select("duration", "map", "server_address")
+	applyDBQueryByDate(query, c)
+	query.Find(&roots)
+
+	for _, root := range roots {
+		for _, statistic := range mapStatistics {
+			if statistic.Name == root.Map && statistic.Server == root.ServerAddress {
+				roundTime, err := ParseRoundTime(root.Duration)
+				if err == nil {
+					statistic.Duration += float32(roundTime.ToSeconds())
+				} else {
+					statistic.Duration += float32(3600)
+				}
+			}
 		}
-		for _, attribute := range stats.MapAttributes {
-			simpleMapStat.Attributes[attribute.Name] = attribute.Value
-		}
-		maps = append(maps, simpleMapStat)
 	}
 
-	c.JSON(200, maps)
+	for _, statistic := range mapStatistics {
+		statistic.Duration = statistic.Duration / float32(statistic.Count)
+	}
+
+	c.JSON(200, mapStatistics)
 }
 
 func ApiSendFeedback(c *gin.Context) {
@@ -143,7 +189,7 @@ func ApiChanglingGET(c *gin.Context) {
 		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "Victory", "RoleName")).
 		Preload("Factions.Members.ChangelingInfo", r.PreloadSelect("ID", "RoleID")).
 		Preload("Factions.Members.ChangelingInfo.ChangelingPurchase", r.PreloadSelect("ChangelingInfoID", "PowerType", "PowerName", "Cost"))
-	_, processRoots, _, _, _ := getRoots(query, c)
+	processRoots := getRoots(query, c)
 
 	roleAbilitiesMap := make(map[string]*changlingRole)
 
@@ -220,7 +266,7 @@ func ApiUplinkGET(c *gin.Context) {
 			}).
 		Preload("Factions.Members.UplinkInfo", r.PreloadSelect("ID", "RoleID")).
 		Preload("Factions.Members.UplinkInfo.UplinkPurchases", r.PreloadSelect("UplinkInfoID", "ItemType", "Bundlename", "Cost"))
-	_, processRoots, _, _, _ := getRoots(query, c)
+	processRoots := getRoots(query, c)
 
 	uplinkRolesMap := make(map[string]*UplinkRoleInfo, 0)
 
