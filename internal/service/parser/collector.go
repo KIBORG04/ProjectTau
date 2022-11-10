@@ -109,7 +109,6 @@ func (c *Collector) requestGET(url string) *http.Response {
 		c.saveLogs(loggerGet, err)
 		return nil
 	}
-	resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
 		c.saveLogs(loggerGet, resp.Status)
 		return nil
