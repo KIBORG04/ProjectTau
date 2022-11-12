@@ -72,4 +72,7 @@
             order: [[ 0, 'dsc' ]]
         });
     });
+
+    var replaced = $("body").html().replace(/T00:00:00Z/g,'');
+    $("body").html(replaced);
 </script>
