@@ -1,13 +1,12 @@
 module ssstatistics
 
-go 1.18
+go 1.19
 
 require (
 	github.com/PerformLine/go-stockutil v1.9.3
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1
 	github.com/go-yaml/yaml v2.1.0+incompatible
-	github.com/goccy/go-json v0.9.11
 	github.com/lib/pq v1.10.4
 	golang.org/x/exp v0.0.0-20220321155233-aaef6dbbfd82
 	gorm.io/driver/postgres v1.3.1
@@ -49,6 +48,7 @@ require (
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/neurosnap/sentences.v1 v1.0.6 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 	k8s.io/apimachinery v0.23.4 // indirect
 	sigs.k8s.io/json v0.0.0-20211020170558-c049b76a60c6 // indirect
 )

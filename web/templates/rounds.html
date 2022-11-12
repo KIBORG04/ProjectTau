@@ -11,6 +11,13 @@
 
 <div class="container mt-4">
     <div class="row">
+        <div class="input-group">
+            <button class="btn btn-primary" type="button" id="open_round">Поиск раунда</button>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="input_round" name='input_round' placeholder="45923">
+            <label for="input_round">Введите ID раунда</label>
+        </div>
+    </div>
         <div class="fs-5 badge bg-secondary text-wrap mt-2" style="width: 100%">
             Последние раунды
         </div>
@@ -50,10 +57,18 @@
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}
 <script>
+    $("#open_round").click(function () {
+        const val = $("#input_round").val()
+        if(val === "")
+            return
+        window.open("/round/" + val)
+    })
+
     $(function () {
         $('#rounds').DataTable({
             lengthChange: false,
             pageLength: 50,
+            searching: false,
             order: [[ 0, 'dsc' ]]
         });
     });
