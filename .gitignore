@@ -5,3 +5,4 @@
 pg_data/
 config.yaml
 config/config.yaml
+*.png

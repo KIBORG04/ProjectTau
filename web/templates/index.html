@@ -56,26 +56,13 @@
         </div>
         <div class="col-sm-3 col-lg-4 mt-2">
             <ul class="list-group list-group-flush">
-                {{ if ne .randComm.Content "" }}
-                    <figure class="text-end">
-                        <p class="h5">{{ .randComm.Title }}</p>
-                        <p class="fs-6"> {{ .randComm.Content }} </p>
-                        {{ if ne .randComm.Author "" }}
-                            <figcaption class="blockquote-footer">
-                                {{ .randComm.Author }}
-                            </figcaption>
-                        {{ end }}
-                    </figure>
-                {{ end }}
-                {{ if ne .lastAchievement.Title "" }}
-                    <figure class="text-end">
-                        <p class="h5">{{ .lastAchievement.Title }}</p>
-                        <p class="fs-6"> {{ .lastAchievement.Desc }} </p>
-                        <figcaption class="blockquote-footer">
-                            {{ .lastAchievement.Key }} as {{ .lastAchievement.Name }}
-                        </figcaption>
-                    </figure>
-                {{ end }}
+                <div id="random_announce">
+                    <div class="spinner-border text-end" role="status"></div>
+                </div>
+
+                <div id="random_achievement">
+                    <div class="spinner-border text-end" role="status"></div>
+                </div>
             </ul>
         </div>
     </div>
@@ -83,3 +70,49 @@
 
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}
+
+<script>
+    function unescape(str) {
+        return str.replace(/&amp;#34;/g, '"')
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
+            .replace(/&#039;/g, "'")
+    }
+
+    function get_announce() {
+        $.getJSON("/api/random_announce", function (data) {
+            const author = data.Author ? `<figcaption class="blockquote-footer">${data.Author}</figcaption>` : ""
+            const button = `<button id="update_announce" class="btn btn-outline-secondary btn-sm bi bi-arrow-clockwise float-md-end ms-2"></button>`
+            $("#random_announce").html(`
+             <figure class="text-end">
+                        <p class="h5">${button}${data.Title}</p>
+                        <p id="announce_contents" class="fs-6"></p>
+                         ${author}
+             </figure>`)
+            $("#announce_contents").text(unescape(data.Content))
+            $("#update_announce").click(get_announce)
+        })
+    }
+
+    function get_achievement() {
+        $.getJSON("/api/random_achievement", function (data) {
+            const button = `<button id="update_achievement" class="btn btn-outline-secondary btn-sm bi bi-arrow-clockwise float-md-end ms-2"></button>`
+            $("#random_achievement").html(`
+             <figure class="text-end">
+                        <p class="h5">${button}${data.Title}</p>
+                        <p id="achievement_contents" class="fs-6"></p>
+                        <figcaption class="blockquote-footer">
+                            ${data.Key} as ${data.Name}
+                        </figcaption>
+             </figure>`)
+            $("#achievement_contents").text(unescape(data.Desc))
+            $("#update_achievement").click(get_achievement)
+        })
+    }
+
+    get_announce()
+    get_achievement()
+
+</script>

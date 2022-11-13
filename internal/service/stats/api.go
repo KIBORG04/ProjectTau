@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/exp/slices"
 	"gorm.io/gorm"
+	"html/template"
 	"net/http"
 	"ssstatistics/internal/bots/telegram"
 	"ssstatistics/internal/domain"
@@ -351,4 +352,44 @@ func ApiUplinkGET(c *gin.Context) {
 	}
 
 	c.JSON(200, uplinkRolesMap)
+}
+
+func ApiRandomAnnounceGET(c *gin.Context) {
+	var randComm domain.CommunicationLogs
+	r.Database.Model(&randComm).Select("Title", "Content", "Author").Order("random()").Limit(1).
+		Find(&randComm)
+
+	var announce struct {
+		Title   string
+		Content string
+		Author  string
+	}
+
+	announce.Title = randComm.Title
+	announce.Content = template.HTMLEscapeString(randComm.Content)
+	announce.Author = randComm.Author
+
+	c.JSON(200, announce)
+
+}
+
+func ApiRandomAchievementGET(c *gin.Context) {
+	var randAchievement domain.Achievement
+	r.Database.Model(&randAchievement).Select("Title", "Desc", "Key", "Name").Order("random()").Limit(1).
+		Find(&randAchievement)
+
+	var achievement struct {
+		Title string
+		Desc  string
+		Key   string
+		Name  string
+	}
+
+	achievement.Title = randAchievement.Title
+	achievement.Desc = template.HTMLEscapeString(randAchievement.Desc)
+	achievement.Key = randAchievement.Key
+	achievement.Name = randAchievement.Name
+
+	c.JSON(200, achievement)
+
 }

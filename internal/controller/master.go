@@ -88,6 +88,11 @@ func initializeRoutes() {
 
 		api.GET("/uplink", stats.ApiUplinkGET)
 		api.POST("/uplink", stats.ApiUplinkGET)
+
+		api.GET("/random_announce", stats.ApiRandomAnnounceGET)
+
+		api.GET("/random_achievement", stats.ApiRandomAchievementGET)
+
 	}
 
 	// Group using gin.BasicAuth() middleware

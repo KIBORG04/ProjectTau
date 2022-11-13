@@ -101,14 +101,6 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 	go heatmap.Create(c.Request.Context(), "explosions", explosionCoords)
 	}*/
 
-	var randComm domain.CommunicationLogs
-	r.Database.Model(&randComm).Select("Title", "Content", "Author").Order("random()").Limit(1).
-		Find(&randComm)
-
-	var lastAchievement domain.Achievement
-	r.Database.Model(&lastAchievement).Select("Title", "Desc", "Key", "Name").Order("random()").Limit(1).
-		Find(&lastAchievement)
-
 	var lastRoot domain.Root
 	r.Database.Model(&lastRoot).Select("Version", "RoundID", "Date").Order("round_id desc").Limit(1).
 		Find(&lastRoot)
@@ -159,9 +151,6 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		"crewDeathsSum":   crewDeathsSum,
 		"roleDeathsCount": roleDeathsCount,
 		"roleDeathsSum":   roleDeathsSum,
-
-		"randComm":        randComm,
-		"lastAchievement": lastAchievement,
 	}
 }
 
@@ -222,7 +211,11 @@ func completedObjectives[T any](objectives []T) uint {
 
 func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.
-		Preload("LeaveStats", r.PreloadSelect("RootID", "Name", "AssignedRole", "LeaveTime", "LeaveType")).
+		Preload("LeaveStats",
+			r.PreloadSelect("RootID", "Name", "AssignedRole", "LeaveTime", "LeaveType"),
+			func(tx *gorm.DB) *gorm.DB {
+				return tx.Where("assigned_role in (?)", stationPositions).Where("name not like 'maintenance drone%'")
+			}).
 		Preload("Factions", r.PreloadSelect("ID", "RootID", "FactionName", "Victory")).
 		Preload("Factions.FactionObjectives", r.PreloadSelect("OwnerID", "Completed")).
 		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "RoleName", "Victory")).
