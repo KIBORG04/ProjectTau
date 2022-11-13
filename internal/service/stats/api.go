@@ -356,7 +356,11 @@ func ApiUplinkGET(c *gin.Context) {
 
 func ApiRandomAnnounceGET(c *gin.Context) {
 	var randComm domain.CommunicationLogs
-	r.Database.Model(&randComm).Select("Title", "Content", "Author").Order("random()").Limit(1).
+	r.Database.Model(&randComm).
+		Select("Title", "Content", "Author").
+		Where("type not like 'fax%'").
+		Order("random()").
+		Limit(1).
 		Find(&randComm)
 
 	var announce struct {
