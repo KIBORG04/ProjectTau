@@ -73,6 +73,7 @@ func initializeRoutes() {
 
 	apiRoute := base.Group("/api")
 	{
+		// support query with 'ckey' parameter
 		apiRoute.GET("/mmr", api.MmrGET)
 
 		apiRoute.GET("/maps", api.MapsGET)
@@ -91,6 +92,8 @@ func initializeRoutes() {
 		apiRoute.GET("/random_announce", api.RandomAnnounceGET)
 
 		apiRoute.GET("/random_achievement", api.RandomAchievementGET)
+
+		apiRoute.GET("/uplink_buys", api.CkeyUplinkBuysGET)
 	}
 
 	// Group using gin.BasicAuth() middleware

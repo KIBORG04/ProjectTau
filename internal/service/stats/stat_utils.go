@@ -5,11 +5,18 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/exp/slices"
 	"gorm.io/gorm"
+	"regexp"
 	"ssstatistics/internal/domain"
-	"ssstatistics/internal/utils"
 	"strconv"
 	"strings"
 	"time"
+)
+
+// Utility regex
+var (
+	ckeyRegex = regexp.MustCompile(`[';()\\"&8^:$#№@_\s%]`)
+	IsDrone   = regexp.MustCompile(`maintenance drone \(\d+\)`)
+	IsMobName = regexp.MustCompile(`\w+ \(\d+\)`)
 )
 
 type ServerCheckbox struct {
@@ -156,7 +163,7 @@ type StatInfo interface {
 }
 
 func IsStationPlayer(assignment, name string) bool {
-	return slices.Contains(StationPositions, assignment) && utils.IsDrone.FindString(name) == ""
+	return slices.Contains(StationPositions, assignment) && IsDrone.FindString(name) == ""
 }
 
 type RoundTime struct {
@@ -206,6 +213,7 @@ func IsRoundStartLeaver(stat domain.LeaveStats) bool {
 	return false
 }
 
+// Ckey byond functions which remove all spaces and not word symbols
 func Ckey(str string) string {
-	return strings.ReplaceAll(strings.ToLower(str), " ", "")
+	return ckeyRegex.ReplaceAllString(str, "")
 }

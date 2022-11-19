@@ -189,7 +189,7 @@ func ParseTopData() []string {
 
 				// uniq mode checks
 				if faction.FactionName == "Cult Of Blood" &&
-					(utils.IsMobName.FindString(role.MindName) != "" || strings.Contains(role.MindName, "familiar")) {
+					(stats.IsMobName.FindString(role.MindName) != "" || strings.Contains(role.MindName, "familiar")) {
 					continue
 				}
 

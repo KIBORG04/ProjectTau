@@ -15,22 +15,24 @@ import (
 )
 
 func MmrGET(c *gin.Context) {
-	var players []*domain.Player
-	r.Database.
-		Select("Ckey", "MMR").
-		Find(&players)
-
 	type mmr struct {
 		Ckey string
 		MMR  int32
 	}
 
 	var mmrs []*mmr
-	for _, player := range players {
-		mmrs = append(mmrs, &mmr{
-			Ckey: player.Ckey,
-			MMR:  player.MMR,
-		})
+	player, _ := getValidatePlayer(c)
+	if player != (*Player)(nil) {
+		r.Database.
+			Model(&domain.Player{}).
+			Select("Ckey", "MMR").
+			Where("ckey = ?", player.Ckey).
+			Find(&mmrs)
+	} else {
+		r.Database.
+			Model(&domain.Player{}).
+			Select("Ckey", "MMR").
+			Find(&mmrs)
 	}
 
 	c.JSON(200, mmrs)
