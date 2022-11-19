@@ -3,7 +3,8 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	c "ssstatistics/internal/config"
-	"ssstatistics/internal/service/stats"
+	"ssstatistics/internal/service/stats/api"
+	"ssstatistics/internal/service/stats/general"
 )
 
 var router *gin.Engine
@@ -19,80 +20,77 @@ func runUpdateDB(c *gin.Context) {
 }
 
 func initializeRoutes() {
-	base := router.Group("")
-
 	GET := func(f func(*gin.Context) (int, string, gin.H)) func(*gin.Context) {
 		return func(c *gin.Context) {
-			stats.BasicGET(c, f)
+			general.BasicGET(c, f)
 		}
 	}
 
 	POST := func(f func(*gin.Context) (int, string, gin.H)) func(*gin.Context) {
 		return func(c *gin.Context) {
-			stats.BasicPOST(c, f)
+			general.BasicPOST(c, f)
 		}
 	}
 
+	base := router.Group("")
 	{
-		base.GET("/", GET(stats.RootGET))
-		base.POST("/", POST(stats.RootGET))
+		base.GET("/", GET(general.RootGET))
+		base.POST("/", POST(general.RootGET))
 
-		base.GET("/gamemodes", GET(stats.GamemodesGET))
-		base.POST("/gamemodes", POST(stats.GamemodesGET))
+		base.GET("/gamemodes", GET(general.GamemodesGET))
+		base.POST("/gamemodes", POST(general.GamemodesGET))
 
-		base.GET("/uplink", GET(stats.UplinkGET))
-		base.POST("/uplink", POST(stats.UplinkGET))
+		base.GET("/uplink", GET(general.UplinkGET))
+		base.POST("/uplink", POST(general.UplinkGET))
 
-		base.GET("/objectives", GET(stats.ObjectivesGET))
-		base.POST("/objectives", POST(stats.ObjectivesGET))
+		base.GET("/objectives", GET(general.ObjectivesGET))
+		base.POST("/objectives", POST(general.ObjectivesGET))
 
-		base.GET("/rounds", GET(stats.RoundsGET))
-		base.POST("/rounds", POST(stats.RoundsGET))
+		base.GET("/rounds", GET(general.RoundsGET))
+		base.POST("/rounds", POST(general.RoundsGET))
 
-		base.GET("/round/:id", GET(stats.RoundGET))
-		base.GET("/round", GET(stats.RoundsGET))
+		base.GET("/round/:id", GET(general.RoundGET))
+		base.GET("/round", GET(general.RoundsGET))
 
-		base.GET("/tops", GET(stats.TopsGET))
-		base.POST("/tops", POST(stats.TopsGET))
+		base.GET("/tops", GET(general.TopsGET))
+		base.POST("/tops", POST(general.TopsGET))
 
-		base.GET("/mmr", GET(stats.MmrGET))
-		base.POST("/mmr", POST(stats.MmrGET))
+		base.GET("/mmr", GET(general.MmrGET))
+		base.POST("/mmr", POST(general.MmrGET))
 
-		base.GET("/maps", GET(stats.MapsGET))
-		base.POST("/maps", POST(stats.MapsGET))
+		base.GET("/maps", GET(general.MapsGET))
+		base.POST("/maps", POST(general.MapsGET))
 
-		base.GET("/cult", GET(stats.Cult))
+		base.GET("/cult", GET(general.Cult))
 
-		base.GET("/feedback", GET(stats.FeedbackGET))
+		base.GET("/feedback", GET(general.FeedbackGET))
 
-		base.GET("/heatmaps", GET(stats.HeatmapsGET))
+		base.GET("/heatmaps", GET(general.HeatmapsGET))
 
-		base.GET("/changling", GET(stats.ChanglingGET))
-		base.POST("/changling", POST(stats.ChanglingGET))
-
+		base.GET("/changling", GET(general.ChanglingGET))
+		base.POST("/changling", POST(general.ChanglingGET))
 	}
 
-	api := base.Group("/api")
+	apiRoute := base.Group("/api")
 	{
-		api.GET("/mmr", stats.ApiMmrGET)
+		apiRoute.GET("/mmr", api.MmrGET)
 
-		api.GET("/maps", stats.ApiMapsGET)
-		api.POST("/maps", stats.ApiMapsGET)
+		apiRoute.GET("/maps", api.MapsGET)
+		apiRoute.POST("/maps", api.MapsGET)
 
-		api.POST("/send_feedback", stats.ApiSendFeedback)
+		apiRoute.POST("/send_feedback", api.SendFeedback)
 
-		api.GET("/heatmaps", stats.ApiHeatmapsGET)
+		apiRoute.GET("/heatmaps", api.HeatmapsGET)
 
-		api.GET("/changling", stats.ApiChanglingGET)
-		api.POST("/changling", stats.ApiChanglingGET)
+		apiRoute.GET("/changling", api.ChanglingGET)
+		apiRoute.POST("/changling", api.ChanglingGET)
 
-		api.GET("/uplink", stats.ApiUplinkGET)
-		api.POST("/uplink", stats.ApiUplinkGET)
+		apiRoute.GET("/uplink", api.UplinkGET)
+		apiRoute.POST("/uplink", api.UplinkGET)
 
-		api.GET("/random_announce", stats.ApiRandomAnnounceGET)
+		apiRoute.GET("/random_announce", api.RandomAnnounceGET)
 
-		api.GET("/random_achievement", stats.ApiRandomAchievementGET)
-
+		apiRoute.GET("/random_achievement", api.RandomAchievementGET)
 	}
 
 	// Group using gin.BasicAuth() middleware

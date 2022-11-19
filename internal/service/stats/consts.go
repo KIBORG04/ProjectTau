@@ -105,7 +105,7 @@ var (
 		"pAI",
 	}
 
-	stationPositions []string
+	StationPositions []string
 
 	SoloRoles = []string{
 		"TraitorChan",
@@ -144,11 +144,11 @@ var (
 )
 
 func PopulatePositions() {
-	stationPositions = append(stationPositions, commandPositions...)
-	stationPositions = append(stationPositions, engineeringPositions...)
-	stationPositions = append(stationPositions, medicalPositions...)
-	stationPositions = append(stationPositions, sciencePositions...)
-	stationPositions = append(stationPositions, civilianPositions...)
-	stationPositions = append(stationPositions, securityPositions...)
-	stationPositions = append(stationPositions, nonhumanPositions...)
+	StationPositions = append(StationPositions, commandPositions...)
+	StationPositions = append(StationPositions, engineeringPositions...)
+	StationPositions = append(StationPositions, medicalPositions...)
+	StationPositions = append(StationPositions, sciencePositions...)
+	StationPositions = append(StationPositions, civilianPositions...)
+	StationPositions = append(StationPositions, securityPositions...)
+	StationPositions = append(StationPositions, nonhumanPositions...)
 }

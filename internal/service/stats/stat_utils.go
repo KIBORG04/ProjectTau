@@ -16,7 +16,7 @@ type ServerCheckbox struct {
 	Checkboxes []string `form:"server[]"`
 }
 
-func setCheckboxStates(c *gin.Context) {
+func SetCheckboxStates(c *gin.Context) {
 	var serversForm ServerCheckbox
 	err := c.ShouldBind(&serversForm)
 	if err != nil {
@@ -27,7 +27,7 @@ func setCheckboxStates(c *gin.Context) {
 	c.Set("serverCheckboxes", serversForm)
 }
 
-func getCheckboxStates(c *gin.Context) map[string]string {
+func GetCheckboxStates(c *gin.Context) map[string]string {
 	bool2Checked := func(b bool) string {
 		if b {
 			return "checked"
@@ -65,7 +65,7 @@ func getCheckboxStates(c *gin.Context) map[string]string {
 	return checkboxesStates
 }
 
-func applyDBQueryByDate(db *gorm.DB, c *gin.Context) {
+func ApplyDBQueryByDate(db *gorm.DB, c *gin.Context) {
 	startDate := c.DefaultPostForm("date_start", "2022-02-27")
 	endDate := c.DefaultPostForm("date_end", time.Now().Format("2006-01-02"))
 
@@ -81,7 +81,7 @@ func applyDBQueryByDate(db *gorm.DB, c *gin.Context) {
 	}
 }
 
-func applyDBQueryByServers(db *gorm.DB, checkboxes map[string]string) {
+func ApplyDBQueryByServers(db *gorm.DB, checkboxes map[string]string) {
 	// cringe and cringe orm
 	checkboxesKeys := make([]string, 0, len(checkboxes))
 	for k, v := range checkboxes {
@@ -96,14 +96,14 @@ func applyDBQueryByServers(db *gorm.DB, checkboxes map[string]string) {
 
 }
 
-// db is configured
-func getRoots(db *gorm.DB, c *gin.Context) []*domain.Root {
-	checkboxes := getCheckboxStates(c)
+// GetRoots db is configured
+func GetRoots(db *gorm.DB, c *gin.Context) []*domain.Root {
+	checkboxes := GetCheckboxStates(c)
 
 	var roots []*domain.Root
 
-	applyDBQueryByDate(db, c)
-	applyDBQueryByServers(db, checkboxes)
+	ApplyDBQueryByDate(db, c)
+	ApplyDBQueryByServers(db, checkboxes)
 
 	db.Omit("CompletionHTML").
 		Find(&roots)
@@ -156,7 +156,7 @@ type StatInfo interface {
 }
 
 func IsStationPlayer(assignment, name string) bool {
-	return slices.Contains(stationPositions, assignment) && utils.IsDrone.FindString(name) == ""
+	return slices.Contains(StationPositions, assignment) && utils.IsDrone.FindString(name) == ""
 }
 
 type RoundTime struct {

@@ -1,4 +1,4 @@
-package stats
+package api
 
 import (
 	"fmt"
@@ -10,10 +10,11 @@ import (
 	"ssstatistics/internal/bots/telegram"
 	"ssstatistics/internal/domain"
 	r "ssstatistics/internal/repository"
+	"ssstatistics/internal/service/stats"
 	"strings"
 )
 
-func ApiMmrGET(c *gin.Context) {
+func MmrGET(c *gin.Context) {
 	var players []*domain.Player
 	r.Database.
 		Select("Ckey", "MMR").
@@ -35,7 +36,7 @@ func ApiMmrGET(c *gin.Context) {
 	c.JSON(200, mmrs)
 }
 
-func ApiMapsGET(c *gin.Context) {
+func MapsGET(c *gin.Context) {
 	var mapStatistics []*struct {
 		Name           string
 		Server         string
@@ -81,18 +82,18 @@ func ApiMapsGET(c *gin.Context) {
 			"count(r.map) as count").
 		Joins("join scores s on s.root_id = r.round_id").
 		Group("r.map, r.server_address")
-	applyDBQueryByDate(query, c)
+	stats.ApplyDBQueryByDate(query, c)
 	query.Find(&mapStatistics)
 
 	var roots []*domain.Root
 	query = r.Database.Select("duration", "map", "server_address")
-	applyDBQueryByDate(query, c)
+	stats.ApplyDBQueryByDate(query, c)
 	query.Find(&roots)
 
 	for _, root := range roots {
 		for _, statistic := range mapStatistics {
 			if statistic.Name == root.Map && statistic.Server == root.ServerAddress {
-				roundTime, err := ParseRoundTime(root.Duration)
+				roundTime, err := stats.ParseRoundTime(root.Duration)
 				if err == nil {
 					statistic.Duration += float32(roundTime.ToSeconds())
 				} else {
@@ -109,7 +110,7 @@ func ApiMapsGET(c *gin.Context) {
 	c.JSON(200, mapStatistics)
 }
 
-func ApiSendFeedback(c *gin.Context) {
+func SendFeedback(c *gin.Context) {
 	type FeedbackForm struct {
 		Username string `json:"username"`
 		Text     string `json:"text"`
@@ -144,7 +145,7 @@ Text: %s`, form.Username, form.Text)
 	c.JSON(http.StatusOK, "Сообщение отправлено.")
 }
 
-func ApiHeatmapsGET(c *gin.Context) {
+func HeatmapsGET(c *gin.Context) {
 	type Request struct {
 		// explosions, deaths
 		Type          string `form:"type"`
@@ -184,13 +185,13 @@ type (
 	}
 )
 
-func ApiChanglingGET(c *gin.Context) {
+func ChanglingGET(c *gin.Context) {
 	query := r.Database.
 		Preload("Factions", r.PreloadSelect("ID", "RootID", "Victory", "FactionName")).
 		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "Victory", "RoleName")).
 		Preload("Factions.Members.ChangelingInfo", r.PreloadSelect("ID", "RoleID")).
 		Preload("Factions.Members.ChangelingInfo.ChangelingPurchase", r.PreloadSelect("ChangelingInfoID", "PowerType", "PowerName", "Cost"))
-	processRoots := getRoots(query, c)
+	processRoots := stats.GetRoots(query, c)
 
 	roleAbilitiesMap := make(map[string]*changlingRole)
 
@@ -254,7 +255,7 @@ type (
 	}
 )
 
-func ApiUplinkGET(c *gin.Context) {
+func UplinkGET(c *gin.Context) {
 	query := r.Database.
 		Preload("Factions",
 			r.PreloadSelect("ID", "RootID", "Victory", "FactionName"),
@@ -267,7 +268,7 @@ func ApiUplinkGET(c *gin.Context) {
 			}).
 		Preload("Factions.Members.UplinkInfo", r.PreloadSelect("ID", "RoleID")).
 		Preload("Factions.Members.UplinkInfo.UplinkPurchases", r.PreloadSelect("UplinkInfoID", "ItemType", "Bundlename", "Cost"))
-	processRoots := getRoots(query, c)
+	processRoots := stats.GetRoots(query, c)
 
 	uplinkRolesMap := make(map[string]*UplinkRoleInfo, 0)
 
@@ -287,14 +288,14 @@ func ApiUplinkGET(c *gin.Context) {
 					roleName = faction.FactionName
 					useFaction = true
 				}
-				uplinkRole, ok := uplinkRolesMap[Ckey(roleName)]
+				uplinkRole, ok := uplinkRolesMap[stats.Ckey(roleName)]
 				if !ok {
 					uplinkRole = &UplinkRoleInfo{
 						Name:        roleName,
 						Count:       1,
 						UplinkInfos: make(map[string]*UplinkInfo),
 					}
-					uplinkRolesMap[Ckey(roleName)] = uplinkRole
+					uplinkRolesMap[stats.Ckey(roleName)] = uplinkRole
 				} else {
 					uplinkRole.Count++
 				}
@@ -310,7 +311,7 @@ func ApiUplinkGET(c *gin.Context) {
 					itemType := purchase.ItemType
 					itemName := purchase.Bundlename
 					if itemType == "" {
-						itemType = Ckey(purchase.Bundlename)
+						itemType = stats.Ckey(purchase.Bundlename)
 					} else if itemType != "/obj/item/weapon/storage/box/syndicate" {
 						splitType := strings.Split(purchase.ItemType, "/")
 						itemType = splitType[len(splitType)-1]
@@ -318,7 +319,7 @@ func ApiUplinkGET(c *gin.Context) {
 						// бандлу с рандомным лутом ставится такое же название, что и виду коробки
 						// покупка "рандомного итема" имеет тот же тайп, но цену в 0
 						if purchase.Cost > 0 {
-							itemType = Ckey(itemName)
+							itemType = stats.Ckey(itemName)
 						} else {
 							itemName = "Random Item"
 							itemType = "RandomItem"
@@ -354,7 +355,7 @@ func ApiUplinkGET(c *gin.Context) {
 	c.JSON(200, uplinkRolesMap)
 }
 
-func ApiRandomAnnounceGET(c *gin.Context) {
+func RandomAnnounceGET(c *gin.Context) {
 	var randComm domain.CommunicationLogs
 	r.Database.Model(&randComm).
 		Select("Title", "Content", "Author").
@@ -377,7 +378,7 @@ func ApiRandomAnnounceGET(c *gin.Context) {
 
 }
 
-func ApiRandomAchievementGET(c *gin.Context) {
+func RandomAchievementGET(c *gin.Context) {
 	var randAchievement domain.Achievement
 	r.Database.Model(&randAchievement).Select("Title", "Desc", "Key", "Name").Order("random()").Limit(1).
 		Find(&randAchievement)

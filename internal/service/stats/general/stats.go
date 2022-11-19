@@ -1,4 +1,4 @@
-package stats
+package general
 
 import (
 	"fmt"
@@ -10,13 +10,14 @@ import (
 	"ssstatistics/internal/domain"
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/charts"
+	"ssstatistics/internal/service/stats"
 	"ssstatistics/internal/utils"
 )
 
 func BasicGET(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
 	baseContext := gin.H{
 		"baseUrl":          config.Config.BaseUrl,
-		"serverCheckboxes": getCheckboxStates(c),
+		"serverCheckboxes": stats.GetCheckboxStates(c),
 	}
 
 	code, file, context := f(c)
@@ -29,7 +30,7 @@ func BasicGET(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
 }
 
 func BasicPOST(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
-	setCheckboxStates(c)
+	stats.SetCheckboxStates(c)
 	BasicGET(c, f)
 }
 
@@ -56,7 +57,7 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 	var crewDeathsCount []Group
 	r.Database.Model(&domain.Deaths{}).
 		Select("assigned_role as name, count(assigned_role) as count").
-		Where("assigned_role in (?)", stationPositions).
+		Where("assigned_role in (?)", stats.StationPositions).
 		Where("name not like 'maintenance drone%'").
 		Group("assigned_role").
 		Order("count desc").
@@ -125,11 +126,11 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 	for _, root := range rootsStatistics {
 		totalRoots += root.Count
 		switch root.Server {
-		case ServerAlphaAddress:
+		case stats.ServerAlphaAddress:
 			totalAlphaRoots += root.Count
-		case ServerBetaAddress:
+		case stats.ServerBetaAddress:
 			totalBetaaRoots += root.Count
-		case ServerGammaAddress:
+		case stats.ServerGammaAddress:
 			totalGammaRoots += root.Count
 		}
 	}
@@ -139,7 +140,7 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		"version":     lastRoot.Version,
 		"lastRound":   lastRoot.RoundID,
 		"lastDate":    utils.TrimPGDate(lastRoot.Date),
-		"firstDate":   CurrentStatisticsDate,
+		"firstDate":   stats.CurrentStatisticsDate,
 
 		"alphaRounds": totalAlphaRoots,
 		"betaRounds":  totalBetaaRoots,
@@ -197,11 +198,11 @@ func completedObjectives[T any](objectives []T) uint {
 	for _, objective := range objectives {
 		switch t := any(objective).(type) {
 		case domain.RoleObjectives:
-			if t.Completed == ObjectiveWIN {
+			if t.Completed == stats.ObjectiveWIN {
 				completed++
 			}
 		case domain.FactionObjectives:
-			if t.Completed == ObjectiveWIN {
+			if t.Completed == stats.ObjectiveWIN {
 				completed++
 			}
 		}
@@ -214,24 +215,24 @@ func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 		Preload("LeaveStats",
 			r.PreloadSelect("RootID", "Name", "AssignedRole", "LeaveTime", "LeaveType"),
 			func(tx *gorm.DB) *gorm.DB {
-				return tx.Where("assigned_role in (?)", stationPositions).Where("name not like 'maintenance drone%'")
+				return tx.Where("assigned_role in (?)", stats.StationPositions).Where("name not like 'maintenance drone%'")
 			}).
 		Preload("Factions", r.PreloadSelect("ID", "RootID", "FactionName", "Victory")).
 		Preload("Factions.FactionObjectives", r.PreloadSelect("OwnerID", "Completed")).
 		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "RoleName", "Victory")).
 		Preload("Factions.Members.RoleObjectives", r.PreloadSelect("OwnerID", "Completed"))
-	processRoots := getRoots(query, c)
+	processRoots := stats.GetRoots(query, c)
 
 	factionsSum := 0
-	factionsCount := make(InfoSlice, 0)
+	factionsCount := make(stats.InfoSlice, 0)
 
 	rolesSum := 0
-	rolesCount := make(InfoSlice, 0)
+	rolesCount := make(stats.InfoSlice, 0)
 
 	for _, root := range processRoots {
 		var leavers uint
 		for _, leaveStat := range root.LeaveStats {
-			if IsStationPlayer(leaveStat.AssignedRole, leaveStat.Name) && IsRoundStartLeaver(leaveStat) {
+			if stats.IsStationPlayer(leaveStat.AssignedRole, leaveStat.Name) && stats.IsRoundStartLeaver(leaveStat) {
 				leavers++
 			}
 		}
@@ -332,7 +333,7 @@ type OwnerByObjectivesInfo struct {
 	Owner          string
 	Count          uint
 	Id             string
-	ObjectiveInfos InfoSlice
+	ObjectiveInfos stats.InfoSlice
 }
 
 func (b OwnerByObjectivesInfo) GetName() string {
@@ -352,14 +353,14 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 				return tx.Where("id in (select owner_id from role_objectives)")
 			}).
 		Preload("Factions.Members.RoleObjectives", r.PreloadSelect("OwnerID", "Type", "Completed"))
-	processRoots := getRoots(query, c)
+	processRoots := stats.GetRoots(query, c)
 
-	objectiveHolders := make(InfoSlice, 0)
+	objectiveHolders := make(stats.InfoSlice, 0)
 
 	addObjectiveInfo := func(owner *OwnerByObjectivesInfo, objective domain.Objectives) {
 		owner.Count++
 		var isWin uint
-		if objective.Completed == ObjectiveWIN {
+		if objective.Completed == stats.ObjectiveWIN {
 			isWin = 1
 		}
 
@@ -391,7 +392,7 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 				} else {
 					holderInfo = &OwnerByObjectivesInfo{
 						Owner: faction.FactionName,
-						Id:    Ckey(faction.FactionName),
+						Id:    stats.Ckey(faction.FactionName),
 					}
 					objectiveHolders = append(objectiveHolders, holderInfo)
 				}
@@ -413,7 +414,7 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 					} else {
 						holderInfo = &OwnerByObjectivesInfo{
 							Owner: role.RoleName,
-							Id:    Ckey(role.RoleName),
+							Id:    stats.Ckey(role.RoleName),
 						}
 						objectiveHolders = append(objectiveHolders, holderInfo)
 					}
@@ -450,7 +451,7 @@ func RoundGET(c *gin.Context) (int, string, gin.H) {
 
 func RoundsGET(c *gin.Context) (int, string, gin.H) {
 	query := r.Database.Order("round_id DESC").Limit(100)
-	processRoots := getRoots(query, c)
+	processRoots := stats.GetRoots(query, c)
 
 	return 200, "rounds.html", gin.H{
 		"roots": processRoots,
