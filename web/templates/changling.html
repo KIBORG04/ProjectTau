@@ -7,13 +7,8 @@
 </div>
 
 <div class="container mt-4">
-    <div class="row">
-        <div id="left_col" class="col col-auto">
-            <div class="spinner-border" role="status"></div>
-        </div>
-        <div id="data_col" class="col">
-            <div class="spinner-border" role="status"></div>
-        </div>
+    <div id="left_col">
+        <div class="spinner-border" role="status"></div>
     </div>
 </div>
 
@@ -33,7 +28,6 @@
 
     function startPost(dates) {
         $("#left_col").html(`<div class="spinner-border" role="status"></div>`)
-        $("#data_col").html(`<div class="spinner-border" role="status"></div>`)
 
         $.post("/api/changling", dates, createHtml, "json")
     }
@@ -58,28 +52,34 @@
         )
         const dataKeys = Object.keys(myData)
         const dataAbilities = Object.keys(myData[dataKeys[0]].ChanglingAbilities)
-        let leftColItems = dataKeys.map((str) =>
-            `<button
+        let firstElemShown = false
+        let leftColItems = dataKeys.map((str) => {
+                const button = `<button
                 type="button"
-                class="list-group-item list-group-item-action"
-                data-bs-toggle="collapse"
+                role="tab"
+                class="nav-link ${!firstElemShown ? "active" : ""} text-start"
+                id="${str}-tab"
+                data-bs-toggle="pill"
                 data-bs-target="#${str}"
-                aria-expanded="false"
+                aria-expanded="${!firstElemShown ? "true" : "false"}"
                 aria-controls="${str}">
                   ${str} <span class="badge bg-primary rounded-pill">${myData[str].Count}</span>
-                </button>`)
-        let leftCol = `<div class="list-group">${leftColItems.join("")}</div>`
-        $("#left_col").html(leftCol)
+                </button>`
+                firstElemShown = true
+                return button;
+            }
+        )
+        let leftCol = `<div class="row">`
+        leftCol += `<div class="nav flex-column nav-pills col-auto" id="v-pills-tab" role="tablist" aria-orientation="vertical">${leftColItems.join("")}</div>`
 
-        let dataCol = `<div class="table-responsive">`
-
+        let dataCol = `<div class="tab-content col" id="v-pills-tabContent">`
+        firstElemShown = false
         const tableHeaders = Object.keys(myData[dataKeys[0]].ChanglingAbilities[dataAbilities[0]]).map((str) => `<th scope="col">${HumanColumnName[str]}</th>`)
-
-        let firstElemShown = false
         for (const key in myData) {
-            dataCol += `<div class="collapse ${!firstElemShown ? "show" : ""}" id="${key}">`
+            dataCol += `<div class="tab-pane fade ${!firstElemShown ? "show active" : ""}" id="${key}" role="tabpanel" aria-labelledby="${key}-tab">`
             firstElemShown = true
             dataCol += `<div class="fs-5 badge bg-secondary text-wrap">${key}</div>`
+            dataCol += `<div class="table-responsive">`
             dataCol += `<table id="${key}-table" class="table table-sm table-hover table-striped">`
             dataCol += `<thead><tr>`
             dataCol += tableHeaders.join("")
@@ -89,9 +89,9 @@
                 dataCol += `<tr>`
                 for (const abilityHeader in myData[key].ChanglingAbilities[ability]) {
                     const abilityRow = myData[key].ChanglingAbilities[ability][abilityHeader];
-                    if(abilityHeader === "Name") {
+                    if (abilityHeader === "Name") {
                         dataCol += `<th scope="row" class="obj-type">${abilityRow}</th>`
-                    } else if(abilityHeader === "Winrate") {
+                    } else if (abilityHeader === "Winrate") {
                         dataCol += `<td>${abilityRow}%</td>`
                     } else {
                         dataCol += `<td>${abilityRow}</td>`
@@ -102,11 +102,13 @@
             dataCol += `</tbody>`
             dataCol += `</table>`
             dataCol += `</div>`
+            dataCol += `</div>`
         }
 
         dataCol += `</div>`
-
-        $("#data_col").html(dataCol)
+        dataCol += `</div>`
+        leftCol += dataCol + `</div>`
+        $("#left_col").html(leftCol)
 
         for (const key in myData) {
             $(`#${key}-table`).DataTable({
