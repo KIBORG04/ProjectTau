@@ -21,6 +21,8 @@ var Models = []any{
 	new(UplinkPurchases),
 	new(ChangelingInfo),
 	new(ChangelingPurchase),
+	new(WizardInfo),
+	new(WizardPurchase),
 	new(Aspects),
 	new(RitenameByCount),
 

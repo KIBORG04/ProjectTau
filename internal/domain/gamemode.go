@@ -27,6 +27,7 @@ type Role struct {
 	MindCkey         string           `json:"mind_ckey" gorm:"size:256"`
 	UplinkInfo       UplinkInfo       `json:"uplink_info" gorm:"foreignKey:RoleID"`
 	ChangelingInfo   ChangelingInfo   `json:"changeling_info" gorm:"foreignKey:RoleID"`
+	WizardInfo       WizardInfo       `json:"wizard_info" gorm:"foreignKey:RoleID"`
 }
 
 type FactionObjectives Objectives
@@ -41,6 +42,20 @@ type Objectives struct {
 	Type               string `json:"type" gorm:"size:256"`
 	TargetAssignedRole string `json:"target_assigned_role" gorm:"size:256"`
 	TargetSpecialRole  string `json:"target_special_role" gorm:"size:256"`
+}
+
+type WizardInfo struct {
+	ID           int32            `gorm:"uniqueIndex"`
+	RoleID       int32            `gorm:"index"`
+	BookPurchase []WizardPurchase `json:"book_purchases"`
+}
+
+type WizardPurchase struct {
+	ID           int32  `gorm:"uniqueIndex"`
+	WizardInfoID int32  `gorm:"index"`
+	Cost         int32  `json:"cost"`
+	PowerName    string `json:"power_name" gorm:"size:256"`
+	PowerType    string `json:"power_type" gorm:"size:256"`
 }
 
 type UplinkInfo struct {
