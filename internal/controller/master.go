@@ -93,6 +93,10 @@ func initializeRoutes() {
 
 		apiRoute.GET("/random_achievement", api.RandomAchievementGET)
 
+		apiRoute.GET("/random_last_phrase", api.RandomLastPhraseGET)
+
+		apiRoute.GET("/random_flavor", api.RandomFlavorGET)
+
 		apiRoute.GET("/uplink_buys", api.CkeyUplinkBuysGET)
 	}
 

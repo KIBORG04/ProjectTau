@@ -400,3 +400,52 @@ func RandomAchievementGET(c *gin.Context) {
 	c.JSON(200, achievement)
 
 }
+func RandomLastPhraseGET(c *gin.Context) {
+	var randDeath domain.Deaths
+	r.Database.Model(&randDeath).
+		Select("RealName", "RootID", "TimeOfDeath", "LastPhrase").
+		Where("last_phrase <> ''").
+		Order("random()").
+		Limit(1).
+		Find(&randDeath)
+
+	var lastPhrase struct {
+		Name        string
+		RoundID     int32
+		Phrase      string
+		TimeOfDeath string
+	}
+
+	lastPhrase.Name = randDeath.RealName
+	lastPhrase.RoundID = randDeath.RootID
+	lastPhrase.Phrase = randDeath.LastPhrase
+	lastPhrase.TimeOfDeath = randDeath.TimeOfDeath
+
+	c.JSON(200, lastPhrase)
+}
+
+func RandomFlavorGET(c *gin.Context) {
+	var randEntries domain.ManifestEntries
+	r.Database.Model(&randEntries).
+		Select("Name", "Species", "Gender", "Age", "Flavor").
+		Where("flavor <> '' AND char_length(flavor) > 10 AND name NOT LIKE 'syndicate drone%'").
+		Order("random()").
+		Limit(1).
+		Find(&randEntries)
+
+	var lastPhrase struct {
+		Name    string
+		Species string
+		Gender  string
+		Age     uint
+		Flavor  string
+	}
+
+	lastPhrase.Name = randEntries.Name
+	lastPhrase.Species = randEntries.Species
+	lastPhrase.Gender = randEntries.Gender
+	lastPhrase.Age = randEntries.Age
+	lastPhrase.Flavor = template.HTMLEscapeString(randEntries.Flavor)
+
+	c.JSON(200, lastPhrase)
+}

@@ -63,6 +63,14 @@
                 <div id="random_achievement">
                     <div class="spinner-border text-end" role="status"></div>
                 </div>
+
+                <div id="random_flavor">
+                    <div class="spinner-border text-end" role="status"></div>
+                </div>
+
+                <div id="random_last_phrase">
+                    <div class="spinner-border text-end" role="status"></div>
+                </div>
             </ul>
         </div>
     </div>
@@ -112,7 +120,40 @@
         })
     }
 
+    function get_flavor() {
+        $.getJSON("/api/random_flavor", function (data) {
+            const button = `<button id="update_flavor" class="btn btn-outline-secondary btn-sm bi bi-arrow-clockwise float-md-end ms-2"></button>`
+            $("#random_flavor").html(`
+             <figure class="text-end">
+                        <p class="h5">${button}${data.Name}</p>
+                        <p id="flavor_contents" class="fs-6"></p>
+                        <figcaption class="blockquote-footer" style="text-transform:capitalize;">
+                            ${data.Gender}, ${data.Age}, ${data.Species}
+                        </figcaption>
+             </figure>`)
+            $("#flavor_contents").text(unescape(data.Flavor))
+            $("#update_flavor").click(get_flavor)
+        })
+    }
+
+    function get_last_phrase() {
+        $.getJSON("/api/random_last_phrase", function (data) {
+            const button = `<button id="update_last_phrase" class="btn btn-outline-secondary btn-sm bi bi-arrow-clockwise float-md-end ms-2"></button>`
+            $("#random_last_phrase").html(`
+             <figure class="text-end">
+                        <p class="h5">${button}${data.Name} (${data.TimeOfDeath})</p>
+                        <p class="fs-6">${data.Phrase}</p>
+                        <figcaption class="blockquote-footer">
+                            ID: ${data.RoundID}
+                        </figcaption>
+             </figure>`)
+            $("#update_last_phrase").click(get_last_phrase)
+        })
+    }
+
     get_announce()
     get_achievement()
+    get_last_phrase()
+    get_flavor()
 
 </script>
