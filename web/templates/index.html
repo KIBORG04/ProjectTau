@@ -141,10 +141,10 @@
             const button = `<button id="update_last_phrase" class="btn btn-outline-secondary btn-sm bi bi-arrow-clockwise float-md-end ms-2"></button>`
             $("#random_last_phrase").html(`
              <figure class="text-end">
-                        <p class="h5">${button}${data.Name} (${data.TimeOfDeath})</p>
-                        <p class="fs-6">${data.Phrase}</p>
+                        <p class="h5">${button}Перед смертью в ${data.TimeOfDeath}</p>
+                        <p class="fs-6"><span style='font-weight: 500;'>${data.Name}</span>: "${data.Phrase}"</p>
                         <figcaption class="blockquote-footer">
-                            ID: ${data.RoundID}
+                            Round #${data.RoundID}
                         </figcaption>
              </figure>`)
             $("#update_last_phrase").click(get_last_phrase)
