@@ -402,11 +402,13 @@ func RandomAchievementGET(c *gin.Context) {
 }
 func RandomLastPhraseGET(c *gin.Context) {
 	var randDeath domain.Deaths
-	r.Database.Model(&randDeath).
-		Select("RealName", "RootID", "TimeOfDeath", "LastPhrase").
-		Where("last_phrase <> ''").
-		Order("random()").
-		Limit(1).
+	r.Database.Raw(`SELECT *
+						FROM (
+							SELECT distinct on (last_phrase, real_name) last_phrase, real_name, root_id, time_of_death
+							from deaths
+							WHERE last_phrase <> '') as d
+						ORDER BY random()
+						LIMIT 1`).
 		Find(&randDeath)
 
 	var lastPhrase struct {
