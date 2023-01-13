@@ -215,7 +215,7 @@ func ChanglingGET(c *gin.Context) {
 			count(1) as count,
 			sum(victory) as wins, 
 			sum(cost) as total_cost,
-			sum(victory)::real / count(1)::real as winrate
+			sum(victory)*100 / count(1)::real as winrate
 	from (
 		select r.victory, r.role_name, cp.power_type, cp.power_name, cp.cost
 		from roles r
