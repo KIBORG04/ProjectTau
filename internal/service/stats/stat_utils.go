@@ -73,9 +73,16 @@ func GetCheckboxStates(c *gin.Context) map[string]string {
 }
 
 func ApplyDBQueryByDate(db *gorm.DB, c *gin.Context) {
+	startDate, endDate, err := GetValidDates(c)
+	if err == nil {
+		return
+	}
+	db.Where("date BETWEEN ? AND ?", startDate, endDate)
+}
+
+func GetValidDates(c *gin.Context) (string, string, error) {
 	startDate := c.DefaultPostForm("date_start", "2022-02-27")
 	endDate := c.DefaultPostForm("date_end", time.Now().Format("2006-01-02"))
-
 	if startDate != "" && endDate != "" {
 		startStatisticsDateTime, _ := time.Parse("2006-01-02", CurrentStatisticsDate)
 		startDateTime, _ := time.Parse("2006-01-02", startDate)
@@ -83,12 +90,14 @@ func ApplyDBQueryByDate(db *gorm.DB, c *gin.Context) {
 		nowTime := time.Now()
 		if (startDateTime.After(startStatisticsDateTime) || startDateTime.Equal(startStatisticsDateTime)) &&
 			(endDateTime.Day() <= nowTime.Day() && endDateTime.Month() <= nowTime.Month() && endDateTime.Year() <= nowTime.Year()) {
-			db.Where("date BETWEEN ? AND ?", startDate, endDate)
+			return startDate, endDate, nil
 		}
 	}
+	return startDate, endDate, fmt.Errorf("not valid date or dates")
 }
 
-func ApplyDBQueryByServers(db *gorm.DB, checkboxes map[string]string) {
+func GetChosenServers(c *gin.Context) (string, string, string) {
+	var checkboxes = GetCheckboxStates(c)
 	// cringe and cringe orm
 	checkboxesKeys := make([]string, 0, len(checkboxes))
 	for k, v := range checkboxes {
@@ -98,9 +107,12 @@ func ApplyDBQueryByServers(db *gorm.DB, checkboxes map[string]string) {
 			checkboxesKeys = append(checkboxesKeys, "")
 		}
 	}
-	db.Where("server_address = ? OR server_address = ? OR server_address = ?",
-		ServerByAddress[checkboxesKeys[0]], ServerByAddress[checkboxesKeys[1]], ServerByAddress[checkboxesKeys[2]])
+	return ServerByAddress[checkboxesKeys[0]], ServerByAddress[checkboxesKeys[1]], ServerByAddress[checkboxesKeys[2]]
+}
 
+func ApplyDBQueryByServers(db *gorm.DB, c *gin.Context) {
+	s1, s2, s3 := GetChosenServers(c)
+	db.Where("server_address = ? OR server_address = ? OR server_address = ?", s1, s2, s3)
 }
 
 // GetRoots db is configured
@@ -110,7 +122,7 @@ func GetRoots(db *gorm.DB, c *gin.Context) []*domain.Root {
 	var roots []*domain.Root
 
 	ApplyDBQueryByDate(db, c)
-	ApplyDBQueryByServers(db, checkboxes)
+	ApplyDBQueryByServers(db, c)
 
 	db.Omit("CompletionHTML").
 		Find(&roots)

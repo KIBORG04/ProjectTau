@@ -172,68 +172,94 @@ func HeatmapsGET(c *gin.Context) {
 		Error:     "228 Server shlet tebya нахуй."})
 }
 
-type (
-	changlingRole struct {
-		Count              uint
-		ChanglingAbilities map[string]*changlingAbilities
-	}
-
-	changlingAbilities struct {
-		Name      string
-		Count     uint
-		Wins      uint
-		Winrate   uint
-		TotalCost uint
-	}
-)
-
 func ChanglingGET(c *gin.Context) {
-	query := r.Database.
-		Preload("Factions", r.PreloadSelect("ID", "RootID", "Victory", "FactionName")).
-		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "Victory", "RoleName")).
-		Preload("Factions.Members.ChangelingInfo", r.PreloadSelect("ID", "RoleID")).
-		Preload("Factions.Members.ChangelingInfo.ChangelingPurchase", r.PreloadSelect("ChangelingInfoID", "PowerType", "PowerName", "Cost"))
-	processRoots := stats.GetRoots(query, c)
+	var (
+		RolesCount []struct {
+			RoleName string
+			Count    int
+		}
 
-	roleAbilitiesMap := make(map[string]*changlingRole)
+		ChanglingStats []struct {
+			RoleName  string
+			PowerName string
+			PowerType string
+			Count     int
+			Wins      int
+			TotalCost int
+			Winrate   float32
+		}
+	)
 
-	for _, root := range processRoots {
-		for _, faction := range root.Factions {
-			for _, member := range faction.Members {
-				if len(member.ChangelingInfo.ChangelingPurchase) == 0 {
-					continue
-				}
-				role, ok := roleAbilitiesMap[member.RoleName]
-				if !ok {
-					role = &changlingRole{
-						Count:              1,
-						ChanglingAbilities: make(map[string]*changlingAbilities),
-					}
-					roleAbilitiesMap[member.RoleName] = role
-				} else {
-					role.Count++
-				}
+	var (
+		startDate, endDate, _ = stats.GetValidDates(c)
+		s1, s2, s3            = stats.GetChosenServers(c)
+	)
 
-				for _, purchase := range member.ChangelingInfo.ChangelingPurchase {
-					powerType := strings.Split(purchase.PowerType, "/")
-					abilityType := powerType[len(powerType)-1]
-					ability, ok := role.ChanglingAbilities[abilityType]
-					if !ok {
-						role.ChanglingAbilities[abilityType] = &changlingAbilities{
-							Name:      purchase.PowerName,
-							Count:     1,
-							Wins:      uint(member.Victory),
-							Winrate:   uint(member.Victory * 100),
-							TotalCost: uint(purchase.Cost),
-						}
-					} else {
-						ability.Count++
-						ability.Wins += uint(member.Victory)
-						ability.Winrate = ability.Wins * 100 / ability.Count
-						ability.TotalCost += uint(purchase.Cost)
-					}
-				}
-			}
+	r.Database.Raw(`
+	select r.role_name, count(1)
+	from roles r
+	join changeling_infos ci on ci.role_id = r.id
+	join factions f on f.id = r.owner_id 
+	join roots root on root.round_id = f.root_id
+	where (root.date between ? and ?)
+	and server_address = ? OR server_address = ? OR server_address = ?
+	group by r.role_name;
+	`,
+		startDate, endDate,
+		s1, s2, s3).Scan(&RolesCount)
+
+	r.Database.Raw(`
+	select  role_name,
+	        power_name,
+			split_part(power_type, '/', -1) as power_type, 
+			count(1) as count,
+			sum(victory) as wins, 
+			sum(cost) as total_cost,
+			sum(victory)::real / count(1)::real as winrate
+	from (
+		select r.victory, r.role_name, cp.power_type, cp.power_name, cp.cost
+		from roles r
+		join changeling_infos ci on ci.role_id = r.id
+		join changeling_purchases cp on cp.changeling_info_id = ci.id
+		join factions f on f.id = r.owner_id 
+		join roots root on root.round_id = f.root_id
+		where (root.date between ? and ?)
+		and server_address = ? OR server_address = ? OR server_address = ?
+		) as a
+		group by role_name, power_type, power_name;
+	`,
+		startDate, endDate,
+		s1, s2, s3).Scan(&ChanglingStats)
+
+	type AbilityInfo struct {
+		Name      string
+		Count     int
+		Wins      int
+		Winrate   int
+		TotalCost int
+	}
+
+	type Info struct {
+		Count              int
+		ChanglingAbilities map[string]*AbilityInfo
+	}
+
+	roleAbilitiesMap := make(map[string]*Info)
+
+	for _, role := range RolesCount {
+		roleAbilitiesMap[role.RoleName] = &Info{
+			Count:              role.Count,
+			ChanglingAbilities: make(map[string]*AbilityInfo),
+		}
+	}
+
+	for _, stat := range ChanglingStats {
+		roleAbilitiesMap[stat.RoleName].ChanglingAbilities[stat.PowerType] = &AbilityInfo{
+			Name:      stat.PowerName,
+			Count:     stat.Count,
+			Wins:      stat.Wins,
+			Winrate:   int(stat.Winrate),
+			TotalCost: stat.TotalCost,
 		}
 	}
 
