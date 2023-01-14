@@ -45,14 +45,14 @@
                     <tbody>
                     {{ range .factionsCount }}
                         <tr>
-                            <th scope="row">{{ .Name }}</th>
+                            <th scope="row">{{ .FactionName }}</th>
                             <td>{{ .Count }}</td>
                             <td>{{ .Wins }}</td>
-                            <td>{{ .Winrate }}%</td>
-                            <td>{{ .Members }}</td>
+                            <td>{{ .WinrateUint }}%</td>
+                            <td>{{ .MembersCount }}</td>
                             <td>{{ .TotalObjectives }}</td>
                             <td>{{ .CompletedObjectives }}</td>
-                            <td>{{ .PercentObjectives }}%</td>
+                            <td>{{ .WinrateObjectivesUint }}%</td>
                             <td>{{ .AvgLeavers }}</td>
                         </tr>
                     {{ end }}
@@ -82,13 +82,13 @@
                     <tbody>
                     {{ range .rolesCount}}
                         <tr>
-                            <th scope="row">{{ .Name }}</th>
+                            <th scope="row">{{ .RoleName }}</th>
                             <td>{{ .Count }}</td>
                             <td>{{ .Wins }}</td>
-                            <td>{{ .Winrate }}%</td>
+                            <td>{{ .WinrateUint }}%</td>
                             <td>{{ .TotalObjectives }}</td>
                             <td>{{ .CompletedObjectives }}</td>
-                            <td>{{ .PercentObjectives }}%</td>
+                            <td>{{ .WinrateObjectivesUint }}%</td>
                         </tr>
                     {{ end }}
                     </tbody>

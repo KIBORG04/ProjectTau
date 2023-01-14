@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
-	"sort"
 	"ssstatistics/internal/config"
 	"ssstatistics/internal/domain"
 	r "ssstatistics/internal/repository"
@@ -155,151 +154,109 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 	}
 }
 
-type FactionInfo struct {
-	Name                string
-	Count               uint
-	Wins                uint
-	Winrate             uint
-	Members             uint
-	TotalObjectives     uint
-	CompletedObjectives uint
-	PercentObjectives   uint
-	Leavers             uint
-	AvgLeavers          float32
-}
-
-func (b FactionInfo) GetName() string {
-	return b.Name
-}
-func (b FactionInfo) GetCount() uint {
-	return b.Count
-}
-
-type RolesInfo struct {
-	Name                string
-	Count               uint
-	Wins                uint
-	Winrate             uint
-	TotalObjectives     uint
-	CompletedObjectives uint
-	PercentObjectives   uint
-}
-
-func (b RolesInfo) GetName() string {
-	return b.Name
-}
-func (b RolesInfo) GetCount() uint {
-	return b.Count
-}
-
-// functions declaration in another function doesn't support generics
-func completedObjectives[T any](objectives []T) uint {
-	var completed uint
-	for _, objective := range objectives {
-		switch t := any(objective).(type) {
-		case domain.RoleObjectives:
-			if t.Completed == stats.ObjectiveWIN {
-				completed++
-			}
-		case domain.FactionObjectives:
-			if t.Completed == stats.ObjectiveWIN {
-				completed++
-			}
-		}
-	}
-	return completed
-}
-
 func GamemodesGET(c *gin.Context) (int, string, gin.H) {
-	query := r.Database.
-		Preload("LeaveStats",
-			r.PreloadSelect("RootID", "Name", "AssignedRole", "LeaveTime", "LeaveType"),
-			func(tx *gorm.DB) *gorm.DB {
-				return tx.Where("assigned_role in (?)", stats.StationPositions).Where("name not like 'maintenance drone%'")
-			}).
-		Preload("Factions", r.PreloadSelect("ID", "RootID", "FactionName", "Victory")).
-		Preload("Factions.FactionObjectives", r.PreloadSelect("OwnerID", "Completed")).
-		Preload("Factions.Members", r.PreloadSelect("ID", "OwnerID", "RoleName", "Victory")).
-		Preload("Factions.Members.RoleObjectives", r.PreloadSelect("OwnerID", "Completed"))
-	processRoots := stats.GetRoots(query, c)
-
-	factionsSum := 0
-	factionsCount := make(stats.InfoSlice, 0)
-
-	rolesSum := 0
-	rolesCount := make(stats.InfoSlice, 0)
-
-	for _, root := range processRoots {
-		var leavers uint
-		for _, leaveStat := range root.LeaveStats {
-			if stats.IsStationPlayer(leaveStat.AssignedRole, leaveStat.Name) && stats.IsRoundStartLeaver(leaveStat) {
-				leavers++
-			}
+	var (
+		factionsStatistics []*struct {
+			FactionName           string
+			AvgLeavers            float32
+			Count                 int
+			Wins                  int
+			Winrate               float32
+			WinrateUint           uint
+			MembersCount          int
+			TotalObjectives       int
+			CompletedObjectives   int
+			WinrateObjectives     float32
+			WinrateObjectivesUint uint
 		}
-		for _, faction := range root.Factions {
-			foundInfo, ok := factionsCount.HasName(faction.FactionName)
-			if !ok {
-				factionsCount = append(factionsCount, &FactionInfo{
-					Name:                faction.FactionName,
-					Count:               1,
-					Wins:                uint(faction.Victory),
-					Members:             uint(len(faction.Members)),
-					Winrate:             uint(faction.Victory * 100),
-					TotalObjectives:     uint(len(faction.FactionObjectives)),
-					CompletedObjectives: completedObjectives(faction.FactionObjectives),
-					PercentObjectives:   completedObjectives(faction.FactionObjectives) * 100 / utils.Max(uint(len(faction.FactionObjectives)), 1),
-					Leavers:             leavers,
-					AvgLeavers:          float32(leavers),
-				})
-			} else {
-				factionInfo := (*foundInfo).(*FactionInfo)
-				factionInfo.Count++
-				factionInfo.Members += uint(len(faction.Members))
-				factionInfo.Wins += uint(faction.Victory)
-				factionInfo.Winrate = factionInfo.Wins * 100 / factionInfo.Count
-				factionInfo.TotalObjectives += uint(len(faction.FactionObjectives))
-				factionInfo.CompletedObjectives += completedObjectives(faction.FactionObjectives)
-				factionInfo.PercentObjectives = factionInfo.CompletedObjectives * 100 / utils.Max(factionInfo.TotalObjectives, 1)
-				factionInfo.Leavers += leavers
-				factionInfo.AvgLeavers = float32(factionInfo.Leavers) / float32(factionInfo.Count)
-			}
-			factionsSum++
 
-			for _, role := range faction.Members {
-				foundInfo, ok := rolesCount.HasName(role.RoleName)
-				if !ok {
-					rolesCount = append(rolesCount, &RolesInfo{
-						Name:                role.RoleName,
-						Count:               1,
-						Wins:                uint(role.Victory),
-						Winrate:             uint(role.Victory) * 100,
-						TotalObjectives:     uint(len(role.RoleObjectives)),
-						CompletedObjectives: completedObjectives(role.RoleObjectives),
-						PercentObjectives:   completedObjectives(role.RoleObjectives) * 100 / utils.Max(uint(len(role.RoleObjectives)), 1),
-					})
-				} else {
-					roleInfo := (*foundInfo).(*RolesInfo)
-					roleInfo.Count++
-					roleInfo.Wins += uint(role.Victory)
-					roleInfo.Winrate = roleInfo.Wins * 100 / roleInfo.Count
-					roleInfo.TotalObjectives += uint(len(role.RoleObjectives))
-					roleInfo.CompletedObjectives += completedObjectives(role.RoleObjectives)
-					roleInfo.PercentObjectives = roleInfo.CompletedObjectives * 100 / utils.Max(roleInfo.TotalObjectives, 1)
-				}
-				rolesSum++
-			}
-
+		rolesStatistics []*struct {
+			RoleName              string
+			Count                 int
+			Wins                  int
+			Winrate               float32
+			WinrateUint           uint
+			TotalObjectives       int
+			CompletedObjectives   int
+			WinrateObjectives     float32
+			WinrateObjectivesUint uint
 		}
+	)
+
+	r.Database.Raw(`
+SELECT factions.faction_name,
+       (select (select sum(a.leaves)
+                from (SELECT distinct on (leave_stats.id) CASE
+                              WHEN leave_time = ''
+                                  THEN 0
+                              WHEN leave_type = 'Cryopod' AND split_part(leave_time, ':', 2)::int < 15
+                                  THEN 0
+                              WHEN split_part(leave_time, ':', 2)::int > 5 AND split_part(leave_time, ':', 2)::int < 30
+                                  THEN 1
+                              WHEN leave_type = 'Cryopod' AND split_part(leave_time, ':', 2)::int < 45
+                                  THEN 1
+                              END AS leaves
+                      FROM leave_stats
+                      JOIN roots aaa on aaa.round_id = leave_stats.root_id
+                      JOIN factions bbb on bbb.root_id = aaa.round_id
+                      WHERE bbb.faction_name = factions.faction_name
+                        AND assigned_role IN ?
+                        AND leave_stats.name NOT LIKE 'maintenance drone%') as a))::real / COUNT(factions.id)                                                          AS avg_leavers,
+       COUNT(factions.id)                                                                                                                                              AS count,
+       SUM(victory)                                                                                                                                                    AS wins,
+       SUM(victory)::real * 100 / COUNT(factions.id)::real                                                                                                                   AS winrate,
+       SUM((SELECT count(1) FROM roles where roles.owner_id = factions.id))                                                     AS members_count,
+       SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id))                                      AS total_objectives,
+       SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id and fo1.completed = 'SUCCESS'))        AS completed_objectives,
+       SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id and fo1.completed = 'SUCCESS'))::real * 100 /
+            GREATEST(SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id)) ::real, 1)             AS winrate_objectives
+
+		FROM factions
+		group by factions.faction_name;
+	`, stats.StationPositions).Scan(&factionsStatistics)
+
+	r.Database.Raw(`
+	select roles.role_name,
+       COUNT(1)                                                                                                  AS count,
+       SUM(roles.victory)                                                                                        AS wins,
+       SUM(roles.victory)::real * 100 / COUNT(1)::real                                                           AS winrate,
+       SUM((SELECT count(1)
+            FROM role_objectives
+            WHERE roles.id = role_objectives.owner_id))                                                          AS total_objectives,
+       SUM((SELECT count(1)
+            FROM role_objectives
+            WHERE roles.id = role_objectives.owner_id
+              AND completed = 'SUCCESS'))                                                                        AS completed_objectives,
+       SUM((SELECT count(1)
+            FROM role_objectives
+            WHERE roles.id = role_objectives.owner_id
+              AND completed = 'SUCCESS'))::real * 100 /
+       GREATEST(SUM((SELECT count(1) FROM role_objectives WHERE roles.id = role_objectives.owner_id)) ::real,
+                1)                                                                                               AS winrate_objectives
+
+	from roles
+	group by roles.role_name;
+	`).Scan(&rolesStatistics)
+
+	var factionsSum int
+	var rolesSum int
+
+	for _, statistic := range factionsStatistics {
+		factionsSum += statistic.Count
+		statistic.WinrateUint = uint(statistic.Winrate)
+		statistic.WinrateObjectivesUint = uint(statistic.WinrateObjectives)
 	}
-
-	sort.Sort(sort.Reverse(factionsCount))
-	sort.Sort(sort.Reverse(rolesCount))
+	for _, statistic := range rolesStatistics {
+		rolesSum += statistic.Count
+		statistic.WinrateUint = uint(statistic.Winrate)
+		statistic.WinrateObjectivesUint = uint(statistic.WinrateObjectives)
+	}
 
 	return 200, "gamemodes.html", gin.H{
 		"factionsSum":   factionsSum,
-		"factionsCount": factionsCount,
+		"factionsCount": factionsStatistics,
 		"rolesSum":      rolesSum,
-		"rolesCount":    rolesCount,
+		"rolesCount":    rolesStatistics,
 	}
 }
 
