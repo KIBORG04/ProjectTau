@@ -169,7 +169,15 @@
                             data: Object.values(data),
                             borderWidth: 1
                         }]
-                    }
+                    },
+					options: {
+						scales: {
+							y: {
+								suggestedMin: 0,
+								suggestedMax: 100
+							}
+						}
+					}
                 })
                 $(".modal-title").text(faction_str)
                 const myModal = bootstrap.Modal.getOrCreateInstance($("#modalStatistics"))
@@ -194,7 +202,15 @@
                             data: Object.values(data),
                             borderWidth: 1
                         }]
-                    }
+					},
+					options: {
+						scales: {
+							y: {
+								suggestedMin: 0,
+								suggestedMax: 100
+							}
+						}
+					}
                 })
                 $(".modal-title").text(role_str)
                 const myModal = bootstrap.Modal.getOrCreateInstance($("#modalStatistics"))
