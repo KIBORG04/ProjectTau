@@ -98,6 +98,8 @@ func initializeRoutes() {
 		apiRoute.GET("/random_flavor", api.RandomFlavorGET)
 
 		apiRoute.GET("/uplink_buys", api.CkeyUplinkBuysGET)
+
+		apiRoute.GET("/mode_winrates_by_month", api.ModeWinratesByMonthGET)
 	}
 
 	// Group using gin.BasicAuth() middleware

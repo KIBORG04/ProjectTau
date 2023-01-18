@@ -48,7 +48,17 @@
                             <th scope="row">{{ .FactionName }}</th>
                             <td>{{ .Count }}</td>
                             <td>{{ .Wins }}</td>
-                            <td>{{ .WinrateUint }}%</td>
+                            <td class="d-flex">{{ .WinrateUint }}%
+                                <span id="{{ .FactionName }}"
+                                      class="statistics-faction btn btn-outline-secondary btn-sm btn-outline-secondary ms-auto"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#modalStatistics"
+                                      type="button" style="font-size: 10px;"
+                                      title="Динамика винрейтов"
+                                    >
+                                     <i class="bi bi-bar-chart-fill"></i>
+                                </span>
+                            </td>
                             <td>{{ .MembersCount }}</td>
                             <td>{{ .TotalObjectives }}</td>
                             <td>{{ .CompletedObjectives }}</td>
@@ -85,7 +95,17 @@
                             <th scope="row">{{ .RoleName }}</th>
                             <td>{{ .Count }}</td>
                             <td>{{ .Wins }}</td>
-                            <td>{{ .WinrateUint }}%</td>
+                            <td class="d-flex">{{ .WinrateUint }}%
+                                <span id="{{ .RoleName }}"
+                                      class="statistics-role btn btn-outline-secondary btn-sm btn-outline-secondary ms-auto"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#modalStatistics"
+                                      type="button" style="font-size: 10px;"
+                                      title="Динамика винрейтов"
+                                >
+                                     <i class="bi bi-bar-chart-fill"></i>
+                                </span>
+                            </td>
                             <td>{{ .TotalObjectives }}</td>
                             <td>{{ .CompletedObjectives }}</td>
                             <td>{{ .WinrateObjectivesUint }}%</td>
@@ -93,6 +113,24 @@
                     {{ end }}
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Vertically centered modal -->
+<div class="modal fade" tabindex="-1" id="modalStatistics" aria-labelledby="modalStatisticsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -114,4 +152,58 @@
             info: false,
         });
     });
+
+    $(".statistics-faction").click(function () {
+        const faction_str = this.id
+        $.ajax({
+            url: `/api/mode_winrates_by_month`,
+            data: {faction: faction_str},
+            success: function (data) {
+                const chart = $("#myChart")
+                new Chart(chart, {
+                    type: 'line',
+                    data: {
+                        labels: Object.keys(data),
+                        datasets: [{
+                            label: 'winrate, %',
+                            data: Object.values(data),
+                            borderWidth: 1
+                        }]
+                    }
+                })
+                $(".modal-title").text(faction_str)
+                const myModal = bootstrap.Modal.getOrCreateInstance($("#modalStatistics"))
+                myModal.show()
+            }
+        })
+    });
+
+    $(".statistics-role").click(function () {
+        const role_str = this.id
+        $.ajax({
+            url: `/api/mode_winrates_by_month`,
+            data: {role: role_str},
+            success: function (data) {
+                const chart = $("#myChart")
+                new Chart(chart, {
+                    type: 'line',
+                    data: {
+                        labels: Object.keys(data),
+                        datasets: [{
+                            label: 'winrate, %',
+                            data: Object.values(data),
+                            borderWidth: 1
+                        }]
+                    }
+                })
+                $(".modal-title").text(role_str)
+                const myModal = bootstrap.Modal.getOrCreateInstance($("#modalStatistics"))
+                myModal.show()
+            }
+        })
+    });
+
+    $("#modalStatistics").on('hidden.bs.modal', function (event) {
+        $('#myChart').replaceWith('<canvas id="myChart"></canvas>');
+    })
 </script>

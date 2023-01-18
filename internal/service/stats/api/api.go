@@ -12,6 +12,7 @@ import (
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/stats"
 	"strings"
+	"time"
 )
 
 func MmrGET(c *gin.Context) {
@@ -476,4 +477,100 @@ func RandomFlavorGET(c *gin.Context) {
 	lastPhrase.Flavor = template.HTMLEscapeString(randEntries.Flavor)
 
 	c.JSON(200, lastPhrase)
+}
+
+func ModeWinratesByMonthGET(c *gin.Context) {
+	type FactionOrRole struct {
+		FactionName string `form:"faction"`
+		RoleName    string `form:"role"`
+	}
+
+	var query FactionOrRole
+	if err := c.BindQuery(&query); err != nil || (query.FactionName == "" && query.RoleName == "") {
+		c.JSON(http.StatusBadRequest, "Некорректный запрос.")
+		return
+	}
+
+	if query.FactionName != "" && query.RoleName != "" {
+		c.JSON(http.StatusBadRequest, "Либо фракция, либо роль")
+		return
+	}
+
+	type SqlParams struct {
+		Antag    string
+		DateFrom string
+		DateTo   string
+	}
+
+	output := make(map[string]int)
+
+	if query.FactionName != "" {
+		var allFactions []string
+		r.Database.Model(&domain.Factions{}).Distinct("FactionName").Find(&allFactions)
+
+		if !slices.Contains(allFactions, query.FactionName) {
+			c.JSON(http.StatusBadRequest, "Фракция не найдена.")
+			return
+		}
+
+		startDate, _ := time.Parse("2006-01-02", stats.ModeStartDate)
+		endDate := time.Now()
+
+		params := SqlParams{
+			Antag: query.FactionName,
+		}
+		for startDate.Month() != endDate.Month()+1 {
+			dateFromString := startDate.Format("2006-01-02")
+			startDate = startDate.AddDate(0, 1, 0)
+
+			params.DateFrom = dateFromString
+			params.DateTo = startDate.Format("2006-01-02")
+
+			var winrate float32
+			r.Database.Raw(`
+		select SUM(victory)::real * 100 / COUNT(id)::real as winrate
+		from factions
+		join roots r on r.round_id = factions.root_id
+		where faction_name = @Antag and date >= @DateFrom and date <= @DateTo;
+		`, params).Scan(&winrate)
+
+			output[dateFromString] = int(winrate)
+		}
+
+	} else {
+		var allRoles []string
+		r.Database.Model(&domain.Role{}).Distinct("RoleName").Find(&allRoles)
+
+		if !slices.Contains(allRoles, query.RoleName) {
+			c.JSON(http.StatusBadRequest, "Фракция не найдена.")
+			return
+		}
+
+		startDate, _ := time.Parse("2006-01-02", stats.ModeStartDate)
+		endDate := time.Now()
+
+		params := SqlParams{
+			Antag: query.RoleName,
+		}
+		for startDate.Month() != endDate.Month()+1 {
+			dateFromString := startDate.Format("2006-01-02")
+			startDate = startDate.AddDate(0, 1, 0)
+
+			params.DateFrom = dateFromString
+			params.DateTo = startDate.Format("2006-01-02")
+
+			var winrate float32
+			r.Database.Raw(`
+		select SUM(roles.victory)::real * 100 / COUNT(roles.id)::real as winrate
+		from roles
+		join factions f on f.id = roles.owner_id
+		join roots r on r.round_id = f.root_id
+		where role_name = @Antag and date >= @DateFrom and date <= @DateTo;
+		`, params).Scan(&winrate)
+
+			output[dateFromString] = int(winrate)
+		}
+	}
+
+	c.JSON(http.StatusOK, output)
 }

@@ -2,8 +2,9 @@
 
 
 Выбор средней длины флавора в зависимости от расы и пола.
-select species, gender, avg(len) from (select gender, species, char_length(flavor) as len
+select species, gender, avg(len) 
+from (select distinct on (flavor) char_length(flavor) as len, gender, species
                          from manifest_entries
-                         where flavor <> '' AND char_length(flavor) > 10 AND name NOT LIKE 'syndicate drone%' AND flavor in (select distinct flavor from manifest_entries)) as gl
+                         where flavor <> '' AND char_length(flavor) > 10 AND name NOT LIKE 'syndicate drone%') as gl
 group by gender, species
 order by species;
