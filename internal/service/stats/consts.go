@@ -108,6 +108,8 @@ var (
 		"pAI",
 	}
 
+	CompiledStationPositionsForSQLList = "('Captain','Head of Personnel','Head of Security','Chief Engineer','Research Director','Chief Medical Officer','Chief Engineer','Station Enginee\n                     r','Atmospheric Technician','Technical Assistant','Chief Medical Officer','Medical Doctor','Geneticist','Psychiatrist','Chemist','Virologist','Paramedic','Medical Intern','Research Director','Scientist','Geneticist','Robo\n                     ticist','Xenobiologist','Xenoarchaeologist','Research Assistant','Head of Personnel','Barber','Bartender','Botanist','Chef','Janitor','Librarian','Quartermaster','Cargo Technician','Shaft Miner','Recycler','Internal Affai\n                     rs Agent','Chaplain','Test Subject','Clown','Mime','Head of Security','Warden','Detective','Security Officer','Forensic Technician','Security Cadet','AI','Cyborg','pAI')"
+
 	StationPositions []string
 
 	SoloRoles = []string{

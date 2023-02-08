@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"ssstatistics/internal/repository"
 	"ssstatistics/internal/service/cleaning"
 	"ssstatistics/internal/service/maps"
 	"ssstatistics/internal/service/mmr"
@@ -41,6 +42,7 @@ func InitializeDBUpdaters() {
 	DBUpdaters = append(DBUpdaters, mmr.ParseMMR)
 	DBUpdaters = append(DBUpdaters, maps.FixMaxShit)
 	DBUpdaters = append(DBUpdaters, cleaning.CleanAnnounces)
+	DBUpdaters = append(DBUpdaters, repository.RefreshMaterializedViews)
 }
 
 func StartDBUpdaters() []string {

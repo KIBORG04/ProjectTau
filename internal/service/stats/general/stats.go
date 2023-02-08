@@ -183,58 +183,13 @@ func GamemodesGET(c *gin.Context) (int, string, gin.H) {
 	)
 
 	r.Database.Raw(`
-SELECT factions.faction_name,
-       (select (select sum(a.leaves)
-                from (SELECT distinct on (leave_stats.id) CASE
-                              WHEN leave_time = ''
-                                  THEN 0
-                              WHEN leave_type = 'Cryopod' AND split_part(leave_time, ':', 2)::int < 15
-                                  THEN 0
-                              WHEN split_part(leave_time, ':', 2)::int > 5 AND split_part(leave_time, ':', 2)::int < 30
-                                  THEN 1
-                              WHEN leave_type = 'Cryopod' AND split_part(leave_time, ':', 2)::int < 45
-                                  THEN 1
-                              END AS leaves
-                      FROM leave_stats
-                      JOIN roots aaa on aaa.round_id = leave_stats.root_id
-                      JOIN factions bbb on bbb.root_id = aaa.round_id
-                      WHERE bbb.faction_name = factions.faction_name
-                        AND assigned_role IN ?
-                        AND leave_stats.name NOT LIKE 'maintenance drone%') as a))::real / COUNT(factions.id)                                                          AS avg_leavers,
-       COUNT(factions.id)                                                                                                                                              AS count,
-       SUM(victory)                                                                                                                                                    AS wins,
-       SUM(victory)::real * 100 / COUNT(factions.id)::real                                                                                                                   AS winrate,
-       SUM((SELECT count(1) FROM roles where roles.owner_id = factions.id))                                                     AS members_count,
-       SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id))                                      AS total_objectives,
-       SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id and fo1.completed = 'SUCCESS'))        AS completed_objectives,
-       SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id and fo1.completed = 'SUCCESS'))::real * 100 /
-            GREATEST(SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id)) ::real, 1)             AS winrate_objectives
-
-		FROM factions
-		group by factions.faction_name;
-	`, stats.StationPositions).Scan(&factionsStatistics)
+	SELECT * 
+	FROM factions_statistics;
+	`).Scan(&factionsStatistics)
 
 	r.Database.Raw(`
-	select roles.role_name,
-       COUNT(1)                                                                                                  AS count,
-       SUM(roles.victory)                                                                                        AS wins,
-       SUM(roles.victory)::real * 100 / COUNT(1)::real                                                           AS winrate,
-       SUM((SELECT count(1)
-            FROM role_objectives
-            WHERE roles.id = role_objectives.owner_id))                                                          AS total_objectives,
-       SUM((SELECT count(1)
-            FROM role_objectives
-            WHERE roles.id = role_objectives.owner_id
-              AND completed = 'SUCCESS'))                                                                        AS completed_objectives,
-       SUM((SELECT count(1)
-            FROM role_objectives
-            WHERE roles.id = role_objectives.owner_id
-              AND completed = 'SUCCESS'))::real * 100 /
-       GREATEST(SUM((SELECT count(1) FROM role_objectives WHERE roles.id = role_objectives.owner_id)) ::real,
-                1)                                                                                               AS winrate_objectives
-
-	from roles
-	group by roles.role_name;
+	SELECT *
+	FROM roles_statistics;
 	`).Scan(&rolesStatistics)
 
 	var factionsSum int
