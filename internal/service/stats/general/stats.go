@@ -33,7 +33,6 @@ func BasicPOST(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
 	BasicGET(c, f)
 }
 
-// RootGET TODO: remove keymap.KeyMap
 func RootGET(c *gin.Context) (int, string, gin.H) {
 	type Group struct {
 		Name  string

@@ -519,7 +519,7 @@ func ModeWinratesByMonthGET(c *gin.Context) {
 		params := SqlParams{
 			Antag: query.FactionName,
 		}
-		for startDate.Month() != endDate.Month()+1 {
+		for (startDate.Month() != endDate.Month()+1) || (startDate.Year() != endDate.Year()) {
 			dateFromString := startDate.Format("2006-01-02")
 			startDate = startDate.AddDate(0, 1, 0)
 
