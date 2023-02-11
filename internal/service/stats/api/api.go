@@ -88,34 +88,15 @@ func MapsGET(c *gin.Context) {
 		avg(s.crew_survived) as crewsurvived,
 		avg(s.foodeaten) as foodeaten,
 		avg(s.clownabuse) as clownabuse,
-		count(r.map) as count
+		count(r.map) as count,
+		avg(case when duration = '' then 3600
+           else split_part(duration, ':', 1)::int * 3600 + split_part(duration, ':', 2)::int * 60
+        end) as duration
 		`).
 		Joins("join scores s on s.root_id = r.round_id").
 		Group("name, r.server_address")
 	stats.ApplyDBQueryByDate(query, c)
 	query.Find(&mapStatistics)
-
-	var roots []*domain.Root
-	query = r.Database.Select("duration", "map", "server_address")
-	stats.ApplyDBQueryByDate(query, c)
-	query.Find(&roots)
-
-	for _, root := range roots {
-		for _, statistic := range mapStatistics {
-			if statistic.Name == root.Map && statistic.Server == root.ServerAddress {
-				roundTime, err := stats.ParseRoundTime(root.Duration)
-				if err == nil {
-					statistic.Duration += float32(roundTime.ToSeconds())
-				} else {
-					statistic.Duration += float32(3600)
-				}
-			}
-		}
-	}
-
-	for _, statistic := range mapStatistics {
-		statistic.Duration = statistic.Duration / float32(statistic.Count)
-	}
 
 	c.JSON(200, mapStatistics)
 }
