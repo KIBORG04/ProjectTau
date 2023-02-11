@@ -74,7 +74,7 @@ func GetCheckboxStates(c *gin.Context) map[string]string {
 
 func ApplyDBQueryByDate(db *gorm.DB, c *gin.Context) {
 	startDate, endDate, err := GetValidDates(c)
-	if err == nil {
+	if err != nil {
 		return
 	}
 	db.Where("date BETWEEN ? AND ?", startDate, endDate)
@@ -86,10 +86,7 @@ func GetValidDates(c *gin.Context) (string, string, error) {
 	if startDate != "" && endDate != "" {
 		startStatisticsDateTime, _ := time.Parse("2006-01-02", CurrentStatisticsDate)
 		startDateTime, _ := time.Parse("2006-01-02", startDate)
-		endDateTime, _ := time.Parse("2006-01-02", endDate)
-		nowTime := time.Now()
-		if (startDateTime.After(startStatisticsDateTime) || startDateTime.Equal(startStatisticsDateTime)) &&
-			(endDateTime.Day() <= nowTime.Day() && endDateTime.Month() <= nowTime.Month() && endDateTime.Year() <= nowTime.Year()) {
+		if startDateTime.After(startStatisticsDateTime) || startDateTime.Equal(startStatisticsDateTime) {
 			return startDate, endDate, nil
 		}
 	}

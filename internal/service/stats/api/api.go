@@ -64,27 +64,34 @@ func MapsGET(c *gin.Context) {
 	}
 
 	query := r.Database.Table("roots r").
-		Select("r.map as name, " +
-			"r.server_address as server, " +
-			"avg(s.crewscore) as crewscore, " +
-			"avg(s.stuffshipped) as stuffshipped, " +
-			"avg(s.stuffharvested) as stuffharvested, " +
-			"avg(s.oremined) as oremined, " +
-			"avg(s.researchdone) as researchdone, " +
-			"avg(s.powerloss) as powerloss, " +
-			"avg(s.mess) as mess, " +
-			"avg(s.meals) as meals, " +
-			"avg(s.nuked) as nuked, " +
-			"avg(s.rec_antags) as RecAntags, " +
-			"avg(s.crew_escaped) as crewescaped, " +
-			"avg(s.crew_dead) as crewdead, " +
-			"avg(s.crew_total) as crewtotal, " +
-			"avg(s.crew_survived) as crewsurvived, " +
-			"avg(s.foodeaten) as foodeaten, " +
-			"avg(s.clownabuse) as clownabuse, " +
-			"count(r.map) as count").
+		Select(`
+		case r.map 
+			when 'Falcon Station (Snowy)' then 'Falcon Station'
+			when 'Gamma Station (Snowy)' then 'Gamma Station'
+			when 'Prometheus Station (Snowy)' then 'Prometheus Station'
+			else r.map
+		end as name,
+		r.server_address as server,
+		avg(s.crewscore) as crewscore,
+		avg(s.stuffshipped) as stuffshipped,
+		avg(s.stuffharvested) as stuffharvested,
+		avg(s.oremined) as oremined,
+		avg(s.researchdone) as researchdone,
+		avg(s.powerloss) as powerloss,
+		avg(s.mess) as mess,
+		avg(s.meals) as meals,
+		avg(s.nuked) as nuked,
+		avg(s.rec_antags) as RecAntags,
+		avg(s.crew_escaped) as crewescaped,
+		avg(s.crew_dead) as crewdead,
+		avg(s.crew_total) as crewtotal,
+		avg(s.crew_survived) as crewsurvived,
+		avg(s.foodeaten) as foodeaten,
+		avg(s.clownabuse) as clownabuse,
+		count(r.map) as count
+		`).
 		Joins("join scores s on s.root_id = r.round_id").
-		Group("r.map, r.server_address")
+		Group("name, r.server_address")
 	stats.ApplyDBQueryByDate(query, c)
 	query.Find(&mapStatistics)
 
@@ -267,24 +274,24 @@ func ChanglingGET(c *gin.Context) {
 	c.JSON(200, roleAbilitiesMap)
 }
 
-type (
-	UplinkRoleInfo struct {
-		Name        string
-		Count       uint
-		UplinkInfos map[string]*UplinkInfo
-	}
-
-	UplinkInfo struct {
-		Name       string
-		Count      uint
-		TotalCount uint
-		Wins       uint
-		Winrate    uint
-		TotalCost  uint
-	}
-)
-
 func UplinkGET(c *gin.Context) {
+	type (
+		UplinkInfo struct {
+			Name       string
+			Count      uint
+			TotalCount uint
+			Wins       uint
+			Winrate    uint
+			TotalCost  uint
+		}
+
+		UplinkRoleInfo struct {
+			Name        string
+			Count       uint
+			UplinkInfos map[string]*UplinkInfo
+		}
+	)
+
 	query := r.Database.
 		Preload("Factions",
 			r.PreloadSelect("ID", "RootID", "Victory", "FactionName"),
