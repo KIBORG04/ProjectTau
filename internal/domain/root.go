@@ -30,6 +30,31 @@ type Root struct {
 	Explosions        []Explosions        `json:"explosions"`
 	ManifestEntries   []ManifestEntries   `json:"manifest_entries"`
 	LeaveStats        []LeaveStats        `json:"leave_stats"`
+	Rating            Rating              `json:"rating"`
+}
+
+type Rating struct {
+	ID          int32              `gorm:"uniqueIndex"`
+	RootID      int32              `gorm:"index"`
+	RatingsTemp map[string]float32 `json:"ratings" gorm:"-"`
+	Ratings     []RatingValues
+}
+
+func (r *Rating) BeforeSave(tx *gorm.DB) error {
+	for category, value := range r.RatingsTemp {
+		r.Ratings = append(r.Ratings, RatingValues{
+			Key:   category,
+			Value: value,
+		})
+	}
+	return nil
+}
+
+type RatingValues struct {
+	ID       int32  `gorm:"uniqueIndex"`
+	RatingID int32  `gorm:"index"`
+	Key      string `gorm:"size:256"`
+	Value    float32
 }
 
 type Achievement struct {

@@ -7,6 +7,8 @@ var Models = []any{
 	new(Factions),
 	new(Role),
 	new(Score),
+	new(Rating),
+	new(RatingValues),
 	new(Achievement),
 	new(CommunicationLogs),
 	new(Deaths),

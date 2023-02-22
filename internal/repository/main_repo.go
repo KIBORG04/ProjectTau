@@ -52,6 +52,8 @@ func CreateConnection() {
 }
 
 func AutoMigrate() {
+	dropViews()
+
 	err := Database.AutoMigrate(d.Models...)
 	if err != nil {
 		println(err.Error())
@@ -65,7 +67,13 @@ func AutoMigrate() {
 	}
 
 	createViews()
+}
 
+func dropViews() {
+	// Спасибо gorm
+	// который пытается мигрировать каюку-то хуйню чисто по приколу
+	Database.Exec(`drop materialized view if exists factions_statistics;`)
+	Database.Exec(`drop materialized view if exists roles_statistics;`)
 }
 
 func createViews() {
