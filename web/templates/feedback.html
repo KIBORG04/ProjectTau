@@ -27,23 +27,26 @@
 
 {{ template "footer.html" .}}
 <script>
+    function clear_inputs() {
+        $("#text").val('');
+        $("#name").val('');
+    }
     $("#form").submit(function (e) {
         $.ajax({
             url: '/api/send_feedback',
             type: 'POST',
-            data: `{ "username": "${$("#name").val()}", "text":"${$("#text").val()}" }`,
+            data: JSON.stringify({ username: $("#name").val(), text:$("#text").val() }),
             datatype: 'json',
             success: function (data) {
                 const msg = `<div class="alert alert-success mt-3" role="alert">${data}</div>`
                 $("#answer").empty().append(msg);
+                clear_inputs()
             },
             error: function (jqXHR) {
                 const msg = `<div class="alert alert-danger mt-3" role="alert">${jqXHR.responseJSON}</div>`
                 $("#answer").empty().append(msg);
             }
         })
-
         e.preventDefault();
     })
-
 </script>

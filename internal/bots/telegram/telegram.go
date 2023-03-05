@@ -19,7 +19,7 @@ type TgBot struct {
 func (t *TgBot) Send(s string) error {
 	for _, id := range config.Config.TelegramBot.TrustedChatIDs {
 		msg := tgbotapi.NewMessage(int64(id), s)
-		msg.ParseMode = tgbotapi.ModeMarkdownV2
+		msg.ParseMode = tgbotapi.ModeMarkdown
 		_, err := t.Self.Send(msg)
 		if err != nil {
 			return err
