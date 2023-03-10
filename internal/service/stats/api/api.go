@@ -125,9 +125,8 @@ func SendFeedback(c *gin.Context) {
 	}
 
 	msg := fmt.Sprintf(`
-	Name: *%s*
-	
-Text: %s`, form.Username, form.Text)
+	*%s*
+	%s`, form.Username, form.Text)
 
 	err := telegram.Bot.Send(msg)
 	if err != nil {
