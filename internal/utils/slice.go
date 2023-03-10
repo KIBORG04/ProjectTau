@@ -25,6 +25,11 @@ func RemoveElem[s comparable](slice []s, elem s) []s {
 	return slice[:len(slice)-1]
 }
 
+func RemoveByIndex[T comparable](slice []T, index int) []T {
+	slice[index] = slice[len(slice)-1]
+	return slice[:len(slice)-1]
+}
+
 func GetKeyByValue[T, R comparable](myMap map[R]T, el T) R {
 	var genericError R
 	for k, v := range myMap {

@@ -10,6 +10,7 @@ import (
 	"ssstatistics/internal/bots/telegram"
 	"ssstatistics/internal/domain"
 	r "ssstatistics/internal/repository"
+	"ssstatistics/internal/service/last_phrase"
 	"ssstatistics/internal/service/stats"
 	"strings"
 	"time"
@@ -415,30 +416,9 @@ func RandomAchievementGET(c *gin.Context) {
 	c.JSON(200, achievement)
 
 }
+
 func RandomLastPhraseGET(c *gin.Context) {
-	var randDeath domain.Deaths
-	r.Database.Raw(`SELECT *
-						FROM (
-							SELECT distinct on (last_phrase, real_name) last_phrase, real_name, root_id, time_of_death
-							from deaths
-							WHERE last_phrase <> '') as d
-						ORDER BY random()
-						LIMIT 1`).
-		Find(&randDeath)
-
-	var lastPhrase struct {
-		Name        string
-		RoundID     int32
-		Phrase      string
-		TimeOfDeath string
-	}
-
-	lastPhrase.Name = randDeath.RealName
-	lastPhrase.RoundID = randDeath.RootID
-	lastPhrase.Phrase = randDeath.LastPhrase
-	lastPhrase.TimeOfDeath = randDeath.TimeOfDeath
-
-	c.JSON(200, lastPhrase)
+	c.JSON(200, last_phrase.GetRandomLastPhrase())
 }
 
 func RandomFlavorGET(c *gin.Context) {
