@@ -162,6 +162,7 @@ type Deaths struct {
 	FromSuicide      int32  `json:"from_suicide"`
 	LastAttackerName string `json:"last_attacker_name" gorm:"size:256"`
 	LastPhrase       string `json:"last_phrase" gorm:"size:1024"`
+	LastExaminedName string `json:"last_examined_name" gorm:"size:256"`
 }
 
 func (d *Deaths) ColumnsMigration(dx *gorm.DB) {
