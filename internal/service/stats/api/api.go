@@ -10,8 +10,8 @@ import (
 	"ssstatistics/internal/bots/telegram"
 	"ssstatistics/internal/domain"
 	r "ssstatistics/internal/repository"
-	"ssstatistics/internal/service/last_phrase"
 	"ssstatistics/internal/service/stats"
+	"ssstatistics/internal/service/stats/last_phrase"
 	"strings"
 	"time"
 )
@@ -519,7 +519,7 @@ func ModeWinratesByMonthGET(c *gin.Context) {
 		params := SqlParams{
 			Antag: query.RoleName,
 		}
-		for startDate.Month() != endDate.Month()+1 {
+		for (startDate.Month() != endDate.Month()+1) || (startDate.Year() != endDate.Year()) {
 			dateFromString := startDate.Format("2006-01-02")
 			startDate = startDate.AddDate(0, 1, 0)
 
