@@ -62,6 +62,7 @@ func MapsGET(c *gin.Context) {
 		Foodeaten      float32
 		Clownabuse     float32
 		Duration       float32
+		Rating         float32
 	}
 
 	query := r.Database.Table("roots r").
@@ -92,9 +93,12 @@ func MapsGET(c *gin.Context) {
 		count(r.map) as count,
 		avg(case when duration = '' then 3600
            else split_part(duration, ':', 1)::int * 3600 + split_part(duration, ':', 2)::int * 60
-        end) as duration
+        end) as duration,
+		avg(rv.value) as rating
 		`).
 		Joins("join scores s on s.root_id = r.round_id").
+		Joins("left join ratings on ratings.root_id = r.round_id").
+		Joins("left join rating_values rv on rv.rating_id = ratings.id and rv.key = 'map_rating'").
 		Group("name, r.server_address")
 	stats.ApplyDBQueryByDate(query, c)
 	query.Find(&mapStatistics)
