@@ -28,6 +28,7 @@ type Root struct {
 	CommunicationLogs []CommunicationLogs `json:"communication_logs"`
 	Deaths            []Deaths            `json:"deaths"`
 	Explosions        []Explosions        `json:"explosions"`
+	EMPExplosions     []EMPExplosions     `json:"emps"`
 	ManifestEntries   []ManifestEntries   `json:"manifest_entries"`
 	LeaveStats        []LeaveStats        `json:"leave_stats"`
 	Rating            Rating              `json:"rating"`
@@ -170,15 +171,28 @@ func (d *Deaths) ColumnsMigration(dx *gorm.DB) {
 }
 
 type Explosions struct {
-	ID               int32 `gorm:"uniqueIndex"`
-	RootID           int32 `gorm:"index"`
-	EpicenterX       int32 `json:"epicenter_x"`
-	EpicenterY       int32 `json:"epicenter_y"`
-	EpicenterZ       int32 `json:"epicenter_z"`
-	DevastationRange int32 `json:"devastation_range"`
-	HeavyImpactRange int32 `json:"heavy_impact_range"`
-	LightImpactRange int32 `json:"light_impact_range"`
-	FlashRange       int32 `json:"flash_range"`
+	ID               int32  `gorm:"uniqueIndex"`
+	RootID           int32  `gorm:"index"`
+	EpicenterX       int32  `json:"epicenter_x"`
+	EpicenterY       int32  `json:"epicenter_y"`
+	EpicenterZ       int32  `json:"epicenter_z"`
+	DevastationRange int32  `json:"devastation_range"`
+	HeavyImpactRange int32  `json:"heavy_impact_range"`
+	LightImpactRange int32  `json:"light_impact_range"`
+	FlashRange       int32  `json:"flash_range"`
+	OccurredTime     string `json:"occurred_time"`
+}
+
+type EMPExplosions struct {
+	ID               int32  `gorm:"uniqueIndex"`
+	RootID           int32  `gorm:"index"`
+	EpicenterX       int32  `json:"epicenter_x"`
+	EpicenterY       int32  `json:"epicenter_y"`
+	EpicenterZ       int32  `json:"epicenter_z"`
+	DevastationRange int32  `json:"devastation_range"`
+	HeavyImpactRange int32  `json:"heavy_range"`
+	LightImpactRange int32  `json:"light_range"`
+	OccurredTime     string `json:"occurred_time"`
 }
 
 type ManifestEntries struct {

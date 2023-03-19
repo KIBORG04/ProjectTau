@@ -13,6 +13,7 @@ var Models = []any{
 	new(CommunicationLogs),
 	new(Deaths),
 	new(Explosions),
+	new(EMPExplosions),
 	new(ManifestEntries),
 	new(LeaveStats),
 	new(Damage),
