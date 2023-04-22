@@ -99,6 +99,10 @@ func initializeRoutes() {
 
 		apiRoute.GET("/uplink_buys", CkeyUplinkBuysGET)
 
+		apiRoute.GET("/characters", CkeyCharactersGET)
+
+		apiRoute.GET("/ckeys_by_char", CharacterCkeysGET)
+
 		apiRoute.GET("/mode_winrates_by_month", api.ModeWinratesByMonthGET)
 	}
 
