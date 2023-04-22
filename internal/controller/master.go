@@ -97,7 +97,7 @@ func initializeRoutes() {
 
 		apiRoute.GET("/random_flavor", api.RandomFlavorGET)
 
-		apiRoute.GET("/uplink_buys", api.CkeyUplinkBuysGET)
+		apiRoute.GET("/uplink_buys", CkeyUplinkBuysGET)
 
 		apiRoute.GET("/mode_winrates_by_month", api.ModeWinratesByMonthGET)
 	}

@@ -23,8 +23,8 @@ func MmrGET(c *gin.Context) {
 	}
 
 	var mmrs []*mmr
-	player, _ := getValidatePlayer(c)
-	if player != (*Player)(nil) {
+	player, _ := stats.GetValidatePlayer(c)
+	if player != (*stats.Player)(nil) {
 		r.Database.
 			Model(&domain.Player{}).
 			Select("Ckey", "MMR").

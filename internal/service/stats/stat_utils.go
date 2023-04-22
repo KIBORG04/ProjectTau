@@ -226,3 +226,20 @@ func IsRoundStartLeaver(stat domain.LeaveStats) bool {
 func Ckey(str string) string {
 	return ckeyRegex.ReplaceAllString(str, "")
 }
+
+type Player struct {
+	Ckey string `form:"ckey"`
+}
+
+func GetValidatePlayer(c *gin.Context) (*Player, error) {
+	var player Player
+	err := c.BindQuery(&player)
+	if err != nil {
+		return nil, err
+	}
+	if player.Ckey == "" {
+		return nil, fmt.Errorf("ckey not entered in query")
+	}
+	player.Ckey = Ckey(player.Ckey)
+	return &player, nil
+}

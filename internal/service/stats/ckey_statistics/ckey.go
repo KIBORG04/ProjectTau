@@ -1,4 +1,4 @@
-package api
+package ckey_statistics
 
 import (
 	"fmt"
@@ -7,31 +7,13 @@ import (
 	"ssstatistics/internal/service/stats"
 )
 
-type Player struct {
-	Ckey string `form:"ckey"`
-}
-
-func getValidatePlayer(c *gin.Context) (*Player, error) {
-	var player Player
-	err := c.BindQuery(&player)
+func GetCkeyUplinkBuys(c *gin.Context) (int, any) {
+	player, err := stats.GetValidatePlayer(c)
 	if err != nil {
-		return nil, err
-	}
-	if player.Ckey == "" {
-		return nil, fmt.Errorf("ckey not entered in query")
-	}
-	player.Ckey = stats.Ckey(player.Ckey)
-	return &player, nil
-}
-
-func CkeyUplinkBuysGET(c *gin.Context) {
-	player, err := getValidatePlayer(c)
-	if err != nil {
-		c.JSON(400, map[string]string{
+		return 400, map[string]string{
 			"code":  "400",
 			"error": fmt.Sprint(err),
-		})
-		return
+		}
 	}
 
 	var uplinkBuys []struct {
@@ -50,5 +32,5 @@ func CkeyUplinkBuysGET(c *gin.Context) {
 		Order("count desc").
 		Find(&uplinkBuys)
 
-	c.JSON(200, uplinkBuys)
+	return 200, uplinkBuys
 }
