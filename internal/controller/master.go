@@ -97,13 +97,22 @@ func initializeRoutes() {
 
 		apiRoute.GET("/random_flavor", api.RandomFlavorGET)
 
-		apiRoute.GET("/uplink_buys", CkeyUplinkBuysGET)
-
-		apiRoute.GET("/characters", CkeyCharactersGET)
-
-		apiRoute.GET("/ckeys_by_char", CharacterCkeysGET)
-
 		apiRoute.GET("/mode_winrates_by_month", api.ModeWinratesByMonthGET)
+	}
+
+	playerRoute := apiRoute.Group("/player")
+	{
+		playerRoute.GET("/uplink_buys", CkeyUplinkBuysGET)
+
+		playerRoute.GET("/changling_buys", CkeyChanglingBuysGET)
+
+		playerRoute.GET("/wizard_buys", CkeyWizardBuysGET)
+
+		playerRoute.GET("/characters", CkeyCharactersGET)
+
+		playerRoute.GET("/ckeys_by_char", CharacterCkeysGET)
+
+		playerRoute.GET("/roles", CkeyRolesGET)
 	}
 
 	// Group using gin.BasicAuth() middleware

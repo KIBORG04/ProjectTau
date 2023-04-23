@@ -19,11 +19,17 @@ func GetCkeyUplinkBuys(c *gin.Context) (int, any) {
 	var uplinkBuys []struct {
 		Rolename   string
 		Bundlename string
+		Wins       int
+		Winrate    int
 		Count      int
 	}
 
 	r.Database.
-		Select("roles.role_name as rolename,u.bundlename, count(u.bundlename) as count").
+		Select(`  roles.role_name 									   AS rolename,
+						u.bundlename, 
+					    count(u.bundlename) 								   AS count,
+						SUM(roles.victory)                                     AS wins,
+						(SUM(roles.victory)::real * 100 / COUNT(1)::real)::int AS winrate`).
 		Table("roles").
 		Joins("join uplink_infos i on roles.id = i.role_id").
 		Joins("join uplink_purchases u on i.id = u.uplink_info_id").
@@ -40,6 +46,84 @@ func GetCkeyUplinkBuys(c *gin.Context) (int, any) {
 	}
 
 	return 200, uplinkBuys
+}
+
+func GetCkeyChanglingBuys(c *gin.Context) (int, any) {
+	player, err := stats.GetValidatePlayer(c)
+	if err != nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": fmt.Sprint(err),
+		}
+	}
+
+	var changlingBuys []struct {
+		PowerName string
+		Wins      int
+		Winrate   int
+		Count     int
+	}
+
+	r.Database.
+		Select(`  u.power_name, 
+					    count(u.power_name) 								   AS count,
+						SUM(roles.victory)                                     AS wins,
+						(SUM(roles.victory)::real * 100 / COUNT(1)::real)::int AS winrate`).
+		Table("roles").
+		Joins("join changeling_infos i on roles.id = i.role_id").
+		Joins("join changeling_purchases u on i.id = u.changeling_info_id").
+		Where("mind_ckey = ?", player.Ckey).
+		Group("u.power_name").
+		Order("count desc").
+		Find(&changlingBuys)
+
+	if changlingBuys == nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": "nothing found",
+		}
+	}
+
+	return 200, changlingBuys
+}
+
+func GetCkeyWizardBuys(c *gin.Context) (int, any) {
+	player, err := stats.GetValidatePlayer(c)
+	if err != nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": fmt.Sprint(err),
+		}
+	}
+
+	var wizardBuys []struct {
+		PowerName string
+		Wins      int
+		Winrate   int
+		Count     int
+	}
+
+	r.Database.
+		Select(`  u.power_name, 
+					    count(u.power_name) 								   AS count,
+						SUM(roles.victory)                                     AS wins,
+						(SUM(roles.victory)::real * 100 / COUNT(1)::real)::int AS winrate`).
+		Table("roles").
+		Joins("join wizard_infos i on roles.id = i.role_id").
+		Joins("join wizard_purchases u on i.id = u.wizard_info_id").
+		Where("mind_ckey = ?", player.Ckey).
+		Group("u.power_name").
+		Order("count desc").
+		Find(&wizardBuys)
+
+	if wizardBuys == nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": "nothing found",
+		}
+	}
+
+	return 200, wizardBuys
 }
 
 func GetCkeyCharacters(c *gin.Context) (int, any) {
@@ -112,4 +196,35 @@ func GetCharacterCkeys(c *gin.Context) (int, any) {
 	}
 
 	return 200, ckeys
+}
+
+func GetCkeyRoles(c *gin.Context) (int, any) {
+	player, err := stats.GetValidatePlayer(c)
+	if err != nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": fmt.Sprint(err),
+		}
+	}
+
+	var rolesInfo []struct {
+		RoleName string
+		Count    int
+	}
+
+	r.Database.Raw(`
+		select role_name,
+			   COUNT(1)                                               AS count
+		from roles
+		where mind_ckey = ?
+		group by role_name;`, player.Ckey).Scan(&rolesInfo)
+
+	if rolesInfo == nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": "nothing found",
+		}
+	}
+
+	return 200, rolesInfo
 }
