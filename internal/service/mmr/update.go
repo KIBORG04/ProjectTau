@@ -11,12 +11,15 @@ import (
 type playersMMR map[string]int32
 
 func isWin(role *domain.Role, faction *domain.Factions) (int32, error) {
-	if slices.Contains(stats.TeamlRoles, faction.FactionName) {
+	victoryType, err := stats.GetAntagonistWinType(role.RoleName, faction.FactionName)
+	switch victoryType {
+	case stats.FactionVictory:
 		return faction.Victory, nil
-	} else if slices.Contains(stats.SoloRoles, role.RoleName) {
+	case stats.RoleVictory:
 		return role.Victory, nil
+	default:
+		return -1, err
 	}
-	return -1, fmt.Errorf("role or faction not allowed")
 }
 
 func ParseMMR() []string {

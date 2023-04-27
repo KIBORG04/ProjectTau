@@ -224,7 +224,25 @@ func IsRoundStartLeaver(stat domain.LeaveStats) bool {
 
 // Ckey byond functions which remove all spaces and not word symbols
 func Ckey(str string) string {
-	return ckeyRegex.ReplaceAllString(str, "")
+	return strings.ToLower(ckeyRegex.ReplaceAllString(str, ""))
+}
+
+type VictoryTypes int
+
+const (
+	FactionVictory VictoryTypes = iota
+	RoleVictory
+	ErrorVictory
+)
+
+// GetAntagonistWinType Реальную победу в режиме сложно определить, эта функция должна облегчить задачу
+func GetAntagonistWinType(roleName, factionName string) (VictoryTypes, error) {
+	if slices.Contains(TeamlRoles, factionName) {
+		return FactionVictory, nil
+	} else if slices.Contains(SoloRoles, roleName) {
+		return RoleVictory, nil
+	}
+	return ErrorVictory, fmt.Errorf("role or faction not allowed")
 }
 
 type Player struct {

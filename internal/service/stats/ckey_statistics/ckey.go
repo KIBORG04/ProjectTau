@@ -7,6 +7,8 @@ import (
 	"ssstatistics/internal/service/stats"
 )
 
+// TODO: возможно надо перенести валидацию приходящих значений в контроллер-часть. Тут же должны тупо выполняться запросы в БД
+
 func GetCkeyUplinkBuys(c *gin.Context) (int, any) {
 	player, err := stats.GetValidatePlayer(c)
 	if err != nil {
@@ -210,14 +212,26 @@ func GetCkeyRoles(c *gin.Context) (int, any) {
 	var rolesInfo []struct {
 		RoleName string
 		Count    int
+		Wins     int
 	}
 
 	r.Database.Raw(`
 		select role_name,
-			   COUNT(1)                                               AS count
-		from roles
-		where mind_ckey = ?
-		group by role_name;`, player.Ckey).Scan(&rolesInfo)
+			   count(1) as count,
+			   sum(case when faction_name in ? then faction_victory
+						when role_name in ? then role_victory
+						else 1
+				   end) as wins
+		from (select distinct factions.root_id,
+							  factions.faction_name,
+							  factions.victory as faction_victory,
+							  r.role_name,
+							  r.victory as role_victory
+			  from factions
+			  join roles r on factions.id = r.owner_id
+			  where r.mind_ckey = ?) as t
+		group by role_name;
+		`, stats.TeamlRoles, stats.SoloRoles, player.Ckey).Scan(&rolesInfo)
 
 	if rolesInfo == nil {
 		return 400, map[string]string{
@@ -227,4 +241,36 @@ func GetCkeyRoles(c *gin.Context) (int, any) {
 	}
 
 	return 200, rolesInfo
+}
+
+func GetAchievementsCkey(c *gin.Context) (int, any) {
+	player, err := stats.GetValidatePlayer(c)
+	if err != nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": fmt.Sprint(err),
+		}
+	}
+
+	var achievementsInfo []struct {
+		Name    string
+		Title   string
+		Desc    string
+		RoundId int
+	}
+
+	r.Database.Raw(`
+		select root_id as round_id, name, title, "desc" 
+	    from achievements
+		where regexp_replace(lower(key), '['';()\\"&8^:$#№@_\s%]', '', 'g') = ?;
+	`, player.Ckey).Scan(&achievementsInfo)
+
+	if achievementsInfo == nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": "nothing found",
+		}
+	}
+
+	return 200, achievementsInfo
 }

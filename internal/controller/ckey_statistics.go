@@ -34,3 +34,7 @@ func CkeyRolesGET(c *gin.Context) {
 	code, result := ckey_statistics.GetCkeyRoles(c)
 	c.JSON(code, result)
 }
+func AchievementsCkeysGET(c *gin.Context) {
+	code, result := ckey_statistics.GetAchievementsCkey(c)
+	c.JSON(code, result)
+}
