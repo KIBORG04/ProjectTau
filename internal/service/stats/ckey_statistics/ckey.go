@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/stats"
+	"ssstatistics/internal/utils"
 )
 
 // TODO: возможно надо перенести валидацию приходящих значений в контроллер-часть. Тут же должны тупо выполняться запросы в БД
@@ -18,7 +19,7 @@ func GetCkeyUplinkBuys(c *gin.Context) (int, any) {
 		}
 	}
 
-	var uplinkBuys []struct {
+	var uplinkBuys []*struct {
 		Rolename   string
 		Bundlename string
 		Wins       int
@@ -59,7 +60,7 @@ func GetCkeyChanglingBuys(c *gin.Context) (int, any) {
 		}
 	}
 
-	var changlingBuys []struct {
+	var changlingBuys []*struct {
 		PowerName string
 		Wins      int
 		Winrate   int
@@ -98,7 +99,7 @@ func GetCkeyWizardBuys(c *gin.Context) (int, any) {
 		}
 	}
 
-	var wizardBuys []struct {
+	var wizardBuys []*struct {
 		PowerName string
 		Wins      int
 		Winrate   int
@@ -137,7 +138,7 @@ func GetCkeyCharacters(c *gin.Context) (int, any) {
 		}
 	}
 
-	var characters []struct {
+	var characters []*struct {
 		MindName string
 		Count    int
 	}
@@ -177,7 +178,7 @@ func GetCharacterCkeys(c *gin.Context) (int, any) {
 		}
 	}
 
-	var ckeys []struct {
+	var ckeys []*struct {
 		MindCkey string
 		Count    int
 	}
@@ -209,7 +210,7 @@ func GetCkeyRoles(c *gin.Context) (int, any) {
 		}
 	}
 
-	var rolesInfo []struct {
+	var rolesInfo []*struct {
 		RoleName string
 		Count    int
 		Wins     int
@@ -252,7 +253,7 @@ func GetAchievementsCkey(c *gin.Context) (int, any) {
 		}
 	}
 
-	var achievementsInfo []struct {
+	var achievementsInfo []*struct {
 		Name    string
 		Title   string
 		Desc    string
@@ -273,4 +274,53 @@ func GetAchievementsCkey(c *gin.Context) (int, any) {
 	}
 
 	return 200, achievementsInfo
+}
+
+func GetAllRolesRounds(c *gin.Context) (int, any) {
+	player, err := stats.GetValidatePlayer(c)
+	if err != nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": fmt.Sprint(err),
+		}
+	}
+
+	var allAntagsInfo []*struct {
+		RoundId     int
+		Date        string
+		FactionName string
+		RoleName    string
+		Win         int
+	}
+
+	r.Database.Raw(`
+	select round_id, 
+	       date, 
+	       f.faction_name, 
+	       r.role_name, 
+	       (case when f.faction_name in ? then f.victory
+                 when r.role_name in ? then r.victory
+                 else 0
+    		end) as win
+	from roots
+	join factions f on f.root_id = round_id
+	join roles r on r.owner_id = f.id
+	where r.mind_ckey = ?
+	group by f.faction_name, r.role_name, round_id, win
+	order by round_id desc;
+
+	`, stats.TeamlRoles, stats.SoloRoles, player.Ckey).Scan(&allAntagsInfo)
+
+	if allAntagsInfo == nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": "nothing found",
+		}
+	}
+
+	for _, info := range allAntagsInfo {
+		info.Date = utils.TrimPGDate(info.Date)
+	}
+
+	return 200, allAntagsInfo
 }
