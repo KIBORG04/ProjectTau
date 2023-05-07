@@ -5,6 +5,10 @@ import (
 	"ssstatistics/internal/service/stats/ckey_statistics"
 )
 
+func FinderGET(c *gin.Context) (int, string, gin.H) {
+	return 200, "finder.html", gin.H{}
+}
+
 func CkeyUplinkBuysGET(c *gin.Context) {
 	code, result := ckey_statistics.GetCkeyUplinkBuys(c)
 	c.JSON(code, result)

@@ -1,0 +1,143 @@
+{{ template "header.html" .}}
+
+<div class="alert alert-info mt-4" role="alert">
+    <h4 class="alert-heading">Пояснение к информации!</h4>
+    Пара персонааж-сикей попадает в статистику только при наличие у игрока роли антагониста.
+    <br>
+    Это значит, что учитываются только сыгранные раунды за антагонистов. Если игрок ни разу не был ролькой, он сюда не попадёт.
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <h3 class="text-center">Ckey2Char</h3>
+            <label for="by_ckey" class="form-label">Введите ckey игрока</label>
+            <div class="row">
+                <div class="col">
+                    <input type='text' class="form-control" name='by_ckey' id='by_ckey' placeholder='ckey'/>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary" id="find_by_ckey">Найти!</button>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <span id="found_ckey"></span>
+                <div id="ckey_info">
+                    ...
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <h3 class="text-center">Char2Ckey</h3>
+            <label for="by_char" class="form-label">Введите имя персонажа</label>
+            <div class="row">
+                <div class="col">
+                    <input type='text' class="form-control" name='by_char' id='by_char' placeholder='name' />
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary" id="find_by_char">Найти!</button>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <span id="found_char"></span>
+                <div id="char_info">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ template "footer.html" . }}
+<script>
+    $("#find_by_ckey").click(function () {
+        const val = $('#by_ckey').val().toLowerCase();
+        if(val.length === 0)
+            return;
+        $('#found_ckey').html(`<b>${val}:</b>`);
+        $('#ckey_info').html(`<div class="spinner-border" role="status" id=""></div>`);
+        $.ajax({
+            url: `/api/player/characters`,
+            data: { ckey: val },
+            success: outputFoundByCkeyChars,
+            error: function (jqXHR) {
+                let errorMsg = JSON.stringify(jqXHR.responseJSON);
+                if(jqXHR.responseJSON?.error === "nothing found")
+                    errorMsg = "Сикей в БД не найден!";
+                const msg = `<div class="alert alert-danger mt-3" role="alert">${errorMsg}</div>`;
+                $("#ckey_info").html(msg);
+                $('#by_ckey').val('');
+            }
+        })
+    });
+
+    function outputFoundByCkeyChars(data) {
+        let html = `
+        <table class="table">
+       <thead>
+       <tr>
+       <th scope="col">Персонаж</th>
+       <th scope="col">Раундов</th>
+       </tr>
+       </thead>`;
+        for (const indx in data) {
+            html += `
+            <tr>
+                <td>${data[indx].MindName}</td>
+                <td>${data[indx].Count}</td>
+            </tr>
+            `;
+        }
+        html += `</table>`;
+
+        $('#ckey_info').html(html);
+        $('#by_ckey').val('');
+    }
+
+    $("#find_by_char").click(function () {
+        const val = $('#by_char').val();
+        if(val.length === 0)
+            return;
+        $('#found_char').html(`<b>${val}:</b>`);
+        $('#char_info').html(`<div class="spinner-border" role="status" id=""></div>`);
+        $.ajax({
+            url: `/api/player/ckeys_by_char`,
+            data: { name: val },
+            success: outputFoundByCharCkeys,
+            error: function (jqXHR) {
+                let errorMsg = JSON.stringify(jqXHR.responseJSON);
+                if(jqXHR.responseJSON?.error === "nothing found")
+                    errorMsg = "Персонаж в БД не найден!";
+                const msg = `<div class="alert alert-danger mt-3" role="alert">${errorMsg}</div>`;
+                $("#char_info").html(msg);
+                $('#by_char').val('');
+            }
+        })
+    });
+
+    function outputFoundByCharCkeys(data) {
+        let html = `
+        <table class="table">
+       <thead>
+       <tr>
+       <th scope="col">Ckey</th>
+       <th scope="col">Раундов</th>
+       </tr>
+       </thead>`;
+        for (const indx in data) {
+            html += `
+            <tr>
+                <td>${data[indx].MindCkey}</td>
+                <td>${data[indx].Count}</td>
+            </tr>
+            `;
+        }
+        html += `</table>`;
+
+        $('#char_info').html(html);
+        $('#by_char').val('');
+    }
+</script>

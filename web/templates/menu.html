@@ -24,7 +24,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="/feedback">Feedback</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -37,15 +37,14 @@
                     <a class="nav-link" aria-current="page" href="/mmr">MMR</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/feedback">Feedback</a>
+                    <a class="nav-link" aria-current="page" href="/finder">Finder</a>
                 </li>
             </ul>
 
             <form class="d-flex" method="post">
                 <div class="mt-2 me-2">
-                    <label for="date_start" class="form-label">Start</label>
                     <input id="date_start" name="date_start" type="date" value="2022-02-27" min="2022-02-27"/>
-                    <label for="date_end" class="form-label">End</label>
+                    -
                     <input id="date_end" name="date_end" type="date" min="2022-02-27"/>
                 </div>
                 {{ $l := not .serverCheckboxes }}

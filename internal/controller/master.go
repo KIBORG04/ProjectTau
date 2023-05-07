@@ -69,6 +69,8 @@ func initializeRoutes() {
 
 		base.GET("/changling", GET(general.ChanglingGET))
 		base.POST("/changling", POST(general.ChanglingGET))
+
+		base.GET("/finder", GET(FinderGET))
 	}
 
 	apiRoute := base.Group("/api")

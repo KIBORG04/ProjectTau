@@ -6,6 +6,7 @@ import (
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/stats"
 	"ssstatistics/internal/utils"
+	"strings"
 )
 
 // TODO: возможно надо перенести валидацию приходящих значений в контроллер-часть. Тут же должны тупо выполняться запросы в БД
@@ -144,13 +145,17 @@ func GetCkeyCharacters(c *gin.Context) (int, any) {
 	}
 
 	r.Database.Raw(`
-	select mind_name, count(1)
+	select mind_name, count(1) as count
 	from roles
 	where mind_ckey = ?
 	  and mind_name not like '%(%)'
 	  and mind_name not like 'homunculus%'
+	  and mind_name not like 'Syndicate Robot-%'
 	  and role_name not in ('Abductor Scientist', 'Abductor Agent', 'Cortical Borer')
-	group by mind_name;`, player.Ckey).Scan(&characters)
+	  and mind_name <> ''
+	  and mind_name <> 'unknown'
+	group by mind_name
+	order by count desc;`, player.Ckey).Scan(&characters)
 
 	if characters == nil {
 		return 400, map[string]string{
@@ -177,6 +182,7 @@ func GetCharacterCkeys(c *gin.Context) (int, any) {
 			"error": "name not entered in query",
 		}
 	}
+	character.Name = strings.ToLower(character.Name)
 
 	var ckeys []*struct {
 		MindCkey string
@@ -186,7 +192,7 @@ func GetCharacterCkeys(c *gin.Context) (int, any) {
 	r.Database.Raw(`
 	select mind_ckey, count(1) as count
 	from roles
-	where mind_name = ?
+	where lower(mind_name) = ?
 	group by mind_ckey
 	order by count desc
 	`, character.Name).Scan(&ckeys)
