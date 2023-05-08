@@ -1,0 +1,225 @@
+{{ template "header.html" . }}
+
+<div class="container">
+    <div class="row mt-3">
+        <ul class="nav nav-tabs nav-fill" role="tablist" aria-orientation="horizontal">
+            <li class="nav-item">
+                <button
+                        id="main-tab"
+                        class="nav-link active"
+                        type="button"
+                        role="tab"
+                        aria-current="page"
+                        data-bs-toggle="pill"
+                        data-bs-target="#main"
+                        aria-expanded="true"
+                        aria-controls="main"
+                >Основное
+                </button>
+            </li>
+            <li class="nav-item">
+                <button
+                        id="buys-tab"
+                        class="nav-link"
+                        type="button"
+                        role="tab"
+                        aria-current="page"
+                        data-bs-toggle="pill"
+                        data-bs-target="#buys"
+                        aria-expanded="false"
+                        aria-controls="buys"
+                >Закупы
+                </button>
+            </li>
+            <li class="nav-item">
+                <button
+                        id="other-tab"
+                        class="nav-link"
+                        type="button"
+                        role="tab"
+                        aria-current="page"
+                        data-bs-toggle="pill"
+                        data-bs-target="#other"
+                        aria-expanded="false"
+                        aria-controls="other"
+                >Разное
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="row tab-content">
+        <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab">
+            <div class="row mt-2">
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        <div class="fs-5 badge bg-secondary text-wrap nav-fill">
+                            Персонажи
+                        </div>
+                    </ul>
+                    <div id="characters"><div class="spinner-border" role="status" id=""></div></div>
+                </div>
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        <div class="fs-5 badge bg-secondary text-wrap nav-fill">
+                            Рольки
+                        </div>
+                    </ul>
+                    <div id="roles" class="col"><div class="spinner-border" role="status" id=""></div></div>
+                </div>
+            </div>
+            <div class="col">
+                <ul class="list-group list-group-flush mb-2">
+                    <div class="fs-5 badge bg-secondary text-wrap nav-fill">
+                        Раунды на рольках
+                    </div>
+                </ul>
+                <div id="lastRounds" class="row"><div class="spinner-border" role="status" id=""></div></div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="buys" role="tabpanel" aria-labelledby="buys-tab">
+            ЗАКУПЫ :(
+        </div>
+        <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
+            РАЗНОЕ :(
+        </div>
+    </div>
+</div>
+
+{{ template "footer.html" . }}
+
+<script>
+    const playerCkey = window.location.pathname.split("/").pop();
+    $("#characters").ready(function () {
+        $.ajax({
+            url: `/api/player/characters`,
+            data: {ckey: playerCkey},
+            success: outputFoundByCkeyChars,
+            error: function (jqXHR) {
+                error(jqXHR, "#characters")
+            },
+        })
+    });
+
+    function outputFoundByCkeyChars(data) {
+        let html = `<div class="row">`;
+        const itemsNum = 16;
+        for (let cols = 0; cols < Math.floor((data.length-1) / itemsNum) + 1; cols++) {
+            html += `<div class="col"><ul class="list-group list-group-flush">`;
+            for (let i = itemsNum * cols; i < Math.min(itemsNum + itemsNum * cols, data.length); i++) {
+                html += `
+                <li class="list-group-item">
+                    ${data[i].MindName}
+                </li>`;
+            }
+            html += `</ul></div>`;
+        }
+        html += "</div>"
+        $('#characters').html(html);
+    }
+
+    $("#roles").ready(function () {
+        $.ajax({
+            url: `/api/player/roles`,
+            data: {ckey: playerCkey},
+            success: outputCkeyRoles,
+            error: function (jqXHR) {
+                error(jqXHR, "#roles")
+            },
+        })
+    });
+
+    function outputCkeyRoles(data) {
+        let html = `
+       <div class="table-responsive"><table id="ckey-roles-table" class="table table-sm table-hover">
+       <thead>
+       <tr>
+       <th scope="col">Роль</th>
+       <th scope="col">Раундов</th>
+       <th scope="col">Побед</th>
+       <th scope="col">Винрейт</th>
+       </tr>
+       </thead>`;
+        for (const indx in data) {
+            let color = "table-secondary";
+            const winrate = data[indx].Wins * 100 / data[indx].Count;
+            if(winrate > 75)
+                color = "table-success";
+            else if(winrate < 40)
+                color = "table-danger";
+            html += `
+            <tr class=${color} >
+                <td>${data[indx].RoleName}</td>
+                <td>${data[indx].Count}</td>
+                <td>${data[indx].Wins}</td>
+                <td>${Math.round(winrate)}%</td>
+            </tr>
+            `;
+        }
+        html += `</table></div>`;
+        $('#roles').html(html);
+        $(`#ckey-roles-table`).DataTable({
+            info: false,
+            pageLength: 18,
+            searching: false,
+            lengthChange: false,
+        });
+    }
+
+    $("#lastRounds").ready(function () {
+        $.ajax({
+            url: `/api/player/roles_rounds`,
+            data: {ckey: playerCkey},
+            success: outputCkeyRounds,
+            error: function (jqXHR) {
+                error(jqXHR, "#lastRounds")
+            },
+        })
+    });
+
+    function outputCkeyRounds(data) {
+        let html = `
+        <div class="table-responsive">
+        <table class="table table-sm table-hover" id="last-rounds-table">
+       <thead>
+       <tr>
+       <th scope="col">ID</th>
+       <th scope="col">Дата</th>
+       <th scope="col">Фракция</th>
+       <th scope="col">Роль</th>
+       <th scope="col">Результат</th>
+       </tr>
+       </thead>`;
+        for (const indx in data) {
+            const color = !!data[indx].Win ? "table-success" : "table-danger";
+            const resultWord = !!data[indx].Win ? "Победа" : "Поражение";
+            html += `
+            <tr class=${color}>
+                <td><a class="btn btn-primary btn-lg btn-sm" role="button" href="/round/${data[indx].RoundId}">${data[indx].RoundId}</a></td>
+                <td>${data[indx].Date}</td>
+                <td>${data[indx].FactionName}</td>
+                <td>${data[indx].RoleName}</td>
+                <td>${resultWord}</td>
+            </tr>
+            `;
+        }
+        html += `</table></div>`;
+
+        $('#lastRounds').html(html);
+
+        $(`#last-rounds-table`).DataTable({
+            info: false,
+            order: [[0, 'desc']],
+            pageLength: 19,
+            lengthChange: false,
+        });
+    }
+
+    function error(jqXHR, elem) {
+        let errorMsg = JSON.stringify(jqXHR.responseJSON);
+        if(jqXHR.responseJSON?.error === "nothing found")
+            errorMsg = "Персонаж в БД не найден!";
+        const msg = `<div class="alert alert-danger mt-3" role="alert">${errorMsg}</div>`;
+        $(elem).html(msg);
+    }
+
+</script>

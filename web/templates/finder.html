@@ -2,7 +2,7 @@
 
 <div class="alert alert-info mt-4" role="alert">
     <h4 class="alert-heading">Пояснение к информации!</h4>
-    Пара персонааж-сикей попадает в статистику только при наличие у игрока роли антагониста.
+    Пара персонаж-сикей попадает в статистику только при наличии у игрока роли антагониста.
     <br>
     Это значит, что учитываются только сыгранные раунды за антагонистов. Если игрок ни разу не был ролькой, он сюда не попадёт.
 </div>
@@ -57,12 +57,13 @@
         const val = $('#by_ckey').val().toLowerCase();
         if(val.length === 0)
             return;
-        $('#found_ckey').html(`<b>${val}:</b>`);
         $('#ckey_info').html(`<div class="spinner-border" role="status" id=""></div>`);
         $.ajax({
             url: `/api/player/characters`,
             data: { ckey: val },
-            success: outputFoundByCkeyChars,
+            success: function (data) {
+                outputFoundByCkeyChars(data, val)
+            },
             error: function (jqXHR) {
                 let errorMsg = JSON.stringify(jqXHR.responseJSON);
                 if(jqXHR.responseJSON?.error === "nothing found")
@@ -74,7 +75,8 @@
         })
     });
 
-    function outputFoundByCkeyChars(data) {
+    function outputFoundByCkeyChars(data, ckey) {
+        $('#found_ckey').html(`<b>Личная страничка:</b> <a class="btn btn-primary btn-lg btn-sm" role="button" href="/player/${ckey}">${ckey}</a>`);
         let html = `
         <table class="table">
        <thead>
@@ -128,9 +130,10 @@
        </tr>
        </thead>`;
         for (const indx in data) {
+            const ckey = data[indx].MindCkey;
             html += `
             <tr>
-                <td>${data[indx].MindCkey}</td>
+                <td><a class="btn btn-primary btn-lg btn-sm" role="button" href="/player/${ckey}">${ckey}</a></td>
                 <td>${data[indx].Count}</td>
             </tr>
             `;

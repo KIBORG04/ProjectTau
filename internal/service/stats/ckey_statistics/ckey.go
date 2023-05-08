@@ -62,6 +62,7 @@ func GetCkeyChanglingBuys(c *gin.Context) (int, any) {
 	}
 
 	var changlingBuys []*struct {
+		Rolename  string
 		PowerName string
 		Wins      int
 		Winrate   int
@@ -69,7 +70,8 @@ func GetCkeyChanglingBuys(c *gin.Context) (int, any) {
 	}
 
 	r.Database.
-		Select(`  u.power_name, 
+		Select(`  roles.role_name 									   AS rolename,
+						u.power_name, 
 					    count(u.power_name) 								   AS count,
 						SUM(roles.victory)                                     AS wins,
 						(SUM(roles.victory)::real * 100 / COUNT(1)::real)::int AS winrate`).
@@ -77,7 +79,7 @@ func GetCkeyChanglingBuys(c *gin.Context) (int, any) {
 		Joins("join changeling_infos i on roles.id = i.role_id").
 		Joins("join changeling_purchases u on i.id = u.changeling_info_id").
 		Where("mind_ckey = ?", player.Ckey).
-		Group("u.power_name").
+		Group("roles.role_name, u.power_name").
 		Order("count desc").
 		Find(&changlingBuys)
 
@@ -101,6 +103,7 @@ func GetCkeyWizardBuys(c *gin.Context) (int, any) {
 	}
 
 	var wizardBuys []*struct {
+		Rolename  string
 		PowerName string
 		Wins      int
 		Winrate   int
@@ -108,7 +111,8 @@ func GetCkeyWizardBuys(c *gin.Context) (int, any) {
 	}
 
 	r.Database.
-		Select(`  u.power_name, 
+		Select(`  roles.role_name 									   AS rolename,
+						u.power_name, 
 					    count(u.power_name) 								   AS count,
 						SUM(roles.victory)                                     AS wins,
 						(SUM(roles.victory)::real * 100 / COUNT(1)::real)::int AS winrate`).
@@ -116,7 +120,7 @@ func GetCkeyWizardBuys(c *gin.Context) (int, any) {
 		Joins("join wizard_infos i on roles.id = i.role_id").
 		Joins("join wizard_purchases u on i.id = u.wizard_info_id").
 		Where("mind_ckey = ?", player.Ckey).
-		Group("u.power_name").
+		Group("roles.role_name, u.power_name").
 		Order("count desc").
 		Find(&wizardBuys)
 
@@ -237,7 +241,8 @@ func GetCkeyRoles(c *gin.Context) (int, any) {
 			  from factions
 			  join roles r on factions.id = r.owner_id
 			  where r.mind_ckey = ?) as t
-		group by role_name;
+		group by role_name
+		order by role_name;
 		`, stats.TeamlRoles, stats.SoloRoles, player.Ckey).Scan(&rolesInfo)
 
 	if rolesInfo == nil {

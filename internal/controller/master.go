@@ -71,6 +71,10 @@ func initializeRoutes() {
 		base.POST("/changling", POST(general.ChanglingGET))
 
 		base.GET("/finder", GET(FinderGET))
+
+		base.GET("/player", GET(NotAPlayerGET))
+
+		base.GET("/player/:name", GET(PlayerStatisticGET))
 	}
 
 	apiRoute := base.Group("/api")
@@ -118,7 +122,7 @@ func initializeRoutes() {
 
 		playerRoute.GET("/achievements", AchievementsCkeysGET)
 
-		playerRoute.GET("/all_roles", AllRolesRoundsGET)
+		playerRoute.GET("/roles_rounds", AllRolesRoundsGET)
 	}
 
 	// Group using gin.BasicAuth() middleware

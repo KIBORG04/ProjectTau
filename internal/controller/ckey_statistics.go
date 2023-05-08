@@ -9,6 +9,16 @@ func FinderGET(c *gin.Context) (int, string, gin.H) {
 	return 200, "finder.html", gin.H{}
 }
 
+func PlayerStatisticGET(c *gin.Context) (int, string, gin.H) {
+	return 200, "player.html", gin.H{}
+}
+
+func NotAPlayerGET(c *gin.Context) (int, string, gin.H) {
+	return 200, "error.html", gin.H{
+		"error": "Введи игрока нормально, без абузов",
+	}
+}
+
 func CkeyUplinkBuysGET(c *gin.Context) {
 	code, result := ckey_statistics.GetCkeyUplinkBuys(c)
 	c.JSON(code, result)
