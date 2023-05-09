@@ -11,6 +11,14 @@ import (
 
 // TODO: возможно надо перенести валидацию приходящих значений в контроллер-часть. Тут же должны тупо выполняться запросы в БД
 
+type AntagonistBuy struct {
+	Rolename  string
+	PowerName string
+	Wins      int
+	Winrate   int
+	Count     int
+}
+
 func GetCkeyUplinkBuys(c *gin.Context) (int, any) {
 	player, err := stats.GetValidatePlayer(c)
 	if err != nil {
@@ -20,17 +28,11 @@ func GetCkeyUplinkBuys(c *gin.Context) (int, any) {
 		}
 	}
 
-	var uplinkBuys []*struct {
-		Rolename   string
-		Bundlename string
-		Wins       int
-		Winrate    int
-		Count      int
-	}
+	var uplinkBuys []*AntagonistBuy
 
 	r.Database.
 		Select(`  roles.role_name 									   AS rolename,
-						u.bundlename, 
+						u.bundlename 										   AS power_name, 
 					    count(u.bundlename) 								   AS count,
 						SUM(roles.victory)                                     AS wins,
 						(SUM(roles.victory)::real * 100 / COUNT(1)::real)::int AS winrate`).
@@ -61,13 +63,7 @@ func GetCkeyChanglingBuys(c *gin.Context) (int, any) {
 		}
 	}
 
-	var changlingBuys []*struct {
-		Rolename  string
-		PowerName string
-		Wins      int
-		Winrate   int
-		Count     int
-	}
+	var changlingBuys []*AntagonistBuy
 
 	r.Database.
 		Select(`  roles.role_name 									   AS rolename,
@@ -102,13 +98,7 @@ func GetCkeyWizardBuys(c *gin.Context) (int, any) {
 		}
 	}
 
-	var wizardBuys []*struct {
-		Rolename  string
-		PowerName string
-		Wins      int
-		Winrate   int
-		Count     int
-	}
+	var wizardBuys []*AntagonistBuy
 
 	r.Database.
 		Select(`  roles.role_name 									   AS rolename,

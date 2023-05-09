@@ -1,7 +1,7 @@
 {{ template "header.html" . }}
 
 <div class="container">
-    <div class="row mt-3">
+    <div class="row mt-3 mb-3">
         <ul class="nav nav-tabs nav-fill" role="tablist" aria-orientation="horizontal">
             <li class="nav-item">
                 <button
@@ -56,7 +56,7 @@
                             Персонажи
                         </div>
                     </ul>
-                    <div id="characters"><div class="spinner-border" role="status" id=""></div></div>
+                    <div id="characters"><div class="spinner-border" role="status"></div></div>
                 </div>
                 <div class="col">
                     <ul class="list-group list-group-flush">
@@ -64,7 +64,7 @@
                             Рольки
                         </div>
                     </ul>
-                    <div id="roles" class="col"><div class="spinner-border" role="status" id=""></div></div>
+                    <div id="roles" class="col"><div class="spinner-border" role="status"></div></div>
                 </div>
             </div>
             <div class="col">
@@ -73,11 +73,11 @@
                         Раунды на рольках
                     </div>
                 </ul>
-                <div id="lastRounds" class="row"><div class="spinner-border" role="status" id=""></div></div>
+                <div id="lastRounds" class="row"><div class="spinner-border" role="status"></div></div>
             </div>
         </div>
         <div class="tab-pane fade" id="buys" role="tabpanel" aria-labelledby="buys-tab">
-            ЗАКУПЫ :(
+            <div id="role-buys-data"><div class="spinner-border" role="status"></div></div>
         </div>
         <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
             РАЗНОЕ :(
@@ -212,6 +212,153 @@
             pageLength: 19,
             lengthChange: false,
         });
+    }
+
+    $("#role-buys-data").ready(function () {
+        let html = ``;
+        html += `<div class="row">`
+        html += `<ul class="nav nav-justified nav-pills" role="tablist" aria-orientation="horizontal">`
+        html += getRoleBuysTab("Uplink", true);
+        html += getRoleBuysTab("Changling", false);
+        html += getRoleBuysTab("Wizard", false);
+        html += `</ul>`;
+        html += `</div>`;
+        html += `<div class="row tab-content">`;
+
+        /*
+        Пишу пока не забыл.
+        Возможен прикол, что асинхронные ajax будут криво изменять html переменную из-за её захвата
+        и не атомарного доступа к переменной.
+        Решение: делать тут <div id="uplink-buy> и уже потом запускать аджаксы, которые будут менять дивы по id,
+        так как к тем моментам будет построено дом дерево
+         */
+        const a1 = $.ajax({
+            url: `/api/player/uplink_buys`,
+            data: {ckey: playerCkey},
+            success: function (data) {
+                html += buysStatistics(data, "Uplink", true);
+            },
+        });
+        const a2 = $.ajax({
+            url: `/api/player/changling_buys`,
+            data: {ckey: playerCkey},
+            success: function (data) {
+                html += buysStatistics(data, "Changling", false);
+            },
+        });
+        const a3 = $.ajax({
+            url: `/api/player/wizard_buys`,
+            data: {ckey: playerCkey},
+            success: function (data) {
+                html += buysStatistics(data, "Wizard", false);
+            },
+        });
+        Promise.all([a1, a2, a3]).then((values) => {
+                html += `</div>`;
+                $("#role-buys-data").html(html);
+            });
+    });
+
+    function getRoleBuysTab(name, active) {
+        const idName = name.toLowerCase();
+        return `<li class="nav-item">
+                <button
+                        id="${idName}-buys-tab"
+                        class="nav-link ${active ? "active" : ""}"
+                        type="button"
+                        role="tab"
+                        aria-current="page"
+                        data-bs-toggle="pill"
+                        data-bs-target="#${idName}"
+                        aria-expanded="true"
+                        aria-controls="${idName}"
+                >${name}
+                </button>
+            </li>`;
+    }
+
+    function buysStatistics(data, name, active) {
+        const idName = name.toLowerCase();
+        let html = ``;
+        html += `<div class="tab-pane fade ${active ? "show active" : ""}" id="${idName}" role="tabpanel" aria-labelledby="${idName}-tab">`;
+
+        if(data.length === 0) {
+            html += `<div class="alert alert-danger mt-3 row" role="alert">Пусто</div>`;
+            html += `</div>`;
+            return html;
+        }
+
+        const aggregateDate = {};
+        for (const buy of data) {
+            const id = buy.Rolename.toLowerCase();
+            if(!aggregateDate[id]) {
+                aggregateDate[id] = [];
+            }
+            aggregateDate[id].push(buy);
+        }
+
+        html += `<div class="row mt-3">`;
+        html += `<div class="nav flex-column nav-pills col-auto" id="v-pills-tab" role="tablist" aria-orientation="vertical">`
+        let firstElemShown = false;
+        Object.keys(aggregateDate).map((str) => {
+            const roleId = str.replace(/\s/g, '');
+            html += `<button
+                type="button"
+                role="tab"
+                class="nav-link ${!firstElemShown ? "active" : ""} text-capitalize text-start"
+                id="${roleId}-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#${roleId}"
+                aria-expanded="${!firstElemShown ? "true" : "false"}"
+                aria-controls="${roleId}">
+                ${str}
+                </button>`;
+            firstElemShown = true;
+        });
+        html += `</div>`;
+
+        html += `<div class="tab-content col" id="v-pills-tabContent">`;
+        firstElemShown = false;
+        for (const roleName in aggregateDate) {
+            const roleId = roleName.replace(/\s/g, '');
+            html += `<div class="tab-pane fade ${!firstElemShown ? "show active" : ""}" id="${roleId}" role="tabpanel" aria-labelledby="${roleId}-tab">`;
+            firstElemShown = true;
+            html += `<div class="fs-5 badge bg-secondary text-wrap text-capitalize">${roleName}</div>`;
+            html += `<div class="table-responsive">`
+            html += `<table id="${roleId}-table" class="table table-sm table-hover">`;
+            html += `<thead><tr>`;
+            html += `<th>Покупка</th>`;
+            html += `<th>Количество</th>`;
+            html += `<th>Побед</th>`;
+            html += `<th>Винрейт</th>`;
+            html += `</tr></thead>`;
+            html += `<tbody>`;
+            for (const buy of aggregateDate[roleName]) {
+                let color = "table-secondary";
+                if(buy.Winrate > 75)
+                    color = "table-success";
+                else if(buy.Winrate < 40)
+                    color = "table-danger";
+                html += `<tr class=${color}>`;
+                html += `<td>${buy.PowerName}</td>`;
+                html += `<td>${buy.Count}</td>`;
+                html += `<td>${buy.Wins}</td>`;
+                html += `<td>${buy.Winrate}%</td>`;
+                html += `</tr>`;
+            }
+            html += `</tbody>`
+            html += `</table>`
+            html += `</div>`
+            html += `</div>`
+        }
+        html += `</div>`;
+
+        html += `</div>`;
+
+        /* Рендер закупов, как на аплинк или ченджлинг страничке, но код с нуля) */
+
+        html += `</div>`;
+        return html;
     }
 
     function error(jqXHR, elem) {
