@@ -34,9 +34,11 @@ func GetCkeyUplinkBuys(c *gin.Context) (int, any) {
 		Select(`  roles.role_name 									   AS rolename,
 						u.bundlename 										   AS power_name, 
 					    count(u.bundlename) 								   AS count,
-						SUM(roles.victory)                                     AS wins,
-						(SUM(roles.victory)::real * 100 / COUNT(1)::real)::int AS winrate`).
-		Table("roles").
+						sum(case when factions.faction_name in ? then factions.victory
+						when roles.role_name in ? then roles.victory
+						else 1 end) 										   AS wins`, stats.TeamlRoles, stats.SoloRoles).
+		Table("factions").
+		Joins("join roles on roles.owner_id = factions.id").
 		Joins("join uplink_infos i on roles.id = i.role_id").
 		Joins("join uplink_purchases u on i.id = u.uplink_info_id").
 		Where("mind_ckey = ?", player.Ckey).
@@ -49,6 +51,10 @@ func GetCkeyUplinkBuys(c *gin.Context) (int, any) {
 			"code":  "400",
 			"error": "nothing found",
 		}
+	}
+
+	for _, buy := range uplinkBuys {
+		buy.Winrate = int(float32(buy.Wins) * 100 / float32(buy.Count))
 	}
 
 	return 200, uplinkBuys
