@@ -124,6 +124,35 @@ func GetCkeyWizardBuys(c *gin.Context) (int, any) {
 	return 200, wizardBuys
 }
 
+func FindSimilaryCkey(c *gin.Context) (int, any) {
+	player, err := stats.GetValidatePlayer(c)
+	if err != nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": fmt.Sprint(err),
+		}
+	}
+
+	var FoundCkey struct {
+		FoundCkey string
+	}
+
+	r.Database.Raw(`
+	select mind_ckey as found_ckey, similarity(mind_ckey, ?) as sim
+	from roles
+	where similarity(mind_ckey, ?) > 0.4
+	order by sim desc;`, player.Ckey, player.Ckey).First(&FoundCkey)
+
+	if FoundCkey.FoundCkey == "" {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": "nothing found",
+		}
+	}
+
+	return 200, FoundCkey
+}
+
 func GetCkeyCharacters(c *gin.Context) (int, any) {
 	player, err := stats.GetValidatePlayer(c)
 	if err != nil {
@@ -161,6 +190,43 @@ func GetCkeyCharacters(c *gin.Context) (int, any) {
 	return 200, characters
 }
 
+func FindSimilaryCharacter(c *gin.Context) (int, any) {
+	type Character struct {
+		Name string `form:"name"`
+	}
+	var character Character
+	err := c.BindQuery(&character)
+	if err != nil {
+		return 400, err
+	}
+	if character.Name == "" {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": "name not entered in query",
+		}
+	}
+	character.Name = strings.ToLower(character.Name)
+
+	var FoundChar struct {
+		Name string
+	}
+
+	r.Database.Raw(`
+	select mind_name as name, similarity(lower(mind_name), ?) as sim
+	from roles
+	where similarity(lower(mind_name), ?) > 0.3
+	order by sim desc;`, character.Name, character.Name).First(&FoundChar)
+
+	if FoundChar.Name == "" {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": "nothing found",
+		}
+	}
+
+	return 200, FoundChar
+}
+
 func GetCharacterCkeys(c *gin.Context) (int, any) {
 	type Character struct {
 		Name string `form:"name"`
@@ -186,9 +252,9 @@ func GetCharacterCkeys(c *gin.Context) (int, any) {
 	r.Database.Raw(`
 	select mind_ckey, count(1) as count
 	from roles
-	where lower(mind_name) = ?
+	where lower(mind_name) =  ?
 	group by mind_ckey
-	order by count desc
+	order by count desc;
 	`, character.Name).Scan(&ckeys)
 
 	if ckeys == nil {

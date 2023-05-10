@@ -34,8 +34,18 @@ func CkeyWizardBuysGET(c *gin.Context) {
 	c.JSON(code, result)
 }
 
+func TryFindCkeyGET(c *gin.Context) {
+	code, result := ckey_statistics.FindSimilaryCkey(c)
+	c.JSON(code, result)
+}
+
 func CkeyCharactersGET(c *gin.Context) {
 	code, result := ckey_statistics.GetCkeyCharacters(c)
+	c.JSON(code, result)
+}
+
+func TryFindCharacterGET(c *gin.Context) {
+	code, result := ckey_statistics.FindSimilaryCharacter(c)
 	c.JSON(code, result)
 }
 

@@ -4,7 +4,8 @@
     <h4 class="alert-heading">Пояснение к информации!</h4>
     Пара персонаж-сикей попадает в статистику только при наличии у игрока роли антагониста.
     <br>
-    Это значит, что учитываются только сыгранные раунды за антагонистов. Если игрок ни разу не был ролькой, он сюда не попадёт.
+    Это значит, что учитываются только сыгранные раунды за антагонистов. Если игрок ни разу не был ролькой, он сюда не
+    попадёт.
 </div>
 
 
@@ -34,7 +35,7 @@
             <label for="by_char" class="form-label">Введите имя персонажа</label>
             <div class="row">
                 <div class="col">
-                    <input type='text' class="form-control" name='by_char' id='by_char' placeholder='name' />
+                    <input type='text' class="form-control" name='by_char' id='by_char' placeholder='name'/>
                 </div>
                 <div class="col">
                     <button type="submit" class="btn btn-primary" id="find_by_char">Найти!</button>
@@ -55,18 +56,16 @@
 <script>
     $("#find_by_ckey").click(function () {
         const val = $('#by_ckey').val().toLowerCase();
-        if(val.length === 0)
+        if (val.length === 0)
             return;
         $('#ckey_info').html(`<div class="spinner-border" role="status" id=""></div>`);
         $.ajax({
-            url: `/api/player/characters`,
-            data: { ckey: val },
-            success: function (data) {
-                outputFoundByCkeyChars(data, val)
-            },
+            url: `/api/player/try_find`,
+            data: {ckey: val},
+            success: outputFoundByCkeyChars,
             error: function (jqXHR) {
                 let errorMsg = JSON.stringify(jqXHR.responseJSON);
-                if(jqXHR.responseJSON?.error === "nothing found")
+                if (jqXHR.responseJSON?.error === "nothing found")
                     errorMsg = "Сикей в БД не найден!";
                 const msg = `<div class="alert alert-danger mt-3" role="alert">${errorMsg}</div>`;
                 $("#ckey_info").html(msg);
@@ -75,43 +74,58 @@
         })
     });
 
-    function outputFoundByCkeyChars(data, ckey) {
+    function outputFoundByCkeyChars(data) {
+        const ckey = data.FoundCkey;
         $('#found_ckey').html(`<b>Личная страничка:</b> <a class="btn btn-primary btn-lg btn-sm" role="button" href="/player/${ckey}">${ckey}</a>`);
-        let html = `
-        <table class="table">
-       <thead>
-       <tr>
-       <th scope="col">Персонаж</th>
-       <th scope="col">Раундов</th>
-       </tr>
-       </thead>`;
-        for (const indx in data) {
-            html += `
-            <tr>
-                <td>${data[indx].MindName}</td>
-                <td>${data[indx].Count}</td>
-            </tr>
-            `;
-        }
-        html += `</table>`;
 
-        $('#ckey_info').html(html);
-        $('#by_ckey').val('');
+        $.ajax({
+            url: `/api/player/characters`,
+            data: {ckey: ckey},
+            success: function (data) {
+                let html = `
+                    <table class="table">
+                   <thead>
+                   <tr>
+                   <th scope="col">Персонаж</th>
+                   <th scope="col">Раундов</th>
+                   </tr>
+                   </thead>`;
+                for (const indx in data) {
+                    html += `
+                        <tr>
+                            <td>${data[indx].MindName}</td>
+                            <td>${data[indx].Count}</td>
+                        </tr>
+                        `;
+                }
+                html += `</table>`;
+
+                $('#ckey_info').html(html);
+                $('#by_ckey').val('');
+            },
+            error: function (jqXHR) {
+                let errorMsg = JSON.stringify(jqXHR.responseJSON);
+                if (jqXHR.responseJSON?.error === "nothing found")
+                    errorMsg = "Сикей в БД не найден!";
+                const msg = `<div class="alert alert-danger mt-3" role="alert">${errorMsg}</div>`;
+                $("#ckey_info").html(msg);
+                $('#by_ckey').val('');
+            }
+        })
     }
 
     $("#find_by_char").click(function () {
         const val = $('#by_char').val();
-        if(val.length === 0)
+        if (val.length === 0)
             return;
-        $('#found_char').html(`<b>${val}:</b>`);
         $('#char_info').html(`<div class="spinner-border" role="status" id=""></div>`);
         $.ajax({
-            url: `/api/player/ckeys_by_char`,
-            data: { name: val },
+            url: `/api/player/try_find_character`,
+            data: {name: val},
             success: outputFoundByCharCkeys,
             error: function (jqXHR) {
                 let errorMsg = JSON.stringify(jqXHR.responseJSON);
-                if(jqXHR.responseJSON?.error === "nothing found")
+                if (jqXHR.responseJSON?.error === "nothing found")
                     errorMsg = "Персонаж в БД не найден!";
                 const msg = `<div class="alert alert-danger mt-3" role="alert">${errorMsg}</div>`;
                 $("#char_info").html(msg);
@@ -121,26 +135,41 @@
     });
 
     function outputFoundByCharCkeys(data) {
-        let html = `
-        <table class="table">
-       <thead>
-       <tr>
-       <th scope="col">Ckey</th>
-       <th scope="col">Раундов</th>
-       </tr>
-       </thead>`;
-        for (const indx in data) {
-            const ckey = data[indx].MindCkey;
-            html += `
-            <tr>
-                <td><a class="btn btn-primary btn-lg btn-sm" role="button" href="/player/${ckey}">${ckey}</a></td>
-                <td>${data[indx].Count}</td>
-            </tr>
-            `;
-        }
-        html += `</table>`;
+        $('#found_char').html(`<b>${data.Name}:</b>`);
+        $.ajax({
+            url: `/api/player/ckeys_by_char`,
+            data: {name: data.Name},
+            success: function (data) {
+                let html = `
+                <table class="table">
+               <thead>
+               <tr>
+               <th scope="col">Ckey</th>
+               <th scope="col">Раундов</th>
+               </tr>
+               </thead>`;
+                for (const indx in data) {
+                    const ckey = data[indx].MindCkey;
+                    html += `
+                    <tr>
+                        <td><a class="btn btn-primary btn-lg btn-sm" role="button" href="/player/${ckey}">${ckey}</a></td>
+                        <td>${data[indx].Count}</td>
+                    </tr>
+                    `;
+                }
+                html += `</table>`;
 
-        $('#char_info').html(html);
-        $('#by_char').val('');
+                $('#char_info').html(html);
+                $('#by_char').val('');
+            },
+            error: function (jqXHR) {
+                let errorMsg = JSON.stringify(jqXHR.responseJSON);
+                if (jqXHR.responseJSON?.error === "nothing found")
+                    errorMsg = "Персонаж в БД не найден!";
+                const msg = `<div class="alert alert-danger mt-3" role="alert">${errorMsg}</div>`;
+                $("#char_info").html(msg);
+                $('#by_char').val('');
+            }
+        })
     }
 </script>

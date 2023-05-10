@@ -114,6 +114,10 @@ func initializeRoutes() {
 
 		playerRoute.GET("/wizard_buys", CkeyWizardBuysGET)
 
+		playerRoute.GET("/try_find", TryFindCkeyGET)
+
+		playerRoute.GET("/try_find_character", TryFindCharacterGET)
+
 		playerRoute.GET("/characters", CkeyCharactersGET)
 
 		playerRoute.GET("/ckeys_by_char", CharacterCkeysGET)

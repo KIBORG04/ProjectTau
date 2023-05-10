@@ -65,7 +65,7 @@ func AutoMigrate() {
 			t.ColumnsMigration(Database)
 		}
 	}
-
+	Database.Exec(`CREATE EXTENSION IF NOT EXISTS pg_trgm;`)
 	createViews()
 }
 
