@@ -75,9 +75,11 @@ func GetCkeyChanglingBuys(c *gin.Context) (int, any) {
 		Select(`  roles.role_name 									   AS rolename,
 						u.power_name, 
 					    count(u.power_name) 								   AS count,
-						SUM(roles.victory)                                     AS wins,
-						(SUM(roles.victory)::real * 100 / COUNT(1)::real)::int AS winrate`).
-		Table("roles").
+						sum(case when factions.faction_name in ? then factions.victory
+						when roles.role_name in ? then roles.victory
+						else 1 end) 										   AS wins`, stats.TeamlRoles, stats.SoloRoles).
+		Table("factions").
+		Joins("join roles on roles.owner_id = factions.id").
 		Joins("join changeling_infos i on roles.id = i.role_id").
 		Joins("join changeling_purchases u on i.id = u.changeling_info_id").
 		Where("mind_ckey = ?", player.Ckey).
@@ -90,6 +92,10 @@ func GetCkeyChanglingBuys(c *gin.Context) (int, any) {
 			"code":  "400",
 			"error": "nothing found",
 		}
+	}
+
+	for _, buy := range changlingBuys {
+		buy.Winrate = int(float32(buy.Wins) * 100 / float32(buy.Count))
 	}
 
 	return 200, changlingBuys
@@ -110,9 +116,11 @@ func GetCkeyWizardBuys(c *gin.Context) (int, any) {
 		Select(`  roles.role_name 									   AS rolename,
 						u.power_name, 
 					    count(u.power_name) 								   AS count,
-						SUM(roles.victory)                                     AS wins,
-						(SUM(roles.victory)::real * 100 / COUNT(1)::real)::int AS winrate`).
-		Table("roles").
+						sum(case when factions.faction_name in ? then factions.victory
+						when roles.role_name in ? then roles.victory
+						else 1 end) 										   AS wins`, stats.TeamlRoles, stats.SoloRoles).
+		Table("factions").
+		Joins("join roles on roles.owner_id = factions.id").
 		Joins("join wizard_infos i on roles.id = i.role_id").
 		Joins("join wizard_purchases u on i.id = u.wizard_info_id").
 		Where("mind_ckey = ?", player.Ckey).
@@ -125,6 +133,10 @@ func GetCkeyWizardBuys(c *gin.Context) (int, any) {
 			"code":  "400",
 			"error": "nothing found",
 		}
+	}
+
+	for _, buy := range wizardBuys {
+		buy.Winrate = int(float32(buy.Wins) * 100 / float32(buy.Count))
 	}
 
 	return 200, wizardBuys
