@@ -14,7 +14,7 @@ import (
 
 // Utility regex
 var (
-	ckeyRegex = regexp.MustCompile(`[';()\\"&8^:$#№@_\s%]`)
+	ckeyRegex = regexp.MustCompile(`[';()\\"&^?:$#№@_\s%]`)
 	IsDrone   = regexp.MustCompile(`maintenance drone \(\d+\)`)
 	IsMobName = regexp.MustCompile(`\w+ \(\d+\)`)
 )
