@@ -1,7 +1,7 @@
 {{ template "header.html" . }}
 
 <div class="container">
-    <div class="row mt-3 mb-3">
+    <div class="row mt-2 mb-3">
         <ul class="nav nav-tabs nav-fill" role="tablist" aria-orientation="horizontal">
             <li class="nav-item">
                 <button
@@ -49,6 +49,10 @@
     </div>
     <div class="row tab-content">
         <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab">
+            <div class="row">
+                <div id="playerInfo">
+                </div>
+            </div>
             <div class="row mt-2">
                 <div class="col">
                     <ul class="list-group list-group-flush">
@@ -56,7 +60,9 @@
                             Персонажи
                         </div>
                     </ul>
-                    <div id="characters"><div class="spinner-border" role="status"></div></div>
+                    <div id="characters">
+                        <div class="spinner-border" role="status"></div>
+                    </div>
                 </div>
                 <div class="col">
                     <ul class="list-group list-group-flush">
@@ -64,7 +70,9 @@
                             Рольки
                         </div>
                     </ul>
-                    <div id="roles" class="col"><div class="spinner-border" role="status"></div></div>
+                    <div id="roles" class="col">
+                        <div class="spinner-border" role="status"></div>
+                    </div>
                 </div>
             </div>
             <div class="col">
@@ -73,11 +81,15 @@
                         Раунды на рольках
                     </div>
                 </ul>
-                <div id="lastRounds" class="row"><div class="spinner-border" role="status"></div></div>
+                <div id="lastRounds" class="row">
+                    <div class="spinner-border" role="status"></div>
+                </div>
             </div>
         </div>
         <div class="tab-pane fade" id="buys" role="tabpanel" aria-labelledby="buys-tab">
-            <div id="role-buys-data"><div class="spinner-border" role="status"></div></div>
+            <div id="role-buys-data">
+                <div class="spinner-border" role="status"></div>
+            </div>
         </div>
         <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
             <div class="row mt-2">
@@ -87,7 +99,9 @@
                             Достижения
                         </div>
                     </ul>
-                    <div id="achievements"><div class="spinner-border" role="status"></div></div>
+                    <div id="achievements">
+                        <div class="spinner-border" role="status"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -112,7 +126,7 @@
     function outputFoundByCkeyChars(data) {
         let html = `<div class="row">`;
         const itemsNum = 16;
-        for (let cols = 0; cols < Math.floor((data.length-1) / itemsNum) + 1; cols++) {
+        for (let cols = 0; cols < Math.floor((data.length - 1) / itemsNum) + 1; cols++) {
             html += `<div class="col"><ul class="list-group list-group-flush">`;
             for (let i = itemsNum * cols; i < Math.min(itemsNum + itemsNum * cols, data.length); i++) {
                 html += `
@@ -151,9 +165,9 @@
         for (const indx in data) {
             let color = "table-secondary";
             const winrate = data[indx].Wins * 100 / data[indx].Count;
-            if(winrate > 75)
+            if (winrate > 75)
                 color = "table-success";
-            else if(winrate < 40)
+            else if (winrate < 40)
                 color = "table-danger";
             html += `
             <tr class=${color} >
@@ -263,9 +277,9 @@
             },
         });
         Promise.all([a1, a2, a3]).then((values) => {
-                html += `</div>`;
-                $("#role-buys-data").html(html);
-            });
+            html += `</div>`;
+            $("#role-buys-data").html(html);
+        });
     });
 
     function getRoleBuysTab(name, active) {
@@ -291,7 +305,7 @@
         let html = ``;
         html += `<div class="tab-pane fade ${active ? "show active" : ""}" id="${idName}" role="tabpanel" aria-labelledby="${idName}-tab">`;
 
-        if(data.length === 0) {
+        if (data.length === 0) {
             html += `<div class="alert alert-danger mt-3 row" role="alert">Пусто</div>`;
             html += `</div>`;
             return html;
@@ -300,7 +314,7 @@
         const aggregateDate = {};
         for (const buy of data) {
             const id = buy.Rolename.toLowerCase();
-            if(!aggregateDate[id]) {
+            if (!aggregateDate[id]) {
                 aggregateDate[id] = [];
             }
             aggregateDate[id].push(buy);
@@ -344,9 +358,9 @@
             html += `<tbody>`;
             for (const buy of aggregateDate[roleName]) {
                 let color = "table-secondary";
-                if(buy.Winrate > 75)
+                if (buy.Winrate > 75)
                     color = "table-success";
-                else if(buy.Winrate < 40)
+                else if (buy.Winrate < 40)
                     color = "table-danger";
                 html += `<tr class=${color}>`;
                 html += `<td>${buy.PowerName}</td>`;
@@ -400,10 +414,32 @@
         $('#achievements').html(html);
     }
 
+    $("#playerInfo").ready(function () {
+        $.ajax({
+            url: `/api/player/mmr`,
+            data: {ckey: playerCkey},
+            success: outputPlayerMMR,
+            error: function (jqXHR) {
+                error(jqXHR, "#playerInfo")
+            },
+        })
+    });
+
+    function outputPlayerMMR(data) {
+        let html = ``;
+        html += `
+            <ul class="list-group list-group-flush">
+                <div class="fs-5 badge bg-secondary text-wrap nav-fill">
+                    ${playerCkey} MMR: ${data.pop().Mmr}
+                </div>
+            </ul>`;
+        $('#playerInfo').html(html);
+    }
+
 
     function error(jqXHR, elem) {
         let errorMsg = JSON.stringify(jqXHR.responseJSON);
-        if(jqXHR.responseJSON?.error === "nothing found")
+        if (jqXHR.responseJSON?.error === "nothing found")
             errorMsg = "Персонаж в БД не найден!";
         const msg = `<div class="alert alert-danger mt-3" role="alert">${errorMsg}</div>`;
         $(elem).html(msg);

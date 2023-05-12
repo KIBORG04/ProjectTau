@@ -409,3 +409,31 @@ func GetAllRolesRounds(c *gin.Context) (int, any) {
 
 	return 200, allAntagsInfo
 }
+
+func GetCkeyMMR(c *gin.Context) (int, any) {
+	player, err := stats.GetValidatePlayer(c)
+	if err != nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": fmt.Sprint(err),
+		}
+	}
+
+	var MMR []*struct {
+		Mmr int
+	}
+
+	r.Database.Raw(`
+	select mmr
+	from players
+	where ckey = ?;`, player.Ckey).Scan(&MMR)
+
+	if MMR == nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": "nothing found",
+		}
+	}
+
+	return 200, MMR
+}

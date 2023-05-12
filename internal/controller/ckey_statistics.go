@@ -67,3 +67,8 @@ func AllRolesRoundsGET(c *gin.Context) {
 	code, result := ckey_statistics.GetAllRolesRounds(c)
 	c.JSON(code, result)
 }
+
+func CkeyMMRGET(c *gin.Context) {
+	code, result := ckey_statistics.GetCkeyMMR(c)
+	c.JSON(code, result)
+}

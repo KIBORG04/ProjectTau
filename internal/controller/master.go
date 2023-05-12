@@ -127,6 +127,8 @@ func initializeRoutes() {
 		playerRoute.GET("/achievements", AchievementsCkeysGET)
 
 		playerRoute.GET("/roles_rounds", AllRolesRoundsGET)
+
+		playerRoute.GET("/mmr", CkeyMMRGET)
 	}
 
 	// Group using gin.BasicAuth() middleware

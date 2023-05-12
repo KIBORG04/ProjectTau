@@ -6,9 +6,6 @@
     <br>
     При победе на соло антагонисте или командой вам начисляется <span style="color: limegreen">25 очков</span>.
     При поражении снимается <span style="color: red">30 очков</span>.
-    <br>
-    <br>
-    <span class="fs-5 fw-bold text-danger">31.08.2022 ММРЫ ПЕРЕРАСЧИТАНЫ. ТЕПЕРЬ ЗА 1 РАУНД ТОЛЬКО 1 РАЗ ДОБАВЛЯЮТ ИЛИ СНИМАЮТ ОЧКИ.</span>
 </div>
 
 
@@ -58,7 +55,10 @@
         let row = `<tr class='${tr_class}'>`
         row += `<th class='text-end'>${num}</th>`
         row += `<th class='text-start' >${img}</th>`
-        row += `<td class='text-start'>${ckey}</td>`
+        if(ckey[0] !== "<")
+            row += `<td class='text-start'><a class="text-black text-decoration-none" href="/player/${ckey}">${ckey} <i class="bi bi-box-arrow-up-right" style="font-size:12px;"></i></a></td>`
+        else
+            row += `<td>${ckey}</td>`
         row += `<td class='text-end'>${mmr}</td>`
         row += `</tr>`
         return row

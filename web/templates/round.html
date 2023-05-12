@@ -46,7 +46,9 @@
                                 <ul class="list-group list-group-horizontal">
                                     <li class="list-group-item" style="width: 100%">{{ .RoleName }}</li>
                                     <li class="list-group-item" style="width: 100%">{{ .MindName }}</li>
-                                    <li class="list-group-item" style="width: 100%">{{ .MindCkey }}</li>
+                                    <li class="list-group-item" style="width: 100%">
+                                        <a class="btn btn-primary btn-lg btn-sm" role="button" href="/player/{{ .MindCkey }}">{{ .MindCkey }}</a>
+                                    </li>
                                     {{ if ne $l 0}}
                                         <button class="btn btn-outline-secondary"
                                                 style="width: 80%" type="button"
