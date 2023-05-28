@@ -10,6 +10,7 @@ type Root struct {
 	RoundID   int32      `json:"round_id" gorm:"primaryKey;uniqueIndex"`
 	Version   int32      `json:"version"`
 	Mode      string     `json:"mode" gorm:"size:128"`
+	Bundle    string     `json:"bundle" gorm:"size:128"`
 	StartTime string     `json:"start_time" gorm:"size:16"`
 	Map       string     `json:"map" gorm:"size:128"`
 	Duration  string     `json:"duration" gorm:"size:16"`
@@ -32,6 +33,7 @@ type Root struct {
 	ManifestEntries   []ManifestEntries   `json:"manifest_entries"`
 	LeaveStats        []LeaveStats        `json:"leave_stats"`
 	Rating            Rating              `json:"rating"`
+	Vote              Vote                `json:"completed_votes"`
 }
 
 type Rating struct {
@@ -39,6 +41,13 @@ type Rating struct {
 	RootID      int32              `gorm:"index"`
 	RatingsTemp map[string]float32 `json:"ratings" gorm:"-"`
 	Ratings     []RatingValues
+}
+
+type RatingValues struct {
+	ID       int32  `gorm:"uniqueIndex"`
+	RatingID int32  `gorm:"index"`
+	Key      string `gorm:"size:256"`
+	Value    float32
 }
 
 func (r *Rating) BeforeSave(tx *gorm.DB) error {
@@ -51,11 +60,32 @@ func (r *Rating) BeforeSave(tx *gorm.DB) error {
 	return nil
 }
 
-type RatingValues struct {
+type Vote struct {
+	ID          int32          `gorm:"uniqueIndex"`
+	RootID      int32          `gorm:"index"`
+	Name        string         `json:"name"`
+	TotalVotes  int            `json:"total_votes"`
+	TotalVoters int            `json:"total_voters"`
+	Winner      string         `json:"winner"`
+	ResultsTemp map[string]int `json:"results" gorm:"-"`
+	Results     []VoteValues
+}
+
+type VoteValues struct {
 	ID       int32  `gorm:"uniqueIndex"`
 	RatingID int32  `gorm:"index"`
 	Key      string `gorm:"size:256"`
-	Value    float32
+	Value    int
+}
+
+func (r *Vote) BeforeSave(tx *gorm.DB) error {
+	for category, value := range r.ResultsTemp {
+		r.Results = append(r.Results, VoteValues{
+			Key:   category,
+			Value: value,
+		})
+	}
+	return nil
 }
 
 type Achievement struct {
