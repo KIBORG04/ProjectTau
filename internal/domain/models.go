@@ -9,6 +9,8 @@ var Models = []any{
 	new(Score),
 	new(Rating),
 	new(RatingValues),
+	new(Vote),
+	new(VoteValues),
 	new(Achievement),
 	new(CommunicationLogs),
 	new(Deaths),
