@@ -72,10 +72,10 @@ type Vote struct {
 }
 
 type VoteValues struct {
-	ID       int32  `gorm:"uniqueIndex"`
-	RatingID int32  `gorm:"index"`
-	Key      string `gorm:"size:256"`
-	Value    int
+	ID     int32  `gorm:"uniqueIndex"`
+	VoteID int32  `gorm:"index"`
+	Key    string `gorm:"size:256"`
+	Value  int
 }
 
 func (r *Vote) BeforeSave(tx *gorm.DB) error {
