@@ -33,7 +33,7 @@ type Root struct {
 	ManifestEntries   []ManifestEntries   `json:"manifest_entries"`
 	LeaveStats        []LeaveStats        `json:"leave_stats"`
 	Rating            Rating              `json:"rating"`
-	Vote              Vote                `json:"completed_votes"`
+	Vote              []Vote              `json:"completed_votes"`
 }
 
 type Rating struct {
