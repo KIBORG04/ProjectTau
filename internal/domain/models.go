@@ -34,6 +34,8 @@ var Models = []any{
 	new(Player),
 	new(Top),
 	new(TopMember),
+
+	new(ThetaSponsor),
 }
 
 type MyMigrator interface {

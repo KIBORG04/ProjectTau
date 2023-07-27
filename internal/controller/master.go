@@ -131,6 +131,11 @@ func initializeRoutes() {
 		playerRoute.GET("/mmr", CkeyMMRGET)
 	}
 
+	ss14 := apiRoute.Group("/ss14")
+	{
+		ss14.GET("/sponsors/:userid", SponsorsGET)
+	}
+
 	// Group using gin.BasicAuth() middleware
 	// gin.Accounts is a shortcut for map[string]string
 	authorized := base.Group("/admin", gin.BasicAuth(gin.Accounts{
