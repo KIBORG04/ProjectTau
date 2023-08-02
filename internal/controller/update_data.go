@@ -1,10 +1,6 @@
 package controller
 
 import (
-	"ssstatistics/internal/repository"
-	"ssstatistics/internal/service/cleaning"
-	"ssstatistics/internal/service/maps"
-	"ssstatistics/internal/service/mmr"
 	"ssstatistics/internal/service/parser"
 	"ssstatistics/internal/service/tops"
 )
@@ -39,10 +35,10 @@ type DBUpdater func() []string
 
 func InitializeDBUpdaters() {
 	DBUpdaters = append(DBUpdaters, tops.ParseTopData)
-	DBUpdaters = append(DBUpdaters, mmr.ParseMMR)
-	DBUpdaters = append(DBUpdaters, maps.FixMaxShit)
-	DBUpdaters = append(DBUpdaters, cleaning.CleanAnnounces)
-	DBUpdaters = append(DBUpdaters, repository.RefreshMaterializedViews)
+	//DBUpdaters = append(DBUpdaters, mmr.ParseMMR)
+	//DBUpdaters = append(DBUpdaters, maps.FixMaxShit)
+	//DBUpdaters = append(DBUpdaters, cleaning.CleanAnnounces)
+	//DBUpdaters = append(DBUpdaters, repository.RefreshMaterializedViews)
 }
 
 func StartDBUpdaters() []string {

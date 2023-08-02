@@ -9,6 +9,7 @@ const (
 const (
 	CurrentStatisticsDate = "2022-02-27"
 	ModeStartDate         = "2022-03-01"
+	TopRichStareDate      = "2023-07-01"
 )
 
 const (

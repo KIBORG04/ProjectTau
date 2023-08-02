@@ -9,6 +9,7 @@ import (
 	"ssstatistics/internal/service/stats"
 	"ssstatistics/internal/utils"
 	"strings"
+	"time"
 )
 
 type PlayerTopInfo struct {
@@ -246,7 +247,9 @@ func ParseTopData() []string {
 			}
 		}
 
-		if root.Score.Richestkey != "" {
+		date, _ := time.Parse("2006-01-02T15:04:05Z", root.Date)
+		richDate, _ := time.Parse("2006-01-02", stats.TopRichStareDate)
+		if root.Score.Richestkey != "" && date.After(richDate) {
 			staticTopTypes["rich"].SetPlayerAndMaxValue(root.Score.Richestkey, int(root.Score.Richestcash))
 		}
 		if root.Score.Dmgestkey != "" {
