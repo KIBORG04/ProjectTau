@@ -71,7 +71,7 @@ func (c *Collector) trySaveUrl(date *time.Time) {
 		roundId := u.RoundId.FindString(v)
 		if len(roundId) == 0 {
 			c.saveLogs(loggerStats, fmt.Sprintf("%s not contain digits of the round", v))
-			return
+			continue
 		}
 		_, err := r.FindByRoundId(roundId)
 		if err == nil {
