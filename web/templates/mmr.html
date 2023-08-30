@@ -27,28 +27,31 @@
         let img = "";
         let alt = "";
         if (mmrPosition === 1) {
-            img = "evilcrab";
+            img = "evilcrab.png";
             alt = "top1";
         } else if (mmrPosition === 2) {
-            img = "crab";
+            img = "crab.png";
             alt = "top2";
         } else if (mmrPosition === 3) {
-            img = "rat";
+            img = "rat.png";
             alt = "top3";
         } else if (ckey === "kiborg04") {
-            img = "kiborg";
+            img = "kiborg.png";
             alt = "god";
+        } else if (ckey === "zeroinside") {
+            img = "zero_inside.gif";
+            alt = "zero_inside";
         } else if (mmrPosition > 3 && mmrPosition <= totalPositions / 2) {
-            img = "mushroom";
+            img = "mushroom.png";
             alt = "default_chel";
         } else if (mmrPosition === totalPositions || mmrPosition >= totalPositions - 10) {
-            img = "chic";
+            img = "chic.png";
             alt = "unrobust";
         } else {
-            img = "mouse";
+            img = "mouse.png";
             alt = "default_chel";
         }
-        return `<img src="/web/static/images/ranks/${img}.png" alt="${alt}" width="32px" height="32px" style="margin-top: -50%; position: inherit;">`
+        return `<img src="/web/static/images/ranks/${img}" alt="${alt}" width="32px" height="32px" style="margin-top: -50%; position: inherit;">`
     }
 
     function getRow(num, img, ckey, mmr, tr_class = "") {
