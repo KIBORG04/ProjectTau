@@ -6,53 +6,34 @@
 <div class="container mt-4">
     {{ template "ad.html" . }}
     <div class="row">
-        <div class="col-sm-3 col-lg-4">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Версия статистики: {{ .version }}</li>
-                <li class="list-group-item">Дата начала сбора статистики: {{ .firstDate }}</li>
-                <li class="list-group-item">Последнее обновление БД: {{ .lastDate }}</li>
-                <li class="list-group-item">Последний раунд в БД: {{ .lastRound }}</li>
-            </ul>
-        </div>
-        <div class="col-sm-3 col-lg-4">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Раундов в статистике: {{ .totalRounds }}</li>
-                <li class="list-group-item">Раундов на первом: {{ .alphaRounds }}</li>
-                <li class="list-group-item">Раундов на втором: {{ .betaRounds }}</li>
-                <li class="list-group-item">Раундов на третьем: {{ .gammaRounds }}</li>
-                <button class="btn btn-outline-secondary mt-5" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#crewDeathsSum"
-                        aria-expanded="false" aria-controls="collapseExample">
-                    Смертей экипажа: {{ .crewDeathsSum }}
-                </button>
-                <div class="collapse" id="crewDeathsSum">
-                    {{ range .crewDeathsCount }}
-                        <li class="list-group-item ps-3 pt-0 pb-0">{{ .Name }}: {{ .Count }}</li>
-                    {{ end }}
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Версия статистики: {{ .version }}</li>
+                        <li class="list-group-item">Дата начала сбора статистики: {{ .firstDate }}</li>
+                        <li class="list-group-item">Последнее обновление БД: {{ .lastDate }}</li>
+                        <li class="list-group-item">Последний раунд в БД: {{ .lastRound }}</li>
+                    </ul>
                 </div>
-                <button class="btn btn-outline-secondary  mt-5" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#roleDeathsSum"
-                        aria-expanded="false" aria-controls="collapseExample">
-                    Смертей ролей: {{ .roleDeathsSum }}
-                </button>
-                <div class="collapse" id="roleDeathsSum">
-                    {{ range .roleDeathsCount }}
-                        <li class="list-group-item ps-3 pt-0 pb-0">{{ .Name }}: {{ .Count }}</li>
-                    {{ end }}
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Раундов в статистике: {{ .totalRounds }}</li>
+                        <li class="list-group-item">Раундов на первом: {{ .alphaRounds }}</li>
+                        <li class="list-group-item">Раундов на втором: {{ .betaRounds }}</li>
+                        <li class="list-group-item">Раундов на третьем: {{ .gammaRounds }}</li>
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush  mt-5">
-                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#modesSum"
-                            aria-expanded="false" aria-controls="collapseExample">
-                        Количество режимов: {{ .modesSum }}
-                    </button>
-                    <div class="collapse" id="modesSum">
-                        {{ range .modesCount }}
-                            <li class="list-group-item ps-3 pt-0 pb-0">{{ .Name }}: {{ .Count }}</li>
-                        {{ end }}
-                    </div>
-                </ul>
-            </ul>
+            </div>
+            <br>
+            <div class="row">
+                <h5 class="text-center border-bottom pb-2">Онлайн за всё время по неделям</h5>
+                <canvas id="online-stat-all"></canvas>
+            </div>
+            <div class="row">
+                <h5 class="text-center border-bottom pb-2">Онлайн за последние 90 дней</h5>
+                <canvas id="online-stat-month"></canvas>
+            </div>
         </div>
         <div class="col-sm-3 col-lg-4 mt-2">
             <ul class="list-group list-group-flush">
@@ -151,9 +132,58 @@
         })
     }
 
+    function get_online_chart(targetId, endpoint, dateFrom, dateTo){
+        $.ajax({
+            url: `/api/${endpoint}`,
+            data: {dateFrom: dateFrom, dateTo: dateTo},
+            success: function (data) {
+                const maxOnline = Math.max(...Object.values(data))
+                const chart = $("#" + targetId)
+                new Chart(chart, {
+                    type: 'line',
+                    data: {
+                        labels: Object.keys(data),
+                        datasets: [{
+                            label: 'players, avg',
+                            data: Object.values(data),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                suggestedMin: 0,
+                                suggestedMax: maxOnline+10
+                            }
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+    function get_online_charts() {
+        const dateTo = new Date()
+        const dateFrom = new Date()
+        dateFrom.setDate(dateTo.getDate() - 90)
+        get_online_chart("online-stat-all", "online_stat_weeks", "2022-03-01", format_date(dateTo))
+        get_online_chart("online-stat-month", "online_stat", format_date(dateFrom), format_date(dateTo))
+    }
+
+    function format_date(date) {
+        let month = date.getMonth() + 1
+        if(month < 10)
+            month = "0" + month
+        let day = date.getDate()
+        if(day < 10)
+            day = "0" + day
+        return `${date.getFullYear()}-${month}-${day}`
+    }
+
     get_announce()
     get_achievement()
     get_last_phrase()
     get_flavor()
+    get_online_charts()
 
 </script>

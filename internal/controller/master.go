@@ -104,6 +104,10 @@ func initializeRoutes() {
 		apiRoute.GET("/random_flavor", api.RandomFlavorGET)
 
 		apiRoute.GET("/mode_winrates_by_month", api.ModeWinratesByMonthGET)
+
+		apiRoute.GET("/online_stat", api.OnlineStatGET)
+
+		apiRoute.GET("/online_stat_weeks", api.OnlineStatWeeksGET)
 	}
 
 	playerRoute := apiRoute.Group("/player")

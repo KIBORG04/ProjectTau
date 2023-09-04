@@ -39,46 +39,6 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		Count int
 	}
 
-	var modesCount []Group
-	r.Database.Model(&domain.Root{}).
-		Select("mode as name, count(mode) as count").
-		Where("mode <> ''").
-		Group("mode").
-		Order("count desc").
-		Scan(&modesCount)
-
-	var modesSum int
-	for _, group := range modesCount {
-		modesSum += group.Count
-	}
-
-	var crewDeathsCount []Group
-	r.Database.Model(&domain.Deaths{}).
-		Select("assigned_role as name, count(assigned_role) as count").
-		Where("assigned_role in (?)", stats.StationPositions).
-		Where("name not like 'maintenance drone%'").
-		Group("assigned_role").
-		Order("count desc").
-		Scan(&crewDeathsCount)
-
-	var crewDeathsSum int
-	for _, group := range crewDeathsCount {
-		crewDeathsSum += group.Count
-	}
-
-	var roleDeathsCount []Group
-	r.Database.Model(&domain.Deaths{}).
-		Select("special_role as name, count(special_role) as count").
-		Where("special_role <> ''").
-		Group("special_role").
-		Order("count desc").
-		Scan(&roleDeathsCount)
-
-	var roleDeathsSum int
-	for _, group := range roleDeathsCount {
-		roleDeathsSum += group.Count
-	}
-
 	/* TODO:
 	deathCoords := make([]image.Point, 0, crewDeathsSum)
 	explosionCoords := make([]image.Point, 0)
@@ -143,13 +103,6 @@ func RootGET(c *gin.Context) (int, string, gin.H) {
 		"alphaRounds": totalAlphaRoots,
 		"betaRounds":  totalBetaaRoots,
 		"gammaRounds": totalGammaRoots,
-
-		"modesCount":      modesCount,
-		"modesSum":        modesSum,
-		"crewDeathsCount": crewDeathsCount,
-		"crewDeathsSum":   crewDeathsSum,
-		"roleDeathsCount": roleDeathsCount,
-		"roleDeathsSum":   roleDeathsSum,
 	}
 }
 

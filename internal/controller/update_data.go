@@ -31,10 +31,6 @@ func StartRegularUpdaters() []string {
 
 var DBUpdaters []DBUpdater
 
-// DBUpdater
-//
-//	TODO: Возможно, стоит сделать поттягивание всей БД и передача её в каждую из функций,
-//	TODO: чтобы они не делали свои запросы по кд
 type DBUpdater func() []string
 
 func InitializeDBUpdaters() {
