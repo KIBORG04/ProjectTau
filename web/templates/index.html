@@ -27,11 +27,11 @@
             </div>
             <br>
             <div class="row">
-                <h5 class="text-center border-bottom pb-2">Онлайн за всё время по неделям</h5>
+                <h5 class="text-center border-bottom pb-2">Средний онлайн по неделям</h5>
                 <canvas id="online-stat-all"></canvas>
             </div>
             <div class="row">
-                <h5 class="text-center border-bottom pb-2">Онлайн за последние 90 дней</h5>
+                <h5 class="text-center border-bottom pb-2">Средний онлайн за последние 90 дней</h5>
                 <canvas id="online-stat-month"></canvas>
             </div>
         </div>
@@ -165,6 +165,7 @@
     function get_online_charts() {
         const dateTo = new Date()
         const dateFrom = new Date()
+        dateTo.setDate(dateTo.getDate() - 1) // without today
         dateFrom.setDate(dateTo.getDate() - 90)
         get_online_chart("online-stat-all", "online_stat_weeks", "2022-03-01", format_date(dateTo))
         get_online_chart("online-stat-month", "online_stat", format_date(dateFrom), format_date(dateTo))

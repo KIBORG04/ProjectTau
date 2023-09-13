@@ -574,7 +574,7 @@ func OnlineStatGET(c *gin.Context) {
 		select date, round(avg(s.crew_total)) as players
 		from roots
 		join scores s on round_id = s.root_id
-		where date >= ? and date <= ?
+		where (date >= ? and date <= ?) and server_address = 'game.taucetistation.org:2506'
 		group by date
 		order by date;
 		`, query.DateFrom, query.DateTo).Scan(&dbResult)
@@ -616,7 +616,7 @@ func OnlineStatWeeksGET(c *gin.Context) {
 		select date_part('isoyear', date) || '-' || date_part('week', date) as week_date, round(avg(s.crew_total)) as players
 		from roots
 		join scores s on round_id = s.root_id
-		where date >= ? and date <= ?
+		where (date >= ? and date <= ?) and server_address = 'game.taucetistation.org:2506'
 		group by week_date
 		order by to_date(date_part('isoyear', date) || '-' || date_part('week', date), 'YYYY-WW');
 		`, query.DateFrom, query.DateTo).Scan(&dbResult)
@@ -624,7 +624,11 @@ func OnlineStatWeeksGET(c *gin.Context) {
 	onlineStat := make(map[string]int, len(dbResult))
 
 	for _, onlineDay := range dbResult {
-		onlineStat[onlineDay.WeekDate] = onlineDay.Players
+		date := strings.Split(onlineDay.WeekDate, "-")
+		if len(date[1]) == 1 {
+			date[1] = "0" + date[1]
+		}
+		onlineStat[fmt.Sprintf("%s-%s", date[0], date[1])] = onlineDay.Players
 	}
 
 	c.JSON(http.StatusOK, onlineStat)
