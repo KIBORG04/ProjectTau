@@ -385,7 +385,7 @@ func GetAllRolesRounds(c *gin.Context) (int, any) {
 	       r.role_name, 
 	       (case when f.faction_name in ? then f.victory
                  when r.role_name in ? then r.victory
-                 else 0
+                 else 1
     		end) as win
 	from roots
 	join factions f on f.root_id = round_id

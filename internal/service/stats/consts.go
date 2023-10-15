@@ -116,6 +116,7 @@ var (
 	SoloRoles = []string{
 		"TraitorChan",
 		"Traitor",
+		"Imposter",
 		"Wizard",
 		"Changeling",
 		"Cortical Borer",
@@ -136,6 +137,7 @@ var (
 		"Vox Shoal",
 		"Zobmies",
 		"Families",
+		"Replicators",
 	}
 
 	ShortModeName = map[string]string{
@@ -145,7 +147,6 @@ var (
 		"Abductor Team":               "Abductors",
 		"Alien Hivemind":              "Aliens",
 		"Syndicate Operatives":        "The Nuke",
-		"fwafaw":                      "fwaf",
 	}
 )
 
