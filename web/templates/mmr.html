@@ -26,16 +26,8 @@
     function getRankImage(ckey, mmrPosition, totalPositions) {
         let img = "";
         let alt = "";
-        if (mmrPosition === 1) {
-            img = "evilcrab.png";
-            alt = "top1";
-        } else if (mmrPosition === 2) {
-            img = "crab.png";
-            alt = "top2";
-        } else if (mmrPosition === 3) {
-            img = "rat.png";
-            alt = "top3";
-        } else if (ckey === "kiborg04") {
+
+        if (ckey === "kiborg04") {
             img = "kiborg.png";
             alt = "god";
         } else if (ckey === "zeroinside") {
@@ -44,6 +36,15 @@
         } else if (ckey === "yastark") {
             img = "yastark.png";
             alt = "yastark";
+        } else if (mmrPosition === 1) {
+            img = "evilcrab.png";
+            alt = "top1";
+        } else if (mmrPosition === 2) {
+            img = "crab.png";
+            alt = "top2";
+        } else if (mmrPosition === 3) {
+            img = "rat.png";
+            alt = "top3";
         } else if (mmrPosition > 3 && mmrPosition <= totalPositions / 2) {
             img = "mushroom.png";
             alt = "default_chel";
