@@ -54,6 +54,24 @@
 
 {{ template "footer.html" . }}
 <script>
+    $('#by_ckey').keypress(function (e) {
+        var key = e.which;
+        if(key === 13)  // the enter key code
+        {
+            $('#find_by_ckey').click();
+            return false;
+        }
+    });
+
+    $('#by_char').keypress(function (e) {
+        var key = e.which;
+        if(key === 13)  // the enter key code
+        {
+            $('#find_by_char').click();
+            return false;
+        }
+    });
+
     $("#find_by_ckey").click(function () {
         const val = $('#by_ckey').val().toLowerCase();
         if (val.length === 0)

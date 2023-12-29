@@ -12,9 +12,11 @@ type announcesCounter struct {
 	ids      []int32
 }
 
-func hasContents(slices []*announcesCounter, content string) (*announcesCounter, bool) {
-	for _, announce := range slices {
-		if announce.contents == content {
+type duplicatedAnnounces []*announcesCounter
+
+func (d duplicatedAnnounces) HasAttributes(args []string) (any, bool) {
+	for _, announce := range d {
+		if announce.contents == args[0] {
 			return announce, true
 		}
 	}
@@ -29,12 +31,13 @@ func CleanAnnounces() []string {
 	var roots []*domain.Root
 	query.Find(&roots)
 
-	duplicates := make([]*announcesCounter, 0)
+	duplicates := make(duplicatedAnnounces, 0)
 	for _, root := range roots {
 		for _, log := range root.CommunicationLogs {
-			if v, ok := hasContents(duplicates, log.Content); ok {
-				v.count++
-				v.ids = append(v.ids, log.ID)
+			if v, ok := duplicates.HasAttributes([]string{log.Content}); ok {
+				communicationLog := v.(*announcesCounter)
+				communicationLog.count++
+				communicationLog.ids = append(communicationLog.ids, log.ID)
 			} else {
 				duplicates = append(duplicates, &announcesCounter{
 					contents: log.Content,
