@@ -24,10 +24,10 @@ var ServerByAddress = map[string]string{
 	Gamma: ServerGammaAddress,
 }
 
-const (
-	ObjectiveWIN   = "SUCCESS"
-	ObjectiveHALF  = "HALF"
-	ObjectiveLFAIL = "FAIL"
+var (
+	ObjectiveWIN   = []string{"SUCCESS", "УСПЕХ"}
+	ObjectiveHALF  = []string{"HALF", "ЧАСТИЧНО"}
+	ObjectiveLFAIL = []string{"FAIL", "ПРОВАЛ"}
 )
 
 const (
@@ -121,8 +121,6 @@ var (
 		"Changeling",
 		"Cortical Borer",
 		"Space Ninja",
-		// tau ceti.........
-		"Shadowling",
 		"Thrall",
 	}
 
@@ -138,6 +136,7 @@ var (
 		"Zobmies",
 		"Families",
 		"Replicators",
+		"Shadowlings",
 	}
 
 	ShortModeName = map[string]string{

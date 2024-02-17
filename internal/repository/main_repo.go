@@ -106,8 +106,8 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS factions_statistics AS
 		   SUM(victory)::real * 100 / COUNT(factions.id)::real                                                                                                                   AS winrate,
 		   SUM((SELECT count(1) FROM roles where roles.owner_id = factions.id))                                                     AS members_count,
 		   SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id))                                      AS total_objectives,
-		   SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id and fo1.completed = 'SUCCESS'))        AS completed_objectives,
-		   SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id and fo1.completed = 'SUCCESS'))::real * 100 /
+		   SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id and fo1.completed in ('SUCCESS', 'УСПЕХ')))        AS completed_objectives,
+		   SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id and fo1.completed in ('SUCCESS', 'УСПЕХ')))::real * 100 /
 				GREATEST(SUM((SELECT count(1) FROM faction_objectives fo1 where fo1.owner_id = factions.id)) ::real, 1)             AS winrate_objectives
 	
 			FROM factions
@@ -125,11 +125,11 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS factions_statistics AS
 			   SUM((SELECT count(1)
 					FROM role_objectives
 					WHERE roles.id = role_objectives.owner_id
-					  AND completed = 'SUCCESS'))                                                                        AS completed_objectives,
+					  AND completed in ('SUCCESS', 'УСПЕХ')))                                                                        AS completed_objectives,
 			   SUM((SELECT count(1)
 					FROM role_objectives
 					WHERE roles.id = role_objectives.owner_id
-					  AND completed = 'SUCCESS'))::real * 100 /
+					  AND completed in ('SUCCESS', 'УСПЕХ')))::real * 100 /
 			   GREATEST(SUM((SELECT count(1) FROM role_objectives WHERE roles.id = role_objectives.owner_id)) ::real,
 						1)                                                                                               AS winrate_objectives
 		

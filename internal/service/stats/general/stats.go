@@ -3,6 +3,7 @@ package general
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/exp/slices"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 	"ssstatistics/internal/config"
@@ -224,7 +225,7 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 	addObjectiveInfo := func(owner *OwnerByObjectivesInfo, objective domain.Objectives) {
 		owner.Count++
 		var isWin uint
-		if objective.Completed == stats.ObjectiveWIN {
+		if slices.Contains(stats.ObjectiveWIN, objective.Completed) {
 			isWin = 1
 		}
 

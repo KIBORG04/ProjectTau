@@ -21,6 +21,8 @@
                                 {{ $isWin := .Completed }}
                                 {{ if eq $isWin "SUCCESS" }}
                                     {{ $isWin = "success" }}
+                                 {{ else if eq $isWin "УСПЕХ" }}
+                                    {{ $isWin = "success" }}
                                 {{ else }}
                                     {{ $isWin = "danger" }}
                                 {{ end }}
@@ -73,6 +75,8 @@
                                             {{ range .RoleObjectives }}
                                                 {{ $isWin := .Completed }}
                                                 {{ if eq $isWin "SUCCESS" }}
+                                                    {{ $isWin = "success" }}
+                                                {{ else if eq $isWin "УСПЕХ" }}
                                                     {{ $isWin = "success" }}
                                                 {{ else }}
                                                     {{ $isWin = "danger" }}
