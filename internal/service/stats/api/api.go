@@ -633,3 +633,46 @@ func OnlineStatWeeksGET(c *gin.Context) {
 
 	c.JSON(http.StatusOK, onlineStat)
 }
+
+func OnlineStatByDaytimeGET(c *gin.Context) {
+	type Dates struct {
+		DateFrom string `form:"dateFrom"`
+		DateTo   string `form:"dateTo"`
+	}
+
+	var query Dates
+	if err := c.BindQuery(&query); err != nil || query.DateFrom == "" || query.DateTo == "" {
+		c.JSON(http.StatusBadRequest, "Некорректный запрос.")
+		return
+	}
+
+	_, errFrom := time.Parse("2006-01-02", query.DateFrom)
+	_, errTo := time.Parse("2006-01-02", query.DateTo)
+	if errFrom != nil || errTo != nil {
+		c.JSON(http.StatusBadRequest, "Некорректно введена дата.")
+		return
+	}
+
+	var dbResult []struct {
+		Hinterval int
+		Players   int
+	}
+
+	r.Database.Raw(`
+		SELECT (EXTRACT(HOUR FROM end_time::time) - (EXTRACT(HOUR FROM end_time::time)::int % 2))::int AS hinterval,
+			   ROUND(AVG(s.crew_total)) AS players
+		FROM roots
+				 JOIN scores s ON round_id = s.root_id
+		WHERE (date >= ? and date <= ?) AND server_address = 'game.taucetistation.org:2506'
+		GROUP BY hinterval
+		ORDER BY hinterval;
+		`, query.DateFrom, query.DateTo).Scan(&dbResult)
+
+	onlineStat := make(map[int]int, len(dbResult))
+
+	for _, onlineDay := range dbResult {
+		onlineStat[onlineDay.Hinterval] = onlineDay.Players
+	}
+
+	c.JSON(http.StatusOK, onlineStat)
+}

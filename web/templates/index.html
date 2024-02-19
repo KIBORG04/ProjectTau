@@ -26,9 +26,17 @@
                 </div>
             </div>
             <br>
+            <div class="text-center border-bottom pb-2">
+                <h4>Статистика по: <span id="online-stat-current-dates">Lorem ipsum</span></h4>
+                Вы можете манипулировать графиками, изменяя даты вверху сайта
+            </div>
             <div class="row">
                 <h5 class="text-center border-bottom pb-2">Средний онлайн по неделям</h5>
-                <canvas id="online-stat-all"></canvas>
+                <canvas id="online-stat-all-weeks"></canvas>
+            </div>
+            <div class="row">
+                <h5 class="text-center border-bottom pb-2">Средний онлайн по часам</h5>
+                <canvas id="online-stat-daytime"></canvas>
             </div>
             <div class="row">
                 <h5 class="text-center border-bottom pb-2">Средний онлайн за последние 90 дней</h5>
@@ -132,51 +140,77 @@
         })
     }
 
-    function get_online_chart(targetId, endpoint, dateFrom, dateTo){
+    function get_online_chart(targetId, endpoint, dateFrom, dateTo) {
         $.ajax({
             url: `/api/${endpoint}`,
             data: {dateFrom: dateFrom, dateTo: dateTo},
             success: function (data) {
-                const maxOnline = Math.max(...Object.values(data))
-                const chart = $("#" + targetId)
-                new Chart(chart, {
-                    type: 'line',
-                    data: {
-                        labels: Object.keys(data),
-                        datasets: [{
-                            label: 'players, avg',
-                            data: Object.values(data),
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                suggestedMin: 0,
-                                suggestedMax: maxOnline+10
+                const maxOnline = Math.max(...Object.values(data));
+                const chart = Chart.getChart(targetId);
+                if (chart) {
+                    chart.data.datasets[0].data = Object.values(data);
+                    chart.data.labels = Object.keys(data);
+                    chart.update();
+                    return;
+                }
+                new Chart(
+                    $("#" + targetId),
+                    {
+                        type: 'line',
+                        data: {
+                            labels: Object.keys(data),
+                            datasets: [{
+                                label: 'players, avg',
+                                data: Object.values(data),
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    suggestedMin: 0,
+                                    suggestedMax: maxOnline + 10
+                                }
                             }
                         }
                     }
-                })
+                );
             }
         })
     }
+
+    $("#date_start").change(function () {
+        get_online_charts();
+    });
+
+    $("#date_end").change(function () {
+        get_online_charts();
+    });
 
     function get_online_charts() {
         const dateTo = new Date()
         const dateFrom = new Date()
         dateTo.setDate(dateTo.getDate() - 1) // without today
         dateFrom.setDate(dateTo.getDate() - 90)
-        get_online_chart("online-stat-all", "online_stat_weeks", "2022-03-01", format_date(dateTo))
+
+        const menuDateStart = document.getElementById('date_start').value;
+        const menuDateEnd = document.getElementById('date_end').value;
+
+        $("#online-stat-current-dates").html(`
+            <span class="text-danger">${menuDateStart}</span> - <span class="text-success">${menuDateEnd}</span>
+            `);
+
         get_online_chart("online-stat-month", "online_stat", format_date(dateFrom), format_date(dateTo))
+        get_online_chart("online-stat-all-weeks", "online_stat_weeks", menuDateStart, menuDateEnd)
+        get_online_chart("online-stat-daytime", "online_stat_daytime", menuDateStart, menuDateEnd)
     }
 
     function format_date(date) {
         let month = date.getMonth() + 1
-        if(month < 10)
+        if (month < 10)
             month = "0" + month
         let day = date.getDate()
-        if(day < 10)
+        if (day < 10)
             day = "0" + day
         return `${date.getFullYear()}-${month}-${day}`
     }
