@@ -18,3 +18,7 @@ docker-compose up
 ```
 
 Затем сервис запустится по адресу `localhost:8080`. 
+
+<p align="center">
+  <img src="https://github.com/KIBORG04/ProjectTau/blob/master/deaths.png?raw=true" alt="Diagram"/>
+</p>
