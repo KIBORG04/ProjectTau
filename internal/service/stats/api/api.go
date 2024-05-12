@@ -574,7 +574,7 @@ func OnlineStatGET(c *gin.Context) {
 		select date, round(avg(s.crew_total)) as players
 		from roots
 		join scores s on round_id = s.root_id
-		where (date >= ? and date <= ?) and server_address = 'game.taucetistation.org:2506'
+		where (date >= ? and date <= ?)
 		group by date
 		order by date;
 		`, query.DateFrom, query.DateTo).Scan(&dbResult)
@@ -616,7 +616,7 @@ func OnlineStatWeeksGET(c *gin.Context) {
 		select date_part('isoyear', date) || '-' || date_part('week', date) as week_date, round(avg(s.crew_total)) as players
 		from roots
 		join scores s on round_id = s.root_id
-		where (date >= ? and date <= ?) and server_address = 'game.taucetistation.org:2506'
+		where (date >= ? and date <= ?) 
 		group by week_date
 		order by to_date(date_part('isoyear', date) || '-' || date_part('week', date), 'YYYY-WW');
 		`, query.DateFrom, query.DateTo).Scan(&dbResult)
@@ -663,7 +663,7 @@ func OnlineStatByDaytimeGET(c *gin.Context) {
 			   ROUND(AVG(s.crew_total)) AS players
 		FROM roots
 				 JOIN scores s ON round_id = s.root_id
-		WHERE (date >= ? and date <= ?) AND server_address = 'game.taucetistation.org:2506'
+		WHERE (date >= ? and date <= ?)
 		GROUP BY hinterval
 		ORDER BY hinterval;
 		`, query.DateFrom, query.DateTo).Scan(&dbResult)
