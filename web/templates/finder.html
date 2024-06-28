@@ -43,7 +43,6 @@
             </div>
             <hr>
             <div>
-                <span id="found_char"></span>
                 <div id="char_info">
                     ...
                 </div>
@@ -152,42 +151,56 @@
         })
     });
 
-    function outputFoundByCharCkeys(data) {
-        $('#found_char').html(`<b>${data.Name}:</b>`);
-        $.ajax({
-            url: `/api/player/ckeys_by_char`,
-            data: {name: data.Name},
-            success: function (data) {
-                let html = `
-                <table class="table">
-               <thead>
-               <tr>
-               <th scope="col">Ckey</th>
-               <th scope="col">Раундов</th>
-               </tr>
-               </thead>`;
-                for (const indx in data) {
-                    const ckey = data[indx].MindCkey;
+    function outputFoundByCharCkeys(inputData) {
+        const queries = [];
+        const serverAnswers = [];
+        for (const character of inputData) {
+            queries.push($.ajax({
+                url: `/api/player/ckeys_by_char`,
+                data: {name: character.Name},
+                success: function (data) {
+                    let html = "";
                     html += `
+                        <b>${character.Name}</b> <i>(${character.Similarity}%)</i>
+                       <table class="table caption-top">
+                       <thead>
+                       <tr>
+                       <th scope="col">Ckey</th>
+                       <th scope="col">Раундов</th>
+                       </tr>
+                       </thead>`;
+                    for (const indx in data) {
+                        const ckey = data[indx].MindCkey;
+                        html += `
                     <tr>
                         <td><a class="btn btn-primary btn-lg btn-sm" role="button" href="/player/${ckey}">${ckey}</a></td>
                         <td>${data[indx].Count}</td>
                     </tr>
                     `;
+                    }
+                    html += `</table>`;
+                    serverAnswers.push({sim: character.Similarity, html: html})
+                },
+                error: function (jqXHR) {
+                    let errorMsg = JSON.stringify(jqXHR.responseJSON);
+                    if (jqXHR.responseJSON?.error === "nothing found")
+                        errorMsg = "Персонаж в БД не найден!";
+                    const msg = `<div class="alert alert-danger mt-3" role="alert">${errorMsg}</div>`;
+                    serverAnswers.push({sim: character.Similarity, html: msg})
                 }
-                html += `</table>`;
+            }))
+        }
 
-                $('#char_info').html(html);
-                $('#by_char').val('');
-            },
-            error: function (jqXHR) {
-                let errorMsg = JSON.stringify(jqXHR.responseJSON);
-                if (jqXHR.responseJSON?.error === "nothing found")
-                    errorMsg = "Персонаж в БД не найден!";
-                const msg = `<div class="alert alert-danger mt-3" role="alert">${errorMsg}</div>`;
-                $("#char_info").html(msg);
-                $('#by_char').val('');
+        Promise.all(queries).then(() => {
+            serverAnswers.sort((a, b) => b.sim - a.sim);
+
+            let preparedHtml = "";
+            for (const answer of serverAnswers) {
+                preparedHtml += answer.html;
             }
-        })
+
+            $('#char_info').html(preparedHtml);
+            $('#by_char').val('');
+        });
     }
 </script>

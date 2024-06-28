@@ -225,24 +225,25 @@ func FindSimilaryCharacter(c *gin.Context) (int, any) {
 	}
 	character.Name = strings.ToLower(character.Name)
 
-	var FoundChar struct {
-		Name string
+	var FoundChars []*struct {
+		Name       string
+		Similarity float32
 	}
 
 	r.Database.Raw(`
-	select mind_name as name, similarity(lower(mind_name), ?) as sim
+	select distinct mind_name as name, round(similarity(lower(mind_name), ?)::numeric * 100, 2) as similarity
 	from roles
 	where similarity(lower(mind_name), ?) > 0.3
-	order by sim desc;`, character.Name, character.Name).First(&FoundChar)
+	order by similarity desc;`, character.Name, character.Name).First(&FoundChars)
 
-	if FoundChar.Name == "" {
+	if len(FoundChars) == 0 {
 		return 400, map[string]string{
 			"code":  "400",
 			"error": "nothing found",
 		}
 	}
 
-	return 200, FoundChar
+	return 200, FoundChars
 }
 
 func GetCharacterCkeys(c *gin.Context) (int, any) {
