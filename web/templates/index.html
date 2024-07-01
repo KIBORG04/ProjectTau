@@ -81,7 +81,7 @@
     function get_announce() {
         $.getJSON("/api/random_announce", function (data) {
             const author = data.Author ? `<figcaption class="blockquote-footer">${data.Author}</figcaption>` : ""
-            const button = `<button id="update_announce" class="btn btn-outline-secondary btn-sm bi bi-arrow-clockwise float-md-end ms-2"></button>`
+            const button = `<button id="update_announce" class="btn btn-outline-secondary btn-sm fa-solid fa-arrow-rotate-right float-md-end ms-2"></button>`
             $("#random_announce").html(`
              <figure class="text-end">
                         <p class="h5">${button}${data.Title}</p>
@@ -95,7 +95,7 @@
 
     function get_achievement() {
         $.getJSON("/api/random_achievement", function (data) {
-            const button = `<button id="update_achievement" class="btn btn-outline-secondary btn-sm bi bi-arrow-clockwise float-md-end ms-2"></button>`
+            const button = `<button id="update_achievement" class="btn btn-outline-secondary btn-sm fa-solid fa-arrow-rotate-right float-md-end ms-2"></button>`
             $("#random_achievement").html(`
              <figure class="text-end">
                         <p class="h5">${button}${data.Title}</p>
@@ -111,7 +111,7 @@
 
     function get_flavor() {
         $.getJSON("/api/random_flavor", function (data) {
-            const button = `<button id="update_flavor" class="btn btn-outline-secondary btn-sm bi bi-arrow-clockwise float-md-end ms-2"></button>`
+            const button = `<button id="update_flavor" class="btn btn-outline-secondary btn-sm fa-solid fa-arrow-rotate-right float-md-end ms-2"></button>`
             $("#random_flavor").html(`
              <figure class="text-end">
                         <p class="h5">${button}${data.Name}</p>
@@ -127,7 +127,7 @@
 
     function get_last_phrase() {
         $.getJSON("/api/random_last_phrase", function (data) {
-            const button = `<button id="update_last_phrase" class="btn btn-outline-secondary btn-sm bi bi-arrow-clockwise float-md-end ms-2"></button>`
+            const button = `<button id="update_last_phrase" class="btn btn-outline-secondary btn-sm fa-solid fa-arrow-rotate-right float-md-end ms-2"></button>`
             $("#random_last_phrase").html(`
              <figure class="text-end">
                         <p class="h5">${button}Перед смертью в ${data.TimeOfDeath}</p>
