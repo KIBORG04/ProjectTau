@@ -24,8 +24,8 @@ func CkeyUplinkBuysGET(c *gin.Context) {
 	c.JSON(code, result)
 }
 
-func CkeyChanglingBuysGET(c *gin.Context) {
-	code, result := ckey_statistics.GetCkeyChanglingBuys(c)
+func CkeyChangelingBuysGET(c *gin.Context) {
+	code, result := ckey_statistics.GetCkeyChangelingBuys(c)
 	c.JSON(code, result)
 }
 

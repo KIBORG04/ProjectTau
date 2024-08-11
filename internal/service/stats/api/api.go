@@ -165,14 +165,14 @@ func HeatmapsGET(c *gin.Context) {
 		Error:     "228 Server shlet tebya нахуй."})
 }
 
-func ChanglingGET(c *gin.Context) {
+func ChangelingGET(c *gin.Context) {
 	var (
 		RolesCount []struct {
 			RoleName string
 			Count    int
 		}
 
-		ChanglingStats []struct {
+		ChangelingStats []struct {
 			RoleName  string
 			PowerName string
 			PowerType string
@@ -222,7 +222,7 @@ func ChanglingGET(c *gin.Context) {
 		group by role_name, power_type, power_name;
 	`,
 		startDate, endDate,
-		s1, s2, s3).Scan(&ChanglingStats)
+		s1, s2, s3).Scan(&ChangelingStats)
 
 	type AbilityInfo struct {
 		Name      string
@@ -233,21 +233,21 @@ func ChanglingGET(c *gin.Context) {
 	}
 
 	type Info struct {
-		Count              int
-		ChanglingAbilities map[string]*AbilityInfo
+		Count               int
+		ChangelingAbilities map[string]*AbilityInfo
 	}
 
 	roleAbilitiesMap := make(map[string]*Info)
 
 	for _, role := range RolesCount {
 		roleAbilitiesMap[role.RoleName] = &Info{
-			Count:              role.Count,
-			ChanglingAbilities: make(map[string]*AbilityInfo),
+			Count:               role.Count,
+			ChangelingAbilities: make(map[string]*AbilityInfo),
 		}
 	}
 
-	for _, stat := range ChanglingStats {
-		roleAbilitiesMap[stat.RoleName].ChanglingAbilities[stat.PowerType] = &AbilityInfo{
+	for _, stat := range ChangelingStats {
+		roleAbilitiesMap[stat.RoleName].ChangelingAbilities[stat.PowerType] = &AbilityInfo{
 			Name:      stat.PowerName,
 			Count:     stat.Count,
 			Wins:      stat.Wins,

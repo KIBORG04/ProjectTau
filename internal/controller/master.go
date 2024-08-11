@@ -67,8 +67,8 @@ func initializeRoutes() {
 
 		base.GET("/heatmaps", GET(general.HeatmapsGET))
 
-		base.GET("/changling", GET(general.ChanglingGET))
-		base.POST("/changling", POST(general.ChanglingGET))
+		base.GET("/changeling", GET(general.ChangelingGET))
+		base.POST("/changeling", POST(general.ChangelingGET))
 
 		base.GET("/finder", GET(FinderGET))
 
@@ -89,8 +89,8 @@ func initializeRoutes() {
 
 		apiRoute.GET("/heatmaps", api.HeatmapsGET)
 
-		apiRoute.GET("/changling", api.ChanglingGET)
-		apiRoute.POST("/changling", api.ChanglingGET)
+		apiRoute.GET("/changeling", api.ChangelingGET)
+		apiRoute.POST("/changeling", api.ChangelingGET)
 
 		apiRoute.GET("/uplink", api.UplinkGET)
 		apiRoute.POST("/uplink", api.UplinkGET)
@@ -116,7 +116,7 @@ func initializeRoutes() {
 	{
 		playerRoute.GET("/uplink_buys", CkeyUplinkBuysGET)
 
-		playerRoute.GET("/changling_buys", CkeyChanglingBuysGET)
+		playerRoute.GET("/changeling_buys", CkeyChangelingBuysGET)
 
 		playerRoute.GET("/wizard_buys", CkeyWizardBuysGET)
 

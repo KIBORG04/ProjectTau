@@ -31,24 +31,25 @@ func GetCkeyUplinkBuys(c *gin.Context) (int, any) {
 	var uplinkBuys []*AntagonistBuy
 
 	r.Database.
-		Select(`  roles.role_name 									   AS rolename,
-						u.bundlename 										   AS power_name, 
-					    count(u.bundlename) 								   AS count,
-						sum(case when factions.faction_name in ? then factions.victory
-						when roles.role_name in ? then roles.victory
-						else 1 end) 										   AS wins`, stats.TeamlRoles, stats.SoloRoles).
-		Table("factions").
-		Joins("join roles on roles.owner_id = factions.id").
-		Joins("join uplink_infos i on roles.id = i.role_id").
-		Joins("join uplink_purchases u on i.id = u.uplink_info_id").
-		Where("mind_ckey = ?", player.Ckey).
-		Group("roles.role_name, u.bundlename").
-		Order("count desc").
-		Find(&uplinkBuys)
+		Raw(`
+		SELECT rolename, power_name, count(power_name) AS count,
+		sum(case when faction_name in ? then f_victory
+		when rolename in ? then r_victory
+		else 1 end) AS wins
+		FROM (
+		select distinct on (f.root_id, roles.role_name, u.bundlename, f.faction_name) roles.role_name AS rolename, u.bundlename as power_name, f.faction_name as faction_name, roles.victory as r_victory, f.victory as f_victory
+		from factions f
+		join roles on roles.owner_id = f.id
+		join uplink_infos i on roles.id = i.role_id
+		join uplink_purchases u on i.id = u.uplink_info_id
+		WHERE mind_ckey = ?
+		) as t
+		GROUP by rolename, power_name 
+		ORDER BY count desc`, stats.TeamlRoles, stats.SoloRoles, player.Ckey).Scan(&uplinkBuys)
 
 	if uplinkBuys == nil {
-		return 400, map[string]string{
-			"code":  "400",
+		return 404, map[string]string{
+			"code":  "404",
 			"error": "nothing found",
 		}
 	}
@@ -60,7 +61,7 @@ func GetCkeyUplinkBuys(c *gin.Context) (int, any) {
 	return 200, uplinkBuys
 }
 
-func GetCkeyChanglingBuys(c *gin.Context) (int, any) {
+func GetCkeyChangelingBuys(c *gin.Context) (int, any) {
 	player, err := stats.GetValidatePlayer(c)
 	if err != nil {
 		return 400, map[string]string{
@@ -69,36 +70,36 @@ func GetCkeyChanglingBuys(c *gin.Context) (int, any) {
 		}
 	}
 
-	var changlingBuys []*AntagonistBuy
+	var changelingBuys []*AntagonistBuy
 
-	r.Database.
-		Select(`  roles.role_name 									   AS rolename,
-						u.power_name, 
-					    count(u.power_name) 								   AS count,
-						sum(case when factions.faction_name in ? then factions.victory
-						when roles.role_name in ? then roles.victory
-						else 1 end) 										   AS wins`, stats.TeamlRoles, stats.SoloRoles).
-		Table("factions").
-		Joins("join roles on roles.owner_id = factions.id").
-		Joins("join changeling_infos i on roles.id = i.role_id").
-		Joins("join changeling_purchases u on i.id = u.changeling_info_id").
-		Where("mind_ckey = ?", player.Ckey).
-		Group("roles.role_name, u.power_name").
-		Order("count desc").
-		Find(&changlingBuys)
+	r.Database.Raw(`
+		SELECT rolename, power_name, count(power_name) AS count,
+		sum(case when faction_name in ? then f_victory
+		when rolename in ? then r_victory
+		else 1 end) AS wins
+		FROM (
+		select distinct on (f.root_id, roles.role_name, u.power_name, f.faction_name) roles.role_name AS rolename, u.power_name as power_name, f.faction_name as faction_name, roles.victory as r_victory, f.victory as f_victory
+		from factions f
+		join roles on roles.owner_id = f.id
+		join changeling_infos i on roles.id = i.role_id
+		join changeling_purchases u on i.id = u.changeling_info_id
+		WHERE mind_ckey = ?
+		) as t
+		GROUP by rolename, power_name 
+		ORDER BY count desc`, stats.TeamlRoles, stats.SoloRoles, player.Ckey).Scan(&changelingBuys)
 
-	if changlingBuys == nil {
-		return 400, map[string]string{
-			"code":  "400",
+	if changelingBuys == nil {
+		return 404, map[string]string{
+			"code":  "404",
 			"error": "nothing found",
 		}
 	}
 
-	for _, buy := range changlingBuys {
+	for _, buy := range changelingBuys {
 		buy.Winrate = int(float32(buy.Wins) * 100 / float32(buy.Count))
 	}
 
-	return 200, changlingBuys
+	return 200, changelingBuys
 }
 
 func GetCkeyWizardBuys(c *gin.Context) (int, any) {
@@ -112,25 +113,25 @@ func GetCkeyWizardBuys(c *gin.Context) (int, any) {
 
 	var wizardBuys []*AntagonistBuy
 
-	r.Database.
-		Select(`  roles.role_name 									   AS rolename,
-						u.power_name, 
-					    count(u.power_name) 								   AS count,
-						sum(case when factions.faction_name in ? then factions.victory
-						when roles.role_name in ? then roles.victory
-						else 1 end) 										   AS wins`, stats.TeamlRoles, stats.SoloRoles).
-		Table("factions").
-		Joins("join roles on roles.owner_id = factions.id").
-		Joins("join wizard_infos i on roles.id = i.role_id").
-		Joins("join wizard_purchases u on i.id = u.wizard_info_id").
-		Where("mind_ckey = ?", player.Ckey).
-		Group("roles.role_name, u.power_name").
-		Order("count desc").
-		Find(&wizardBuys)
+	r.Database.Raw(`
+		SELECT rolename, power_name, count(power_name) AS count,
+		sum(case when faction_name in ? then f_victory
+		when rolename in ? then r_victory
+		else 1 end) AS wins
+		FROM (
+		select distinct on (f.root_id, roles.role_name, u.power_name, f.faction_name) roles.role_name AS rolename, u.power_name as power_name, f.faction_name as faction_name, roles.victory as r_victory, f.victory as f_victory
+		from factions f
+		join roles on roles.owner_id = f.id
+		join wizard_infos i on roles.id = i.role_id
+		join wizard_purchases u on i.id = u.wizard_info_id
+		WHERE mind_ckey = ?
+		) as t
+		GROUP by rolename, power_name 
+		ORDER BY count desc`, stats.TeamlRoles, stats.SoloRoles, player.Ckey).Scan(&wizardBuys)
 
 	if wizardBuys == nil {
-		return 400, map[string]string{
-			"code":  "400",
+		return 404, map[string]string{
+			"code":  "404",
 			"error": "nothing found",
 		}
 	}
@@ -162,8 +163,8 @@ func FindSimilaryCkey(c *gin.Context) (int, any) {
 	order by sim desc;`, player.Ckey, player.Ckey).First(&FoundCkey)
 
 	if FoundCkey.FoundCkey == "" {
-		return 400, map[string]string{
-			"code":  "400",
+		return 404, map[string]string{
+			"code":  "404",
 			"error": "nothing found",
 		}
 	}
@@ -199,8 +200,8 @@ func GetCkeyCharacters(c *gin.Context) (int, any) {
 	order by count desc;`, player.Ckey).Scan(&characters)
 
 	if characters == nil {
-		return 400, map[string]string{
-			"code":  "400",
+		return 404, map[string]string{
+			"code":  "404",
 			"error": "nothing found",
 		}
 	}
@@ -237,8 +238,8 @@ func FindSimilaryCharacter(c *gin.Context) (int, any) {
 	order by similarity desc;`, character.Name, character.Name).First(&FoundChars)
 
 	if len(FoundChars) == 0 {
-		return 400, map[string]string{
-			"code":  "400",
+		return 404, map[string]string{
+			"code":  "404",
 			"error": "nothing found",
 		}
 	}
@@ -277,8 +278,8 @@ func GetCharacterCkeys(c *gin.Context) (int, any) {
 	`, character.Name).Scan(&ckeys)
 
 	if ckeys == nil {
-		return 400, map[string]string{
-			"code":  "400",
+		return 404, map[string]string{
+			"code":  "404",
 			"error": "nothing found",
 		}
 	}
@@ -321,8 +322,8 @@ func GetCkeyRoles(c *gin.Context) (int, any) {
 		`, stats.TeamlRoles, stats.SoloRoles, player.Ckey).Scan(&rolesInfo)
 
 	if rolesInfo == nil {
-		return 400, map[string]string{
-			"code":  "400",
+		return 404, map[string]string{
+			"code":  "404",
 			"error": "nothing found",
 		}
 	}
@@ -343,18 +344,20 @@ func GetAchievementsCkey(c *gin.Context) (int, any) {
 		Name    string
 		Title   string
 		Desc    string
+		Date    string
 		RoundId int
 	}
 
 	r.Database.Raw(`
-		select root_id as round_id, name, title, "desc" 
-	    from achievements
+		select root_id as round_id, name, title, a.desc, r.date
+	    from achievements a
+	    join roots r on r.round_id = a.root_id  
 		where regexp_replace(lower(key), '['';()\\"&8^:$#№@_\s%]', '', 'g') = ?;
 	`, player.Ckey).Scan(&achievementsInfo)
 
 	if achievementsInfo == nil {
-		return 400, map[string]string{
-			"code":  "400",
+		return 404, map[string]string{
+			"code":  "404",
 			"error": "nothing found",
 		}
 	}

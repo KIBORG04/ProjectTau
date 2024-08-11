@@ -29,7 +29,7 @@
     function startPost(dates) {
         $("#left_col").html(`<div class="spinner-border" role="status"></div>`)
 
-        $.post("/api/changling", dates, createHtml, "json")
+        $.post("/api/changeling", dates, createHtml, "json")
     }
 
     const HumanColumnName = {
@@ -51,7 +51,7 @@
             {}
         )
         const dataKeys = Object.keys(myData)
-        const dataAbilities = Object.keys(myData[dataKeys[0]].ChanglingAbilities)
+        const dataAbilities = Object.keys(myData[dataKeys[0]].ChangelingAbilities)
         let firstElemShown = false
         let leftColItems = dataKeys.map((str) => {
                 const button = `<button
@@ -74,7 +74,7 @@
 
         let dataCol = `<div class="tab-content col" id="v-pills-tabContent">`
         firstElemShown = false
-        const tableHeaders = Object.keys(myData[dataKeys[0]].ChanglingAbilities[dataAbilities[0]]).map((str) => `<th scope="col">${HumanColumnName[str]}</th>`)
+        const tableHeaders = Object.keys(myData[dataKeys[0]].ChangelingAbilities[dataAbilities[0]]).map((str) => `<th scope="col">${HumanColumnName[str]}</th>`)
         for (const key in myData) {
             dataCol += `<div class="tab-pane fade ${!firstElemShown ? "show active" : ""}" id="${key}" role="tabpanel" aria-labelledby="${key}-tab">`
             firstElemShown = true
@@ -85,10 +85,10 @@
             dataCol += tableHeaders.join("")
             dataCol += `</tr></thead>`
             dataCol += `<tbody>`
-            for (const ability in myData[key].ChanglingAbilities) {
+            for (const ability in myData[key].ChangelingAbilities) {
                 dataCol += `<tr>`
-                for (const abilityHeader in myData[key].ChanglingAbilities[ability]) {
-                    const abilityRow = myData[key].ChanglingAbilities[ability][abilityHeader];
+                for (const abilityHeader in myData[key].ChangelingAbilities[ability]) {
+                    const abilityRow = myData[key].ChangelingAbilities[ability][abilityHeader];
                     if (abilityHeader === "Name") {
                         dataCol += `<th scope="row" class="obj-type">${abilityRow}</th>`
                     } else if (abilityHeader === "Winrate") {

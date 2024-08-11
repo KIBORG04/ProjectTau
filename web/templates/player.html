@@ -165,7 +165,7 @@
         for (const indx in data) {
             let color = "table-secondary";
             const winrate = data[indx].Wins * 100 / data[indx].Count;
-            if (winrate > 75)
+            if (winrate >= 75)
                 color = "table-success";
             else if (winrate < 40)
                 color = "table-danger";
@@ -242,7 +242,7 @@
         html += `<div class="row">`
         html += `<ul class="nav nav-justified nav-pills" role="tablist" aria-orientation="horizontal">`
         html += getRoleBuysTab("Uplink", true);
-        html += getRoleBuysTab("Changling", false);
+        html += getRoleBuysTab("Changeling", false);
         html += getRoleBuysTab("Wizard", false);
         html += `</ul>`;
         html += `</div>`;
@@ -261,12 +261,18 @@
             success: function (data) {
                 html += buysStatistics(data, "Uplink", true);
             },
+            error: function (jqXHR) {
+                html += buysStatistics([], "Uplink", false);
+            },
         });
         const a2 = $.ajax({
-            url: `/api/player/changling_buys`,
+            url: `/api/player/changeling_buys`,
             data: {ckey: playerCkey},
             success: function (data) {
-                html += buysStatistics(data, "Changling", false);
+                html += buysStatistics(data, "Changeling", false);
+            },
+            error: function (jqXHR) {
+                html += buysStatistics([], "Changeling", false);
             },
         });
         const a3 = $.ajax({
@@ -275,8 +281,11 @@
             success: function (data) {
                 html += buysStatistics(data, "Wizard", false);
             },
+            error: function (jqXHR) {
+                html += buysStatistics([], "Wizard", false);
+            },
         });
-        Promise.all([a1, a2, a3]).then((values) => {
+        Promise.all([a1, a2, a3]).catch((values) => {
             html += `</div>`;
             $("#role-buys-data").html(html);
         });
@@ -306,7 +315,7 @@
         html += `<div class="tab-pane fade ${active ? "show active" : ""}" id="${idName}" role="tabpanel" aria-labelledby="${idName}-tab">`;
 
         if (data.length === 0) {
-            html += `<div class="alert alert-danger mt-3 row" role="alert">Пусто</div>`;
+            html += `<div class="alert alert-danger mt-3 row" role="alert">Пусто. Либо игрок не сыграл на рольке и раунда, либо данных в статистике еще не существовало.</div>`;
             html += `</div>`;
             return html;
         }
@@ -358,7 +367,7 @@
             html += `<tbody>`;
             for (const buy of aggregateDate[roleName]) {
                 let color = "table-secondary";
-                if (buy.Winrate > 75)
+                if (buy.Winrate >= 75)
                     color = "table-success";
                 else if (buy.Winrate < 40)
                     color = "table-danger";
@@ -375,9 +384,7 @@
             html += `</div>`
         }
         html += `</div>`;
-
         html += `</div>`;
-
         html += `</div>`;
         return html;
     }
@@ -406,7 +413,7 @@
                   ${unescape(achievement.Desc)}
                 </div>
                 <footer class="blockquote-footer text-end me-1">
-                  ${achievement.Name} in Round #${achievement.RoundId}
+                  ${achievement.Name} в раунде <a href="/round/${achievement.RoundId}">#${achievement.RoundId}</a> (${achievement.Date.replace(/T00:00:00Z/g,'')})
                 </footer>
             </div>`;
         }

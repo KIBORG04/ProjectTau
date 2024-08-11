@@ -352,6 +352,6 @@ func HeatmapsGET(c *gin.Context) (int, string, gin.H) {
 	return 200, "heatmaps.html", gin.H{}
 }
 
-func ChanglingGET(c *gin.Context) (int, string, gin.H) {
-	return 200, "changling.html", gin.H{}
+func ChangelingGET(c *gin.Context) (int, string, gin.H) {
+	return 200, "changeling.html", gin.H{}
 }
