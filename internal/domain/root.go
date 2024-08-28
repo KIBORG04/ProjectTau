@@ -26,6 +26,7 @@ type Root struct {
 	CompletionHTML    string              `json:"completion_html"`
 	Score             Score               `json:"score"`
 	Achievements      []Achievement       `json:"achievements"`
+	Medals            []Medal             `json:"medals"`
 	CommunicationLogs []CommunicationLogs `json:"communication_logs"`
 	Deaths            []Deaths            `json:"deaths"`
 	Explosions        []Explosions        `json:"explosions"`
@@ -95,6 +96,16 @@ type Achievement struct {
 	Name   string `json:"name" gorm:"size:256"`
 	Title  string `json:"title" gorm:"size:256"`
 	Desc   string `json:"desc" gorm:"size:256"`
+}
+
+type Medal struct {
+	ID         int32  `gorm:"uniqueIndex"`
+	RootID     int32  `gorm:"index"`
+	Key        string `json:"key" gorm:"size:256"`
+	MedalName  string `json:"medal_name" gorm:"size:256"`
+	TargetName string `json:"target_name" gorm:"size:256"`
+	ParentName string `json:"parent_name" gorm:"size:256"`
+	Reason     string `json:"reason" gorm:"size:256"`
 }
 
 type Score struct {
