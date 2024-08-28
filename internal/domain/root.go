@@ -105,7 +105,7 @@ type Medal struct {
 	MedalName  string `json:"medal_name" gorm:"size:256"`
 	TargetName string `json:"target_name" gorm:"size:256"`
 	ParentName string `json:"parent_name" gorm:"size:256"`
-	Reason     string `json:"reason" gorm:"size:256"`
+	Reason     string `json:"reason" gorm:"size:2048"`
 }
 
 type Score struct {
