@@ -31,3 +31,9 @@ func EagerFindByRoundId(id string) (*d.Root, error) {
 	}
 	return &root, nil
 }
+
+func GetCompletionHTMLByRoundId(id string) (string, error) {
+	var html string
+	Database.Select(`regexp_replace(completion_html, '<img\s+src\s*=\s*["'']+logo_\d+\.png["'']+[^>]*>', '', 'g')`).Table("roots").Where("round_id = ?", id).Find(&html)
+	return html, nil
+}

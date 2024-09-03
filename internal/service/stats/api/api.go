@@ -676,3 +676,25 @@ func OnlineStatByDaytimeGET(c *gin.Context) {
 
 	c.JSON(http.StatusOK, onlineStat)
 }
+
+func CompletionHTMLByIdHET(c *gin.Context) {
+	type Round struct {
+		RoundId string `form:"id"`
+	}
+
+	var query Round
+	if err := c.BindQuery(&query); err != nil || query.RoundId == "" {
+		c.JSON(http.StatusBadRequest, "Некорректный запрос.")
+		return
+	}
+
+	html, err := r.GetCompletionHTMLByRoundId(query.RoundId)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, "Раунд не найден в БД.")
+		return
+	}
+
+	c.JSON(http.StatusOK, map[string]string{
+		"html": html,
+	})
+}

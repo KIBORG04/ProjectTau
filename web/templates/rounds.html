@@ -13,43 +13,58 @@
     <div class="row">
         <div class="input-group">
             <button class="btn btn-primary" type="button" id="open_round">Поиск раунда</button>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="input_round" name='input_round' placeholder="45923">
-            <label for="input_round">Введите ID раунда</label>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="input_round" name='input_round' placeholder="45923">
+                <label for="input_round">Введите ID раунда</label>
+            </div>
         </div>
-    </div>
-        <div class="fs-5 badge bg-secondary text-wrap mt-2" style="width: 100%">
-            Последние раунды
+        <div class="row">
+            <div class="fs-5 badge bg-secondary text-wrap mt-2" style="width: 100%">
+                Последние раунды
+            </div>
         </div>
-        <div class="table-responsive">
-            <table id="rounds" class="table table-sm table-hover table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Дата* и время**</th>
-                    <th scope="col">Длительность</th>
-                    <th scope="col">Карта</th>
-                    <th scope="col">Режим</th>
-                    <th scope="col">Результат</th>
-                    <th scope="col">Адрес</th>
-                    <th scope="col">Ссылка</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{ range .roots }}
+        <div class="row" id="titles-block" style="display: none">
+            <button id="close-titles" class="btn btn-primary btn-lg btn-sm" role="button">Закрыть</button>
+            <iframe id="titles"></iframe>
+        </div>
+        <div class="row">
+            <div class="table-responsive">
+                <table id="rounds" class="table table-sm table-hover table-striped">
+                    <thead>
                     <tr>
-                        <th scope="row">{{ .RoundID }} </th>
-                        <td>{{ .Date }} {{ .StartTime }}-{{ .EndTime }}</td>
-                        <td>{{ .Duration }}</td>
-                        <td>{{ .Map }}</td>
-                        <td>{{ .Mode }}</td>
-                        <td>{{ .ModeResult }}</td>
-                        <td>{{ .ServerAddress }}</td>
-                        <td><a class="btn btn-primary btn-lg btn-sm" role="button" href="/round/{{.RoundID}}">{{ .RoundID }}</a></td>
+                        <th scope="col">ID</th>
+                        <th scope="col">Дата* и время**</th>
+                        <th scope="col">Длительность</th>
+                        <th scope="col">Карта</th>
+                        <th scope="col">Режим</th>
+                        <th scope="col">Результат</th>
+                        <th scope="col">Адрес</th>
+                        <th scope="col">Ссылка</th>
+                        <th scope="col">Титры</th>
                     </tr>
-                {{ end }}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {{ range .roots }}
+                        <tr>
+                            <th scope="row">{{ .RoundID }} </th>
+                            <td>{{ .Date }} {{ .StartTime }}-{{ .EndTime }}</td>
+                            <td>{{ .Duration }}</td>
+                            <td>{{ .Map }}</td>
+                            <td>{{ .Mode }}</td>
+                            <td>{{ .ModeResult }}</td>
+                            <td>{{ .ServerAddress }}</td>
+                            <td><a class="btn btn-primary btn-lg btn-sm" role="button"
+                                   href="/round/{{.RoundID}}">{{ .RoundID }}</a></td>
+                            <td>
+                                <button id="{{.RoundID}}" class="btn btn-primary btn-lg btn-sm open-titles" role="button">
+                                    Титры
+                                </button>
+                            </td>
+                        </tr>
+                    {{ end }}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -57,9 +72,27 @@
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}
 <script>
-    $("#open_round").click(function () {
+    $(function () {
+        $(".open-titles").on("click", function () {
+            const roundID = $(this).attr('id');
+            $.getJSON(`/api/completion_html_by?id=${roundID}`, function (data) {
+                $("#titles-block").css('display', 'block');
+                let frame = $("#titles");
+                const head = `<head><link rel="stylesheet" type="text/css" href="/web/static/styles/tauceti.css"/></head>`
+                frame.contents().find('head').html(head);
+                frame.contents().find('body').html(data.html);
+                frame.css('height', frame[0].contentWindow.document.body.scrollHeight + 30 + 'px')
+            })
+        });
+
+        $("#close-titles").on("click", function () {
+            $("#titles-block").css('display', 'none');
+        });
+    });
+
+    $("#open_round").on("click", function () {
         const val = $("#input_round").val()
-        if(val === "")
+        if (val === "")
             return
         window.open("/round/" + val)
     })
@@ -69,10 +102,10 @@
             lengthChange: false,
             pageLength: 50,
             searching: false,
-            order: [[ 0, 'dsc' ]]
+            order: [[0, 'dsc']]
         });
     });
 
-    var replaced = $("#rounds").html().replace(/T00:00:00Z/g,'');
+    var replaced = $("#rounds").html().replace(/T00:00:00Z/g, '');
     $("#rounds").html(replaced);
 </script>
