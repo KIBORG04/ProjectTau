@@ -110,6 +110,8 @@ func initializeRoutes() {
 		apiRoute.GET("/online_stat_weeks", api.OnlineStatWeeksGET)
 
 		apiRoute.GET("/online_stat_daytime", api.OnlineStatByDaytimeGET)
+
+		apiRoute.GET("/completion_html_by", api.CompletionHTMLByIdGET)
 	}
 
 	playerRoute := apiRoute.Group("/player")

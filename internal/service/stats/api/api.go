@@ -677,7 +677,7 @@ func OnlineStatByDaytimeGET(c *gin.Context) {
 	c.JSON(http.StatusOK, onlineStat)
 }
 
-func CompletionHTMLByIdHET(c *gin.Context) {
+func CompletionHTMLByIdGET(c *gin.Context) {
 	type Round struct {
 		RoundId string `form:"id"`
 	}
