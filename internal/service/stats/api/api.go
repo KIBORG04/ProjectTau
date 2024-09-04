@@ -694,6 +694,8 @@ func CompletionHTMLByIdGET(c *gin.Context) {
 		return
 	}
 
+	html = stats.NormalizeByondBase64(html)
+
 	c.JSON(http.StatusOK, map[string]string{
 		"html": html,
 	})

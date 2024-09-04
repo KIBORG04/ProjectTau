@@ -261,3 +261,15 @@ func GetValidatePlayer(c *gin.Context) (*Player, error) {
 	player.Ckey = Ckey(player.Ckey)
 	return &player, nil
 }
+
+func NormalizeByondBase64(str string) string {
+	re := regexp.MustCompile(`'data:image/png;base64,[^'><]*`)
+	newStr := re.ReplaceAllStringFunc(str, func(base64Str string) string {
+		lastChar := base64Str[len(base64Str)-1]
+		if lastChar == '=' {
+			return base64Str
+		}
+		return base64Str[:len(base64Str)-1]
+	})
+	return newStr
+}

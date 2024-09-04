@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="fs-5 badge bg-secondary text-wrap mt-2" style="width: 100%">
+            <div id="last-rounds-label" class="fs-5 badge bg-secondary text-wrap mt-2" style="width: 100%">
                 Последние раунды
             </div>
         </div>
@@ -56,9 +56,11 @@
                             <td><a class="btn btn-primary btn-lg btn-sm" role="button"
                                    href="/round/{{.RoundID}}">{{ .RoundID }}</a></td>
                             <td>
-                                <button id="{{.RoundID}}" class="btn btn-primary btn-lg btn-sm open-titles" role="button">
+                                <a href="#last-rounds-label">
+                                    <button id="{{.RoundID}}" class="btn btn-primary btn-lg btn-sm open-titles" role="button">
                                     Титры
-                                </button>
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                     {{ end }}
@@ -81,6 +83,7 @@
                 const head = `<head><link rel="stylesheet" type="text/css" href="/web/static/styles/tauceti.css"/></head>`
                 frame.contents().find('head').html(head);
                 frame.contents().find('body').html(data.html);
+                frame.css('height', 'auto');
                 frame.css('height', frame[0].contentWindow.document.body.scrollHeight + 30 + 'px')
             })
         });
