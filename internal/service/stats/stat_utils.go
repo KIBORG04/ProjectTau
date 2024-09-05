@@ -266,7 +266,7 @@ func NormalizeByondBase64(str string) string {
 	re := regexp.MustCompile(`'data:image/png;base64,[^'><]*`)
 	newStr := re.ReplaceAllStringFunc(str, func(base64Str string) string {
 		lastChar := base64Str[len(base64Str)-1]
-		if lastChar == '=' {
+		if lastChar == '=' || (len(base64Str)%4) == 0 {
 			return base64Str
 		}
 		return base64Str[:len(base64Str)-1]
