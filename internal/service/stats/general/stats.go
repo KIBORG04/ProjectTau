@@ -35,12 +35,12 @@ func BasicPOST(c *gin.Context, f func(*gin.Context) (int, string, gin.H)) {
 }
 
 func RootGET(c *gin.Context) (int, string, gin.H) {
+	/* TODO:
 	type Group struct {
 		Name  string
 		Count int
 	}
 
-	/* TODO:
 	deathCoords := make([]image.Point, 0, crewDeathsSum)
 	explosionCoords := make([]image.Point, 0)
 

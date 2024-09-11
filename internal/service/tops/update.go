@@ -1,7 +1,6 @@
 package tops
 
 import (
-	"fmt"
 	"golang.org/x/exp/slices"
 	"sort"
 	"ssstatistics/internal/domain"
@@ -309,6 +308,6 @@ func ParseTopData() []string {
 		return []string{err.Error()}
 	}
 	return []string{
-		fmt.Sprint("Tops Updated"),
+		"Tops Updated",
 	}
 }

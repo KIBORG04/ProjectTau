@@ -22,9 +22,7 @@ func StartRegularUpdaters() []string {
 
 	for _, callback := range GeneralUpdaters {
 		callbackLogs := callback()
-		for _, s := range callbackLogs {
-			logs = append(logs, s)
-		}
+		logs = append(logs, callbackLogs...)
 	}
 	return logs
 }
@@ -47,9 +45,7 @@ func StartDBUpdaters() []string {
 
 	for _, callback := range DBUpdaters {
 		callbackLogs := callback()
-		for _, s := range callbackLogs {
-			logs = append(logs, s)
-		}
+		logs = append(logs, callbackLogs...)
 	}
 	return logs
 }
