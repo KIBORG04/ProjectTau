@@ -1,4 +1,4 @@
-FROM golang:1.19-alpine
+FROM golang:1.23-alpine
 WORKDIR /usr/src/taustats
 
 # If you enable this, then gcc is needed to debug your app
