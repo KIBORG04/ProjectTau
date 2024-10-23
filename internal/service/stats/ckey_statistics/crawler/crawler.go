@@ -113,7 +113,7 @@ func getChangedResponses(oldStats, newStats []domain.CrawlerStat) []domain.Crawl
 	var changed []domain.CrawlerStat
 	for _, newStat := range newStats {
 		oldValue, exists := oldMap[newStat.ServerName]
-		if newStat.CrawlerUpdatedAt.Equal(oldValue[1].(time.Time)) {
+		if exists && newStat.CrawlerUpdatedAt.Equal(oldValue[1].(time.Time)) {
 			continue
 		}
 		if !exists || oldValue[0] != newStat.Minutes {
