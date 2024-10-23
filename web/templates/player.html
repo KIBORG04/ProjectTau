@@ -114,6 +114,10 @@
     const playerCkey = window.location.pathname.split("/").pop();
     $("#characters").ready(function () {
         $.ajax({
+            url: `/api/player/crawler`,
+            data: {ckey: playerCkey},
+        })
+        $.ajax({
             url: `/api/player/characters`,
             data: {ckey: playerCkey},
             success: outputFoundByCkeyChars,
