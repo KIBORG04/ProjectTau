@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"slices"
+	"ssstatistics/internal/config"
 	"ssstatistics/internal/domain"
 	"ssstatistics/internal/repository"
 	"strconv"
@@ -26,6 +28,10 @@ type crawlerResponse struct {
 var loggerGet = log.New(os.Stderr, "[CrawlerParser] ", log.Lmsgprefix|log.Ltime)
 
 func FetchPlayerStats(ckey string) *domain.Player {
+	if slices.Contains(config.Config.Secret.CrawlBlacklist, ckey) {
+		return nil
+	}
+
 	player := repository.GetPlayer(ckey)
 	if player == nil {
 		loggerGet.Println("player not exist in database")
