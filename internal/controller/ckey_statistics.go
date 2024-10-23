@@ -72,3 +72,8 @@ func CkeyMMRGET(c *gin.Context) {
 	code, result := ckey_statistics.GetCkeyMMR(c)
 	c.JSON(code, result)
 }
+
+func CrawlerGET(c *gin.Context) {
+	code, result := ckey_statistics.GetPlayerWithCrawler(c)
+	c.JSON(code, result)
+}

@@ -137,6 +137,8 @@ func initializeRoutes() {
 		playerRoute.GET("/roles_rounds", AllRolesRoundsGET)
 
 		playerRoute.GET("/mmr", CkeyMMRGET)
+
+		playerRoute.GET("/crawler", CrawlerGET)
 	}
 
 	ss14 := apiRoute.Group("/ss14")

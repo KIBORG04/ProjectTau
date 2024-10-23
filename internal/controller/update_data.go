@@ -4,8 +4,9 @@ import (
 	"ssstatistics/internal/repository"
 	"ssstatistics/internal/service/cleaning"
 	"ssstatistics/internal/service/maps"
-	"ssstatistics/internal/service/mmr"
 	"ssstatistics/internal/service/parser"
+	"ssstatistics/internal/service/stats/ckey_statistics/crawler"
+	"ssstatistics/internal/service/stats/ckey_statistics/mmr"
 	"ssstatistics/internal/service/tops"
 )
 
@@ -38,6 +39,7 @@ func InitializeDBUpdaters() {
 	DBUpdaters = append(DBUpdaters, cleaning.CleanAnnounces)
 	DBUpdaters = append(DBUpdaters, cleaning.CleanDuplicatedFlavors)
 	DBUpdaters = append(DBUpdaters, repository.RefreshMaterializedViews)
+	DBUpdaters = append(DBUpdaters, crawler.SecretlyUpdateSomePlayers)
 }
 
 func StartDBUpdaters() []string {

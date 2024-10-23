@@ -33,6 +33,7 @@ var Models = []any{
 	new(RitenameByCount),
 
 	new(Player),
+	new(CrawlerStat),
 	new(Top),
 	new(TopMember),
 

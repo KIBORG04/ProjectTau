@@ -71,7 +71,7 @@ func ParseMMR() []string {
 			MMR:  mmr,
 		})
 	}
-	r.SaveMMR(playersSlice)
+	r.SavePlayers(playersSlice)
 
 	return []string{fmt.Sprintf("For %d players MMR recalculated", len(playersMMR))}
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/stats"
+	"ssstatistics/internal/service/stats/ckey_statistics/crawler"
 	"ssstatistics/internal/utils"
 	"strings"
 )
@@ -440,4 +441,45 @@ func GetCkeyMMR(c *gin.Context) (int, any) {
 	}
 
 	return 200, MMR
+}
+
+func GetPlayerWithCrawler(c *gin.Context) (int, any) {
+	player, err := stats.GetValidatePlayer(c)
+	if err != nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": fmt.Sprint(err),
+		}
+	}
+
+	playerStats := crawler.FetchPlayerStats(player.Ckey)
+
+	if playerStats == nil {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": "nothing found",
+		}
+	}
+
+	if len(playerStats.CrawlerStats) == 0 {
+		return 400, map[string]string{
+			"code":  "400",
+			"error": "nothing found",
+		}
+	}
+
+	type crawlerMinimized struct {
+		ServerName string
+		Minutes    uint
+	}
+	var crawlerStatsMinimized []crawlerMinimized
+
+	for _, stat := range playerStats.CrawlerStats {
+		crawlerStatsMinimized = append(crawlerStatsMinimized, crawlerMinimized{
+			ServerName: stat.ServerName,
+			Minutes:    stat.Minutes,
+		})
+	}
+
+	return 200, crawlerStatsMinimized
 }
