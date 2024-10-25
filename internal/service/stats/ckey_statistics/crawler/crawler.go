@@ -11,6 +11,7 @@ import (
 	"ssstatistics/internal/domain"
 	"ssstatistics/internal/repository"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -77,6 +78,8 @@ func setCrawlerStats(player *domain.Player) error {
 		crawlerStats = append(crawlerStats, crawlerStat)
 	}
 
+	crawlerStats = cutServerNames(crawlerStats)
+
 	diff := getChangedResponses(player.CrawlerStats, crawlerStats)
 	player.CrawlerStats = append(player.CrawlerStats, diff...)
 	return nil
@@ -105,6 +108,43 @@ func requestGET(ckey string) ([]crawlerResponse, error) {
 	}
 
 	return stats, nil
+}
+
+func cutServerNames(servers []domain.CrawlerStat) []domain.CrawlerStat {
+	var newCrawlerStat []domain.CrawlerStat
+	sumCleanServersMinutes := make(map[string]domain.CrawlerStat)
+
+	for _, server := range servers {
+		substr := containsSubstring(server.ServerName, config.Config.Secret.CorrectServerNames)
+		if substr == "" {
+			newCrawlerStat = append(newCrawlerStat, server)
+			continue
+		}
+		serverToUpdate, exists := sumCleanServersMinutes[substr]
+		if !exists {
+			serverToUpdate = server
+			serverToUpdate.ServerName = substr
+			sumCleanServersMinutes[substr] = serverToUpdate
+		} else {
+			serverToUpdate.Minutes += server.Minutes
+		}
+	}
+
+	for _, server := range sumCleanServersMinutes {
+		newCrawlerStat = append(newCrawlerStat, server)
+	}
+
+	return newCrawlerStat
+}
+
+// returns substring
+func containsSubstring(server string, correctServers []string) string {
+	for _, serverName := range correctServers {
+		if strings.Contains(server, serverName) {
+			return serverName
+		}
+	}
+	return ""
 }
 
 // return new array with new elements and changed minutes

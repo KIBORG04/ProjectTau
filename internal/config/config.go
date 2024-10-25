@@ -26,7 +26,8 @@ type GlobalConfig struct {
 		TrustedChatIDs []int  `yaml:"trustedChatIDs"`
 	} `yaml:"telegram"`
 	Secret struct {
-		CrawlBlacklist []string `yaml:"crawlBlacklist"`
+		CrawlBlacklist     []string `yaml:"crawlBlacklist"`
+		CorrectServerNames []string `yaml:"correctServerNames"`
 	} `yaml:"secret"`
 	Proxy   string `yaml:"proxy"`
 	BaseUrl string
