@@ -18,7 +18,7 @@ import (
 const (
 	Url = "https://crawler.ss13.su/api/?ckey="
 	// 24 hours is 1 day
-	expirationStatsHours = 24 * 7
+	expirationStatsHours = 0
 )
 
 type crawlerResponse struct {
@@ -112,7 +112,7 @@ func requestGET(ckey string) ([]crawlerResponse, error) {
 
 func cutServerNames(servers []domain.CrawlerStat) []domain.CrawlerStat {
 	var newCrawlerStat []domain.CrawlerStat
-	sumCleanServersMinutes := make(map[string]domain.CrawlerStat)
+	sumCleanServersMinutes := make(map[string]*domain.CrawlerStat)
 
 	for _, server := range servers {
 		substr := containsSubstring(server.ServerName, config.Config.Secret.CorrectServerNames)
@@ -122,7 +122,7 @@ func cutServerNames(servers []domain.CrawlerStat) []domain.CrawlerStat {
 		}
 		serverToUpdate, exists := sumCleanServersMinutes[substr]
 		if !exists {
-			serverToUpdate = server
+			serverToUpdate = &server
 			serverToUpdate.ServerName = substr
 			sumCleanServersMinutes[substr] = serverToUpdate
 		} else {
@@ -131,7 +131,7 @@ func cutServerNames(servers []domain.CrawlerStat) []domain.CrawlerStat {
 	}
 
 	for _, server := range sumCleanServersMinutes {
-		newCrawlerStat = append(newCrawlerStat, server)
+		newCrawlerStat = append(newCrawlerStat, *server)
 	}
 
 	return newCrawlerStat
