@@ -18,7 +18,7 @@ import (
 const (
 	Url = "https://crawler.ss13.su/api/?ckey="
 	// 24 hours is 1 day
-	expirationStatsHours = 0
+	expirationStatsHours = 24 * 7
 )
 
 type crawlerResponse struct {
