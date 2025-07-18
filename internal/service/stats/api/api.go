@@ -546,7 +546,7 @@ func ModeWinratesByMonthGET(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
-func OnlineStatGET(c *gin.Context) {
+func OnlineStatAvgPerDayGET(c *gin.Context) {
 	type Dates struct {
 		DateFrom string `form:"dateFrom"`
 		DateTo   string `form:"dateTo"`
@@ -572,6 +572,48 @@ func OnlineStatGET(c *gin.Context) {
 
 	r.Database.Raw(`
 		select date, round(avg(s.crew_total)) as players
+		from roots
+		join scores s on round_id = s.root_id
+		where (date >= ? and date <= ?)
+		group by date
+		order by date;
+		`, query.DateFrom, query.DateTo).Scan(&dbResult)
+
+	onlineStat := make(map[string]int, len(dbResult))
+
+	for _, onlineDay := range dbResult {
+		onlineStat[onlineDay.Date.Format("2006-01-02")] = onlineDay.Players
+	}
+
+	c.JSON(http.StatusOK, onlineStat)
+}
+
+func OnlineStatMaxPerDayGET(c *gin.Context) {
+	type Dates struct {
+		DateFrom string `form:"dateFrom"`
+		DateTo   string `form:"dateTo"`
+	}
+
+	var query Dates
+	if err := c.BindQuery(&query); err != nil || query.DateFrom == "" || query.DateTo == "" {
+		c.JSON(http.StatusBadRequest, "Некорректный запрос.")
+		return
+	}
+
+	_, errFrom := time.Parse("2006-01-02", query.DateFrom)
+	_, errTo := time.Parse("2006-01-02", query.DateTo)
+	if errFrom != nil || errTo != nil {
+		c.JSON(http.StatusBadRequest, "Некорректно введена дата.")
+		return
+	}
+
+	var dbResult []struct {
+		Date    time.Time
+		Players int
+	}
+
+	r.Database.Raw(`
+		select date, max(s.crew_total) as players
 		from roots
 		join scores s on round_id = s.root_id
 		where (date >= ? and date <= ?)

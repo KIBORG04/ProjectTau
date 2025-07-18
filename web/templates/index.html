@@ -140,45 +140,6 @@
         })
     }
 
-    function get_online_chart(targetId, endpoint, dateFrom, dateTo) {
-        $.ajax({
-            url: `/api/${endpoint}`,
-            data: {dateFrom: dateFrom, dateTo: dateTo},
-            success: function (data) {
-                const maxOnline = Math.max(...Object.values(data));
-                const chart = Chart.getChart(targetId);
-                if (chart) {
-                    chart.data.datasets[0].data = Object.values(data);
-                    chart.data.labels = Object.keys(data);
-                    chart.update();
-                    return;
-                }
-                new Chart(
-                    $("#" + targetId),
-                    {
-                        type: 'line',
-                        data: {
-                            labels: Object.keys(data),
-                            datasets: [{
-                                label: 'players, avg',
-                                data: Object.values(data),
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    suggestedMin: 0,
-                                    suggestedMax: maxOnline + 10
-                                }
-                            }
-                        }
-                    }
-                );
-            }
-        })
-    }
-
     $("#date_start").change(function () {
         get_online_charts();
     });
@@ -187,7 +148,7 @@
         get_online_charts();
     });
 
-    function get_online_charts() {
+    async function get_online_charts() {
         const dateTo = new Date()
         const dateFrom = new Date()
         dateTo.setDate(dateTo.getDate() - 1) // without today
@@ -200,9 +161,69 @@
             <span class="text-danger">${menuDateStart}</span> - <span class="text-success">${menuDateEnd}</span>
             `);
 
-        get_online_chart("online-stat-month", "online_stat", format_date(dateFrom), format_date(dateTo))
-        get_online_chart("online-stat-all-weeks", "online_stat_weeks", menuDateStart, menuDateEnd)
-        get_online_chart("online-stat-daytime", "online_stat_daytime", menuDateStart, menuDateEnd)
+        // важна синхронность только доя графика online-stat-month
+        get_online_chart("online-stat-all-weeks", "online_stat_weeks", "players, avg", menuDateStart, menuDateEnd)
+        get_online_chart("online-stat-daytime", "online_stat_daytime", "players, avg", menuDateStart, menuDateEnd)
+
+        await get_online_chart("online-stat-month", "online_stat", "players, avg", format_date(dateFrom), format_date(dateTo))
+        await get_online_chart("online-stat-month", "online_stat_max", "players, max", format_date(dateFrom), format_date(dateTo))
+    }
+
+    let datasetCounter = 1;
+    function get_online_chart(targetId, endpoint, label, dateFrom, dateTo) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: `/api/${endpoint}`,
+                data: {dateFrom: dateFrom, dateTo: dateTo},
+                success: function (data) {
+                    const maxOnline = Math.max(...Object.values(data));
+                    const chart = Chart.getChart(targetId);
+
+                    const newLabels = Object.keys(data);
+                    const newData = Object.values(data);
+
+                    if (chart) {
+                        chart.data.datasets.push({
+                            label: label,
+                            data: newData,
+                            borderWidth: 1,
+                        });
+
+                        chart.update();
+                        return;
+                    }
+                    new Chart(
+                        $("#" + targetId),
+                        {
+                            type: 'line',
+                            data: {
+                                labels: newLabels,
+                                datasets: [{
+                                    label: label,
+                                    data: newData,
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                plugins: {
+                                    colors: {
+                                        forceOverride: true
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        suggestedMin: 0,
+                                        suggestedMax: maxOnline + 10
+                                    }
+                                }
+                            }
+                        }
+                    );
+                    resolve();
+                }
+            })
+        }
+        )
     }
 
     function format_date(date) {

@@ -105,7 +105,9 @@ func initializeRoutes() {
 
 		apiRoute.GET("/mode_winrates_by_month", api.ModeWinratesByMonthGET)
 
-		apiRoute.GET("/online_stat", api.OnlineStatGET)
+		apiRoute.GET("/online_stat", api.OnlineStatAvgPerDayGET)
+
+		apiRoute.GET("/online_stat_max", api.OnlineStatMaxPerDayGET)
 
 		apiRoute.GET("/online_stat_weeks", api.OnlineStatWeeksGET)
 
