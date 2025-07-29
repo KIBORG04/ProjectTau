@@ -149,11 +149,6 @@
     });
 
     async function get_online_charts() {
-        const dateTo = new Date()
-        const dateFrom = new Date()
-        dateTo.setDate(dateTo.getDate() - 1) // without today
-        dateFrom.setDate(dateTo.getDate() - 90)
-
         const menuDateStart = document.getElementById('date_start').value;
         const menuDateEnd = document.getElementById('date_end').value;
 
@@ -162,8 +157,20 @@
             `);
 
         // важна синхронность только доя графика online-stat-month
+        for (let id of ['online-stat-all-weeks', 'online-stat-daytime', 'online-stat-month']) {
+            let existingChart = Chart.getChart(id);
+            if (existingChart) {
+                existingChart.destroy();
+            }
+        }
+
         get_online_chart("online-stat-all-weeks", "online_stat_weeks", "players, avg", menuDateStart, menuDateEnd)
         get_online_chart("online-stat-daytime", "online_stat_daytime", "players, avg", menuDateStart, menuDateEnd)
+
+        const dateTo = new Date()
+        const dateFrom = new Date()
+        dateTo.setDate(dateTo.getDate() - 1) // without today
+        dateFrom.setDate(dateTo.getDate() - 90)
 
         await get_online_chart("online-stat-month", "online_stat", "players, avg", format_date(dateFrom), format_date(dateTo))
         await get_online_chart("online-stat-month", "online_stat_max", "players, max", format_date(dateFrom), format_date(dateTo))
