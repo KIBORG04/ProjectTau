@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func AddNewChronicle(dateStr, event string) error {
+func AddNewChronicle(dateStr, event string, priority int) error {
 	// Парсим дату из строки (ожидаем формат "YYYY-MM-DD")
 	date, err := time.Parse("2006-01-02", dateStr)
 	if err != nil {
@@ -13,8 +13,9 @@ func AddNewChronicle(dateStr, event string) error {
 	}
 
 	newChronicle := domain.Chronicle{
-		Date:  date,
-		Event: event,
+		Date:     date,
+		Event:    event,
+		Priority: priority,
 	}
 
 	result := Database.Create(&newChronicle)

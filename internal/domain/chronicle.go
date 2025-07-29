@@ -7,6 +7,7 @@ import (
 
 type Chronicle struct {
 	gorm.Model
-	Date  time.Time
-	Event string
+	Date     time.Time
+	Event    string
+	Priority int
 }

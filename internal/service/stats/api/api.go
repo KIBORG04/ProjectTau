@@ -12,6 +12,7 @@ import (
 	r "ssstatistics/internal/repository"
 	"ssstatistics/internal/service/stats"
 	"ssstatistics/internal/service/stats/last_phrase"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -788,8 +789,9 @@ func AddChronicle(c *gin.Context) {
 
 	dateStr := c.PostForm("date")
 	event := c.PostForm("event")
+	priorityStr := c.PostForm("priority")
 
-	if dateStr == "" || event == "" {
+	if dateStr == "" || event == "" || priorityStr == "" {
 		c.HTML(http.StatusBadRequest, "secrets.html", gin.H{
 			"user": user,
 			"logs": []string{"Все поля обязательны для заполнения"},
@@ -797,7 +799,16 @@ func AddChronicle(c *gin.Context) {
 		return
 	}
 
-	err := r.AddNewChronicle(dateStr, event)
+	priority, err := strconv.Atoi(priorityStr)
+	if err != nil {
+		c.HTML(http.StatusBadRequest, "secrets.html", gin.H{
+			"user": user,
+			"logs": []string{"Ошибка парсинга приоритета"},
+		})
+		return
+	}
+
+	err = r.AddNewChronicle(dateStr, event, priority)
 	if err != nil {
 		c.HTML(http.StatusBadRequest, "secrets.html", gin.H{
 			"user": user,
