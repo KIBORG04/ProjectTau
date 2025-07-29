@@ -38,6 +38,8 @@ var Models = []any{
 	new(TopMember),
 
 	new(ThetaSponsor),
+
+	new(Chronicle),
 }
 
 type MyMigrator interface {

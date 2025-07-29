@@ -113,6 +113,8 @@ func initializeRoutes() {
 
 		apiRoute.GET("/online_stat_daytime", api.OnlineStatByDaytimeGET)
 
+		apiRoute.GET("/chronicles_daytime", api.ChronicleByDatetimeGET)
+
 		apiRoute.GET("/completion_html_by", api.CompletionHTMLByIdGET)
 	}
 
@@ -163,6 +165,7 @@ func initializeRoutes() {
 		})
 
 		authorized.POST("/secrets", runUpdateDB)
+		authorized.POST("/add_chronicle", api.AddChronicle)
 	}
 
 }

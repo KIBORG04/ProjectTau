@@ -742,3 +742,72 @@ func CompletionHTMLByIdGET(c *gin.Context) {
 		"html": html,
 	})
 }
+
+func ChronicleByDatetimeGET(c *gin.Context) {
+	type Dates struct {
+		DateFrom string `form:"dateFrom"`
+		DateTo   string `form:"dateTo"`
+	}
+
+	var query Dates
+	if err := c.BindQuery(&query); err != nil || query.DateFrom == "" || query.DateTo == "" {
+		c.JSON(http.StatusBadRequest, "Некорректный запрос.")
+		return
+	}
+
+	_, errFrom := time.Parse("2006-01-02", query.DateFrom)
+	_, errTo := time.Parse("2006-01-02", query.DateTo)
+	if errFrom != nil || errTo != nil {
+		c.JSON(http.StatusBadRequest, "Некорректно введена дата.")
+		return
+	}
+
+	var dbResult []struct {
+		Date  time.Time
+		Event string
+	}
+
+	r.Database.Raw(`
+		SELECT date, event
+		FROM chronicles
+		WHERE (date >= ? and date <= ?)
+		ORDER BY date desc;
+		`, query.DateFrom, query.DateTo).Scan(&dbResult)
+
+	onlineStat := make(map[time.Time]string, len(dbResult))
+
+	for _, chronicleRaw := range dbResult {
+		onlineStat[chronicleRaw.Date] = chronicleRaw.Event
+	}
+
+	c.JSON(http.StatusOK, onlineStat)
+}
+
+func AddChronicle(c *gin.Context) {
+	user := c.MustGet(gin.AuthUserKey).(string)
+
+	dateStr := c.PostForm("date")
+	event := c.PostForm("event")
+
+	if dateStr == "" || event == "" {
+		c.HTML(http.StatusBadRequest, "secrets.html", gin.H{
+			"user": user,
+			"logs": []string{"Все поля обязательны для заполнения"},
+		})
+		return
+	}
+
+	err := r.AddNewChronicle(dateStr, event)
+	if err != nil {
+		c.HTML(http.StatusBadRequest, "secrets.html", gin.H{
+			"user": user,
+			"logs": []string{fmt.Sprintf("Ошибка: %s", err.Error())},
+		})
+		return
+	}
+
+	c.HTML(200, "secrets.html", gin.H{
+		"user": user,
+		"logs": []string{fmt.Sprintf("Хроника добавлена!\n%s - %s", dateStr, event)},
+	})
+}

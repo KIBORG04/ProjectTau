@@ -28,7 +28,13 @@
             <br>
             <div class="text-center border-bottom pb-2">
                 <h4>Статистика по: <span id="online-stat-current-dates">Lorem ipsum</span></h4>
-                Вы можете манипулировать графиками, изменяя даты вверху сайта
+                <div class="alert-info">
+                    Вы можете манипулировать графиками, изменяя даты вверху сайта
+                    <div>
+                        <input type="checkbox" id="toggleChronicles" checked>
+                        Показывать важные события
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <h5 class="text-center border-bottom pb-2">Средний онлайн по неделям</h5>
@@ -148,6 +154,19 @@
         get_online_charts();
     });
 
+    let showChronicles = true;
+    $("#toggleChronicles").change(function() {
+        showChronicles = this.checked;
+
+        // Обновляем все графики
+        ['online-stat-all-weeks', 'online-stat-daytime', 'online-stat-month'].forEach(id => {
+            const chart = Chart.getChart(id);
+            if (chart) {
+                chart.update();
+            }
+        });
+    });
+
     async function get_online_charts() {
         const menuDateStart = document.getElementById('date_start').value;
         const menuDateEnd = document.getElementById('date_end').value;
@@ -164,8 +183,10 @@
             }
         }
 
-        get_online_chart("online-stat-all-weeks", "online_stat_weeks", "players, avg", menuDateStart, menuDateEnd)
-        get_online_chart("online-stat-daytime", "online_stat_daytime", "players, avg", menuDateStart, menuDateEnd)
+        await getChronicles()
+
+        await get_online_chart("online-stat-all-weeks", "online_stat_weeks", "players, avg", menuDateStart, menuDateEnd)
+        await get_online_chart("online-stat-daytime", "online_stat_daytime", "players, avg", menuDateStart, menuDateEnd)
 
         const dateTo = new Date()
         const dateFrom = new Date()
@@ -189,16 +210,21 @@
                     const newLabels = Object.keys(data);
                     const newData = Object.values(data);
 
+                    // Получаем хроники для текущего диапазона дат
+                    const chroniclesInRange = endpoint === 'online_stat_weeks'
+                        ? getChroniclesForWeeks(newLabels)
+                        : getChroniclesInRange(newLabels, dateFrom, dateTo);
+
                     if (chart) {
                         chart.data.datasets.push({
                             label: label,
                             data: newData,
                             borderWidth: 1,
                         });
-
                         chart.update();
                         return;
                     }
+
                     new Chart(
                         $("#" + targetId),
                         {
@@ -215,6 +241,18 @@
                                 plugins: {
                                     colors: {
                                         forceOverride: true
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            afterBody: function(context) {
+                                                const label = context[0].label;
+                                                if (chroniclesInRange.find(c => c.date === label)) {
+                                                    const chronicle = chroniclesInRange.find(c => c.date === label);
+                                                    return `Events:\n${chronicle.text.split('|').join('\n')}`;
+                                                }
+                                                return null;
+                                            }
+                                        }
                                     }
                                 },
                                 scales: {
@@ -223,14 +261,237 @@
                                         suggestedMax: maxOnline + 10
                                     }
                                 }
-                            }
+                            },
+                            plugins: [{
+                                id: 'chroniclesPlugin',
+                                afterDraw: function(chart) {
+                                    if (!showChronicles) return;
+                                    const ctx = chart.ctx;
+                                    const xAxis = chart.scales.x;
+                                    const yAxis = chart.scales.y;
+
+                                    chroniclesInRange.forEach(chronicle => {
+                                        const xPos = xAxis.getPixelForValue(chronicle.date);
+
+                                        ctx.save();
+                                        ctx.beginPath();
+                                        ctx.moveTo(xPos, yAxis.top);
+                                        ctx.lineTo(xPos, yAxis.bottom);
+                                        ctx.lineWidth = 2;
+                                        ctx.strokeStyle = 'rgba(128, 128, 128, 0.3)';
+                                        ctx.stroke();
+                                        ctx.restore();
+                                    });
+                                },
+                                afterEvent: function(chart, args) {
+                                    if (!showChronicles || args.event.type !== 'mousemove') return;
+                                    if (args.event.type === 'mousemove') {
+                                        const xAxis = chart.scales.x;
+                                        const yAxis = chart.scales.y;
+                                        const ctx = chart.ctx;
+                                        const mouseX = args.event.x;
+
+                                        let closestChronicle = null;
+                                        let minDistance = Infinity;
+
+                                        chroniclesInRange.forEach(chronicle => {
+                                            const xPos = xAxis.getPixelForValue(chronicle.date);
+                                            const distance = Math.abs(mouseX - xPos);
+
+                                            if (distance < 50 && distance < minDistance) {
+                                                minDistance = distance;
+                                                closestChronicle = chronicle;
+                                            }
+                                        });
+
+                                        if (closestChronicle) {
+                                            const xPos = xAxis.getPixelForValue(closestChronicle.date);
+
+                                            chart.draw();
+
+                                            // Рисуем выделенную линию
+                                            ctx.save();
+                                            ctx.beginPath();
+                                            ctx.moveTo(xPos, yAxis.top);
+                                            ctx.lineTo(xPos, yAxis.bottom);
+                                            ctx.lineWidth = 3;
+                                            ctx.strokeStyle = 'rgba(255, 0, 0, 0.7)';
+                                            ctx.stroke();
+
+                                            // Разбиваем текст на строки
+                                            const events = closestChronicle.text.split('|');
+
+                                            // Рассчитываем размеры текста
+                                            ctx.font = '12px Arial';
+                                            const lineHeight = 16;
+                                            let maxWidth = 0;
+
+                                            // Находим максимальную ширину текста
+                                            events.forEach(event => {
+                                                const width = ctx.measureText(event).width;
+                                                maxWidth = Math.max(maxWidth, width);
+                                            });
+
+                                            // Параметры блока с текстом
+                                            const padding = 10;
+                                            const rectWidth = maxWidth + padding * 2;
+                                            const rectHeight = events.length * lineHeight + padding * 2;
+                                            const centerX = chart.width / 2;
+                                            const centerY = 55;
+
+                                            // Рисуем полупрозрачный фон
+                                            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                                            ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+                                            ctx.lineWidth = 1;
+
+                                            // Закругленный прямоугольник
+                                            const radius = 5;
+                                            ctx.beginPath();
+                                            ctx.moveTo(centerX - rectWidth/2 + radius, centerY - rectHeight/2);
+                                            ctx.lineTo(centerX + rectWidth/2 - radius, centerY - rectHeight/2);
+                                            ctx.quadraticCurveTo(centerX + rectWidth/2, centerY - rectHeight/2,
+                                                centerX + rectWidth/2, centerY - rectHeight/2 + radius);
+                                            ctx.lineTo(centerX + rectWidth/2, centerY + rectHeight/2 - radius);
+                                            ctx.quadraticCurveTo(centerX + rectWidth/2, centerY + rectHeight/2,
+                                                centerX + rectWidth/2 - radius, centerY + rectHeight/2);
+                                            ctx.lineTo(centerX - rectWidth/2 + radius, centerY + rectHeight/2);
+                                            ctx.quadraticCurveTo(centerX - rectWidth/2, centerY + rectHeight/2,
+                                                centerX - rectWidth/2, centerY + rectHeight/2 - radius);
+                                            ctx.lineTo(centerX - rectWidth/2, centerY - rectHeight/2 + radius);
+                                            ctx.quadraticCurveTo(centerX - rectWidth/2, centerY - rectHeight/2,
+                                                centerX - rectWidth/2 + radius, centerY - rectHeight/2);
+                                            ctx.closePath();
+                                            ctx.fill();
+                                            ctx.stroke();
+
+                                            // Рисуем текст
+                                            ctx.fillStyle = 'white';
+                                            ctx.textAlign = 'center';
+                                            ctx.textBaseline = 'middle';
+
+                                            events.forEach((event, index) => {
+                                                const yPos = centerY - rectHeight/2 + padding + lineHeight/2 + index * lineHeight;
+                                                ctx.fillText(event, centerX, yPos);
+                                            });
+
+                                            ctx.restore();
+                                        }
+                                    }
+                                }
+                            }]
                         }
                     );
                     resolve();
                 }
             })
+        })
+    }
+
+    // Новая функция для обработки недельных интервалов
+    function getChroniclesForWeeks(weekLabels) {
+        const result = [];
+
+        weekLabels.forEach(weekLabel => {
+            const [year, week] = weekLabel.split('-').map(Number);
+            const weekDates = getDatesOfWeek(year, week);
+            const weekEvents = [];
+
+            weekDates.forEach(date => {
+                const dateStr = formatDateForChronicle(date);
+                if (chronicles[dateStr]) {
+                    weekEvents.push(chronicles[dateStr]);
+                }
+            });
+
+            if (weekEvents.length > 0) {
+                result.push({
+                    date: weekLabel,
+                    text: weekEvents.join('|') // Используем | как разделитель для нескольких событий
+                });
+            }
+        });
+
+        return result;
+    }
+
+    // Вспомогательная функция для получения всех дат недели
+    function getDatesOfWeek(year, week) {
+        const dates = [];
+        const firstDay = new Date(year, 0, 1);
+        const firstWeekDay = firstDay.getDay() || 7;
+        let firstWeekDate = new Date(year, 0, 1 + (8 - firstWeekDay) % 7);
+
+        if (week > 1) {
+            firstWeekDate.setDate(firstWeekDate.getDate() + (week - 1) * 7);
         }
-        )
+
+        for (let i = 0; i < 7; i++) {
+            const date = new Date(firstWeekDate);
+            date.setDate(date.getDate() + i);
+            dates.push(date);
+        }
+
+        return dates;
+    }
+
+    // Форматирование даты для сравнения с chronicles
+    function formatDateForChronicle(date) {
+        return date.toISOString().split('T')[0];
+    }
+
+    let chronicles = {};
+    function getChronicles() {
+        const dateFrom = document.getElementById('date_start').value;
+        const dateTo = document.getElementById('date_end').value;
+
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: `/api/chronicles_daytime`,
+                data: {dateFrom: dateFrom, dateTo: dateTo},
+                success: function (data) {
+                    chronicles = {};
+
+                    // Собираем все события по датам
+                    const eventsByDate = {};
+
+                    for (const [key, value] of Object.entries(data)) {
+                        const dateOnly = key.split('T')[0];
+
+                        if (!eventsByDate[dateOnly]) {
+                            eventsByDate[dateOnly] = [];
+                        }
+
+                        eventsByDate[dateOnly].push(value);
+                    }
+
+                    for (const [date, events] of Object.entries(eventsByDate)) {
+                        if (events.length === 1) {
+                            chronicles[date] = events[0];
+                        } else {
+                            chronicles[date] = events.join(' | ');
+                        }
+                    }
+
+                    resolve();
+                },
+                error: function(error) {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    function getChroniclesInRange(labels, dateFrom, dateTo) {
+        const result = [];
+        labels.forEach(date => {
+            if (chronicles[date]) {
+                result.push({
+                    date: date,
+                    text: chronicles[date]
+                });
+            }
+        });
+        return result;
     }
 
     function format_date(date) {
