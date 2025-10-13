@@ -168,12 +168,20 @@
 
         await getChronicles()
 
-        // Сначала создаем график с историческими данными
-        await get_online_chart("online-stat-all-weeks", "online_stat_weeks", "players, avg", menuDateStart, menuDateEnd)
+        // 1. Рисуем график с реальными данными
+        await get_online_chart("online-stat-all-weeks", "online_stat_weeks", "Players, avg", menuDateStart, menuDateEnd)
         
-        // Затем добавляем на него линию прогноза
-        await add_forecast_to_weekly_chart("online-stat-all-weeks", "online_stat_weeks_forecast", "Прогноз SARIMA", menuDateStart, menuDateEnd);
+        // 2. Добавляем на него ИСТОРИЧЕСКИЙ прогноз (например, недельной давности)
+        await add_historical_forecast_to_chart(
+            "online-stat-all-weeks", 
+            "Прогноз (7 дней назад)", 
+            { type: 'weekly', days_ago: 7 }
+        );
 
+        // 3. Добавляем на него АКТУАЛЬНЫЙ прогноз на будущее
+        await add_forecast_to_weekly_chart("online-stat-all-weeks", "online_stat_weeks_forecast", "Прогноз (актуальный)", menuDateStart, menuDateEnd);
+
+        // --- Для дневного графика то же самое ---
         await get_online_chart("online-stat-daytime", "online_stat_daytime", "players, avg", menuDateStart, menuDateEnd)
 
         const dateTo = new Date()
@@ -183,7 +191,64 @@
 
         await get_online_chart("online-stat-month", "online_stat", "players, avg", format_date(dateFrom), format_date(dateTo))
         await get_online_chart("online-stat-month", "online_stat_max", "players, max", format_date(dateFrom), format_date(dateTo))
-        await add_forecast_to_daily_chart("online-stat-month", "online_stat_daily_forecast", "Прогноз (дневной)");
+
+        // Добавляем исторический дневной прогноз (например, вчерашний)
+        await add_historical_forecast_to_chart(
+            "online-stat-month", 
+            "Прогноз (вчера)", 
+            { type: 'daily', days_ago: 1 }
+        );
+
+        await add_forecast_to_daily_chart("online-stat-month", "online_stat_daily_forecast", "Прогноз (актуальный)");
+    }
+
+    // НОВАЯ ФУНКЦИЯ для отрисовки исторического прогноза
+    function add_historical_forecast_to_chart(targetId, label, params) {
+        return new Promise((resolve) => {
+            $.ajax({
+                url: `/api/historical_forecast`,
+                data: params, // { type: 'weekly', days_ago: 7 }
+                success: function(historicalData) {
+                    const chart = Chart.getChart(targetId);
+                    if (!chart || Object.keys(historicalData).length === 0) {
+                        resolve();
+                        return;
+                    }
+
+                    const historicalLabels = Object.keys(historicalData);
+                    const historicalValues = Object.values(historicalData);
+
+                    // Создаем датасет, который будет накладываться на существующие данные
+                    const datasetData = [];
+                    // Сопоставляем исторические данные с основной шкалой графика
+                    chart.data.labels.forEach(label => {
+                        if (historicalData[label] !== undefined) {
+                            datasetData.push(historicalData[label]);
+                        } else {
+                            datasetData.push(null); // Пропуски, где нет данных
+                        }
+                    });
+
+                    chart.data.datasets.push({
+                        label: label,
+                        data: datasetData,
+                        borderColor: 'rgba(150, 150, 150, 0.7)', // Серый цвет
+                        borderWidth: 2,
+                        borderDash: [2, 2], // Мелкий пунктир
+                        fill: false,
+                        tension: 0.1,
+                        pointRadius: 2,
+                    });
+                    
+                    chart.update();
+                    resolve();
+                },
+                error: function(error) {
+                    console.error(`Не удалось получить исторический прогноз для ${targetId}:`, error);
+                    resolve();
+                }
+            });
+        });
     }
 
     let datasetCounter = 1;
@@ -276,7 +341,6 @@
                                     });
                                 },
                                 afterEvent: function(chart, args) {
-                                    // ... (весь ваш код для afterEvent без изменений) ...
                                     if (!showChronicles || args.event.type !== 'mousemove') return;
                                     if (args.event.type === 'mousemove') {
                                         const xAxis = chart.scales.x;

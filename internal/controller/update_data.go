@@ -8,6 +8,7 @@ import (
 	"ssstatistics/internal/service/stats/ckey_statistics/crawler"
 	"ssstatistics/internal/service/stats/ckey_statistics/mmr"
 	"ssstatistics/internal/service/tops"
+	"ssstatistics/internal/service/forecast" 
 )
 
 type GeneralUpdater func() []string
@@ -56,6 +57,12 @@ func StartUpdaters() []string {
 	var logs []string
 	logs = append(logs, StartRegularUpdaters()...)
 	logs = append(logs, StartDBUpdaters()...)
+
+	// Запускаем расчеты в фоне, чтобы не задерживать ответ администратору
+	go forecast.UpdateDailyForecast()
+	go forecast.UpdateWeeklyForecast()
+	logs = append(logs, "Запущено фоновое обновление прогнозов онлайна.")
+	
 	return logs
 }
 

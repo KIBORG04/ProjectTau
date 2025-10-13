@@ -1,8 +1,12 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	c "ssstatistics/internal/config"
+	"ssstatistics/internal/domain"
+	r "ssstatistics/internal/repository"
+	//"ssstatistics/internal/service/forecast" // Можно оставить для костыля
 	"ssstatistics/internal/service/stats/api"
 	"ssstatistics/internal/service/stats/general"
 )
@@ -111,6 +115,8 @@ func initializeRoutes() {
 
 		apiRoute.GET("/online_stat_daily_forecast", api.DailyForecastHandler)
 
+		apiRoute.GET("/historical_forecast", api.HistoricalForecastHandler)
+
 		apiRoute.GET("/online_stat_max", api.OnlineStatMaxPerDayGET)
 
 		apiRoute.GET("/online_stat_weeks", api.OnlineStatWeeksGET)
@@ -183,7 +189,20 @@ func Run() {
 	router.LoadHTMLGlob("web/templates/*")
 	router.Static("/web/static/", "./web/static")
 
+	err = r.Database.AutoMigrate(&domain.ForecastHistory{})
+	if err != nil {
+		panic(fmt.Sprintf("failed to auto-migrate database: %v", err))
+	}
+
 	initializeRoutes()
+
+		// --- НАЧАЛО: ВРЕМЕННЫЙ КОД (КОСТЫЛЬ) ДЛЯ ПЕРВОГО РАСЧЕТА ---
+	// Этот код запустит расчет прогнозов один раз при старте сервера.
+	// После успешного расчета его нужно будет удалить.
+	//fmt.Println("Starting one-time forecast calculation in background...")
+	//go forecast.UpdateDailyForecast()
+	//go forecast.UpdateWeeklyForecast()
+	// --- КОНЕЦ ВРЕМЕННОГО КОДА ---
 
 	router.Run(":8080")
 }
