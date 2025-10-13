@@ -107,6 +107,10 @@ func initializeRoutes() {
 
 		apiRoute.GET("/online_stat", api.OnlineStatAvgPerDayGET)
 
+		apiRoute.GET("/online_stat_weeks_forecast", api.ForecastHandler)
+
+		apiRoute.GET("/online_stat_daily_forecast", api.DailyForecastHandler)
+
 		apiRoute.GET("/online_stat_max", api.OnlineStatMaxPerDayGET)
 
 		apiRoute.GET("/online_stat_weeks", api.OnlineStatWeeksGET)

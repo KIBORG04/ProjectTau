@@ -15,6 +15,10 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"bytes"
+	"encoding/json"
+	"io"
+	"log"
 )
 
 func MmrGET(c *gin.Context) {
@@ -821,4 +825,164 @@ func AddChronicle(c *gin.Context) {
 		"user": user,
 		"logs": []string{fmt.Sprintf("Хроника добавлена!\n%s - %s", dateStr, event)},
 	})
+}
+
+// ForecastHandler обрабатывает запрос на прогноз онлайна
+func ForecastHandler(c *gin.Context) {
+	// --- ШАГ 1: ПОЛУЧЕНИЕ ИСТОРИЧЕСКИХ ДАННЫХ (ваш код из OnlineStatWeeksGET) ---
+	type Dates struct {
+		DateFrom string `form:"dateFrom"`
+		DateTo   string `form:"dateTo"`
+	}
+
+	var query Dates
+	// Для прогноза лучше использовать как можно больше данных, поэтому мы не будем требовать даты.
+	// Если они не заданы, мы их просто не будем использовать в запросе.
+	_ = c.BindQuery(&query) 
+
+	// Для более точного прогноза лучше брать весь доступный диапазон данных,
+	// а не только тот, что выбран на фронтенде.
+	// Поэтому мы будем использовать даты только если они явно переданы.
+	var dbResult []struct {
+		WeekDate string
+		Players  int
+	}
+	
+	// Используем глобальную переменную `r.Database` для доступа к БД
+	tx := r.Database.Raw(`
+		SELECT date_part('isoyear', date) || '-' || date_part('week', date) AS week_date, round(avg(s.crew_total)) AS players
+		FROM roots
+		JOIN scores s ON round_id = s.root_id
+		WHERE (? = '' OR date >= ?) AND (? = '' OR date <= ?)
+		GROUP BY week_date
+		ORDER BY to_date(date_part('isoyear', date) || '-' || date_part('week', date), 'YYYY-WW');
+		`, query.DateFrom, query.DateFrom, query.DateTo, query.DateTo).Scan(&dbResult)
+
+	if tx.Error != nil {
+		log.Printf("DB Error in ForecastHandler: %v", tx.Error)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database query failed"})
+		return
+	}
+
+	// Конвертируем результат в map[string]float64, как ожидает Python-сервис
+	historicalData := make(map[string]float64, len(dbResult))
+	for _, onlineDay := range dbResult {
+		dateParts := strings.Split(onlineDay.WeekDate, "-")
+		if len(dateParts) == 2 {
+			if len(dateParts[1]) == 1 {
+				dateParts[1] = "0" + dateParts[1]
+			}
+			// Конвертируем int в float64
+			historicalData[fmt.Sprintf("%s-%s", dateParts[0], dateParts[1])] = float64(onlineDay.Players)
+		}
+	}
+
+	if len(historicalData) < 20 { // Модели нужно достаточно данных для обучения
+		// Если данных слишком мало, просто не возвращаем прогноз
+		c.JSON(http.StatusOK, gin.H{})
+		return
+	}
+
+	// --- Шаг 2: Отправка запроса в Python-микросервис ---
+	requestPayload := map[string]interface{}{"data": historicalData}
+	payloadBytes, _ := json.Marshal(requestPayload)
+
+	// ВАЖНО: Адрес сервиса зависит от того, как вы запускаете проект.
+	// Если через Docker Compose - 'http://forecast-service:5000/forecast'
+	// Если вручную - 'http://localhost:5000/forecast'
+	pythonServiceURL := "http://forecast-service:5000/forecast" 
+	
+	resp, err := http.Post(pythonServiceURL, "application/json", bytes.NewBuffer(payloadBytes))
+	// ... остальная часть функции остается без изменений ...
+	if err != nil {
+		log.Printf("Error calling Python service: %v", err)
+		c.JSON(http.StatusServiceUnavailable, gin.H{"error": "Forecast service is unavailable"})
+		return
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		bodyBytes, _ := io.ReadAll(resp.Body)
+		log.Printf("Python service returned an error. Status: %s, Body: %s", resp.Status, string(bodyBytes))
+		c.JSON(resp.StatusCode, gin.H{"error": "Failed to generate forecast from python service"})
+		return
+	}
+
+	responseBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to read forecast response"})
+        return
+    }
+    
+    var forecastData map[string]interface{}
+    if err := json.Unmarshal(responseBody, &forecastData); err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse forecast response"})
+        return
+    }
+
+	c.JSON(http.StatusOK, forecastData)
+}
+
+// DailyForecastHandler обрабатывает запрос на прогноз онлайна по дням
+func DailyForecastHandler(c *gin.Context) {
+	// --- ШАГ 1: ПОЛУЧЕНИЕ ДАННЫХ ЗА ПОСЛЕДНИЕ 180 ДНЕЙ ---
+	var dbResult []struct {
+		Date    time.Time
+		Players float64
+	}
+
+	// Берем данные за последние 180 дней для обучения модели
+	daysToQuery := 180
+	dateFrom := time.Now().AddDate(0, 0, -daysToQuery)
+
+	tx := r.Database.Raw(`
+		SELECT date::date, round(avg(s.crew_total)) as players
+		FROM roots
+		JOIN scores s ON round_id = s.root_id
+		WHERE date >= ?
+		GROUP BY date::date
+		ORDER BY date::date;
+		`, dateFrom).Scan(&dbResult)
+
+	if tx.Error != nil {
+		log.Printf("DB Error in DailyForecastHandler: %v", tx.Error)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database query failed"})
+		return
+	}
+
+	// Конвертируем в map[string]float64 для Python
+	historicalData := make(map[string]float64, len(dbResult))
+	for _, row := range dbResult {
+		historicalData[row.Date.Format("2006-01-02")] = row.Players
+	}
+
+	if len(historicalData) < 30 { // Нужно хотя бы ~месяц данных
+		c.JSON(http.StatusOK, gin.H{})
+		return
+	}
+
+	// --- Шаг 2: Отправка запроса в НОВЫЙ endpoint Python-сервиса ---
+	requestPayload := map[string]interface{}{"data": historicalData}
+	payloadBytes, _ := json.Marshal(requestPayload)
+
+	pythonServiceURL := "http://forecast-service:5000/forecast/daily" // <-- ИЗМЕНИЛСЯ URL
+	resp, err := http.Post(pythonServiceURL, "application/json", bytes.NewBuffer(payloadBytes))
+	if err != nil {
+		log.Printf("Error calling Python daily forecast service: %v", err)
+		c.JSON(http.StatusServiceUnavailable, gin.H{"error": "Daily forecast service is unavailable"})
+		return
+	}
+	defer resp.Body.Close()
+
+	// --- Шаг 3: Перенаправляем ответ в браузер (без изменений) ---
+	responseBody, _ := io.ReadAll(resp.Body)
+	if resp.StatusCode != http.StatusOK {
+		log.Printf("Python service returned an error. Status: %s, Body: %s", resp.Status, string(responseBody))
+		c.JSON(resp.StatusCode, gin.H{"error": "Failed to generate daily forecast"})
+		return
+	}
+
+	var forecastData map[string]interface{}
+	json.Unmarshal(responseBody, &forecastData)
+	c.JSON(http.StatusOK, forecastData)
 }
