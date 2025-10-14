@@ -29,7 +29,7 @@ def make_prediction(data, date_format_string, frequency, seasonal_period, foreca
         return {"error": f"Failed to parse time series data: {e}"}, 400
 
     # Настраиваем и обучаем модель
-    order = (1, 1, 1)
+    order = (1, 0, 1)
     seasonal_order = (1, 1, 0, seasonal_period)
     
     try:

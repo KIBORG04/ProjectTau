@@ -115,7 +115,7 @@ func initializeRoutes() {
 
 		apiRoute.GET("/online_stat_daily_forecast", api.DailyForecastHandler)
 
-		apiRoute.GET("/historical_forecast", api.HistoricalForecastHandler)
+		apiRoute.GET("/one_step_forecast_history", api.OneStepForecastHistoryHandler)
 
 		apiRoute.GET("/online_stat_max", api.OnlineStatMaxPerDayGET)
 

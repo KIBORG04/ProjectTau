@@ -15,6 +15,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"encoding/json"
 )
 
 func MmrGET(c *gin.Context) {
@@ -853,39 +854,134 @@ func DailyForecastHandler(c *gin.Context) {
 	c.Data(http.StatusOK, "application/json; charset=utf-8", latestForecast.Data)
 }
 
-// НОВЫЙ ХЕНДЛЕР: HistoricalForecastHandler отдает прогноз, сделанный N дней назад
-func HistoricalForecastHandler(c *gin.Context) {
+// OneStepForecastHistoryHandler собирает историческую линию из одношаговых прогнозов
+func OneStepForecastHistoryHandler(c *gin.Context) {
 	forecastType := c.Query("type") // "weekly" или "daily"
-	daysAgoStr := c.Query("days_ago") // например, "7"
+	dateFromStr := c.Query("dateFrom")
+	dateToStr := c.Query("dateTo")
 
-	if forecastType == "" || daysAgoStr == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Missing 'type' or 'days_ago' query parameters"})
+	if forecastType == "" || dateFromStr == "" || dateToStr == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Missing parameters"})
 		return
 	}
 
-	daysAgo, err := strconv.Atoi(daysAgoStr)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "'days_ago' must be an integer"})
+	// 1. Получаем все прогнозы нужного типа из истории в память
+	var history []domain.ForecastHistory
+	err := r.Database.Where("forecast_type = ?", forecastType).Order("created_at asc").Find(&history).Error
+	if err != nil || len(history) == 0 {
+		c.JSON(http.StatusOK, gin.H{}) // Возвращаем пустой ответ, если истории нет
 		return
 	}
 
-	// Ищем самый свежий прогноз, который был сделан ДО (СЕЙЧАС - N дней)
-	targetDate := time.Now().AddDate(0, 0, -daysAgo)
-	
-	var historicalForecast domain.ForecastHistory
-	err = r.Database.
-		Where("forecast_type = ? AND created_at <= ?", forecastType, targetDate).
-		Order("created_at desc").
-		First(&historicalForecast).Error
+	// 2. Итерируемся по каждой дате/неделе в запрошенном диапазоне
+	result := make(map[string]float64)
 
-	if err != nil {
-		if err == gorm.ErrRecordNotFound {
-			c.JSON(http.StatusOK, gin.H{}) // Просто нет такого старого прогноза
-			return
+	if forecastType == "daily" {
+		dateFrom, _ := time.Parse("2006-01-02", dateFromStr)
+		dateTo, _ := time.Parse("2006-01-02", dateToStr)
+
+		for d := dateFrom; !d.After(dateTo); d = d.AddDate(0, 0, 1) {
+			processDate(d, history, result)
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not fetch historical forecast"})
+	} else if forecastType == "weekly" {
+        // Для недель нам нужны все метки, которые есть на графике реальных данных
+        var realLabels []struct{ Week string }
+        r.Database.Raw(`
+            SELECT DISTINCT date_part('isoyear', date) || '-' || date_part('week', date) as week
+            FROM roots WHERE date >= ? AND date <= ? ORDER BY week
+        `, dateFromStr, dateToStr).Scan(&realLabels)
+
+        for _, label := range realLabels {
+            processWeek(label.Week, history, result)
+        }
+    }
+
+
+	c.JSON(http.StatusOK, result)
+}
+
+// processDate находит предсказание для конкретной даты
+func processDate(targetDate time.Time, history []domain.ForecastHistory, result map[string]float64) {
+	var relevantForecast *domain.ForecastHistory
+	// Находим самый последний прогноз, сделанный ДО нашей целевой даты
+	for i := range history {
+		if history[i].CreatedAt.Before(targetDate) {
+			relevantForecast = &history[i]
+		} else {
+			break // т.к. история отсортирована, дальше можно не смотреть
+		}
+	}
+
+	if relevantForecast == nil {
+		return // Не найдено прогноза, сделанного в прошлом
+	}
+
+	var data map[string]float64
+	if err := json.Unmarshal(relevantForecast.Data, &data); err != nil {
+		return // Ошибка парсинга JSON
+	}
+
+	// Ищем в данных прогноза значение для нашей целевой даты
+	targetDateStr := targetDate.Format("2006-01-02")
+	if value, ok := data[targetDateStr]; ok {
+		result[targetDateStr] = value
+	}
+}
+
+// processWeek находит предсказание для конкретной недели
+func processWeek(targetWeek string, history []domain.ForecastHistory, result map[string]float64) {
+    year, week, _ := parseWeekString(targetWeek)
+    firstDayOfWeek, _ := getFirstDayOfWeek(year, week)
+
+    var relevantForecast *domain.ForecastHistory
+	// Находим самый последний прогноз, сделанный ДО начала нашей целевой недели
+	for i := range history {
+		if history[i].CreatedAt.Before(firstDayOfWeek) {
+			relevantForecast = &history[i]
+		} else {
+			break
+		}
+	}
+
+    if relevantForecast == nil {
 		return
 	}
 
-	c.Data(http.StatusOK, "application/json; charset=utf-8", historicalForecast.Data)
+	var data map[string]float64
+	if err := json.Unmarshal(relevantForecast.Data, &data); err != nil {
+		return
+	}
+
+	// Ищем в данных прогноза значение для нашей целевой недели
+    targetWeekPadded := fmt.Sprintf("%d-%02d", year, week) // Убедимся, что неделя в формате "YYYY-WW"
+	if value, ok := data[targetWeekPadded]; ok {
+		result[targetWeekPadded] = value
+	}
+}
+
+// Вспомогательные функции для работы с неделями (можно вынести в отдельный пакет)
+func parseWeekString(weekStr string) (year, week int, err error) {
+    parts := strings.Split(weekStr, "-")
+    if len(parts) != 2 { return 0,0, fmt.Errorf("invalid week format")}
+    year, err = strconv.Atoi(parts[0])
+    if err != nil { return 0,0, err}
+    week, err = strconv.Atoi(parts[1])
+    return year, week, err
+}
+
+func getFirstDayOfWeek(year, week int) (time.Time, error) {
+    date := time.Date(year, 0, 0, 0, 0, 0, 0, time.UTC)
+    isoYear, isoWeek := date.ISOWeek()
+    for isoYear < year || (isoYear == year && isoWeek < week) {
+        date = date.AddDate(0, 0, 7)
+        isoYear, isoWeek = date.ISOWeek()
+    }
+    for isoYear > year || (isoYear == year && isoWeek > week) {
+        date = date.AddDate(0, 0, -1)
+        isoYear, isoWeek = date.ISOWeek()
+    }
+    for date.Weekday() != time.Monday {
+        date = date.AddDate(0, 0, -1)
+    }
+    return date, nil
 }

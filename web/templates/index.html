@@ -168,87 +168,46 @@
 
         await getChronicles()
 
-        // 1. Рисуем график с реальными данными
-        await get_online_chart("online-stat-all-weeks", "online_stat_weeks", "Players, avg", menuDateStart, menuDateEnd)
-        
-        // 2. Добавляем на него ИСТОРИЧЕСКИЙ прогноз (например, недельной давности)
-        await add_historical_forecast_to_chart(
-            "online-stat-all-weeks", 
-            "Прогноз (7 дней назад)", 
-            { type: 'weekly', days_ago: 7 }
-        );
+        // --- НЕДЕЛЬНЫЙ ГРАФИК ---
+        // 1. Рисуем реальные данные
+        await get_online_chart("online-stat-all-weeks", "online_stat_weeks", "Players, avg", menuDateStart, menuDateEnd);
+        // 2. Добавляем на него выровненный исторический прогноз
+        await add_aligned_dataset_to_chart("online-stat-all-weeks", "one_step_forecast_history?type=weekly", "Прогноз (история)", menuDateStart, menuDateEnd, {
+            borderColor: 'rgba(255, 99, 132, 0.7)', // Розовый/Красный
+            borderWidth: 2,
+            borderDash: [2, 2],
+            fill: false,
+            tension: 0.4,
+            pointRadius: 3
+        });
 
-        // 3. Добавляем на него АКТУАЛЬНЫЙ прогноз на будущее
+        // 3. Добавляем прогноз на будущее
         await add_forecast_to_weekly_chart("online-stat-all-weeks", "online_stat_weeks_forecast", "Прогноз (актуальный)", menuDateStart, menuDateEnd);
 
-        // --- Для дневного графика то же самое ---
-        await get_online_chart("online-stat-daytime", "online_stat_daytime", "players, avg", menuDateStart, menuDateEnd)
+        // --- ДНЕВНОЙ ГРАФИК ---
+        await get_online_chart("online-stat-daytime", "online_stat_daytime", "players, avg", menuDateStart, menuDateEnd);
 
         const dateTo = new Date()
         const dateFrom = new Date()
         dateTo.setDate(dateTo.getDate() - 1) // without today
         dateFrom.setDate(dateTo.getDate() - 90)
+        const dateFromStr = format_date(dateFrom);
+        const dateToStr = format_date(dateTo);
 
+        // 1. Реальные данные
         await get_online_chart("online-stat-month", "online_stat", "players, avg", format_date(dateFrom), format_date(dateTo))
         await get_online_chart("online-stat-month", "online_stat_max", "players, max", format_date(dateFrom), format_date(dateTo))
-
-        // Добавляем исторический дневной прогноз (например, вчерашний)
-        await add_historical_forecast_to_chart(
-            "online-stat-month", 
-            "Прогноз (вчера)", 
-            { type: 'daily', days_ago: 1 }
-        );
-
-        await add_forecast_to_daily_chart("online-stat-month", "online_stat_daily_forecast", "Прогноз (актуальный)");
-    }
-
-    // НОВАЯ ФУНКЦИЯ для отрисовки исторического прогноза
-    function add_historical_forecast_to_chart(targetId, label, params) {
-        return new Promise((resolve) => {
-            $.ajax({
-                url: `/api/historical_forecast`,
-                data: params, // { type: 'weekly', days_ago: 7 }
-                success: function(historicalData) {
-                    const chart = Chart.getChart(targetId);
-                    if (!chart || Object.keys(historicalData).length === 0) {
-                        resolve();
-                        return;
-                    }
-
-                    const historicalLabels = Object.keys(historicalData);
-                    const historicalValues = Object.values(historicalData);
-
-                    // Создаем датасет, который будет накладываться на существующие данные
-                    const datasetData = [];
-                    // Сопоставляем исторические данные с основной шкалой графика
-                    chart.data.labels.forEach(label => {
-                        if (historicalData[label] !== undefined) {
-                            datasetData.push(historicalData[label]);
-                        } else {
-                            datasetData.push(null); // Пропуски, где нет данных
-                        }
-                    });
-
-                    chart.data.datasets.push({
-                        label: label,
-                        data: datasetData,
-                        borderColor: 'rgba(150, 150, 150, 0.7)', // Серый цвет
-                        borderWidth: 2,
-                        borderDash: [2, 2], // Мелкий пунктир
-                        fill: false,
-                        tension: 0.1,
-                        pointRadius: 2,
-                    });
-                    
-                    chart.update();
-                    resolve();
-                },
-                error: function(error) {
-                    console.error(`Не удалось получить исторический прогноз для ${targetId}:`, error);
-                    resolve();
-                }
-            });
+        // 2. Добавляем выровненный исторический прогноз
+        await add_aligned_dataset_to_chart("online-stat-month", "one_step_forecast_history?type=daily", "Прогноз (история)", dateFromStr, dateToStr, {
+            borderColor: 'rgba(255, 99, 132, 0.7)', // Розовый/Красный
+            borderWidth: 2,
+            borderDash: [2, 2],
+            fill: false,
+            tension: 0.4,
+            pointRadius: 3
         });
+        // 3. Актуальный прогноз
+        await add_forecast_to_daily_chart("online-stat-month", "online_stat_daily_forecast", "Прогноз (актуальный)");
     }
 
     let datasetCounter = 1;
@@ -417,6 +376,44 @@
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.error(`Ошибка при загрузке данных для графика '${targetId}' с эндпоинта '${endpoint}':`, textStatus, errorThrown);
                     // Вызываем resolve() даже при ошибке, чтобы остальные графики продолжили загружаться.
+                    resolve();
+                }
+            });
+        });
+    }
+
+    /**
+     * НОВАЯ ФУНКЦИЯ
+     * Задача 2: Добавляет на существующий график "редкий" набор данных,
+     * правильно выравнивая его по оси X.
+     */
+    function add_aligned_dataset_to_chart(targetId, endpoint, label, dateFrom, dateTo, styleOptions) {
+        return new Promise((resolve) => {
+            $.ajax({
+                url: `/api/${endpoint}`,
+                data: {dateFrom: dateFrom, dateTo: dateTo},
+                success: function(sparseData) {
+                    const chart = Chart.getChart(targetId);
+                    // Если нет графика или API вернул пустые данные, ничего не делаем
+                    if (!chart || Object.keys(sparseData).length === 0) {
+                        resolve();
+                        return;
+                    }
+
+                    // САМОЕ ГЛАВНОЕ: создаем полный массив данных, сопоставляя его с метками на оси X
+                    const alignedData = chart.data.labels.map(labelOnAxis => sparseData[labelOnAxis] || null);
+
+                    chart.data.datasets.push({
+                        label: label,
+                        data: alignedData,
+                        ...styleOptions // Применяем стили (цвет, пунктир и т.д.)
+                    });
+
+                    chart.update();
+                    resolve();
+                },
+                error: function(error) {
+                    console.error(`Не удалось получить данные для '${label}':`, error);
                     resolve();
                 }
             });
