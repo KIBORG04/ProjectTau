@@ -1,6 +1,3 @@
-<!--index.html-->
-
-<!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
 <div class="container mt-4">
@@ -50,28 +47,14 @@
             </div>
         </div>
         <div class="col-sm-3 col-lg-4 mt-2">
-            <ul class="list-group list-group-flush">
-                <div id="random_announce">
-                    <div class="spinner-border text-end" role="status"></div>
-                </div>
-
-                <div id="random_achievement">
-                    <div class="spinner-border text-end" role="status"></div>
-                </div>
-
-                <div id="random_flavor">
-                    <div class="spinner-border text-end" role="status"></div>
-                </div>
-
-                <div id="random_last_phrase">
-                    <div class="spinner-border text-end" role="status"></div>
-                </div>
-            </ul>
+            <div id="random_announce" class="mb-3"></div>
+            <div id="random_achievement" class="mb-3"></div>
+            <div id="random_flavor" class="mb-3"></div>
+            <div id="random_last_phrase" class="mb-3"></div>
         </div>
     </div>
 </div>
 
-<!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}
 
 <script>
@@ -89,11 +72,11 @@
             const author = data.Author ? `<figcaption class="blockquote-footer">${data.Author}</figcaption>` : ""
             const button = `<button id="update_announce" class="btn btn-outline-secondary btn-sm fa-solid fa-arrow-rotate-right float-md-end ms-2"></button>`
             $("#random_announce").html(`
-             <figure class="text-end">
-                        <p class="h5">${button}${data.Title}</p>
-                        <p id="announce_contents" class="fs-6"></p>
-                         ${author}
-             </figure>`)
+               <figure class="text-end">
+                            <p class="h5">${button}${data.Title}</p>
+                            <p id="announce_contents" class="fs-6"></p>
+                             ${author}
+               </figure>`)
             $("#announce_contents").text(unescape(data.Content))
             $("#update_announce").click(get_announce)
         })
@@ -103,13 +86,13 @@
         $.getJSON("/api/random_achievement", function (data) {
             const button = `<button id="update_achievement" class="btn btn-outline-secondary btn-sm fa-solid fa-arrow-rotate-right float-md-end ms-2"></button>`
             $("#random_achievement").html(`
-             <figure class="text-end">
-                        <p class="h5">${button}${data.Title}</p>
-                        <p id="achievement_contents" class="fs-6"></p>
-                        <figcaption class="blockquote-footer">
-                            ${data.Key} as ${data.Name}
-                        </figcaption>
-             </figure>`)
+               <figure class="text-end">
+                            <p class="h5">${button}${data.Title}</p>
+                            <p id="achievement_contents" class="fs-6"></p>
+                            <figcaption class="blockquote-footer">
+                                ${data.Key} as ${data.Name}
+                            </figcaption>
+               </figure>`)
             $("#achievement_contents").text(unescape(data.Desc))
             $("#update_achievement").click(get_achievement)
         })
@@ -119,13 +102,13 @@
         $.getJSON("/api/random_flavor", function (data) {
             const button = `<button id="update_flavor" class="btn btn-outline-secondary btn-sm fa-solid fa-arrow-rotate-right float-md-end ms-2"></button>`
             $("#random_flavor").html(`
-             <figure class="text-end">
-                        <p class="h5">${button}${data.Name}</p>
-                        <p id="flavor_contents" class="fs-6"></p>
-                        <figcaption class="blockquote-footer" style="text-transform:capitalize;">
-                            ${data.Gender}, ${data.Age}, ${data.Species}
-                        </figcaption>
-             </figure>`)
+               <figure class="text-end">
+                            <p class="h5">${button}${data.Name}</p>
+                            <p id="flavor_contents" class="fs-6"></p>
+                            <figcaption class="blockquote-footer" style="text-transform:capitalize;">
+                                ${data.Gender}, ${data.Age}, ${data.Species}
+                            </figcaption>
+               </figure>`)
             $("#flavor_contents").text(unescape(data.Flavor))
             $("#update_flavor").click(get_flavor)
         })
@@ -135,13 +118,13 @@
         $.getJSON("/api/random_last_phrase", function (data) {
             const button = `<button id="update_last_phrase" class="btn btn-outline-secondary btn-sm fa-solid fa-arrow-rotate-right float-md-end ms-2"></button>`
             $("#random_last_phrase").html(`
-             <figure class="text-end">
-                        <p class="h5">${button}Перед смертью в ${data.TimeOfDeath}</p>
-                        <p class="fs-6"><span style='font-weight: 500;'>${data.Name}</span>: "${data.Phrase}"</p>
-                        <figcaption class="blockquote-footer">
-                            Round #${data.RoundID}
-                        </figcaption>
-             </figure>`)
+               <figure class="text-end">
+                            <p class="h5">${button}Перед смертью в ${data.TimeOfDeath}</p>
+                            <p class="fs-6"><span style='font-weight: 500;'>${data.Name}</span>: "${data.Phrase}"</p>
+                            <figcaption class="blockquote-footer">
+                                Round #${data.RoundID}
+                            </figcaption>
+               </figure>`)
             $("#update_last_phrase").click(get_last_phrase)
         })
     }
@@ -185,36 +168,66 @@
 
         await getChronicles()
 
-        await get_online_chart("online-stat-all-weeks", "online_stat_weeks", "players, avg", menuDateStart, menuDateEnd)
-        await get_online_chart("online-stat-daytime", "online_stat_daytime", "players, avg", menuDateStart, menuDateEnd)
+        // --- НЕДЕЛЬНЫЙ ГРАФИК ---
+        // 1. Рисуем реальные данные
+        await get_online_chart("online-stat-all-weeks", "online_stat_weeks", "Players, avg", menuDateStart, menuDateEnd);
+        // 2. Добавляем на него выровненный исторический прогноз
+        await add_aligned_dataset_to_chart("online-stat-all-weeks", "one_step_forecast_history?type=weekly", "Прогноз (история)", menuDateStart, menuDateEnd, {
+            borderColor: 'rgba(255, 99, 132, 0.7)', // Розовый/Красный
+            borderWidth: 2,
+            borderDash: [2, 2],
+            fill: false,
+            tension: 0.4,
+            pointRadius: 3
+        });
+
+        // 3. Добавляем прогноз на будущее
+        await add_forecast_to_weekly_chart("online-stat-all-weeks", "online_stat_weeks_forecast", "Прогноз (актуальный)", menuDateStart, menuDateEnd);
+
+        // --- ДНЕВНОЙ ГРАФИК ---
+        await get_online_chart("online-stat-daytime", "online_stat_daytime", "players, avg", menuDateStart, menuDateEnd);
 
         const dateTo = new Date()
         const dateFrom = new Date()
         dateTo.setDate(dateTo.getDate() - 1) // without today
         dateFrom.setDate(dateTo.getDate() - 90)
+        const dateFromStr = format_date(dateFrom);
+        const dateToStr = format_date(dateTo);
 
+        // 1. Реальные данные
         await get_online_chart("online-stat-month", "online_stat", "players, avg", format_date(dateFrom), format_date(dateTo))
         await get_online_chart("online-stat-month", "online_stat_max", "players, max", format_date(dateFrom), format_date(dateTo))
+        // 2. Добавляем выровненный исторический прогноз
+        await add_aligned_dataset_to_chart("online-stat-month", "one_step_forecast_history?type=daily", "Прогноз (история)", dateFromStr, dateToStr, {
+            borderColor: 'rgba(255, 99, 132, 0.7)', // Розовый/Красный
+            borderWidth: 2,
+            borderDash: [2, 2],
+            fill: false,
+            tension: 0.4,
+            pointRadius: 3
+        });
+        // 3. Актуальный прогноз
+        await add_forecast_to_daily_chart("online-stat-month", "online_stat_daily_forecast", "Прогноз (актуальный)");
     }
 
     let datasetCounter = 1;
     function get_online_chart(targetId, endpoint, label, dateFrom, dateTo) {
-        return new Promise((resolve, reject) => {
+        // Promise теперь всегда вызывает resolve(), чтобы не блокировать другие графики
+        return new Promise((resolve) => {
             $.ajax({
                 url: `/api/${endpoint}`,
                 data: {dateFrom: dateFrom, dateTo: dateTo},
                 success: function (data) {
                     const maxOnline = Math.max(...Object.values(data));
                     const chart = Chart.getChart(targetId);
-
+                
                     const newLabels = Object.keys(data);
                     const newData = Object.values(data);
-
-                    // Получаем хроники для текущего диапазона дат
+                
                     const chroniclesInRange = endpoint === 'online_stat_weeks'
                         ? getChroniclesForWeeks(newLabels)
                         : getChroniclesInRange(newLabels, dateFrom, dateTo);
-
+                
                     if (chart) {
                         chart.data.datasets.push({
                             label: label,
@@ -222,9 +235,12 @@
                             borderWidth: 1,
                         });
                         chart.update();
+                        
+                        // ИСПРАВЛЕНИЕ №1: Вызываем resolve() после обновления графика
+                        resolve();
                         return;
                     }
-
+                
                     new Chart(
                         $("#" + targetId),
                         {
@@ -269,10 +285,10 @@
                                     const ctx = chart.ctx;
                                     const xAxis = chart.scales.x;
                                     const yAxis = chart.scales.y;
-
+                                
                                     chroniclesInRange.forEach(chronicle => {
                                         const xPos = xAxis.getPixelForValue(chronicle.date);
-
+                                    
                                         ctx.save();
                                         ctx.beginPath();
                                         ctx.moveTo(xPos, yAxis.top);
@@ -290,26 +306,19 @@
                                         const yAxis = chart.scales.y;
                                         const ctx = chart.ctx;
                                         const mouseX = args.event.x;
-
                                         let closestChronicle = null;
                                         let minDistance = Infinity;
-
                                         chroniclesInRange.forEach(chronicle => {
                                             const xPos = xAxis.getPixelForValue(chronicle.date);
                                             const distance = Math.abs(mouseX - xPos);
-
                                             if (distance < 50 && distance < minDistance) {
                                                 minDistance = distance;
                                                 closestChronicle = chronicle;
                                             }
                                         });
-
                                         if (closestChronicle) {
                                             const xPos = xAxis.getPixelForValue(closestChronicle.date);
-
                                             chart.draw();
-
-                                            // Рисуем выделенную линию
                                             ctx.save();
                                             ctx.beginPath();
                                             ctx.moveTo(xPos, yAxis.top);
@@ -317,63 +326,43 @@
                                             ctx.lineWidth = 3;
                                             ctx.strokeStyle = 'rgba(255, 0, 0, 0.7)';
                                             ctx.stroke();
-
-                                            // Разбиваем текст на строки
                                             const events = closestChronicle.text.split('|');
-
-                                            // Рассчитываем размеры текста
                                             ctx.font = '12px Arial';
                                             const lineHeight = 16;
                                             let maxWidth = 0;
-
-                                            // Находим максимальную ширину текста
                                             events.forEach(event => {
                                                 const width = ctx.measureText(event).width;
                                                 maxWidth = Math.max(maxWidth, width);
                                             });
-
-                                            // Параметры блока с текстом
                                             const padding = 10;
                                             const rectWidth = maxWidth + padding * 2;
                                             const rectHeight = events.length * lineHeight + padding * 2;
                                             const centerX = chart.width / 2;
                                             const centerY = 55;
-
-                                            // Рисуем полупрозрачный фон
                                             ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
                                             ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
                                             ctx.lineWidth = 1;
-
-                                            // Закругленный прямоугольник
                                             const radius = 5;
                                             ctx.beginPath();
-                                            ctx.moveTo(centerX - rectWidth/2 + radius, centerY - rectHeight/2);
-                                            ctx.lineTo(centerX + rectWidth/2 - radius, centerY - rectHeight/2);
-                                            ctx.quadraticCurveTo(centerX + rectWidth/2, centerY - rectHeight/2,
-                                                centerX + rectWidth/2, centerY - rectHeight/2 + radius);
-                                            ctx.lineTo(centerX + rectWidth/2, centerY + rectHeight/2 - radius);
-                                            ctx.quadraticCurveTo(centerX + rectWidth/2, centerY + rectHeight/2,
-                                                centerX + rectWidth/2 - radius, centerY + rectHeight/2);
-                                            ctx.lineTo(centerX - rectWidth/2 + radius, centerY + rectHeight/2);
-                                            ctx.quadraticCurveTo(centerX - rectWidth/2, centerY + rectHeight/2,
-                                                centerX - rectWidth/2, centerY + rectHeight/2 - radius);
-                                            ctx.lineTo(centerX - rectWidth/2, centerY - rectHeight/2 + radius);
-                                            ctx.quadraticCurveTo(centerX - rectWidth/2, centerY - rectHeight/2,
-                                                centerX - rectWidth/2 + radius, centerY - rectHeight/2);
+                                            ctx.moveTo(centerX - rectWidth / 2 + radius, centerY - rectHeight / 2);
+                                            ctx.lineTo(centerX + rectWidth / 2 - radius, centerY - rectHeight / 2);
+                                            ctx.quadraticCurveTo(centerX + rectWidth / 2, centerY - rectHeight / 2, centerX + rectWidth / 2, centerY - rectHeight / 2 + radius);
+                                            ctx.lineTo(centerX + rectWidth / 2, centerY + rectHeight / 2 - radius);
+                                            ctx.quadraticCurveTo(centerX + rectWidth / 2, centerY + rectHeight / 2, centerX + rectWidth / 2 - radius, centerY + rectHeight / 2);
+                                            ctx.lineTo(centerX - rectWidth / 2 + radius, centerY + rectHeight / 2);
+                                            ctx.quadraticCurveTo(centerX - rectWidth / 2, centerY + rectHeight / 2, centerX - rectWidth / 2, centerY + rectHeight / 2 - radius);
+                                            ctx.lineTo(centerX - rectWidth / 2, centerY - rectHeight / 2 + radius);
+                                            ctx.quadraticCurveTo(centerX - rectWidth / 2, centerY - rectHeight / 2, centerX - rectWidth / 2 + radius, centerY - rectHeight / 2);
                                             ctx.closePath();
                                             ctx.fill();
                                             ctx.stroke();
-
-                                            // Рисуем текст
                                             ctx.fillStyle = 'white';
                                             ctx.textAlign = 'center';
                                             ctx.textBaseline = 'middle';
-
                                             events.forEach((event, index) => {
-                                                const yPos = centerY - rectHeight/2 + padding + lineHeight/2 + index * lineHeight;
+                                                const yPos = centerY - rectHeight / 2 + padding + lineHeight / 2 + index * lineHeight;
                                                 ctx.fillText(event, centerX, yPos);
                                             });
-
                                             ctx.restore();
                                         }
                                     }
@@ -382,10 +371,190 @@
                         }
                     );
                     resolve();
+                },
+                // ИСПРАВЛЕНИЕ №2: Добавляем обработчик ошибок
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(`Ошибка при загрузке данных для графика '${targetId}' с эндпоинта '${endpoint}':`, textStatus, errorThrown);
+                    // Вызываем resolve() даже при ошибке, чтобы остальные графики продолжили загружаться.
+                    resolve();
                 }
-            })
-        })
+            });
+        });
     }
+
+    /**
+     * НОВАЯ ФУНКЦИЯ
+     * Задача 2: Добавляет на существующий график "редкий" набор данных,
+     * правильно выравнивая его по оси X.
+     */
+    function add_aligned_dataset_to_chart(targetId, endpoint, label, dateFrom, dateTo, styleOptions) {
+        return new Promise((resolve) => {
+            $.ajax({
+                url: `/api/${endpoint}`,
+                data: {dateFrom: dateFrom, dateTo: dateTo},
+                success: function(sparseData) {
+                    const chart = Chart.getChart(targetId);
+                    // Если нет графика или API вернул пустые данные, ничего не делаем
+                    if (!chart || Object.keys(sparseData).length === 0) {
+                        resolve();
+                        return;
+                    }
+
+                    // САМОЕ ГЛАВНОЕ: создаем полный массив данных, сопоставляя его с метками на оси X
+                    const alignedData = chart.data.labels.map(labelOnAxis => sparseData[labelOnAxis] || null);
+
+                    chart.data.datasets.push({
+                        label: label,
+                        data: alignedData,
+                        ...styleOptions // Применяем стили (цвет, пунктир и т.д.)
+                    });
+
+                    chart.update();
+                    resolve();
+                },
+                error: function(error) {
+                    console.error(`Не удалось получить данные для '${label}':`, error);
+                    resolve();
+                }
+            });
+        });
+    }
+    
+    /**
+     * Новая функция для добавления данных прогноза на график среднего онлайна по неделям.
+     * @param {string} targetId - ID canvas элемента графика.
+     * @param {string} endpoint - API endpoint для получения данных прогноза.
+     * @param {string} label - Название для линии прогноза.
+     * @param {string} dateFrom - Начальная дата (может понадобиться бэкенду).
+     * @param {string} dateTo - Конечная дата (может понадобиться бэкенду).
+     */
+    function add_forecast_to_weekly_chart(targetId, endpoint, label, dateFrom, dateTo) {
+        return new Promise((resolve) => {
+            $.ajax({
+                url: `/api/${endpoint}`,
+                data: {dateFrom: dateFrom, dateTo: dateTo},
+                success: function(forecastData) {
+                    const chart = Chart.getChart(targetId);
+                    // Проверяем, что график и его данные существуют
+                    if (!chart || !chart.data.datasets[0] || chart.data.datasets[0].data.length === 0) {
+                        resolve();
+                        return;
+                    }
+
+                    const forecastLabels = Object.keys(forecastData);
+                    const forecastValues = Object.values(forecastData);
+
+                    // Если данных прогноза нет, ничего не делаем
+                    if (forecastLabels.length === 0) {
+                        resolve();
+                        return;
+                    }
+
+                    // Получаем исторические данные из графика
+                    const historicalLabels = chart.data.labels;
+                    const historicalDataset = chart.data.datasets[0];
+                    const lastHistoricalValue = historicalDataset.data[historicalDataset.data.length - 1];
+
+                    // Создаем массив данных для линии прогноза
+                    // Он заполнен null для всех исторических точек, кроме последней
+                    const forecastDatasetData = new Array(historicalLabels.length - 1).fill(null);
+                    
+                    // Первая точка прогноза равна последней точке истории, чтобы линия была непрерывной
+                    forecastDatasetData.push(lastHistoricalValue);
+
+                    // Добавляем фактические значения прогноза
+                    forecastDatasetData.push(...forecastValues);
+
+                    // Объединяем метки (недели) и добавляем новый набор данных (dataset) на график
+                    chart.data.labels.push(...forecastLabels);
+                    chart.data.datasets.push({
+                        label: label,
+                        data: forecastDatasetData,
+                        borderColor: 'rgba(255, 99, 132, 1)', // Красный цвет для прогноза
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderWidth: 2,
+                        borderDash: [5, 5], // Пунктирная линия
+                        fill: false, // Не заливать область под линией
+                        tension: 0.1,
+                    });
+
+                    chart.update(); // Обновляем график для отображения изменений
+                    resolve();
+                },
+                error: function(error) {
+                    console.error(`Не удалось получить данные прогноза из ${endpoint}:`, error);
+                    // Не прерываем выполнение, чтобы остальные графики загрузились
+                    resolve();
+                }
+            });
+        });
+    }
+
+    // Эта функция добавляет прогноз на 90-дневный график (ИСПРАВЛЕННАЯ ВЕРСИЯ)
+    function add_forecast_to_daily_chart(targetId, endpoint, label) {
+        return new Promise((resolve) => {
+            $.ajax({
+                url: `/api/${endpoint}`, // Даты не нужны, бэкенд берет последние 180 дней
+                success: function(forecastData) {
+                    // ИСПРАВЛЕНИЕ №1: Используем Chart.getChart вместо chartInstances
+                    const chart = Chart.getChart(targetId); 
+                    if (!chart || !chart.data.datasets[0] || chart.data.datasets[0].data.length === 0) {
+                        resolve(); 
+                        return;
+                    }
+
+                    const forecastLabels = Object.keys(forecastData);
+                    const forecastValues = Object.values(forecastData);
+
+                    if (forecastLabels.length === 0) {
+                        resolve();
+                        return;
+                    }
+
+                    // ИСПРАВЛЕНИЕ №2: Ищем набор данных с правильным label 'players, avg'
+                    const avgDatasetIndex = chart.data.datasets.findIndex(d => d.label === 'players, avg');
+                    if (avgDatasetIndex === -1) { 
+                        console.error("Не найден набор данных 'players, avg' для добавления прогноза.");
+                        resolve(); 
+                        return; 
+                    }
+
+                    const historicalDataset = chart.data.datasets[avgDatasetIndex];
+                    const lastHistoricalValue = historicalDataset.data[historicalDataset.data.length - 1];
+
+                    // Создаем массив данных для линии прогноза
+                    const forecastDatasetData = new Array(chart.data.labels.length - 1).fill(null);
+                    forecastDatasetData.push(lastHistoricalValue); // Соединяем с последней точкой
+                    forecastDatasetData.push(...forecastValues); // Добавляем сам прогноз
+
+                    // Добавляем новые метки (даты) на ось X, если их еще нет
+                    const existingLabels = new Set(chart.data.labels);
+                    const newLabelsToAdd = forecastLabels.filter(l => !existingLabels.has(l));
+                    chart.data.labels.push(...newLabelsToAdd);
+
+                    // Добавляем новый набор данных (саму линию прогноза) на график
+                    chart.data.datasets.push({
+                        label: label,
+                        data: forecastDatasetData,
+                        borderColor: 'rgba(75, 192, 192, 1)', // Бирюзовый цвет
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 2,
+                        borderDash: [5, 5], // Пунктирная линия
+                        fill: false,
+                        tension: 0.1,
+                    });
+
+                    chart.update(); // Перерисовываем график
+                    resolve();
+                },
+                error: function(error) {
+                    console.error(`Не удалось получить данные дневного прогноза:`, error);
+                    resolve(); // Не ломаем страницу, если прогноз не загрузился
+                }
+            });
+        });
+    }
+
 
     // Новая функция для обработки недельных интервалов
     function getChroniclesForWeeks(weekLabels) {

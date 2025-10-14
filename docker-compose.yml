@@ -13,6 +13,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PGDATA: /usr/src/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
     restart: always
   projecttau:
     build: .
@@ -20,7 +25,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       BASE_URL: ""
       POSTGRES_HOST: db
@@ -28,4 +34,10 @@ services:
       POSTGRES_DB: ssstatistics
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    restart: always
+  forecast-service:
+    build:
+      context: ./internal/service/sarima
+    ports:
+      - "5000:5000"
     restart: always
