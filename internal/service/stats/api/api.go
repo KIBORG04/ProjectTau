@@ -677,53 +677,6 @@ func OnlineStatWeeksGET(c *gin.Context) {
 	c.JSON(http.StatusOK, onlineStat)
 }
 
-func OnlineStatWeeksMaxGET(c *gin.Context) {
-	type Dates struct {
-		DateFrom string `form:"dateFrom"`
-		DateTo   string `form:"dateTo"`
-	}
-
-	var query Dates
-	if err := c.BindQuery(&query); err != nil || query.DateFrom == "" || query.DateTo == "" {
-		c.JSON(http.StatusBadRequest, "Некорректный запрос.")
-		return
-	}
-
-	_, errFrom := time.Parse("2006-01-02", query.DateFrom)
-	_, errTo := time.Parse("2006-01-02", query.DateTo)
-	if errFrom != nil || errTo != nil {
-		c.JSON(http.StatusBadRequest, "Некорректно введена дата.")
-		return
-	}
-
-	var dbResult []struct {
-		WeekDate string
-		Players  int
-	}
-
-	r.Database.Raw(`
-		select date_part('isoyear', date) || '-' || date_part('week', date) as week_date, max(s.crew_total) as players
-		from roots
-		join scores s on round_id = s.root_id
-		where (date >= ? and date <= ?) 
-		group by week_date
-		order by to_date(date_part('isoyear', date) || '-' || date_part('week', date), 'YYYY-WW');
-		`, query.DateFrom, query.DateTo).Scan(&dbResult)
-
-	onlineStat := make(map[string]int, len(dbResult))
-
-	for _, onlineDay := range dbResult {
-		date := strings.Split(onlineDay.WeekDate, "-")
-		if len(date[1]) == 1 {
-			date[1] = "0" + date[1]
-		}
-		onlineStat[fmt.Sprintf("%s-%s", date[0], date[1])] = onlineDay.Players
-	}
-
-	c.JSON(http.StatusOK, onlineStat)
-}
-
-
 func OnlineStatByDaytimeGET(c *gin.Context) {
 	type Dates struct {
 		DateFrom string `form:"dateFrom"`
