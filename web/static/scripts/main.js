@@ -185,6 +185,7 @@ async function get_online_charts() {
     await getChronicles()
 
     await get_online_chart("online-stat-all-weeks", "online_stat_weeks", "players, avg", menuDateStart, menuDateEnd)
+    await get_online_chart("online-stat-all-weeks", "online_stat_weeks_max", "players, max", menuDateStart, menuDateEnd)
     await get_online_chart("online-stat-daytime", "online_stat_daytime", "players, avg", menuDateStart, menuDateEnd)
 
     const dateTo = new Date()

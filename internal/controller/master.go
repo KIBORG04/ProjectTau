@@ -111,6 +111,8 @@ func initializeRoutes() {
 
 		apiRoute.GET("/online_stat_weeks", api.OnlineStatWeeksGET)
 
+		apiRoute.GET("/online_stat_weeks_max", api.OnlineStatWeeksMaxGET)
+
 		apiRoute.GET("/online_stat_daytime", api.OnlineStatByDaytimeGET)
 
 		apiRoute.GET("/chronicles_daytime", api.ChronicleByDatetimeGET)
