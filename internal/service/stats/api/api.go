@@ -491,22 +491,30 @@ func ModeWinratesByMonthGET(c *gin.Context) {
 		params := SqlParams{
 			Antag: query.FactionName,
 		}
+
+		type DBResult struct {
+			MonthStart string
+			Winrate    float32
+		}
+		var results []DBResult
+		r.Database.Raw(`
+		SELECT to_char(date, 'YYYY-MM-01') as month_start, 
+		       SUM(victory)::real * 100 / NULLIF(COUNT(id), 0)::real as winrate
+		FROM factions
+		JOIN roots r ON r.round_id = factions.root_id
+		WHERE faction_name = @Antag
+		GROUP BY month_start;
+		`, params).Scan(&results)
+
+		resultsMap := make(map[string]int, len(results))
+		for _, row := range results {
+			resultsMap[row.MonthStart] = int(row.Winrate)
+		}
+
 		for (startDate.Month() != endDate.Month()+1) || (startDate.Year() != endDate.Year()) {
 			dateFromString := startDate.Format("2006-01-02")
 			startDate = startDate.AddDate(0, 1, 0)
-
-			params.DateFrom = dateFromString
-			params.DateTo = startDate.Format("2006-01-02")
-
-			var winrate float32
-			r.Database.Raw(`
-		select SUM(victory)::real * 100 / COUNT(id)::real as winrate
-		from factions
-		join roots r on r.round_id = factions.root_id
-		where faction_name = @Antag and date >= @DateFrom and date <= @DateTo;
-		`, params).Scan(&winrate)
-
-			output[dateFromString] = int(winrate)
+			output[dateFromString] = resultsMap[dateFromString]
 		}
 
 	} else {
@@ -524,23 +532,31 @@ func ModeWinratesByMonthGET(c *gin.Context) {
 		params := SqlParams{
 			Antag: query.RoleName,
 		}
+
+		type DBResult struct {
+			MonthStart string
+			Winrate    float32
+		}
+		var results []DBResult
+		r.Database.Raw(`
+		SELECT to_char(date, 'YYYY-MM-01') as month_start, 
+		       SUM(roles.victory)::real * 100 / NULLIF(COUNT(roles.id), 0)::real as winrate
+		FROM roles
+		JOIN factions f ON f.id = roles.owner_id
+		JOIN roots r ON r.round_id = f.root_id
+		WHERE role_name = @Antag
+		GROUP BY month_start;
+		`, params).Scan(&results)
+
+		resultsMap := make(map[string]int, len(results))
+		for _, row := range results {
+			resultsMap[row.MonthStart] = int(row.Winrate)
+		}
+
 		for (startDate.Month() != endDate.Month()+1) || (startDate.Year() != endDate.Year()) {
 			dateFromString := startDate.Format("2006-01-02")
 			startDate = startDate.AddDate(0, 1, 0)
-
-			params.DateFrom = dateFromString
-			params.DateTo = startDate.Format("2006-01-02")
-
-			var winrate float32
-			r.Database.Raw(`
-		select SUM(roles.victory)::real * 100 / COUNT(roles.id)::real as winrate
-		from roles
-		join factions f on f.id = roles.owner_id
-		join roots r on r.round_id = f.root_id
-		where role_name = @Antag and date >= @DateFrom and date <= @DateTo;
-		`, params).Scan(&winrate)
-
-			output[dateFromString] = int(winrate)
+			output[dateFromString] = resultsMap[dateFromString]
 		}
 	}
 

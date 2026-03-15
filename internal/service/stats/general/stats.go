@@ -221,18 +221,31 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 	processRoots := stats.GetRoots(query, c)
 
 	objectiveHolders := make(stats.InfoSlice, 0)
+	holdersMap := make(map[string]*OwnerByObjectivesInfo)
+	holderObjsMap := make(map[string]map[string]*ObjectiveInfo)
 
-	addObjectiveInfo := func(owner *OwnerByObjectivesInfo, objective domain.Objectives) {
-		owner.Count++
+	addObjectiveInfo := func(ownerName string, objective domain.Objectives) {
+		holderInfo, ok := holdersMap[ownerName]
+		if !ok {
+			holderInfo = &OwnerByObjectivesInfo{
+				Owner:          ownerName,
+				Id:             stats.Ckey(ownerName),
+				ObjectiveInfos: make(stats.InfoSlice, 0),
+			}
+			holdersMap[ownerName] = holderInfo
+			objectiveHolders = append(objectiveHolders, holderInfo)
+			holderObjsMap[ownerName] = make(map[string]*ObjectiveInfo)
+		}
+
+		holderInfo.Count++
 		var isWin uint
 		if slices.Contains(stats.ObjectiveWIN, objective.Completed) {
 			isWin = 1
 		}
 
-		foundInfo, ok := owner.ObjectiveInfos.HasName(objective.Type)
-		var objectiveInfo *ObjectiveInfo
+		objMap := holderObjsMap[ownerName]
+		objectiveInfo, ok := objMap[objective.Type]
 		if ok {
-			objectiveInfo = (*foundInfo).(*ObjectiveInfo)
 			objectiveInfo.Count++
 			objectiveInfo.Wins += isWin
 			objectiveInfo.Winrate = objectiveInfo.Wins * 100 / objectiveInfo.Count
@@ -243,48 +256,26 @@ func ObjectivesGET(c *gin.Context) (int, string, gin.H) {
 				Wins:    isWin,
 				Winrate: isWin * 100,
 			}
-			owner.ObjectiveInfos = append(owner.ObjectiveInfos, objectiveInfo)
+			objMap[objective.Type] = objectiveInfo
+			holderInfo.ObjectiveInfos = append(holderInfo.ObjectiveInfos, objectiveInfo)
 		}
 	}
 
 	for _, root := range processRoots {
 		for _, faction := range root.Factions {
 			if len(faction.FactionObjectives) > 0 {
-				foundInfo, ok := objectiveHolders.HasName(faction.FactionName)
-				var holderInfo *OwnerByObjectivesInfo
-				if ok {
-					holderInfo = (*foundInfo).(*OwnerByObjectivesInfo)
-				} else {
-					holderInfo = &OwnerByObjectivesInfo{
-						Owner: faction.FactionName,
-						Id:    stats.Ckey(faction.FactionName),
-					}
-					objectiveHolders = append(objectiveHolders, holderInfo)
-				}
 				for _, objective := range faction.FactionObjectives {
-					// IDK HOW
 					if objective.Type == "" {
 						continue
 					}
-					addObjectiveInfo(holderInfo, domain.Objectives(objective))
+					addObjectiveInfo(faction.FactionName, domain.Objectives(objective))
 				}
 			}
 
 			for _, role := range faction.Members {
 				if len(role.RoleObjectives) > 0 {
-					foundInfo, ok := objectiveHolders.HasName(role.RoleName)
-					var holderInfo *OwnerByObjectivesInfo
-					if ok {
-						holderInfo = (*foundInfo).(*OwnerByObjectivesInfo)
-					} else {
-						holderInfo = &OwnerByObjectivesInfo{
-							Owner: role.RoleName,
-							Id:    stats.Ckey(role.RoleName),
-						}
-						objectiveHolders = append(objectiveHolders, holderInfo)
-					}
 					for _, objective := range role.RoleObjectives {
-						addObjectiveInfo(holderInfo, domain.Objectives(objective))
+						addObjectiveInfo(role.RoleName, domain.Objectives(objective))
 					}
 				}
 			}
