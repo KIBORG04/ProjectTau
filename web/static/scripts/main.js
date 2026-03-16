@@ -4,17 +4,17 @@
  * @returns {string} Название сезона: 'winter', 'spring', 'summer', 'autumn'.
  */
 function getSeason(week) {
-    if (week >= 10 && week <= 22) return 'spring'; 
-    if (week >= 23 && week <= 35) return 'summer'; 
-    if (week >= 36 && week <= 48) return 'autumn'; 
-    return 'winter'; 
+    if (week >= 10 && week <= 22) return 'spring';
+    if (week >= 23 && week <= 35) return 'summer';
+    if (week >= 36 && week <= 48) return 'autumn';
+    return 'winter';
 }
 
 const seasonsPlugin = {
     id: 'seasonsPlugin',
     beforeDraw: (chart) => {
         const { ctx, chartArea: { top, bottom, right }, scales: { x } } = chart;
-        
+
         if (!chart.data.labels || chart.data.labels.length === 0) {
             return;
         }
@@ -32,7 +32,7 @@ const seasonsPlugin = {
 
         chart.data.labels.forEach((label, index) => {
             const [year, week] = label.split('-').map(Number);
-            
+
             const currentSeason = getSeason(week);
             ctx.fillStyle = seasonColors[currentSeason];
 
@@ -43,8 +43,8 @@ const seasonsPlugin = {
             ctx.fillRect(xStart, top, width, bottom - top);
 
             if (lastYear !== null && year > lastYear) {
-                const lineColor = 'rgba(70, 130, 180, 0.7)'; 
-                
+                const lineColor = 'rgba(70, 130, 180, 0.7)';
+
                 ctx.beginPath();
                 ctx.moveTo(xStart, top);
                 ctx.lineTo(xStart, bottom);
@@ -52,17 +52,17 @@ const seasonsPlugin = {
                 ctx.strokeStyle = lineColor;
                 ctx.stroke();
 
-                ctx.save(); 
+                ctx.save();
                 ctx.font = '12px Arial';
                 ctx.fillStyle = lineColor;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                
-                ctx.translate(xStart - 7, top + 50); 
-                ctx.rotate(-Math.PI / 2); 
+
+                ctx.translate(xStart - 7, top + 50);
+                ctx.rotate(-Math.PI / 2);
                 ctx.fillText('Новый год', 0, 0);
-                
-                ctx.restore(); 
+
+                ctx.restore();
             }
             lastYear = year;
         });
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("date_end").addEventListener('change', get_online_charts);
 
     let showChronicles = true;
-    document.getElementById("toggleChronicles").addEventListener('change', function() {
+    document.getElementById("toggleChronicles").addEventListener('change', function () {
         showChronicles = this.checked;
 
         ['online-stat-all-weeks', 'online-stat-daytime', 'online-stat-month'].forEach(id => {
@@ -199,7 +199,7 @@ async function get_online_charts() {
 
 function get_online_chart(targetId, endpoint, label, dateFrom, dateTo) {
     return new Promise((resolve, reject) => {
-        const params = new URLSearchParams({dateFrom: dateFrom, dateTo: dateTo});
+        const params = new URLSearchParams({ dateFrom: dateFrom, dateTo: dateTo });
         fetch(`/api/${endpoint}?${params}`)
             .then(response => response.json())
             .then(data => {
@@ -233,7 +233,7 @@ function get_online_chart(targetId, endpoint, label, dateFrom, dateTo) {
                 const activePlugins = [
                     {
                         id: 'chroniclesPlugin',
-                        afterDraw: function(chart) {
+                        afterDraw: function (chart) {
                             if (!document.getElementById("toggleChronicles").checked) return;
                             const ctx = chart.ctx;
                             const xAxis = chart.scales.x;
@@ -252,7 +252,7 @@ function get_online_chart(targetId, endpoint, label, dateFrom, dateTo) {
                                 ctx.restore();
                             });
                         },
-                        afterEvent: function(chart, args) {
+                        afterEvent: function (chart, args) {
                             if (!document.getElementById("toggleChronicles").checked || args.event.type !== 'mousemove') return;
                             if (args.event.type === 'mousemove') {
                                 const xAxis = chart.scales.x;
@@ -309,19 +309,19 @@ function get_online_chart(targetId, endpoint, label, dateFrom, dateTo) {
 
                                     const radius = 5;
                                     ctx.beginPath();
-                                    ctx.moveTo(centerX - rectWidth/2 + radius, centerY - rectHeight/2);
-                                    ctx.lineTo(centerX + rectWidth/2 - radius, centerY - rectHeight/2);
-                                    ctx.quadraticCurveTo(centerX + rectWidth/2, centerY - rectHeight/2,
-                                        centerX + rectWidth/2, centerY - rectHeight/2 + radius);
-                                    ctx.lineTo(centerX + rectWidth/2, centerY + rectHeight/2 - radius);
-                                    ctx.quadraticCurveTo(centerX + rectWidth/2, centerY + rectHeight/2,
-                                        centerX + rectWidth/2 - radius, centerY + rectHeight/2);
-                                    ctx.lineTo(centerX - rectWidth/2 + radius, centerY + rectHeight/2);
-                                    ctx.quadraticCurveTo(centerX - rectWidth/2, centerY + rectHeight/2,
-                                        centerX - rectWidth/2, centerY + rectHeight/2 - radius);
-                                    ctx.lineTo(centerX - rectWidth/2, centerY - rectHeight/2 + radius);
-                                    ctx.quadraticCurveTo(centerX - rectWidth/2, centerY - rectHeight/2,
-                                        centerX - rectWidth/2 + radius, centerY - rectHeight/2);
+                                    ctx.moveTo(centerX - rectWidth / 2 + radius, centerY - rectHeight / 2);
+                                    ctx.lineTo(centerX + rectWidth / 2 - radius, centerY - rectHeight / 2);
+                                    ctx.quadraticCurveTo(centerX + rectWidth / 2, centerY - rectHeight / 2,
+                                        centerX + rectWidth / 2, centerY - rectHeight / 2 + radius);
+                                    ctx.lineTo(centerX + rectWidth / 2, centerY + rectHeight / 2 - radius);
+                                    ctx.quadraticCurveTo(centerX + rectWidth / 2, centerY + rectHeight / 2,
+                                        centerX + rectWidth / 2 - radius, centerY + rectHeight / 2);
+                                    ctx.lineTo(centerX - rectWidth / 2 + radius, centerY + rectHeight / 2);
+                                    ctx.quadraticCurveTo(centerX - rectWidth / 2, centerY + rectHeight / 2,
+                                        centerX - rectWidth / 2, centerY + rectHeight / 2 - radius);
+                                    ctx.lineTo(centerX - rectWidth / 2, centerY - rectHeight / 2 + radius);
+                                    ctx.quadraticCurveTo(centerX - rectWidth / 2, centerY - rectHeight / 2,
+                                        centerX - rectWidth / 2 + radius, centerY - rectHeight / 2);
                                     ctx.closePath();
                                     ctx.fill();
                                     ctx.stroke();
@@ -331,7 +331,7 @@ function get_online_chart(targetId, endpoint, label, dateFrom, dateTo) {
                                     ctx.textBaseline = 'middle';
 
                                     events.forEach((event, index) => {
-                                        const yPos = centerY - rectHeight/2 + padding + lineHeight/2 + index * lineHeight;
+                                        const yPos = centerY - rectHeight / 2 + padding + lineHeight / 2 + index * lineHeight;
                                         ctx.fillText(event, centerX, yPos);
                                     });
 
@@ -365,7 +365,7 @@ function get_online_chart(targetId, endpoint, label, dateFrom, dateTo) {
                                 },
                                 tooltip: {
                                     callbacks: {
-                                        afterBody: function(context) {
+                                        afterBody: function (context) {
                                             const label = context[0].label;
                                             if (chroniclesInRange.find(c => c.date === label)) {
                                                 const chronicle = chroniclesInRange.find(c => c.date === label);
@@ -381,9 +381,9 @@ function get_online_chart(targetId, endpoint, label, dateFrom, dateTo) {
                                     suggestedMin: 0,
                                     suggestedMax: maxOnline + 10
                                 },
-                                x: { 
+                                x: {
                                     grid: {
-                                        display: false 
+                                        display: false
                                     }
                                 }
                             }
@@ -415,7 +415,7 @@ function getChroniclesForWeeks(weekLabels) {
         if (weekEvents.length > 0) {
             result.push({
                 date: weekLabel,
-                text: weekEvents.join('|') 
+                text: weekEvents.join('|')
             });
         }
     });
@@ -424,17 +424,23 @@ function getChroniclesForWeeks(weekLabels) {
 }
 
 function getDatesOfWeek(year, week) {
+    // По стандарту ISO 8601, 4 января всегда принадлежит первой неделе года
+    const jan4 = new Date(year, 0, 4);
+
+    // Получаем день недели для 4 января (1 - понедельник, ..., 7 - воскресенье)
+    const dayOfJan4 = jan4.getDay() || 7;
+
+    // Находим дату понедельника первой недели (может уйти на конец декабря предыдущего года)
+    const firstMonday = new Date(year, 0, 4 - dayOfJan4 + 1);
+
+    // Сдвигаем дату на нужное количество недель вперед
+    const startOfWeek = new Date(firstMonday);
+    startOfWeek.setDate(firstMonday.getDate() + (week - 1) * 7);
+
+    // Собираем 7 дней этой недели
     const dates = [];
-    const firstDay = new Date(year, 0, 1);
-    const firstWeekDay = firstDay.getDay() || 7;
-    let firstWeekDate = new Date(year, 0, 1 + (8 - firstWeekDay) % 7);
-
-    if (week > 1) {
-        firstWeekDate.setDate(firstWeekDate.getDate() + (week - 1) * 7);
-    }
-
     for (let i = 0; i < 7; i++) {
-        const date = new Date(firstWeekDate);
+        const date = new Date(startOfWeek);
         date.setDate(date.getDate() + i);
         dates.push(date);
     }
@@ -452,7 +458,7 @@ function getChronicles() {
     const dateTo = document.getElementById('date_end').value;
 
     return new Promise((resolve, reject) => {
-        const params = new URLSearchParams({dateFrom: dateFrom, dateTo: dateTo});
+        const params = new URLSearchParams({ dateFrom: dateFrom, dateTo: dateTo });
         fetch(`/api/chronicles_daytime?${params}`)
             .then(response => {
                 if (!response.ok) throw new Error("Network response was not ok");
