@@ -162,6 +162,7 @@ function get_last_phrase() {
 // ---- Global state ----
 let onlineStatsData = null;
 let chronicles = {};
+let currentDataSource = 'crew';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Date inputs still trigger chronicle reload + chart rebuild for date-dependent views
@@ -179,6 +180,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    const triggerDataSourceChange = async (source) => {
+        if (currentDataSource !== source) {
+            currentDataSource = source;
+            ['online-stat-all-weeks', 'online-stat-month'].forEach(id => {
+                const chart = Chart.getChart(id);
+                if (chart) chart.destroy();
+            });
+            await buildWeeksChart();
+            await buildLast90DaysChart();
+        }
+    };
+
+    document.getElementById("sourceConcurrent").addEventListener('change', () => triggerDataSourceChange('concurrent'));
+    document.getElementById("sourceCrew").addEventListener('change', () => triggerDataSourceChange('crew'));
 
     get_announce();
     get_achievement();
@@ -202,7 +218,7 @@ async function loadOnlineStats() {
     }
 
     await getChronicles();
-    buildAllCharts();
+    await buildAllCharts();
 }
 
 /**
@@ -218,13 +234,13 @@ async function onDatesChanged() {
         `;
 
     await getChronicles();
-    rebuildChartsAfterChronicleUpdate();
+    await rebuildChartsAfterChronicleUpdate();
 }
 
 /**
  * Build all three chart canvases from the loaded JSON data.
  */
-function buildAllCharts() {
+async function buildAllCharts() {
     if (!onlineStatsData) return;
 
     const menuDateStart = document.getElementById('date_start').value;
@@ -235,25 +251,24 @@ function buildAllCharts() {
         `;
 
     // ---- Chart 1: Online by Weeks (with zoom/pan) ----
-    buildWeeksChart();
+    await buildWeeksChart();
 
     // ---- Chart 2: Average online by hours ----
     buildDaytimeChart();
 
     // ---- Chart 3: Last 90 days ----
-    buildLast90DaysChart();
+    await buildLast90DaysChart();
 }
 
 /**
  * Rebuild charts that depend on chronicles (i.e. after date change).
  */
-function rebuildChartsAfterChronicleUpdate() {
-    // Destroy and recreate charts with updated chronicles
+async function rebuildChartsAfterChronicleUpdate() {
     ['online-stat-all-weeks', 'online-stat-daytime', 'online-stat-month'].forEach(id => {
         const chart = Chart.getChart(id);
         if (chart) chart.destroy();
     });
-    buildAllCharts();
+    await buildAllCharts();
 }
 
 // ======================================================================
@@ -279,24 +294,48 @@ function calculateSMA(data, windowSize) {
     return result;
 }
 
-function buildWeeksChart() {
-    const weeksData = onlineStatsData.weeks;
-    const accuLabels = Object.keys(weeksData.accu).sort();
-    const pccuLabels = Object.keys(weeksData.pccu).sort();
+async function buildWeeksChart() {
+    let accuDataRaw, pccuDataRaw, labels;
 
-    // Merge labels and sort
-    const allLabelsSet = new Set([...accuLabels, ...pccuLabels]);
-    const labels = Array.from(allLabelsSet).sort((a, b) => {
-        const [ay, aw] = a.split('-').map(Number);
-        const [by, bw] = b.split('-').map(Number);
-        return ay !== by ? ay - by : aw - bw;
-    });
+    if (currentDataSource === 'concurrent') {
+        const weeksData = onlineStatsData.weeks;
+        const accuLabels = Object.keys(weeksData.accu);
+        const pccuLabels = Object.keys(weeksData.pccu);
 
-    const accuDataRaw = labels.map(l => weeksData.accu[l] || 0);
-    const pccuDataRaw = labels.map(l => weeksData.pccu[l] || 0);
+        // Merge labels and sort
+        const allLabelsSet = new Set([...accuLabels, ...pccuLabels]);
+        labels = Array.from(allLabelsSet).sort((a, b) => {
+            const [ay, aw] = a.split('-').map(Number);
+            const [by, bw] = b.split('-').map(Number);
+            return ay !== by ? ay - by : aw - bw;
+        });
 
-    const accuData = calculateSMA(accuDataRaw, 4);
-    const pccuData = calculateSMA(pccuDataRaw, 4);
+        accuDataRaw = labels.map(l => weeksData.accu[l] || 0);
+        pccuDataRaw = labels.map(l => weeksData.pccu[l] || 0);
+    } else {
+        const df = document.getElementById('date_start').value;
+        const dt = document.getElementById('date_end').value;
+        const avgData = await fetch(`/api/online_stat_weeks?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
+        const maxData = await fetch(`/api/online_stat_weeks_max?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
+        
+        labels = Array.from(new Set([...Object.keys(avgData), ...Object.keys(maxData)])).sort((a, b) => {
+            const [ay, aw] = a.split('-').map(Number);
+            const [by, bw] = b.split('-').map(Number);
+            return ay !== by ? ay - by : aw - bw;
+        });
+        
+        accuDataRaw = labels.map(l => avgData[l] || 0);
+        pccuDataRaw = labels.map(l => maxData[l] || 0);
+    }
+
+    let accuData, pccuData;
+    if (currentDataSource === 'concurrent') {
+        accuData = calculateSMA(accuDataRaw, 4);
+        pccuData = calculateSMA(pccuDataRaw, 4);
+    } else {
+        accuData = accuDataRaw;
+        pccuData = pccuDataRaw;
+    }
 
     const maxOnline = Math.max(...accuData, ...pccuData);
 
@@ -310,7 +349,7 @@ function buildWeeksChart() {
             labels: labels,
             datasets: [
                 {
-                    label: 'ACCU (avg)',
+                    label: currentDataSource === 'concurrent' ? 'ACCU (avg)' : 'Экипаж (avg)',
                     data: accuData,
                     borderWidth: 2,
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -322,7 +361,7 @@ function buildWeeksChart() {
                     hoverRadius: 4,
                 },
                 {
-                    label: 'PCCU (max)',
+                    label: currentDataSource === 'concurrent' ? 'PCCU (max)' : 'Экипаж (max)',
                     data: pccuData,
                     borderWidth: 2,
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -432,16 +471,32 @@ function buildDaytimeChart() {
 //  Chart 3: Last 90 days
 // ======================================================================
 
-function buildLast90DaysChart() {
-    const last90 = onlineStatsData.last_90_days;
+async function buildLast90DaysChart() {
+    let accuData, pccuData, labels;
 
-    const accuLabels = Object.keys(last90.accu).sort();
-    const pccuLabels = Object.keys(last90.pccu).sort();
-    const allLabelsSet = new Set([...accuLabels, ...pccuLabels]);
-    const labels = Array.from(allLabelsSet).sort();
+    if (currentDataSource === 'concurrent') {
+        const last90 = onlineStatsData.last_90_days;
+        const accuLabels = Object.keys(last90.accu);
+        const pccuLabels = Object.keys(last90.pccu);
+        labels = Array.from(new Set([...accuLabels, ...pccuLabels])).sort();
 
-    const accuData = labels.map(l => last90.accu[l] || 0);
-    const pccuData = labels.map(l => last90.pccu[l] || 0);
+        accuData = labels.map(l => last90.accu[l] || 0);
+        pccuData = labels.map(l => last90.pccu[l] || 0);
+    } else {
+        const dateTo = new Date()
+        const dateFrom = new Date()
+        dateTo.setDate(dateTo.getDate() - 1)
+        dateFrom.setDate(dateTo.getDate() - 90)
+        
+        const df = format_date(dateFrom);
+        const dt = format_date(dateTo);
+        const avgData = await fetch(`/api/online_stat?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
+        const maxData = await fetch(`/api/online_stat_max?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
+        
+        labels = Array.from(new Set([...Object.keys(avgData), ...Object.keys(maxData)])).sort();
+        accuData = labels.map(l => avgData[l] || 0);
+        pccuData = labels.map(l => maxData[l] || 0);
+    }
     const maxOnline = Math.max(...accuData, ...pccuData);
 
     const chroniclesInRange = getChroniclesInRange(labels);
@@ -454,12 +509,12 @@ function buildLast90DaysChart() {
             labels: labels,
             datasets: [
                 {
-                    label: 'ACCU (avg)',
+                    label: currentDataSource === 'concurrent' ? 'ACCU (avg)' : 'Экипаж (avg)',
                     data: accuData,
                     borderWidth: 1,
                 },
                 {
-                    label: 'PCCU (max)',
+                    label: currentDataSource === 'concurrent' ? 'PCCU (max)' : 'Экипаж (max)',
                     data: pccuData,
                     borderWidth: 1,
                 }
@@ -719,4 +774,12 @@ function createChroniclesPlugin(chroniclesInRange) {
             }
         }
     };
+}
+
+function format_date(date) {
+    let month = date.getMonth() + 1
+    if (month < 10) month = "0" + month
+    let day = date.getDate()
+    if (day < 10) day = "0" + day
+    return `${date.getFullYear()}-${month}-${day}`
 }
