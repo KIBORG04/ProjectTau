@@ -39,6 +39,12 @@
             <div class="row">
                 <h5 class="text-center border-bottom pb-2">Онлайн по неделям</h5>
                 <canvas id="online-stat-all-weeks"></canvas>
+                <div class="text-center mt-1">
+                    <button id="resetZoomWeeks" class="btn btn-outline-secondary btn-sm" onclick="resetWeeksZoom()">
+                        <i class="fa-solid fa-arrows-to-dot"></i> Сбросить масштаб
+                    </button>
+                    <small class="text-muted ms-2">Колёсико = зум · Shift+тяни = выделить · Тяни = панорама</small>
+                </div>
             </div>
             <div class="row">
                 <h5 class="text-center border-bottom pb-2">Средний онлайн по часам</h5>
@@ -73,5 +79,9 @@
 
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}
+
+<!-- Zoom/Pan plugin for Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
 
 <script src="/web/static/scripts/main.js" defer></script>
