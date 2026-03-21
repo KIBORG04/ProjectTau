@@ -6,3 +6,4 @@ remote_db:
   dbname: "remote_stats"
 
 output_path: "web/static/data/online_stats.json"
+csv_path: "config/data.csv"

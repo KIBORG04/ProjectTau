@@ -1,11 +1,15 @@
 package main
 
 import (
+	"encoding/csv"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -78,11 +82,89 @@ func writeJSON(path string, data any) error {
 	return nil
 }
 
-// loadRounds loads round data. Currently uses mock data.
-// TODO: Replace with actual database query.
+// loadRounds loads round data. Currently supports CSV and mock data.
 func loadRounds(cfg *OnlineStatsConfig) []Round {
+	if cfg.CSVPath != "" {
+		log.Printf("Loading rounds from CSV: %s\n", cfg.CSVPath)
+		rounds, err := loadRoundsFromCSV(cfg.CSVPath)
+		if err != nil {
+			log.Printf("Error loading CSV: %v. Falling back to mock data.\n", err)
+		} else {
+			return rounds
+		}
+	}
+
 	log.Println("Using mock data (DB connection not yet configured)")
 	return generateMockRounds()
+}
+
+func loadRoundsFromCSV(path string) ([]Round, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	reader := csv.NewReader(file)
+	reader.Comma = ';'
+	reader.LazyQuotes = true
+
+	// Read header
+	header, err := reader.Read()
+	if err != nil {
+		return nil, err
+	}
+
+	// Map columns
+	colIdx := make(map[string]int)
+	for i, name := range header {
+		colIdx[strings.ToLower(strings.Trim(name, "\""))] = i
+	}
+
+	var rounds []Round
+	for {
+		record, err := reader.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return nil, err
+		}
+
+		id, _ := strconv.Atoi(record[colIdx["id"]])
+		port, _ := strconv.Atoi(record[colIdx["server_port"]])
+		players, _ := strconv.Atoi(record[colIdx["players"]])
+
+		startStr := record[colIdx["start_datetime"]]
+		endStr := record[colIdx["end_datetime"]]
+
+		// Skip invalid "zero" dates silently to avoid log spam
+		if startStr == "0000-00-00 00:00:00" || endStr == "0000-00-00 00:00:00" {
+			continue
+		}
+
+		const timeLayout = "2006-01-02 15:04:05"
+		start, err := time.Parse(timeLayout, startStr)
+		if err != nil {
+			log.Printf("Warning: failed to parse start_datetime '%s': %v\n", startStr, err)
+			continue
+		}
+		end, err := time.Parse(timeLayout, endStr)
+		if err != nil {
+			log.Printf("Warning: failed to parse end_datetime '%s': %v\n", endStr, err)
+			continue
+		}
+
+		rounds = append(rounds, Round{
+			ID:            id,
+			StartDatetime: start,
+			EndDatetime:   end,
+			ServerPort:    port,
+			Players:       players,
+		})
+	}
+
+	return rounds, nil
 }
 
 // generateMockRounds creates realistic mock data for testing.

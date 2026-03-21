@@ -295,6 +295,9 @@ function buildWeeksChart() {
                     backgroundColor: 'rgba(54, 162, 235, 0.1)',
                     fill: true,
                     tension: 0.3,
+                    pointRadius: 0,
+                    hitRadius: 10,
+                    hoverRadius: 4,
                 },
                 {
                     label: 'PCCU (max)',
@@ -304,6 +307,9 @@ function buildWeeksChart() {
                     backgroundColor: 'rgba(255, 99, 132, 0.1)',
                     fill: true,
                     tension: 0.3,
+                    pointRadius: 0,
+                    hitRadius: 10,
+                    hoverRadius: 4,
                 }
             ]
         },
@@ -345,8 +351,7 @@ function buildWeeksChart() {
             },
             scales: {
                 y: {
-                    suggestedMin: 0,
-                    suggestedMax: maxOnline + 10
+                    beginAtZero: true
                 },
                 x: {
                     grid: { display: false }
@@ -391,8 +396,7 @@ function buildDaytimeChart() {
             },
             scales: {
                 y: {
-                    suggestedMin: 0,
-                    suggestedMax: maxOnline + 10,
+                    beginAtZero: true
                 },
                 x: {
                     grid: { display: false }
@@ -457,8 +461,7 @@ function buildLast90DaysChart() {
             },
             scales: {
                 y: {
-                    suggestedMin: 0,
-                    suggestedMax: maxOnline + 10
+                    beginAtZero: true
                 },
                 x: {
                     grid: { display: false }

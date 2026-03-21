@@ -18,6 +18,7 @@ type DBConfig struct {
 type OnlineStatsConfig struct {
 	RemoteDB   DBConfig `yaml:"remote_db"`
 	OutputPath string   `yaml:"output_path"`
+	CSVPath    string   `yaml:"csv_path"`
 }
 
 func (c *DBConfig) DSN() string {

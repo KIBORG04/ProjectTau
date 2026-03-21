@@ -52,60 +52,37 @@ func clipRound(r Round, start, end time.Time) (time.Time, time.Time, bool) {
 	return s, e, true
 }
 
-// ---- ACCU (time-weighted average concurrent users) ----
-
-// calcACCU computes the time-weighted average concurrent users for a given period.
-//
-// For each round overlapping [periodStart, periodEnd):
-//
-//	contribution = round.players * overlap_duration
-//
-// ACCU = total_player_seconds / period_duration_seconds
-func calcACCU(rounds []Round, periodStart, periodEnd time.Time) int {
-	totalPlayerSeconds := 0.0
-	periodDuration := periodEnd.Sub(periodStart).Seconds()
-	if periodDuration <= 0 {
-		return 0
-	}
-
-	for _, r := range rounds {
-		s, e, ok := clipRound(r, periodStart, periodEnd)
-		if !ok {
-			continue
-		}
-		totalPlayerSeconds += float64(r.Players) * e.Sub(s).Seconds()
-	}
-
-	return int(math.Round(totalPlayerSeconds / periodDuration))
-}
-
-// ---- PCCU (peak concurrent users, sweep-line) ----
-
 type sweepEvent struct {
-	time  time.Time
-	delta int // +players at start, -players at end
-	isEnd bool
+	time       time.Time
+	port       int
+	roundIndex int
+	players    int
+	isEnd      bool
 }
 
-// calcPCCU computes the peak concurrent users within [periodStart, periodEnd) using sweep-line.
-func calcPCCU(rounds []Round, periodStart, periodEnd time.Time) int {
+// calcStats computes both ACCU and PCCU for a given period using a server-grouped sweep-line.
+// To prevent duplicated/hung rounds on the same server from falsely adding up,
+// the online players for a given server port is the MAX of its active rounds.
+// Global online is the SUM of these per-port maximums.
+// ACCU is the time-weighted average (Area Under Curve) of this global online.
+func calcStats(rounds []Round, periodStart, periodEnd time.Time) (int, int) {
 	var events []sweepEvent
 
-	for _, r := range rounds {
+	for i, r := range rounds {
 		s, e, ok := clipRound(r, periodStart, periodEnd)
 		if !ok {
 			continue
 		}
-		events = append(events, sweepEvent{time: s, delta: r.Players, isEnd: false})
-		events = append(events, sweepEvent{time: e, delta: -r.Players, isEnd: true})
+		events = append(events, sweepEvent{time: s, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: false})
+		events = append(events, sweepEvent{time: e, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: true})
 	}
 
-	if len(events) == 0 {
-		return 0
+	periodDuration := periodEnd.Sub(periodStart).Seconds()
+	if len(events) == 0 || periodDuration <= 0 {
+		return 0, 0
 	}
 
 	// Sort by time; for equal times, ends (isEnd=true) come before starts
-	// so that a round ending at T and a round starting at T don't overlap.
 	sort.Slice(events, func(i, j int) bool {
 		if events[i].time.Equal(events[j].time) {
 			if events[i].isEnd != events[j].isEnd {
@@ -117,15 +94,60 @@ func calcPCCU(rounds []Round, periodStart, periodEnd time.Time) int {
 	})
 
 	maxConcurrent := 0
-	current := 0
-	for _, ev := range events {
-		current += ev.delta
+	totalPlayerSeconds := 0.0
+	activeByPort := make(map[int]map[int]int)
+
+	lastTime := periodStart
+	current := 0 // Global current online
+
+	for i := 0; i < len(events); {
+		t := events[i].time
+
+		// Add area for the interval [lastTime, t]
+		if current > 0 && t.After(lastTime) {
+			totalPlayerSeconds += float64(current) * t.Sub(lastTime).Seconds()
+		}
+
+		// Process all events occurring exactly at time `t`
+		for i < len(events) && events[i].time.Equal(t) {
+			ev := events[i]
+			if activeByPort[ev.port] == nil {
+				activeByPort[ev.port] = make(map[int]int)
+			}
+			if ev.isEnd {
+				delete(activeByPort[ev.port], ev.roundIndex)
+			} else {
+				activeByPort[ev.port][ev.roundIndex] = ev.players
+			}
+			i++
+		}
+
+		// Recalculate global current from the active ports
+		current = 0
+		for _, roundsOnPort := range activeByPort {
+			portMax := 0
+			for _, players := range roundsOnPort {
+				if players > portMax {
+					portMax = players
+				}
+			}
+			current += portMax
+		}
+
 		if current > maxConcurrent {
 			maxConcurrent = current
 		}
+
+		lastTime = t
 	}
 
-	return maxConcurrent
+	// Add any remaining area from the last event until periodEnd
+	if current > 0 && lastTime.Before(periodEnd) {
+		totalPlayerSeconds += float64(current) * periodEnd.Sub(lastTime).Seconds()
+	}
+
+	accu := int(math.Round(totalPlayerSeconds / periodDuration))
+	return accu, maxConcurrent
 }
 
 // ---- Chart Calculations ----
@@ -162,8 +184,9 @@ func CalcWeeks(rounds []Round) WeeksData {
 		}
 
 		label := weekLabel(y, w)
-		accuMap[label] = calcACCU(rounds, weekStart, weekEnd)
-		pccuMap[label] = calcPCCU(rounds, weekStart, weekEnd)
+		accu, pccu := calcStats(rounds, weekStart, weekEnd)
+		accuMap[label] = accu
+		pccuMap[label] = pccu
 
 		// Advance to next week
 		next := weekStart.AddDate(0, 0, 7)
@@ -187,8 +210,9 @@ func CalcLast90Days(rounds []Round, now time.Time) Last90DaysData {
 		dayStart := d
 		dayEnd := d.AddDate(0, 0, 1)
 		label := dayLabel(d)
-		accuMap[label] = calcACCU(rounds, dayStart, dayEnd)
-		pccuMap[label] = calcPCCU(rounds, dayStart, dayEnd)
+		accu, pccu := calcStats(rounds, dayStart, dayEnd)
+		accuMap[label] = accu
+		pccuMap[label] = pccu
 	}
 
 	return Last90DaysData{ACCU: accuMap, PCCU: pccuMap}
@@ -233,7 +257,7 @@ func CalcDaytime(rounds []Round) DaytimeData {
 			slotStart := d.Add(time.Duration(slot) * time.Hour)
 			slotEnd := d.Add(time.Duration(slot+2) * time.Hour)
 
-			accu := calcACCU(rounds, slotStart, slotEnd)
+			accu, _ := calcStats(rounds, slotStart, slotEnd)
 			slotSums[slot] += float64(accu)
 			slotCounts[slot]++
 		}
