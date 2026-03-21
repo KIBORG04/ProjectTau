@@ -162,7 +162,8 @@ function get_last_phrase() {
 // ---- Global state ----
 let onlineStatsData = null;
 let chronicles = {};
-let currentDataSource = 'crew';
+let currentDataSourceWeeks = 'crew';
+let currentDataSource90Days = 'crew';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Date inputs still trigger chronicle reload + chart rebuild for date-dependent views
@@ -181,20 +182,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const triggerDataSourceChange = async (source) => {
-        if (currentDataSource !== source) {
-            currentDataSource = source;
-            ['online-stat-all-weeks', 'online-stat-month'].forEach(id => {
-                const chart = Chart.getChart(id);
-                if (chart) chart.destroy();
-            });
+    const triggerWeeksChange = async (source) => {
+        if (currentDataSourceWeeks !== source) {
+            currentDataSourceWeeks = source;
+            const chart = Chart.getChart('online-stat-all-weeks');
+            if (chart) chart.destroy();
             await buildWeeksChart();
+        }
+    };
+
+    const trigger90DaysChange = async (source) => {
+        if (currentDataSource90Days !== source) {
+            currentDataSource90Days = source;
+            const chart = Chart.getChart('online-stat-month');
+            if (chart) chart.destroy();
             await buildLast90DaysChart();
         }
     };
 
-    document.getElementById("sourceConcurrent").addEventListener('change', () => triggerDataSourceChange('concurrent'));
-    document.getElementById("sourceCrew").addEventListener('change', () => triggerDataSourceChange('crew'));
+    document.getElementById("weeksConcurrent").addEventListener('change', () => triggerWeeksChange('concurrent'));
+    document.getElementById("weeksCrew").addEventListener('change', () => triggerWeeksChange('crew'));
+    document.getElementById("monthConcurrent").addEventListener('change', () => trigger90DaysChange('concurrent'));
+    document.getElementById("monthCrew").addEventListener('change', () => trigger90DaysChange('crew'));
 
     get_announce();
     get_achievement();
@@ -297,7 +306,7 @@ function calculateSMA(data, windowSize) {
 async function buildWeeksChart() {
     let accuDataRaw, pccuDataRaw, labels;
 
-    if (currentDataSource === 'concurrent') {
+    if (currentDataSourceWeeks === 'concurrent') {
         const weeksData = onlineStatsData.weeks;
         const accuLabels = Object.keys(weeksData.accu);
         const pccuLabels = Object.keys(weeksData.pccu);
@@ -329,7 +338,7 @@ async function buildWeeksChart() {
     }
 
     let accuData, pccuData;
-    if (currentDataSource === 'concurrent') {
+    if (currentDataSourceWeeks === 'concurrent') {
         accuData = calculateSMA(accuDataRaw, 4);
         pccuData = calculateSMA(pccuDataRaw, 4);
     } else {
@@ -349,7 +358,7 @@ async function buildWeeksChart() {
             labels: labels,
             datasets: [
                 {
-                    label: currentDataSource === 'concurrent' ? 'ACCU (avg)' : 'Экипаж (avg)',
+                    label: currentDataSourceWeeks === 'concurrent' ? 'ACCU (avg)' : 'Экипаж (avg)',
                     data: accuData,
                     borderWidth: 2,
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -361,7 +370,7 @@ async function buildWeeksChart() {
                     hoverRadius: 4,
                 },
                 {
-                    label: currentDataSource === 'concurrent' ? 'PCCU (max)' : 'Экипаж (max)',
+                    label: currentDataSourceWeeks === 'concurrent' ? 'PCCU (max)' : 'Экипаж (max)',
                     data: pccuData,
                     borderWidth: 2,
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -474,7 +483,7 @@ function buildDaytimeChart() {
 async function buildLast90DaysChart() {
     let accuData, pccuData, labels;
 
-    if (currentDataSource === 'concurrent') {
+    if (currentDataSource90Days === 'concurrent') {
         const last90 = onlineStatsData.last_90_days;
         const accuLabels = Object.keys(last90.accu);
         const pccuLabels = Object.keys(last90.pccu);
@@ -509,12 +518,12 @@ async function buildLast90DaysChart() {
             labels: labels,
             datasets: [
                 {
-                    label: currentDataSource === 'concurrent' ? 'ACCU (avg)' : 'Экипаж (avg)',
+                    label: currentDataSource90Days === 'concurrent' ? 'ACCU (avg)' : 'Экипаж (avg)',
                     data: accuData,
                     borderWidth: 1,
                 },
                 {
-                    label: currentDataSource === 'concurrent' ? 'PCCU (max)' : 'Экипаж (max)',
+                    label: currentDataSource90Days === 'concurrent' ? 'PCCU (max)' : 'Экипаж (max)',
                     data: pccuData,
                     borderWidth: 1,
                 }

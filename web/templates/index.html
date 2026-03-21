@@ -32,18 +32,19 @@
                     Вы можете манипулировать графиками, изменяя даты вверху сайта
                     <div>
                         <input type="checkbox" id="toggleChronicles" checked>
-                        Показывать важные события
-                    </div>
-                    <div class="mt-2 btn-group btn-group-sm" role="group">
-                        <input type="radio" class="btn-check" name="dataSource" id="sourceConcurrent" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="sourceConcurrent">Игроки онлайн (ACCU/PCCU)</label>
-                        <input type="radio" class="btn-check" name="dataSource" id="sourceCrew" autocomplete="off" checked>
-                        <label class="btn btn-outline-primary" for="sourceCrew">Экипаж за смену (Архив)</label>
+                        Показывать важных события
                     </div>
                 </div>
             </div>
             <div class="row">
-                <h5 class="text-center border-bottom pb-2">Онлайн по неделям</h5>
+                <h5 class="text-center border-bottom pb-2">Онлайн по неделям
+                    <div class="btn-group btn-group-sm ms-3" role="group">
+                        <input type="radio" class="btn-check" name="toggleWeeks" id="weeksConcurrent" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="weeksConcurrent">Игроки онлайн (ACCU/PCCU)</label>
+                        <input type="radio" class="btn-check" name="toggleWeeks" id="weeksCrew" autocomplete="off" checked>
+                        <label class="btn btn-outline-primary" for="weeksCrew">Экипаж за смену</label>
+                    </div>
+                </h5>
                 <canvas id="online-stat-all-weeks"></canvas>
                 <div class="text-center mt-1">
                     <button id="resetZoomWeeks" class="btn btn-outline-secondary btn-sm" onclick="resetWeeksZoom()">
@@ -57,7 +58,14 @@
                 <canvas id="online-stat-daytime"></canvas>
             </div>
             <div class="row">
-                <h5 class="text-center border-bottom pb-2">Средний онлайн за последние 90 дней</h5>
+                <h5 class="text-center border-bottom pb-2">Средний онлайн за последние 90 дней
+                    <div class="btn-group btn-group-sm ms-3" role="group">
+                        <input type="radio" class="btn-check" name="toggle90Days" id="monthConcurrent" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="monthConcurrent">Игроки онлайн (ACCU/PCCU)</label>
+                        <input type="radio" class="btn-check" name="toggle90Days" id="monthCrew" autocomplete="off" checked>
+                        <label class="btn btn-outline-primary" for="monthCrew">Экипаж за смену</label>
+                    </div>
+                </h5>
                 <canvas id="online-stat-month"></canvas>
             </div>
         </div>
