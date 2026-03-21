@@ -260,6 +260,25 @@ function rebuildChartsAfterChronicleUpdate() {
 //  Chart 1: Online by Weeks (with zoom/pan)
 // ======================================================================
 
+/**
+ * Calculates Simple Moving Average (SMA).
+ * For early elements (index < windowSize), it averages available elements.
+ */
+function calculateSMA(data, windowSize) {
+    if (!data || data.length === 0) return [];
+    const result = [];
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) {
+        sum += data[i];
+        if (i >= windowSize) {
+            sum -= data[i - windowSize];
+        }
+        const count = Math.min(i + 1, windowSize);
+        result.push(sum / count);
+    }
+    return result;
+}
+
 function buildWeeksChart() {
     const weeksData = onlineStatsData.weeks;
     const accuLabels = Object.keys(weeksData.accu).sort();
@@ -273,8 +292,11 @@ function buildWeeksChart() {
         return ay !== by ? ay - by : aw - bw;
     });
 
-    const accuData = labels.map(l => weeksData.accu[l] || 0);
-    const pccuData = labels.map(l => weeksData.pccu[l] || 0);
+    const accuDataRaw = labels.map(l => weeksData.accu[l] || 0);
+    const pccuDataRaw = labels.map(l => weeksData.pccu[l] || 0);
+
+    const accuData = calculateSMA(accuDataRaw, 4);
+    const pccuData = calculateSMA(pccuDataRaw, 4);
 
     const maxOnline = Math.max(...accuData, ...pccuData);
 
