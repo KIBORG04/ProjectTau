@@ -116,6 +116,9 @@
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}
 
+<!-- Tooltip for chronicles -->
+<div id="chronicle-tooltip" class="d-none" style="position: absolute; background: rgba(33, 37, 41, 0.95); color: #fff; border-radius: 6px; padding: 12px; pointer-events: none; z-index: 1050; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-size: 0.9rem; max-width: 350px; border: 1px solid rgba(255,255,255,0.1); word-wrap: break-word; word-break: break-word; overflow: hidden;"></div>
+
 <!-- Zoom/Pan plugin for Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>

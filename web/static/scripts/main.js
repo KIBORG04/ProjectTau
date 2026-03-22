@@ -398,14 +398,7 @@ async function buildWeeksChart() {
                 colors: { forceOverride: true },
                 tooltip: {
                     callbacks: {
-                        afterBody: function (context) {
-                            const label = context[0].label;
-                            const chronicle = chroniclesInRange.find(c => c.date === label);
-                            if (chronicle) {
-                                return `Events:\n${chronicle.text.split('|').join('\n')}`;
-                            }
-                            return null;
-                        }
+                        // Custom callbacks can be added here
                     }
                 },
                 zoom: {
@@ -539,14 +532,7 @@ async function buildLast90DaysChart() {
                 colors: { forceOverride: true },
                 tooltip: {
                     callbacks: {
-                        afterBody: function (context) {
-                            const label = context[0].label;
-                            const chronicle = chroniclesInRange.find(c => c.date === label);
-                            if (chronicle) {
-                                return `Events:\n${chronicle.text.split('|').join('\n')}`;
-                            }
-                            return null;
-                        }
+                        // Custom callbacks can be added here
                     }
                 }
             },
@@ -689,102 +675,131 @@ function createChroniclesPlugin(chroniclesInRange) {
             const xAxis = chart.scales.x;
             const yAxis = chart.scales.y;
 
+            const hoveredX = chart._hoveredChronicleData || [];
+
             chroniclesInRange.forEach(chronicle => {
                 const xPos = xAxis.getPixelForValue(chronicle.date);
+                if (xPos === undefined || isNaN(xPos)) return;
 
                 ctx.save();
                 ctx.beginPath();
                 ctx.moveTo(xPos, yAxis.top);
                 ctx.lineTo(xPos, yAxis.bottom);
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = 'rgba(128, 128, 128, 0.3)';
+
+                if (hoveredX.includes(xPos)) {
+                    ctx.lineWidth = 3;
+                    ctx.strokeStyle = 'rgba(255, 0, 0, 0.7)';
+                } else {
+                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = 'rgba(128, 128, 128, 0.3)';
+                }
+
                 ctx.stroke();
                 ctx.restore();
             });
         },
         afterEvent: function (chart, args) {
-            if (!document.getElementById("toggleChronicles").checked || args.event.type !== 'mousemove') return;
-            const xAxis = chart.scales.x;
-            const yAxis = chart.scales.y;
-            const ctx = chart.ctx;
-            const mouseX = args.event.x;
+            const tooltipEl = document.getElementById('chronicle-tooltip');
+            if (!tooltipEl) return;
 
-            let closestChronicle = null;
-            let minDistance = Infinity;
+            if (!document.getElementById("toggleChronicles").checked) {
+                if (!tooltipEl.classList.contains('d-none')) {
+                    tooltipEl.classList.add('d-none');
+                    if (chart._hoveredChronicles) {
+                        chart._hoveredChronicles = null;
+                        chart._hoveredChronicleData = [];
+                        chart.draw();
+                    }
+                }
+                return;
+            }
+
+            if (args.event.type === 'mouseout') {
+                tooltipEl.classList.add('d-none');
+                if (chart._hoveredChronicles) {
+                    chart._hoveredChronicles = null;
+                    chart._hoveredChronicleData = [];
+                    chart.draw();
+                }
+                return;
+            }
+
+            if (args.event.type !== 'mousemove') return;
+
+            const xAxis = chart.scales.x;
+            const mouseX = args.event.x;
+            const mouseY = args.event.y;
+
+            const HOVER_RADIUS = 5;
+            let closeChronicles = [];
 
             chroniclesInRange.forEach(chronicle => {
                 const xPos = xAxis.getPixelForValue(chronicle.date);
-                const distance = Math.abs(mouseX - xPos);
-
-                if (distance < 50 && distance < minDistance) {
-                    minDistance = distance;
-                    closestChronicle = chronicle;
+                if (xPos !== undefined && !isNaN(xPos)) {
+                    const distance = Math.abs(mouseX - xPos);
+                    if (distance <= HOVER_RADIUS) {
+                        closeChronicles.push({ chronicle, xPos, distance });
+                    }
                 }
             });
 
-            if (closestChronicle) {
-                const xPos = xAxis.getPixelForValue(closestChronicle.date);
+            if (closeChronicles.length > 0) {
+                closeChronicles.sort((a, b) => a.xPos - b.xPos);
 
-                chart.draw();
-
-                ctx.save();
-                ctx.beginPath();
-                ctx.moveTo(xPos, yAxis.top);
-                ctx.lineTo(xPos, yAxis.bottom);
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = 'rgba(255, 0, 0, 0.7)';
-                ctx.stroke();
-
-                const events = closestChronicle.text.split('|');
-
-                ctx.font = '12px Arial';
-                const lineHeight = 16;
-                let maxWidth = 0;
-
-                events.forEach(event => {
-                    const width = ctx.measureText(event).width;
-                    maxWidth = Math.max(maxWidth, width);
+                let groupedHTML = '';
+                closeChronicles.forEach(item => {
+                    const events = item.chronicle.text.split('|');
+                    groupedHTML += `<div style="font-weight: bold; color: #ffc107; margin-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 2px;">${item.chronicle.date}</div>`;
+                    groupedHTML += `<ul style="padding-left: 20px; list-style-type: disc; margin-bottom: 8px;">`;
+                    events.forEach(ev => {
+                        groupedHTML += `<li style="margin-bottom: 3px;">${ev.trim()}</li>`;
+                    });
+                    groupedHTML += `</ul>`;
                 });
 
-                const padding = 10;
-                const rectWidth = maxWidth + padding * 2;
-                const rectHeight = events.length * lineHeight + padding * 2;
-                const centerX = chart.width / 2;
-                const centerY = 55;
+                groupedHTML = groupedHTML.replace(/margin-bottom: 8px;">(?!.*margin-bottom)/, 'margin-bottom: 0;">');
 
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
-                ctx.lineWidth = 1;
+                tooltipEl.innerHTML = groupedHTML;
+                tooltipEl.classList.remove('d-none');
 
-                const radius = 5;
-                ctx.beginPath();
-                ctx.moveTo(centerX - rectWidth / 2 + radius, centerY - rectHeight / 2);
-                ctx.lineTo(centerX + rectWidth / 2 - radius, centerY - rectHeight / 2);
-                ctx.quadraticCurveTo(centerX + rectWidth / 2, centerY - rectHeight / 2,
-                    centerX + rectWidth / 2, centerY - rectHeight / 2 + radius);
-                ctx.lineTo(centerX + rectWidth / 2, centerY + rectHeight / 2 - radius);
-                ctx.quadraticCurveTo(centerX + rectWidth / 2, centerY + rectHeight / 2,
-                    centerX + rectWidth / 2 - radius, centerY + rectHeight / 2);
-                ctx.lineTo(centerX - rectWidth / 2 + radius, centerY + rectHeight / 2);
-                ctx.quadraticCurveTo(centerX - rectWidth / 2, centerY + rectHeight / 2,
-                    centerX - rectWidth / 2, centerY + rectHeight / 2 - radius);
-                ctx.lineTo(centerX - rectWidth / 2, centerY - rectHeight / 2 + radius);
-                ctx.quadraticCurveTo(centerX - rectWidth / 2, centerY - rectHeight / 2,
-                    centerX - rectWidth / 2 + radius, centerY - rectHeight / 2);
-                ctx.closePath();
-                ctx.fill();
-                ctx.stroke();
+                const canvasRect = chart.canvas.getBoundingClientRect();
 
-                ctx.fillStyle = 'white';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
+                let targetLeft = canvasRect.left + mouseX + window.scrollX + 15;
+                let targetTop = canvasRect.top + mouseY + window.scrollY - 15;
 
-                events.forEach((event, index) => {
-                    const yPos = centerY - rectHeight / 2 + padding + lineHeight / 2 + index * lineHeight;
-                    ctx.fillText(event, centerX, yPos);
-                });
+                // Simple collision detection with right edge (flip to left of cursor)
+                if (targetLeft + tooltipEl.offsetWidth > window.innerWidth + window.scrollX - 20) {
+                    targetLeft = (canvasRect.left + mouseX + window.scrollX) - tooltipEl.offsetWidth - 15;
+                }
 
-                ctx.restore();
+                // Collision detection with bottom edge (shift up)
+                if (targetTop + tooltipEl.offsetHeight > window.innerHeight + window.scrollY - 20) {
+                    targetTop = window.innerHeight + window.scrollY - tooltipEl.offsetHeight - 20;
+                }
+
+                // Collision detection with top edge (if it shifted too far up)
+                if (targetTop < window.scrollY + 20) {
+                    targetTop = window.scrollY + 20;
+                }
+
+                tooltipEl.style.left = targetLeft + 'px';
+                tooltipEl.style.top = targetTop + 'px';
+
+                const currentHoverIds = closeChronicles.map(c => c.chronicle.date).join(',');
+                if (chart._hoveredChronicles !== currentHoverIds) {
+                    chart._hoveredChronicles = currentHoverIds;
+                    chart._hoveredChronicleData = closeChronicles.map(c => c.xPos);
+                    chart.draw();
+                }
+            } else {
+                if (!tooltipEl.classList.contains('d-none')) {
+                    tooltipEl.classList.add('d-none');
+                }
+                if (chart._hoveredChronicles) {
+                    chart._hoveredChronicles = null;
+                    chart._hoveredChronicleData = [];
+                    chart.draw();
+                }
             }
         }
     };
