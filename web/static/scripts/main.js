@@ -59,17 +59,6 @@ const seasonsPlugin = {
                 ctx.lineWidth = 1.2;
                 ctx.strokeStyle = lineColor;
                 ctx.stroke();
-
-                ctx.save();
-                ctx.font = '12px Arial';
-                ctx.fillStyle = lineColor;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-
-                ctx.translate(xStart - 7, top + 50);
-                ctx.rotate(-Math.PI / 2);
-
-                ctx.restore();
             }
             lastYear = year;
         });
@@ -351,7 +340,7 @@ async function buildWeeksChart() {
         pccuData = pccuDataRaw;
     }
 
-    const maxOnline = Math.max(...accuData, ...pccuData);
+
 
     const chroniclesInRange = getChroniclesForWeeks(labels);
 
@@ -444,7 +433,7 @@ function buildDaytimeChart() {
     const rawKeys = Object.keys(daytimeData.accu).map(Number).sort((a, b) => a - b);
     const labels = rawKeys.map(h => `${String(h).padStart(2, '0')}:00`);
     const data = rawKeys.map(h => daytimeData.accu[h] || 0);
-    const maxOnline = Math.max(...data);
+
 
     const canvas = document.getElementById('online-stat-daytime');
 
@@ -504,7 +493,7 @@ async function buildLast90DaysChart() {
         accuData = labels.map(l => avgData[l] || 0);
         pccuData = labels.map(l => maxData[l] || 0);
     }
-    const maxOnline = Math.max(...accuData, ...pccuData);
+
 
     const chroniclesInRange = getChroniclesInRange(labels);
 

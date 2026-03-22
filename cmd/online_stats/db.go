@@ -24,6 +24,7 @@ func FetchNewRoundsFromDB(cfg *OnlineStatsConfig, lastID int) ([]Round, error) {
 		Auth: []ssh.AuthMethod{
 			ssh.Password(dbCfg.SSHPassword),
 		},
+		// TODO: replace InsecureIgnoreHostKey with known_hosts verification to prevent MITM attacks
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 		Timeout:         15 * time.Second,
 	}

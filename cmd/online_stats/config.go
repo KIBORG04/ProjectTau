@@ -26,11 +26,6 @@ type OnlineStatsConfig struct {
 	StatePath  string   `yaml:"state_path"`
 }
 
-func (c *DBConfig) DSN() string {
-	return fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		c.Host, c.Port, c.User, c.Password, c.DBName)
-}
-
 func LoadOnlineStatsConfig(path string) (*OnlineStatsConfig, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
