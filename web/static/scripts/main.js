@@ -68,7 +68,6 @@ const seasonsPlugin = {
 
                 ctx.translate(xStart - 7, top + 50);
                 ctx.rotate(-Math.PI / 2);
-                ctx.fillText('Новый год', 0, 0);
 
                 ctx.restore();
             }
@@ -238,9 +237,12 @@ async function onDatesChanged() {
     const menuDateStart = document.getElementById('date_start').value;
     const menuDateEnd = document.getElementById('date_end').value;
 
-    document.getElementById("online-stat-current-dates").innerHTML = `
-        <span class="text-danger">${menuDateStart}</span> - <span class="text-success">${menuDateEnd}</span>
-        `;
+    const statsDateDisplay = document.getElementById("online-stat-current-dates");
+    if (statsDateDisplay) {
+        statsDateDisplay.innerHTML = `
+            <span class="text-danger">${menuDateStart}</span> - <span class="text-success">${menuDateEnd}</span>
+            `;
+    }
 
     await getChronicles();
     await rebuildChartsAfterChronicleUpdate();
@@ -255,9 +257,12 @@ async function buildAllCharts() {
     const menuDateStart = document.getElementById('date_start').value;
     const menuDateEnd = document.getElementById('date_end').value;
 
-    document.getElementById("online-stat-current-dates").innerHTML = `
-        <span class="text-danger">${menuDateStart}</span> - <span class="text-success">${menuDateEnd}</span>
-        `;
+    const statsDateDisplay = document.getElementById("online-stat-current-dates");
+    if (statsDateDisplay) {
+        statsDateDisplay.innerHTML = `
+            <span class="text-danger">${menuDateStart}</span> - <span class="text-success">${menuDateEnd}</span>
+            `;
+    }
 
     // ---- Chart 1: Online by Weeks (with zoom/pan) ----
     await buildWeeksChart();
@@ -326,13 +331,13 @@ async function buildWeeksChart() {
         const dt = document.getElementById('date_end').value;
         const avgData = await fetch(`/api/online_stat_weeks?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
         const maxData = await fetch(`/api/online_stat_weeks_max?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
-        
+
         labels = Array.from(new Set([...Object.keys(avgData), ...Object.keys(maxData)])).sort((a, b) => {
             const [ay, aw] = a.split('-').map(Number);
             const [by, bw] = b.split('-').map(Number);
             return ay !== by ? ay - by : aw - bw;
         });
-        
+
         accuDataRaw = labels.map(l => avgData[l] || 0);
         pccuDataRaw = labels.map(l => maxData[l] || 0);
     }
@@ -358,7 +363,7 @@ async function buildWeeksChart() {
             labels: labels,
             datasets: [
                 {
-                    label: currentDataSourceWeeks === 'concurrent' ? 'ACCU (avg)' : 'Экипаж (avg)',
+                    label: 'avg',
                     data: accuData,
                     borderWidth: 2,
                     borderColor: 'rgba(54, 162, 235, 1)',
@@ -370,7 +375,7 @@ async function buildWeeksChart() {
                     hoverRadius: 4,
                 },
                 {
-                    label: currentDataSourceWeeks === 'concurrent' ? 'PCCU (max)' : 'Экипаж (max)',
+                    label: 'max',
                     data: pccuData,
                     borderWidth: 2,
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -496,12 +501,12 @@ async function buildLast90DaysChart() {
         const dateFrom = new Date()
         dateTo.setDate(dateTo.getDate() - 1)
         dateFrom.setDate(dateTo.getDate() - 90)
-        
+
         const df = format_date(dateFrom);
         const dt = format_date(dateTo);
         const avgData = await fetch(`/api/online_stat?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
         const maxData = await fetch(`/api/online_stat_max?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
-        
+
         labels = Array.from(new Set([...Object.keys(avgData), ...Object.keys(maxData)])).sort();
         accuData = labels.map(l => avgData[l] || 0);
         pccuData = labels.map(l => maxData[l] || 0);
@@ -518,12 +523,12 @@ async function buildLast90DaysChart() {
             labels: labels,
             datasets: [
                 {
-                    label: currentDataSource90Days === 'concurrent' ? 'ACCU (avg)' : 'Экипаж (avg)',
+                    label: 'avg',
                     data: accuData,
                     borderWidth: 1,
                 },
                 {
-                    label: currentDataSource90Days === 'concurrent' ? 'PCCU (max)' : 'Экипаж (max)',
+                    label: 'max',
                     data: pccuData,
                     borderWidth: 1,
                 }

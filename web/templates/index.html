@@ -1,5 +1,11 @@
 <!--index.html-->
 
+<style>
+    .navbar form.d-flex {
+        display: none !important;
+    }
+</style>
+
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
@@ -7,42 +13,35 @@
     {{ template "ad.html" . }}
     <div class="row">
         <div class="col-lg-8">
-            <div class="row">
-                <div class="col">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Версия статистики: {{ .version }}</li>
-                        <li class="list-group-item">Дата начала сбора статистики: {{ .firstDate }}</li>
-                        <li class="list-group-item">Последнее обновление БД: {{ .lastDate }}</li>
-                        <li class="list-group-item">Последний раунд в БД: {{ .lastRound }}</li>
-                    </ul>
-                </div>
-                <div class="col">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Раундов в статистике: {{ .totalRounds }}</li>
-                        <li class="list-group-item">Раундов на первом: {{ .alphaRounds }}</li>
-                        <li class="list-group-item">Раундов на втором: {{ .betaRounds }}</li>
-                        <li class="list-group-item">Раундов на третьем: {{ .gammaRounds }}</li>
-                    </ul>
-                </div>
-            </div>
-            <br>
+
             <div class="text-center border-bottom pb-2">
-                <h4>Статистика по: <span id="online-stat-current-dates">Lorem ipsum</span></h4>
-                <div class="alert-info">
-                    Вы можете манипулировать графиками, изменяя даты вверху сайта
-                    <div>
-                        <input type="checkbox" id="toggleChronicles" checked>
-                        Показывать важных события
+                <h4>Сводная статистика онлайна</h4>
+                <div class="alert-info mt-2">
+                    <div class="mb-2">
+                        <small>
+                            <b>Игроки онлайн</b> — клиенты на сервере на конец раунда &nbsp;|&nbsp;
+                            <b>Экипаж за смену</b> — общее число входов игроков за экипаж в течение раунда (включая респавны)
+                        </small>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <input type="checkbox" class="form-check-input mt-0 me-2" id="toggleChronicles"
+                            style="width: 1.5rem; height: 1.5rem; cursor: pointer;" checked>
+                        <label for="toggleChronicles" class="form-check-label"
+                            style="font-size: 1.1rem; cursor: pointer;">Показывать важные события</label>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <h5 class="text-center border-bottom pb-2">Онлайн по неделям
-                    <div class="btn-group btn-group-sm ms-3" role="group">
-                        <input type="radio" class="btn-check" name="toggleWeeks" id="weeksConcurrent" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="weeksConcurrent">Игроки онлайн (ACCU/PCCU)</label>
-                        <input type="radio" class="btn-check" name="toggleWeeks" id="weeksCrew" autocomplete="off" checked>
-                        <label class="btn btn-outline-primary" for="weeksCrew">Экипаж за смену</label>
+                    <div class="d-block mt-2">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <input type="radio" class="btn-check" name="toggleWeeks" id="weeksConcurrent"
+                                autocomplete="off">
+                            <label class="btn btn-outline-primary" for="weeksConcurrent">Игроки онлайн</label>
+                            <input type="radio" class="btn-check" name="toggleWeeks" id="weeksCrew" autocomplete="off"
+                                checked>
+                            <label class="btn btn-outline-primary" for="weeksCrew">Экипаж за смену</label>
+                        </div>
                     </div>
                 </h5>
                 <canvas id="online-stat-all-weeks"></canvas>
@@ -59,14 +58,37 @@
             </div>
             <div class="row">
                 <h5 class="text-center border-bottom pb-2">Средний онлайн за последние 90 дней
-                    <div class="btn-group btn-group-sm ms-3" role="group">
-                        <input type="radio" class="btn-check" name="toggle90Days" id="monthConcurrent" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="monthConcurrent">Игроки онлайн (ACCU/PCCU)</label>
-                        <input type="radio" class="btn-check" name="toggle90Days" id="monthCrew" autocomplete="off" checked>
-                        <label class="btn btn-outline-primary" for="monthCrew">Экипаж за смену</label>
+                    <div class="d-block mt-2">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <input type="radio" class="btn-check" name="toggle90Days" id="monthConcurrent"
+                                autocomplete="off">
+                            <label class="btn btn-outline-primary" for="monthConcurrent">Игроки онлайн</label>
+                            <input type="radio" class="btn-check" name="toggle90Days" id="monthCrew" autocomplete="off"
+                                checked>
+                            <label class="btn btn-outline-primary" for="monthCrew">Экипаж за смену</label>
+                        </div>
                     </div>
                 </h5>
                 <canvas id="online-stat-month"></canvas>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Версия статистики: {{ .version }}</li>
+                        <li class="list-group-item">Дата начала сбора статистики: {{ .firstDate }}</li>
+                        <li class="list-group-item">Последнее обновление БД: {{ .lastDate }}</li>
+                        <li class="list-group-item">Последний раунд в БД: {{ .lastRound }}</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Раундов в статистике: {{ .totalRounds }}</li>
+                        <li class="list-group-item">Раундов на первом: {{ .alphaRounds }}</li>
+                        <li class="list-group-item">Раундов на втором: {{ .betaRounds }}</li>
+                        <li class="list-group-item">Раундов на третьем: {{ .gammaRounds }}</li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="col-sm-3 col-lg-4 mt-2">
