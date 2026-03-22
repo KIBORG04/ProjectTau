@@ -1,5 +1,8 @@
 version: "3.7"
 
+volumes:
+  stats_data:
+
 services:
   db:
     image: postgres:14.1-alpine
@@ -28,4 +31,15 @@ services:
       POSTGRES_DB: ssstatistics
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    volumes:
+      - stats_data:/usr/src/taustats/web/static/data
+    restart: always
+
+  online_stats_worker:
+    build: .
+    container_name: online_stats_worker
+    volumes:
+      - ./config:/usr/src/taustats/config
+      - stats_data:/usr/src/taustats/web/static/data
+    command: /bin/sh -c "echo '0 */2 * * * cd /usr/src/taustats && /usr/local/bin/online_stats' >> /etc/crontabs/root && crond -f -l 2"
     restart: always
