@@ -6,11 +6,14 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"sync/atomic"
 	"time"
 
 	"github.com/go-sql-driver/mysql"
 	"golang.org/x/crypto/ssh"
 )
+
+var dialerCounter atomic.Int64
 
 func FetchNewRoundsFromDB(cfg *OnlineStatsConfig, lastID int) ([]Round, error) {
 	dbCfg := &cfg.RemoteDB
@@ -33,11 +36,12 @@ func FetchNewRoundsFromDB(cfg *OnlineStatsConfig, lastID int) ([]Round, error) {
 	}
 	defer sshClient.Close()
 
-	// 2. Register custom MySQL dialer to route through SSH
-	networkName := fmt.Sprintf("mysql+ssh+%s", sshAddr)
+	// 2. Register custom MySQL dialer to route through SSH (unique name to avoid panic on re-registration)
+	networkName := fmt.Sprintf("mysql+ssh+%s+%d", sshAddr, dialerCounter.Add(1))
 	mysql.RegisterDialContext(networkName, func(ctx context.Context, addr string) (net.Conn, error) {
 		return sshClient.Dial("tcp", addr)
 	})
+	defer mysql.DeregisterDialContext(networkName)
 
 	// 3. Connect to MySQL via the custom dialer
 	mysqlAddr := fmt.Sprintf("%s:%d", dbCfg.Host, dbCfg.Port)
