@@ -221,8 +221,11 @@ func CalcLast90Days(rounds []Round, now time.Time) Last90DaysData {
 // CalcDaytime calculates the average concurrent players per 2-hour interval
 // over all days that have data.
 //
-// For each day, compute ACCU for each 2h slot [0:00-2:00), [2:00-4:00), ...
-// Then average across all days.
+// Uses a single global sweep-line across all rounds, distributing
+// player-seconds into 2h slot buckets (0, 2, 4, …, 22) as it sweeps.
+// Result per slot = total player-seconds in that slot / (totalDays × slotDuration).
+//
+// Complexity: O(R log R) for sort + O(R + D) for sweep, where D = number of days.
 func CalcDaytime(rounds []Round) DaytimeData {
 	if len(rounds) == 0 {
 		return DaytimeData{ACCU: map[int]int{}}
@@ -248,27 +251,119 @@ func CalcDaytime(rounds []Round) DaytimeData {
 		totalDays = 1
 	}
 
-	// Accumulate ACCU totals per 2h slot across all days
-	slotSums := make(map[int]float64)  // slot → sum of ACCU values
-	slotCounts := make(map[int]int)     // slot → number of days with data
-
-	for d := startDay; d.Before(endDay); d = d.AddDate(0, 0, 1) {
-		for slot := 0; slot < 24; slot += 2 {
-			slotStart := d.Add(time.Duration(slot) * time.Hour)
-			slotEnd := d.Add(time.Duration(slot+2) * time.Hour)
-
-			accu, _ := calcStats(rounds, slotStart, slotEnd)
-			slotSums[slot] += float64(accu)
-			slotCounts[slot]++
+	// Build sweep events for the entire range
+	var events []sweepEvent
+	for i, r := range rounds {
+		s, e, ok := clipRound(r, startDay, endDay)
+		if !ok {
+			continue
 		}
+		events = append(events, sweepEvent{time: s, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: false})
+		events = append(events, sweepEvent{time: e, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: true})
 	}
 
+	if len(events) == 0 {
+		return DaytimeData{ACCU: map[int]int{}}
+	}
+
+	// Sort by time; ends before starts at equal times (same rule as calcStats)
+	sort.Slice(events, func(i, j int) bool {
+		if events[i].time.Equal(events[j].time) {
+			if events[i].isEnd != events[j].isEnd {
+				return events[i].isEnd
+			}
+			return false
+		}
+		return events[i].time.Before(events[j].time)
+	})
+
+	// Single sweep-line, accumulating player-seconds per 2h slot
+	slotPlayerSeconds := make(map[int]float64) // slot (0,2,…,22) → total player-seconds
+	activeByPort := make(map[int]map[int]int)
+	current := 0
+	lastTime := startDay
+
+	for i := 0; i < len(events); {
+		t := events[i].time
+
+		// Distribute area for [lastTime, t) into 2h slot buckets
+		if current > 0 && t.After(lastTime) {
+			distributeToSlots(slotPlayerSeconds, lastTime, t, current)
+		}
+
+		// Process all events at time t
+		for i < len(events) && events[i].time.Equal(t) {
+			ev := events[i]
+			if activeByPort[ev.port] == nil {
+				activeByPort[ev.port] = make(map[int]int)
+			}
+			if ev.isEnd {
+				delete(activeByPort[ev.port], ev.roundIndex)
+			} else {
+				activeByPort[ev.port][ev.roundIndex] = ev.players
+			}
+			i++
+		}
+
+		// Recalculate global current (sum of per-port maxes)
+		current = 0
+		for _, roundsOnPort := range activeByPort {
+			portMax := 0
+			for _, players := range roundsOnPort {
+				if players > portMax {
+					portMax = players
+				}
+			}
+			current += portMax
+		}
+
+		lastTime = t
+	}
+
+	// Remaining area after the last event
+	if current > 0 && lastTime.Before(endDay) {
+		distributeToSlots(slotPlayerSeconds, lastTime, endDay, current)
+	}
+
+	// Average: total player-seconds / (totalDays × slot duration in seconds)
+	slotDuration := 2.0 * 3600.0
 	result := make(map[int]int)
 	for slot := 0; slot < 24; slot += 2 {
-		if slotCounts[slot] > 0 {
-			result[slot] = int(math.Round(slotSums[slot] / float64(slotCounts[slot])))
+		if slotPlayerSeconds[slot] > 0 {
+			result[slot] = int(math.Round(slotPlayerSeconds[slot] / (float64(totalDays) * slotDuration)))
 		}
 	}
 
 	return DaytimeData{ACCU: result}
+}
+
+// distributeToSlots splits the interval [from, to) into 2-hour slot segments
+// and adds players × duration (in seconds) to each corresponding slot bucket.
+func distributeToSlots(slotPlayerSeconds map[int]float64, from, to time.Time, players int) {
+	for from.Before(to) {
+		hour := from.Hour()
+		slot := (hour / 2) * 2
+
+		// End of this 2h slot
+		nextSlotHour := slot + 2
+		var slotEnd time.Time
+		if nextSlotHour >= 24 {
+			slotEnd = time.Date(from.Year(), from.Month(), from.Day(), 0, 0, 0, 0, from.Location()).AddDate(0, 0, 1)
+		} else {
+			slotEnd = time.Date(from.Year(), from.Month(), from.Day(), nextSlotHour, 0, 0, 0, from.Location())
+		}
+
+		// Clip to [from, to)
+		end := slotEnd
+		if to.Before(end) {
+			end = to
+		}
+
+		duration := end.Sub(from).Seconds()
+		if duration > 0 {
+			slotPlayerSeconds[slot] += float64(players) * duration
+		}
+
+		from = end
+	}
 }
