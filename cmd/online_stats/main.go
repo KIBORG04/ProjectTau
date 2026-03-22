@@ -82,19 +82,61 @@ func writeJSON(path string, data any) error {
 	return nil
 }
 
-// loadRounds loads round data. Currently supports CSV and mock data.
+// loadRounds loads round data. It tries CSV, then DB via SSH, then falls back to Mock data.
 func loadRounds(cfg *OnlineStatsConfig) []Round {
 	if cfg.CSVPath != "" {
 		log.Printf("Loading rounds from CSV: %s\n", cfg.CSVPath)
 		rounds, err := loadRoundsFromCSV(cfg.CSVPath)
 		if err != nil {
-			log.Printf("Error loading CSV: %v. Falling back to mock data.\n", err)
+			log.Printf("Error loading CSV: %v. Falling back.\n", err)
 		} else {
 			return rounds
 		}
 	}
 
-	log.Println("Using mock data (DB connection not yet configured)")
+	// Try loading existing state/cache
+	state, err := LoadState(cfg.StatePath)
+	if err != nil {
+		log.Printf("Warning: failed to load state from %s: %v\n", cfg.StatePath, err)
+		// Continue with empty state
+		state = &StatsState{}
+	}
+
+	// If SSHHost is provided, fetch new rounds from DB
+	if cfg.RemoteDB.SSHHost != "" {
+		log.Printf("State loaded. Cached rounds: %d, Last parsed ID: %d\n", len(state.Rounds), state.LastRoundID)
+		
+		newRounds, err := FetchNewRoundsFromDB(cfg, state.LastRoundID)
+		if err != nil {
+			log.Printf("Error fetching rounds from DB: %v\n", err)
+			log.Println("Proceeding with cached rounds only.")
+		} else if len(newRounds) > 0 {
+			state.Rounds = append(state.Rounds, newRounds...)
+
+			// Find new max ID
+			maxID := state.LastRoundID
+			for _, r := range newRounds {
+				if r.ID > maxID {
+					maxID = r.ID
+				}
+			}
+			state.LastRoundID = maxID
+
+			if err := SaveState(cfg.StatePath, state); err != nil {
+				log.Printf("Warning: failed to save state: %v\n", err)
+			} else {
+				log.Printf("Saved updated state with %d total rounds, last ID: %d\n", len(state.Rounds), state.LastRoundID)
+			}
+		}
+
+		return state.Rounds
+	}
+
+	if len(state.Rounds) > 0 {
+		return state.Rounds
+	}
+
+	log.Println("Using mock data (DB connection not configured)")
 	return generateMockRounds()
 }
 
