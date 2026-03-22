@@ -211,6 +211,11 @@ async function loadOnlineStats() {
         onlineStatsData = await response.json();
     } catch (err) {
         console.error('Failed to load online stats JSON:', err);
+        const canvas = document.getElementById('online-stat-all-weeks');
+        if (canvas && canvas.parentElement) {
+            canvas.parentElement.insertAdjacentHTML('beforebegin',
+                '<div class="alert alert-warning text-center">Не удалось загрузить данные онлайн-статистики</div>');
+        }
         return;
     }
 

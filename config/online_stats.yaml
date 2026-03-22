@@ -1,3 +1,4 @@
+# TODO: move sensitive credentials (password, ssh_password) to environment variables
 remote_db:
   host: "localhost"
   port: 5432

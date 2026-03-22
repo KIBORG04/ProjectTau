@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"strconv"
 	"sync/atomic"
 	"time"
 
@@ -120,8 +121,9 @@ ORDER BY id ASC;`
 		r.StartDatetime = start.Time
 		r.EndDatetime = end.Time
 
-		fmt.Sscanf(playersStr, "%d", &r.Players)
-		
+		players, _ := strconv.Atoi(playersStr)
+		r.Players = players
+
 		if r.Players > 0 {
 			newRounds = append(newRounds, r)
 		}
