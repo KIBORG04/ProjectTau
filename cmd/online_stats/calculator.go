@@ -153,6 +153,11 @@ func calcStats(rounds []Round, periodStart, periodEnd time.Time) (int, int) {
 // ---- Chart Calculations ----
 
 // CalcWeeks calculates ACCU and PCCU per ISO week across all rounds.
+//
+// Uses a single global sweep-line, distributing player-seconds and peak
+// concurrent into ISO week buckets as it sweeps.
+//
+// Complexity: O(R log R) for sort + O(R + W) for sweep, where W = number of weeks.
 func CalcWeeks(rounds []Round) WeeksData {
 	if len(rounds) == 0 {
 		return WeeksData{ACCU: map[string]int{}, PCCU: map[string]int{}}
@@ -170,30 +175,135 @@ func CalcWeeks(rounds []Round) WeeksData {
 		}
 	}
 
-	accuMap := make(map[string]int)
-	pccuMap := make(map[string]int)
+	// Build sweep events for the entire range
+	var events []sweepEvent
+	for i, r := range rounds {
+		if !r.StartDatetime.Before(r.EndDatetime) {
+			continue
+		}
+		events = append(events, sweepEvent{time: r.StartDatetime, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: false})
+		events = append(events, sweepEvent{time: r.EndDatetime, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: true})
+	}
 
-	// Iterate over every ISO week from minTime to maxTime
-	y, w := isoYearWeek(minTime)
-	for {
-		weekStart := startOfISOWeek(y, w)
-		weekEnd := weekStart.AddDate(0, 0, 7)
+	if len(events) == 0 {
+		return WeeksData{ACCU: map[string]int{}, PCCU: map[string]int{}}
+	}
 
-		if weekStart.After(maxTime) {
-			break
+	// Sort by time; ends before starts at equal times (same rule as calcStats)
+	sort.Slice(events, func(i, j int) bool {
+		if events[i].time.Equal(events[j].time) {
+			if events[i].isEnd != events[j].isEnd {
+				return events[i].isEnd
+			}
+			return false
+		}
+		return events[i].time.Before(events[j].time)
+	})
+
+	// Period boundaries aligned to ISO weeks
+	startY, startW := isoYearWeek(minTime)
+	periodStart := startOfISOWeek(startY, startW)
+	endY, endW := isoYearWeek(maxTime)
+	periodEnd := startOfISOWeek(endY, endW).AddDate(0, 0, 7)
+
+	weekPlayerSeconds := make(map[string]float64)
+	weekPCCU := make(map[string]int)
+	activeByPort := make(map[int]map[int]int)
+	current := 0
+	lastTime := periodStart
+
+	for i := 0; i < len(events); {
+		t := events[i].time
+
+		// Distribute area for [lastTime, t) into week buckets
+		if current > 0 && t.After(lastTime) {
+			distributeToWeeks(weekPlayerSeconds, weekPCCU, lastTime, t, current)
 		}
 
-		label := weekLabel(y, w)
-		accu, pccu := calcStats(rounds, weekStart, weekEnd)
-		accuMap[label] = accu
-		pccuMap[label] = pccu
+		// Process all events at time t
+		for i < len(events) && events[i].time.Equal(t) {
+			ev := events[i]
+			if activeByPort[ev.port] == nil {
+				activeByPort[ev.port] = make(map[int]int)
+			}
+			if ev.isEnd {
+				delete(activeByPort[ev.port], ev.roundIndex)
+			} else {
+				activeByPort[ev.port][ev.roundIndex] = ev.players
+			}
+			i++
+		}
 
-		// Advance to next week
-		next := weekStart.AddDate(0, 0, 7)
+		// Recalculate global current (sum of per-port maxes)
+		current = 0
+		for _, roundsOnPort := range activeByPort {
+			portMax := 0
+			for _, players := range roundsOnPort {
+				if players > portMax {
+					portMax = players
+				}
+			}
+			current += portMax
+		}
+
+		lastTime = t
+	}
+
+	// Remaining area after the last event
+	if current > 0 && lastTime.Before(periodEnd) {
+		distributeToWeeks(weekPlayerSeconds, weekPCCU, lastTime, periodEnd, current)
+	}
+
+	// Build result maps, iterating over every week to preserve zero entries
+	accuMap := make(map[string]int)
+	pccuMap := make(map[string]int)
+	weekDuration := 7.0 * 24.0 * 3600.0
+
+	y, w := startY, startW
+	for {
+		ws := startOfISOWeek(y, w)
+		if ws.After(maxTime) {
+			break
+		}
+		label := weekLabel(y, w)
+		if ps, ok := weekPlayerSeconds[label]; ok {
+			accuMap[label] = int(math.Round(ps / weekDuration))
+		} else {
+			accuMap[label] = 0
+		}
+		pccuMap[label] = weekPCCU[label] // 0 if not present
+
+		next := ws.AddDate(0, 0, 7)
 		y, w = isoYearWeek(next)
 	}
 
 	return WeeksData{ACCU: accuMap, PCCU: pccuMap}
+}
+
+// distributeToWeeks splits the interval [from, to) at ISO week boundaries and
+// adds players × duration (seconds) to the corresponding week's player-seconds bucket.
+// Also updates per-week PCCU if players exceeds the current maximum for that week.
+func distributeToWeeks(weekPlayerSeconds map[string]float64, weekPCCU map[string]int, from, to time.Time, players int) {
+	for from.Before(to) {
+		y, w := isoYearWeek(from)
+		weekEnd := startOfISOWeek(y, w).AddDate(0, 0, 7)
+
+		end := to
+		if weekEnd.Before(to) {
+			end = weekEnd
+		}
+
+		duration := end.Sub(from).Seconds()
+		if duration > 0 {
+			label := weekLabel(y, w)
+			weekPlayerSeconds[label] += float64(players) * duration
+			if players > weekPCCU[label] {
+				weekPCCU[label] = players
+			}
+		}
+
+		from = end
+	}
 }
 
 // CalcLast90Days calculates ACCU and PCCU per day for the last 90 days.
