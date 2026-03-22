@@ -345,7 +345,7 @@ async function buildWeeksChart() {
     let accuData, pccuData;
     if (currentDataSourceWeeks === 'concurrent') {
         accuData = calculateSMA(accuDataRaw, 4);
-        pccuData = calculateSMA(pccuDataRaw, 4);
+        pccuData = pccuDataRaw; // No SMA on peak — smoothing would distort the peak meaning
     } else {
         accuData = accuDataRaw;
         pccuData = pccuDataRaw;
