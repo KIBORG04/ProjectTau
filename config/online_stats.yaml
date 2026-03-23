@@ -1,0 +1,10 @@
+# TODO: move sensitive credentials (password, ssh_password) to environment variables
+remote_db:
+  host: "localhost"
+  port: 5432
+  user: "postgres"
+  password: "password"
+  dbname: "remote_stats"
+
+output_path: "web/static/data/online_stats.json"
+csv_path: "config/data.csv"

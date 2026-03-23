@@ -19,5 +19,8 @@ func Min[T constraints.Ordered](a, b T) T {
 }
 
 func TrimPGDate(s string) string {
+	if len(s) < 10 {
+		return s
+	}
 	return s[:10]
 }

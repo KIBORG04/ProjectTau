@@ -1,5 +1,11 @@
 <!--index.html-->
 
+<style>
+    .navbar form.d-flex {
+        display: none !important;
+    }
+</style>
+
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
 
@@ -7,7 +13,66 @@
     {{ template "ad.html" . }}
     <div class="row">
         <div class="col-lg-8">
+
+            <div class="text-center border-bottom pb-2">
+                <h4>Сводная статистика онлайна</h4>
+                <div class="alert-info mt-2">
+                    <div class="mb-2">
+                        <small>
+                            <b>Игроки онлайн</b> — клиенты на сервере на конец раунда &nbsp;|&nbsp;
+                            <b>Экипаж за смену</b> — общее число входов игроков за экипаж в течение раунда (включая респавны)
+                        </small>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <input type="checkbox" class="form-check-input mt-0 me-2" id="toggleChronicles"
+                            style="width: 1.5rem; height: 1.5rem; cursor: pointer;" checked>
+                        <label for="toggleChronicles" class="form-check-label"
+                            style="font-size: 1.1rem; cursor: pointer;">Показывать важные события</label>
+                    </div>
+                </div>
+            </div>
             <div class="row">
+                <h5 class="text-center border-bottom pb-2">Онлайн по неделям
+                    <div class="d-block mt-2">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <input type="radio" class="btn-check" name="toggleWeeks" id="weeksConcurrent"
+                                autocomplete="off">
+                            <label class="btn btn-outline-primary" for="weeksConcurrent">Игроки онлайн</label>
+                            <input type="radio" class="btn-check" name="toggleWeeks" id="weeksCrew" autocomplete="off"
+                                checked>
+                            <label class="btn btn-outline-primary" for="weeksCrew">Экипаж за смену</label>
+                        </div>
+                    </div>
+                </h5>
+                <canvas id="online-stat-all-weeks"></canvas>
+                <div class="text-center mt-1">
+                    <button id="resetZoomWeeks" class="btn btn-outline-secondary btn-sm" onclick="resetWeeksZoom()">
+                        <i class="fa-solid fa-arrows-to-dot"></i> Сбросить масштаб
+                    </button>
+                    <small class="text-muted ms-2">Колёсико = зум · Shift+тяни = выделить · Тяни = панорама</small>
+                </div>
+            </div>
+            <div class="row">
+                <h5 class="text-center border-bottom pb-2">Средний онлайн по часам</h5>
+                <canvas id="online-stat-daytime"></canvas>
+            </div>
+            <div class="row">
+                <h5 class="text-center border-bottom pb-2">Средний онлайн за последние 90 дней
+                    <div class="d-block mt-2">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <input type="radio" class="btn-check" name="toggle90Days" id="monthConcurrent"
+                                autocomplete="off">
+                            <label class="btn btn-outline-primary" for="monthConcurrent">Игроки онлайн</label>
+                            <input type="radio" class="btn-check" name="toggle90Days" id="monthCrew" autocomplete="off"
+                                checked>
+                            <label class="btn btn-outline-primary" for="monthCrew">Экипаж за смену</label>
+                        </div>
+                    </div>
+                </h5>
+                <canvas id="online-stat-month"></canvas>
+            </div>
+
+            <div class="row mt-4">
                 <div class="col">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Версия статистики: {{ .version }}</li>
@@ -24,29 +89,6 @@
                         <li class="list-group-item">Раундов на третьем: {{ .gammaRounds }}</li>
                     </ul>
                 </div>
-            </div>
-            <br>
-            <div class="text-center border-bottom pb-2">
-                <h4>Статистика по: <span id="online-stat-current-dates">Lorem ipsum</span></h4>
-                <div class="alert-info">
-                    Вы можете манипулировать графиками, изменяя даты вверху сайта
-                    <div>
-                        <input type="checkbox" id="toggleChronicles" checked>
-                        Показывать важные события
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <h5 class="text-center border-bottom pb-2">Онлайн по неделям</h5>
-                <canvas id="online-stat-all-weeks"></canvas>
-            </div>
-            <div class="row">
-                <h5 class="text-center border-bottom pb-2">Средний онлайн по часам</h5>
-                <canvas id="online-stat-daytime"></canvas>
-            </div>
-            <div class="row">
-                <h5 class="text-center border-bottom pb-2">Средний онлайн за последние 90 дней</h5>
-                <canvas id="online-stat-month"></canvas>
             </div>
         </div>
         <div class="col-sm-3 col-lg-4 mt-2">
@@ -73,5 +115,12 @@
 
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}
+
+<!-- Tooltip for chronicles -->
+<div id="chronicle-tooltip" class="d-none" style="position: absolute; background: rgba(33, 37, 41, 0.95); color: #fff; border-radius: 6px; padding: 12px; pointer-events: none; z-index: 1050; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-size: 0.9rem; max-width: 350px; border: 1px solid rgba(255,255,255,0.1); word-wrap: break-word; word-break: break-word; overflow: hidden;"></div>
+
+<!-- Zoom/Pan plugin for Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
 
 <script src="/web/static/scripts/main.js" defer></script>

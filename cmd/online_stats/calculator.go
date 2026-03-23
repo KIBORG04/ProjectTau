@@ -1,0 +1,479 @@
+package main
+
+import (
+	"fmt"
+	"math"
+	"sort"
+	"time"
+)
+
+// ---- Helpers ----
+
+func isoYearWeek(t time.Time) (int, int) {
+	year, week := t.ISOWeek()
+	return year, week
+}
+
+func weekLabel(year, week int) string {
+	return fmt.Sprintf("%d-%02d", year, week)
+}
+
+func dayLabel(t time.Time) string {
+	return t.Format("2006-01-02")
+}
+
+// startOfISOWeek returns the Monday 00:00:00 UTC of the given ISO week.
+func startOfISOWeek(year, week int) time.Time {
+	// Jan 4 is always in ISO week 1
+	jan4 := time.Date(year, 1, 4, 0, 0, 0, 0, time.UTC)
+	dow := jan4.Weekday()
+	if dow == 0 {
+		dow = 7
+	}
+	monday := jan4.AddDate(0, 0, -int(dow)+1) // Monday of week 1
+	return monday.AddDate(0, 0, (week-1)*7)
+}
+
+// ---- Clipping ----
+
+// clipRound clips a round to the interval [start, end). Returns clamped start/end and false if no overlap.
+func clipRound(r Round, start, end time.Time) (time.Time, time.Time, bool) {
+	s := r.StartDatetime
+	e := r.EndDatetime
+	if s.Before(start) {
+		s = start
+	}
+	if e.After(end) {
+		e = end
+	}
+	if !s.Before(e) {
+		return s, e, false
+	}
+	return s, e, true
+}
+
+type sweepEvent struct {
+	time       time.Time
+	port       int
+	roundIndex int
+	players    int
+	isEnd      bool
+}
+
+// calcStats computes both ACCU and PCCU for a given period using a server-grouped sweep-line.
+// To prevent duplicated/hung rounds on the same server from falsely adding up,
+// the online players for a given server port is the MAX of its active rounds.
+// Global online is the SUM of these per-port maximums.
+// ACCU is the time-weighted average (Area Under Curve) of this global online.
+func calcStats(rounds []Round, periodStart, periodEnd time.Time) (int, int) {
+	var events []sweepEvent
+
+	for i, r := range rounds {
+		s, e, ok := clipRound(r, periodStart, periodEnd)
+		if !ok {
+			continue
+		}
+		events = append(events, sweepEvent{time: s, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: false})
+		events = append(events, sweepEvent{time: e, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: true})
+	}
+
+	periodDuration := periodEnd.Sub(periodStart).Seconds()
+	if len(events) == 0 || periodDuration <= 0 {
+		return 0, 0
+	}
+
+	// Sort by time; for equal times, ends (isEnd=true) come before starts
+	sort.Slice(events, func(i, j int) bool {
+		if events[i].time.Equal(events[j].time) {
+			if events[i].isEnd != events[j].isEnd {
+				return events[i].isEnd
+			}
+			return false
+		}
+		return events[i].time.Before(events[j].time)
+	})
+
+	maxConcurrent := 0
+	totalPlayerSeconds := 0.0
+	activeByPort := make(map[int]map[int]int)
+
+	lastTime := periodStart
+	current := 0 // Global current online
+
+	for i := 0; i < len(events); {
+		t := events[i].time
+
+		// Add area for the interval [lastTime, t]
+		if current > 0 && t.After(lastTime) {
+			totalPlayerSeconds += float64(current) * t.Sub(lastTime).Seconds()
+		}
+
+		// Process all events occurring exactly at time `t`
+		for i < len(events) && events[i].time.Equal(t) {
+			ev := events[i]
+			if activeByPort[ev.port] == nil {
+				activeByPort[ev.port] = make(map[int]int)
+			}
+			if ev.isEnd {
+				delete(activeByPort[ev.port], ev.roundIndex)
+			} else {
+				activeByPort[ev.port][ev.roundIndex] = ev.players
+			}
+			i++
+		}
+
+		// Recalculate global current from the active ports
+		current = 0
+		for _, roundsOnPort := range activeByPort {
+			portMax := 0
+			for _, players := range roundsOnPort {
+				if players > portMax {
+					portMax = players
+				}
+			}
+			current += portMax
+		}
+
+		if current > maxConcurrent {
+			maxConcurrent = current
+		}
+
+		lastTime = t
+	}
+
+	// Add any remaining area from the last event until periodEnd
+	if current > 0 && lastTime.Before(periodEnd) {
+		totalPlayerSeconds += float64(current) * periodEnd.Sub(lastTime).Seconds()
+	}
+
+	accu := int(math.Round(totalPlayerSeconds / periodDuration))
+	return accu, maxConcurrent
+}
+
+// ---- Chart Calculations ----
+
+// CalcWeeks calculates ACCU and PCCU per ISO week across all rounds.
+//
+// Uses a single global sweep-line, distributing player-seconds and peak
+// concurrent into ISO week buckets as it sweeps.
+//
+// Complexity: O(R log R) for sort + O(R + W) for sweep, where W = number of weeks.
+func CalcWeeks(rounds []Round) WeeksData {
+	if len(rounds) == 0 {
+		return WeeksData{ACCU: map[string]int{}, PCCU: map[string]int{}}
+	}
+
+	// Find the global min/max dates
+	minTime := rounds[0].StartDatetime
+	maxTime := rounds[0].EndDatetime
+	for _, r := range rounds {
+		if r.StartDatetime.Before(minTime) {
+			minTime = r.StartDatetime
+		}
+		if r.EndDatetime.After(maxTime) {
+			maxTime = r.EndDatetime
+		}
+	}
+
+	// Build sweep events for the entire range
+	var events []sweepEvent
+	for i, r := range rounds {
+		if !r.StartDatetime.Before(r.EndDatetime) {
+			continue
+		}
+		events = append(events, sweepEvent{time: r.StartDatetime, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: false})
+		events = append(events, sweepEvent{time: r.EndDatetime, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: true})
+	}
+
+	if len(events) == 0 {
+		return WeeksData{ACCU: map[string]int{}, PCCU: map[string]int{}}
+	}
+
+	// Sort by time; ends before starts at equal times (same rule as calcStats)
+	sort.Slice(events, func(i, j int) bool {
+		if events[i].time.Equal(events[j].time) {
+			if events[i].isEnd != events[j].isEnd {
+				return events[i].isEnd
+			}
+			return false
+		}
+		return events[i].time.Before(events[j].time)
+	})
+
+	// Period boundaries aligned to ISO weeks
+	startY, startW := isoYearWeek(minTime)
+	periodStart := startOfISOWeek(startY, startW)
+	endY, endW := isoYearWeek(maxTime)
+	periodEnd := startOfISOWeek(endY, endW).AddDate(0, 0, 7)
+
+	weekPlayerSeconds := make(map[string]float64)
+	weekPCCU := make(map[string]int)
+	activeByPort := make(map[int]map[int]int)
+	current := 0
+	lastTime := periodStart
+
+	for i := 0; i < len(events); {
+		t := events[i].time
+
+		// Distribute area for [lastTime, t) into week buckets
+		if current > 0 && t.After(lastTime) {
+			distributeToWeeks(weekPlayerSeconds, weekPCCU, lastTime, t, current)
+		}
+
+		// Process all events at time t
+		for i < len(events) && events[i].time.Equal(t) {
+			ev := events[i]
+			if activeByPort[ev.port] == nil {
+				activeByPort[ev.port] = make(map[int]int)
+			}
+			if ev.isEnd {
+				delete(activeByPort[ev.port], ev.roundIndex)
+			} else {
+				activeByPort[ev.port][ev.roundIndex] = ev.players
+			}
+			i++
+		}
+
+		// Recalculate global current (sum of per-port maxes)
+		current = 0
+		for _, roundsOnPort := range activeByPort {
+			portMax := 0
+			for _, players := range roundsOnPort {
+				if players > portMax {
+					portMax = players
+				}
+			}
+			current += portMax
+		}
+
+		lastTime = t
+	}
+
+	// Remaining area after the last event
+	if current > 0 && lastTime.Before(periodEnd) {
+		distributeToWeeks(weekPlayerSeconds, weekPCCU, lastTime, periodEnd, current)
+	}
+
+	// Build result maps, iterating over every week to preserve zero entries
+	accuMap := make(map[string]int)
+	pccuMap := make(map[string]int)
+	weekDuration := 7.0 * 24.0 * 3600.0
+
+	y, w := startY, startW
+	for {
+		ws := startOfISOWeek(y, w)
+		if ws.After(maxTime) {
+			break
+		}
+		label := weekLabel(y, w)
+		if ps, ok := weekPlayerSeconds[label]; ok {
+			accuMap[label] = int(math.Round(ps / weekDuration))
+		} else {
+			accuMap[label] = 0
+		}
+		pccuMap[label] = weekPCCU[label] // 0 if not present
+
+		next := ws.AddDate(0, 0, 7)
+		y, w = isoYearWeek(next)
+	}
+
+	return WeeksData{ACCU: accuMap, PCCU: pccuMap}
+}
+
+// distributeToWeeks splits the interval [from, to) at ISO week boundaries and
+// adds players × duration (seconds) to the corresponding week's player-seconds bucket.
+// Also updates per-week PCCU if players exceeds the current maximum for that week.
+func distributeToWeeks(weekPlayerSeconds map[string]float64, weekPCCU map[string]int, from, to time.Time, players int) {
+	for from.Before(to) {
+		y, w := isoYearWeek(from)
+		weekEnd := startOfISOWeek(y, w).AddDate(0, 0, 7)
+
+		end := to
+		if weekEnd.Before(to) {
+			end = weekEnd
+		}
+
+		duration := end.Sub(from).Seconds()
+		if duration > 0 {
+			label := weekLabel(y, w)
+			weekPlayerSeconds[label] += float64(players) * duration
+			if players > weekPCCU[label] {
+				weekPCCU[label] = players
+			}
+		}
+
+		from = end
+	}
+}
+
+// CalcLast90Days calculates ACCU and PCCU per day for the last 90 days.
+func CalcLast90Days(rounds []Round, now time.Time) Last90DaysData {
+	accuMap := make(map[string]int)
+	pccuMap := make(map[string]int)
+
+	// "now" is today at midnight UTC; we exclude today and go back 90 days
+	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.UTC)
+	endDate := today           // exclusive: today is not included
+	startDate := today.AddDate(0, 0, -90)
+
+	for d := startDate; d.Before(endDate); d = d.AddDate(0, 0, 1) {
+		dayStart := d
+		dayEnd := d.AddDate(0, 0, 1)
+		label := dayLabel(d)
+		accu, pccu := calcStats(rounds, dayStart, dayEnd)
+		accuMap[label] = accu
+		pccuMap[label] = pccu
+	}
+
+	return Last90DaysData{ACCU: accuMap, PCCU: pccuMap}
+}
+
+// CalcDaytime calculates the average concurrent players per 2-hour interval
+// over all days that have data.
+//
+// Uses a single global sweep-line across all rounds, distributing
+// player-seconds into 2h slot buckets (0, 2, 4, …, 22) as it sweeps.
+// Result per slot = total player-seconds in that slot / (totalDays × slotDuration).
+//
+// Complexity: O(R log R) for sort + O(R + D) for sweep, where D = number of days.
+func CalcDaytime(rounds []Round) DaytimeData {
+	if len(rounds) == 0 {
+		return DaytimeData{ACCU: map[int]int{}}
+	}
+
+	// Find global date range
+	minTime := rounds[0].StartDatetime
+	maxTime := rounds[0].EndDatetime
+	for _, r := range rounds {
+		if r.StartDatetime.Before(minTime) {
+			minTime = r.StartDatetime
+		}
+		if r.EndDatetime.After(maxTime) {
+			maxTime = r.EndDatetime
+		}
+	}
+
+	startDay := time.Date(minTime.Year(), minTime.Month(), minTime.Day(), 0, 0, 0, 0, time.UTC)
+	endDay := time.Date(maxTime.Year(), maxTime.Month(), maxTime.Day(), 0, 0, 0, 0, time.UTC).AddDate(0, 0, 1)
+
+	totalDays := int(endDay.Sub(startDay).Hours() / 24)
+	if totalDays <= 0 {
+		totalDays = 1
+	}
+
+	// Build sweep events for the entire range
+	var events []sweepEvent
+	for i, r := range rounds {
+		s, e, ok := clipRound(r, startDay, endDay)
+		if !ok {
+			continue
+		}
+		events = append(events, sweepEvent{time: s, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: false})
+		events = append(events, sweepEvent{time: e, port: r.ServerPort, roundIndex: i, players: r.Players, isEnd: true})
+	}
+
+	if len(events) == 0 {
+		return DaytimeData{ACCU: map[int]int{}}
+	}
+
+	// Sort by time; ends before starts at equal times (same rule as calcStats)
+	sort.Slice(events, func(i, j int) bool {
+		if events[i].time.Equal(events[j].time) {
+			if events[i].isEnd != events[j].isEnd {
+				return events[i].isEnd
+			}
+			return false
+		}
+		return events[i].time.Before(events[j].time)
+	})
+
+	// Single sweep-line, accumulating player-seconds per 2h slot
+	slotPlayerSeconds := make(map[int]float64) // slot (0,2,…,22) → total player-seconds
+	activeByPort := make(map[int]map[int]int)
+	current := 0
+	lastTime := startDay
+
+	for i := 0; i < len(events); {
+		t := events[i].time
+
+		// Distribute area for [lastTime, t) into 2h slot buckets
+		if current > 0 && t.After(lastTime) {
+			distributeToSlots(slotPlayerSeconds, lastTime, t, current)
+		}
+
+		// Process all events at time t
+		for i < len(events) && events[i].time.Equal(t) {
+			ev := events[i]
+			if activeByPort[ev.port] == nil {
+				activeByPort[ev.port] = make(map[int]int)
+			}
+			if ev.isEnd {
+				delete(activeByPort[ev.port], ev.roundIndex)
+			} else {
+				activeByPort[ev.port][ev.roundIndex] = ev.players
+			}
+			i++
+		}
+
+		// Recalculate global current (sum of per-port maxes)
+		current = 0
+		for _, roundsOnPort := range activeByPort {
+			portMax := 0
+			for _, players := range roundsOnPort {
+				if players > portMax {
+					portMax = players
+				}
+			}
+			current += portMax
+		}
+
+		lastTime = t
+	}
+
+	// Remaining area after the last event
+	if current > 0 && lastTime.Before(endDay) {
+		distributeToSlots(slotPlayerSeconds, lastTime, endDay, current)
+	}
+
+	// Average: total player-seconds / (totalDays × slot duration in seconds)
+	slotDuration := 2.0 * 3600.0
+	result := make(map[int]int)
+	for slot := 0; slot < 24; slot += 2 {
+		if slotPlayerSeconds[slot] > 0 {
+			result[slot] = int(math.Round(slotPlayerSeconds[slot] / (float64(totalDays) * slotDuration)))
+		}
+	}
+
+	return DaytimeData{ACCU: result}
+}
+
+// distributeToSlots splits the interval [from, to) into 2-hour slot segments
+// and adds players × duration (in seconds) to each corresponding slot bucket.
+func distributeToSlots(slotPlayerSeconds map[int]float64, from, to time.Time, players int) {
+	for from.Before(to) {
+		hour := from.Hour()
+		slot := (hour / 2) * 2
+
+		// End of this 2h slot
+		nextSlotHour := slot + 2
+		var slotEnd time.Time
+		if nextSlotHour >= 24 {
+			slotEnd = time.Date(from.Year(), from.Month(), from.Day(), 0, 0, 0, 0, from.Location()).AddDate(0, 0, 1)
+		} else {
+			slotEnd = time.Date(from.Year(), from.Month(), from.Day(), nextSlotHour, 0, 0, 0, from.Location())
+		}
+
+		// Clip to [from, to)
+		end := slotEnd
+		if to.Before(end) {
+			end = to
+		}
+
+		duration := end.Sub(from).Seconds()
+		if duration > 0 {
+			slotPlayerSeconds[slot] += float64(players) * duration
+		}
+
+		from = end
+	}
+}
