@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"os"
 	"strconv"
 	"sync/atomic"
 	"time"
@@ -19,11 +20,22 @@ var dialerCounter atomic.Int64
 func FetchNewRoundsFromDB(cfg *OnlineStatsConfig, lastID int) ([]Round, error) {
 	dbCfg := &cfg.RemoteDB
 
+	key, err := os.ReadFile(dbCfg.SSHPublicKey)
+	if err != nil {
+		return nil, fmt.Errorf("не удалось прочитать приватный ключ: %w", err)
+	}
+
+	signer, err := ssh.ParsePrivateKey(key)
+	if err != nil {
+		// Если ключ с паролем — используйте ParsePrivateKeyWithPassphrase
+		return nil, fmt.Errorf("не удалось распарсить приватный ключ: %w", err)
+	}
+
 	// 1. Establish SSH Client
 	sshConfig := &ssh.ClientConfig{
 		User: dbCfg.SSHUser,
 		Auth: []ssh.AuthMethod{
-			ssh.Password(dbCfg.SSHPassword),
+			ssh.PublicKeys(signer),
 		},
 		// TODO: replace InsecureIgnoreHostKey with known_hosts verification to prevent MITM attacks
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
@@ -41,7 +53,7 @@ func FetchNewRoundsFromDB(cfg *OnlineStatsConfig, lastID int) ([]Round, error) {
 	// 2. Register custom MySQL dialer to route through SSH (unique name to avoid panic on re-registration)
 	networkName := fmt.Sprintf("mysql+ssh+%s+%d", sshAddr, dialerCounter.Add(1))
 	mysql.RegisterDialContext(networkName, func(ctx context.Context, addr string) (net.Conn, error) {
-		return sshClient.Dial("tcp", addr)
+		return sshClient.Dial("tcp", "127.0.0.1:3306") //addr)
 	})
 	defer mysql.DeregisterDialContext(networkName)
 
@@ -91,7 +103,7 @@ WHERE rn = 1
 ORDER BY id ASC;`
 
 	log.Printf("Fetching rounds > %d...\n", lastID)
-	
+
 	// Timeout for query execution
 	queryCtx, queryCancel := context.WithTimeout(context.Background(), 2*time.Minute)
 	defer queryCancel()
@@ -117,7 +129,7 @@ ORDER BY id ASC;`
 			// Ignore null dates
 			continue
 		}
-		
+
 		r.StartDatetime = start.Time
 		r.EndDatetime = end.Time
 

@@ -5,6 +5,7 @@
 pg_data/
 config.yaml
 config/config.yaml
+config/online_stats.yaml
 depersonalization.yaml
 
 # Online Stats generated data

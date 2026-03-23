@@ -8,15 +8,15 @@ import (
 )
 
 type DBConfig struct {
-	Host        string `yaml:"host"`
-	Port        int    `yaml:"port"`
-	User        string `yaml:"user"`
-	Password    string `yaml:"password"`
-	DBName      string `yaml:"dbname"`
-	SSHHost     string `yaml:"ssh_host"`
-	SSHPort     int    `yaml:"ssh_port"`
-	SSHUser     string `yaml:"ssh_user"`
-	SSHPassword string `yaml:"ssh_password"`
+	Host         string `yaml:"host"`
+	Port         int    `yaml:"port"`
+	User         string `yaml:"user"`
+	Password     string `yaml:"password"`
+	DBName       string `yaml:"dbname"`
+	SSHHost      string `yaml:"ssh_host"`
+	SSHPort      int    `yaml:"ssh_port"`
+	SSHUser      string `yaml:"ssh_user"`
+	SSHPublicKey string `yaml:"ssh_public_key"`
 }
 
 type OnlineStatsConfig struct {
