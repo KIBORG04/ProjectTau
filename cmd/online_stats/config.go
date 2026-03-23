@@ -22,7 +22,6 @@ type DBConfig struct {
 type OnlineStatsConfig struct {
 	RemoteDB   DBConfig `yaml:"remote_db"`
 	OutputPath string   `yaml:"output_path"`
-	CSVPath    string   `yaml:"csv_path"`
 	StatePath  string   `yaml:"state_path"`
 }
 

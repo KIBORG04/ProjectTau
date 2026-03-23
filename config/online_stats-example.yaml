@@ -1,10 +1,14 @@
 # TODO: move sensitive credentials (password, ssh_password) to environment variables
 remote_db:
-  host: "localhost"
-  port: 5432
-  user: "postgres"
+  host: "127.0.0.1"
+  port: 3306
+  user: "user"
   password: "password"
-  dbname: "remote_stats"
+  dbname: "dbname"
+  ssh_host: "example.com"
+  ssh_port: 22
+  ssh_user: "ssh_user"
+  ssh_public_key: "path/to/private_key"
 
 output_path: "web/static/data/online_stats.json"
-csv_path: "config/data.csv"
+state_path: "web/static/data/state.json"

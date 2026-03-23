@@ -9,6 +9,5 @@ config/online_stats.yaml
 depersonalization.yaml
 
 # Online Stats generated data
-config/data.csv
 web/static/data/online_stats.json
-web/static/data/online_stats_state.json
+web/static/data/state.json
