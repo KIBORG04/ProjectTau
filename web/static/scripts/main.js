@@ -153,6 +153,22 @@ let chronicles = {};
 let currentDataSourceWeeks = 'crew';
 let currentDataSource90Days = 'crew';
 
+const apiCache = {};
+
+function fetchJsonWithCache(url, fallbackValue = {}) {
+    if (!apiCache[url]) {
+        apiCache[url] = fetch(url).then(r => {
+            if (!r.ok) throw new Error("HTTP error " + r.status);
+            return r.json();
+        }).catch(err => {
+            console.error("Fetch error for " + url, err);
+            delete apiCache[url];
+            return fallbackValue;
+        });
+    }
+    return apiCache[url];
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Date inputs still trigger chronicle reload + chart rebuild for date-dependent views
     document.getElementById("date_start").addEventListener('change', onDatesChanged);
@@ -323,8 +339,8 @@ async function buildWeeksChart() {
     } else {
         const df = document.getElementById('date_start').value;
         const dt = document.getElementById('date_end').value;
-        const avgData = await fetch(`/api/online_stat_weeks?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
-        const maxData = await fetch(`/api/online_stat_weeks_max?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
+        const avgData = await fetchJsonWithCache(`/api/online_stat_weeks?dateFrom=${df}&dateTo=${dt}`);
+        const maxData = await fetchJsonWithCache(`/api/online_stat_weeks_max?dateFrom=${df}&dateTo=${dt}`);
 
         labels = Array.from(new Set([...Object.keys(avgData), ...Object.keys(maxData)])).sort((a, b) => {
             const [ay, aw] = a.split('-').map(Number);
@@ -491,8 +507,8 @@ async function buildLast90DaysChart() {
 
         const df = format_date(dateFrom);
         const dt = format_date(dateTo);
-        const avgData = await fetch(`/api/online_stat?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
-        const maxData = await fetch(`/api/online_stat_max?dateFrom=${df}&dateTo=${dt}`).then(r => r.json()).catch(() => ({}));
+        const avgData = await fetchJsonWithCache(`/api/online_stat?dateFrom=${df}&dateTo=${dt}`);
+        const maxData = await fetchJsonWithCache(`/api/online_stat_max?dateFrom=${df}&dateTo=${dt}`);
 
         labels = Array.from(new Set([...Object.keys(avgData), ...Object.keys(maxData)])).sort();
         accuData = labels.map(l => avgData[l] || 0);
@@ -548,16 +564,13 @@ async function buildLast90DaysChart() {
 // ======================================================================
 
 function getChronicles() {
-    const dateFrom = document.getElementById('date_start').value;
-    const dateTo = document.getElementById('date_end').value;
+    // Получаем сразу все хроники (с запасом), чтобы "игроки онлайн" за все годы (с 2013) отрисовывались корректно
+    const dateFrom = "2010-01-01";
+    const dateTo = "2040-01-01";
 
     return new Promise((resolve, reject) => {
         const params = new URLSearchParams({ dateFrom: dateFrom, dateTo: dateTo });
-        fetch(`/api/chronicles_daytime?${params}`)
-            .then(response => {
-                if (!response.ok) throw new Error("Network response was not ok");
-                return response.json();
-            })
+        fetchJsonWithCache(`/api/chronicles_daytime?${params}`)
             .then(data => {
                 chronicles = {};
 
