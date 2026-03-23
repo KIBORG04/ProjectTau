@@ -96,6 +96,8 @@ FROM (
     WHERE f.var_name = 'round_end_clients'
       AND r.start_datetime IS NOT NULL
       AND r.end_datetime IS NOT NULL
+      AND r.start_datetime > '2000-01-01'
+      AND r.end_datetime > '2000-01-01'
       AND f.var_value > 0
       AND r.id > ?
 ) t

@@ -1,17 +1,15 @@
 package main
 
 import (
-	"encoding/csv"
 	"encoding/json"
 	"fmt"
-	"io"
 	"log"
 	"os"
 	"path/filepath"
-	"strconv"
-	"strings"
 	"time"
 )
+
+const maxRoundDuration = 4 * time.Hour
 
 func main() {
 	configPath := "config/online_stats.yaml"
@@ -82,18 +80,8 @@ func writeJSON(path string, data any) error {
 	return nil
 }
 
-// loadRounds loads round data. It tries CSV, then DB via SSH, then falls back to Mock data.
+// loadRounds loads round data. It tries DB via SSH, then falls back to Mock data.
 func loadRounds(cfg *OnlineStatsConfig) []Round {
-	if cfg.CSVPath != "" {
-		log.Printf("Loading rounds from CSV: %s\n", cfg.CSVPath)
-		rounds, err := loadRoundsFromCSV(cfg.CSVPath)
-		if err != nil {
-			log.Printf("Error loading CSV: %v. Falling back.\n", err)
-		} else {
-			return rounds
-		}
-	}
-
 	// Try loading existing state/cache
 	state, err := LoadState(cfg.StatePath)
 	if err != nil {
@@ -129,84 +117,57 @@ func loadRounds(cfg *OnlineStatsConfig) []Round {
 			}
 		}
 
-		return state.Rounds
+		filtered := filterInvalidRounds(state.Rounds)
+		return filtered
 	}
 
 	if len(state.Rounds) > 0 {
-		return state.Rounds
+		filtered := filterInvalidRounds(state.Rounds)
+		return filtered
 	}
 
 	log.Println("Using mock data (DB connection not configured)")
 	return generateMockRounds()
 }
 
-func loadRoundsFromCSV(path string) ([]Round, error) {
-	file, err := os.Open(path)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
+// filterInvalidRounds removes invalid rounds and caps duration at maxRoundDuration.
+func filterInvalidRounds(rounds []Round) []Round {
+	zeroTime := time.Time{}
+	var filtered []Round
+	var skipped int
 
-	reader := csv.NewReader(file)
-	reader.Comma = ';'
-	reader.LazyQuotes = true
-
-	// Read header
-	header, err := reader.Read()
-	if err != nil {
-		return nil, err
-	}
-
-	// Map columns
-	colIdx := make(map[string]int)
-	for i, name := range header {
-		colIdx[strings.ToLower(strings.Trim(name, "\""))] = i
-	}
-
-	var rounds []Round
-	for {
-		record, err := reader.Read()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			return nil, err
-		}
-
-		id, _ := strconv.Atoi(record[colIdx["id"]])
-		port, _ := strconv.Atoi(record[colIdx["server_port"]])
-		players, _ := strconv.Atoi(record[colIdx["players"]])
-
-		startStr := record[colIdx["start_datetime"]]
-		endStr := record[colIdx["end_datetime"]]
-
-		// Skip invalid "zero" dates silently to avoid log spam
-		if startStr == "0000-00-00 00:00:00" || endStr == "0000-00-00 00:00:00" {
+	for _, r := range rounds {
+		// Skip rounds with zero/invalid dates
+		if r.StartDatetime.Equal(zeroTime) || r.EndDatetime.Equal(zeroTime) {
+			skipped++
 			continue
 		}
 
-		const timeLayout = "2006-01-02 15:04:05"
-		start, err := time.Parse(timeLayout, startStr)
-		if err != nil {
-			log.Printf("Warning: failed to parse start_datetime '%s': %v\n", startStr, err)
-			continue
-		}
-		end, err := time.Parse(timeLayout, endStr)
-		if err != nil {
-			log.Printf("Warning: failed to parse end_datetime '%s': %v\n", endStr, err)
+		// Skip rounds with zero port
+		if r.ServerPort == 0 {
+			skipped++
 			continue
 		}
 
-		rounds = append(rounds, Round{
-			ID:            id,
-			StartDatetime: start,
-			EndDatetime:   end,
-			ServerPort:    port,
-			Players:       players,
-		})
+		// Skip rounds with non-positive duration
+		if !r.StartDatetime.Before(r.EndDatetime) {
+			skipped++
+			continue
+		}
+
+		// Cap duration at maxRoundDuration (take last N hours) to handle hung servers
+		if r.EndDatetime.Sub(r.StartDatetime) > maxRoundDuration {
+			r.StartDatetime = r.EndDatetime.Add(-maxRoundDuration)
+		}
+
+		filtered = append(filtered, r)
 	}
 
-	return rounds, nil
+	if skipped > 0 {
+		log.Printf("Filtered out %d invalid rounds (zero dates, zero ports, negative duration)\n", skipped)
+	}
+
+	return filtered
 }
 
 // generateMockRounds creates realistic mock data for testing.
